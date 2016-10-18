@@ -1,0 +1,134 @@
+\section{Convergence Analysis}
+To study convergence of a numerical solution we should define a measure for deviation between the analytical and numerical
+approaches. In case of actual convergence we also need a factor that indicates speed of the process. Denote now
+\begin{enumerate}
+	\item \gls{u}: Exact solution of \cref{prb:Normalized_Problem}
+	\item \gls{uNfem}: \Gls{FEMSol} of \cref{prb:Normalized_Problem} with $N$ elements. \\
+				Note that $u_{N, \, fem}\left( x \right)$ might be
+	\begin{itemize}
+		\item \gls{uNlin}: Linear \gls{FEMSol} of \cref{prb:Normalized_Problem} with $N$ elements
+		\item \gls{uNcub}: Cubic \gls{FEMSol} of \cref{prb:Normalized_Problem} with $N$ elements.
+	\end{itemize}
+\end{enumerate}
+Define now following measures for solution deviations: \\
+\begin{definition} \label{def:Squared_Error}
+	In a Squared Error Measure we penalize the deviation between the numerical and analytical solutions by squaring its absolute
+	value. Then we integrate this function over the whole region and take its square root, i.e.,
+	\begin{equation}	\label{eqn:Squared_Error}
+		\gls{ENsq} = \Bigg\{ \int_{x=0}^{1}\Big[ \gls{uEx} - \gls{uNfem} \Big] ^{2} \dd x \Bigg\}^{1/2}.
+	\end{equation}
+\end{definition}
+%
+\begin{definition}	\label{def:Max_Error}
+	In a Max Error Measure we take absolute value of maximum deviation between the solutions, i.e.,
+	\begin{align}	\label{eqn:Max_Error}
+		\gls{ENmax} &= \max_{ 0 \leq x \leq 1 } \Big \vert  \gls{uEx} - \gls{uNfem} \Big \vert.
+	\end{align}
+\end{definition}
+In this report we have chosen $E_{sq}$ for measuring the deviation. Having defined an error measure we move forward and define a
+\gls{convFactor}.
+%
+\begin{definition} \label{def:Conv_Factor}
+	Suppose that we have solved problem in \crefrange{eqn:FEM_Problem}{eqn:FEM_Right_Boundary} by applying \gls{FEM} with two different No.
+	of elements, $N_{1}$ and $N_{2} = 2N_{1}$. Denote these solutions by $u_{1}$ and $u_{2}$ and let $E_{1}$
+	and $E_{2}$ indicate the solution errors in the squared sense, see \cref{def:Squared_Error}. Define a \gls{convFactor} by
+	\begin{equation} \label{eqn:Conv_Factor}
+		\gls{fConv} = \frac{E_{1}}{E_{2}}.
+	\end{equation}
+\end{definition}
+%
+% Error estimates for the hyperbolic load
+\begin{table}[tbh]
+	\centering
+	\rowcolors{1}{Gray}{LightCyan}
+	\begin{tabular}{| c | c | c | c | c | c |} \hline
+		% A constant
+		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{6.1 e-1} & \num{1.4 e-15} & - & -  \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$	& \num{1.7 e-1} & \num{8.8 e-15} & $3.58$ & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{4.5 e-2} & \num{5.0 e-14} & $3.77$ & - \\ \hline
+		% A linear function
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{1.0 e0} & \num{5.6 e-4} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$ & \num{2.8 e-1} & \num{3.4 e-5} & $3.61$&$16.3$ \\ \hline
+		$f_{n} \left( x \right)=1 + 2x$ & $16$ & \num{7.3 e-2} & \num{2.1 e-6} & $3.79$ & $16.1$ \\ \hline
+		% A quadratic function
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{5.8 e-1} & \num{7.8 e-4} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{1.6 e-1} & \num{5.1 e-5} & $3.55$ & $15.3$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$	& \num{4.3 e-2} & \num{3.2 e-6} & $3.76$ & $15.8$ \\ \hline
+	\end{tabular}
+	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_1st_Degree_Denom}]
+		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_1st_Degree_Denom} with $e_1 = 10$ and $e_2 = 0.01$
+		 and Boundary Parameters $\delta = 0$ and $P = 1$}
+	\label{tbl:q_1st_Degree_Denom_Error}
+\end{table}
+%
+% Error estimates for the classical problem with q(x) = e_1 / (x^2 + e_2)
+\begin{table}
+	\centering
+	\rowcolors{1}{Gray}{LightCyan}
+	\begin{tabular}{| c | c | c | c | c | c |} \hline
+		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
+		% A constant
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{1.9 e-1} & \num{5.8 e-4} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$& \num{5.0 e-2} & \num{3.4 e-5} & $3.89$ & $17.0$	\\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{1.3 e-2} & \num{2.1 e-6} & $3.94$ & $16.2$	\\ \hline
+		% A linear function
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{3.4 e-1} & \num{1.9 e-3} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{8.9 e-2} & \num{1.1 e-4} & $3.83$ & $16.7$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{2.3 e-2} & \num{6.9 e-6} & $3.93$ & $16.2$ \\ \hline
+		% A quadratic function
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{1.7 e-1} & \num{8.6 e-4} & -& - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{4.2 e-2} & \num{6.2 e-5} & $3.94$ & $14.4$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$ & \num{1.1 e-2} & \num{4.0 e-6} & $3.95$ & $15.3$ \\ \hline
+	\end{tabular}
+	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_2nd_Degree_Denom}]
+		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_2nd_Degree_Denom} with $e_1 = 10$ and $e_2 = 0.01$ and Boundary Parameters $\delta = 0$ and $P = 1$}
+	\label{tbl:q_2nd_Degree_Denom_Error}
+\end{table}
+%
+% Error estimates for the exponential load
+\begin{table}
+	\centering
+	\rowcolors{1}{Gray}{LightCyan}
+	\begin{tabular}{| c | c | c | c | c | c |} \hline
+		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
+		% A constant
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{1.3 e0}	& \num{4.2 e-3} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$	& \num{3.4 e-1} & \num{2.7 e-4} & $3.92$ & $15.6$ \\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{8.5 e-2} & \num{1.7 e-5} & $3.98$ & $15.9$ \\ \hline
+		% A linear function
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{3.9 e0} & \num{1.9 e-2} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{1.0 e0} & \num{1.2 e-3} & $3.87$ & $15.5$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{2.5 e-1} & \num{7.8 e-5} & $3.97$ & $15.9$ \\ \hline
+		% A quadratic function
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $4$ & \num{1.1 e0} & \num{1.7 e-2} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $8$ & \num{2.9 e-1} & \num{1.1 e-3} & $3.87$ & $15.0$ \\ \hline
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $16$	& \num{7.4 e-2} & \num{7.0 e-5} & $3.96$ & $15.7$ \\ \hline
+
+	\end{tabular}
+	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_Exponential}]
+		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_Exponential} with $\alpha = 1$ and Boundary Parameters $\delta = 0$ and $P = 0.01$}
+	\label{tbl:q_Exponential_Error}
+\end{table}
+Then the solution is convergent if $f_{con} > 1$ for all choices of $N_{1}$. Furthermore the larger $f_{con}$, the faster convergence. A value of $f_{c} = 4$, for example, indicates that doubling No. of elements results in a
+reduction of the error by a factor $4$. Speed of convergence in this case is said to be of $\mathcal{O}\left( N^2\right) $. \\
+
+Convergence speed of \glspl{FEMSol} in \cref{cas:q_1st_Degree_Denom,cas:q_2nd_Degree_Denom,cas:q_Exponential} is shown in \crefrange{tbl:q_1st_Degree_Denom_Error}{tbl:q_Exponential_Error}. A closer look at \cref{fig:q_1_Load_0} and \cref{tbl:q_1st_Degree_Denom_Error,tbl:q_2nd_Degree_Denom_Error} reveals the following facts:
+\begin{enumerate}
+	\item For a given \gls{N} it seems that both linear and cubic \glspl{FEMSol} stay on the same side of the \gls{analSol}, i.e., they do not oscillate around the \gls{analSol}.
+
+	\item \Gls{linearFEMSol} seems to underestimate the displacement solution. \Gls{cubicFEMSol} on the other hand, changes between being larger and smaller than the \gls{analSol}.
+
+	\item \Glsentryname{order0Cont} in \gls{linearFEMSol} is clearly seen when No. of elements is small, look at the \glspl{nodePoint} in upper left part of \cref{fig:q_1_Load_0}. Cubic \glspl{FEMSol} on the other hand,
+	has continuous first derivative, see lower parts of \cref{fig:q_1_Load_0}.
+
+	\item Obviously we can not satisfy the \gls{naturalCondition} with the \gls{linearFEMSol}, because it involves value of first derivative. In the cubic case, on the other hand, the solution has the exact derivative on the \gls{rightBoundary}.
+
+	\item The linear and cubic \glspl{FEMSol} seem to converge as $\mathcal{O} \left( h^2 \right)$ and $\mathcal{O} \left( h^4 \right)$. This is in accordance with the results in \cref{cha:Error_Estimates}, see \cref{eqn:FEM_Error_To_h_And_Exact_Sol}.
+
+	\item \Cref{fig:q_1_Load_0,tbl:q_1st_Degree_Denom_Error} suggest a cubic FEM-error comparable to the numerical round off error. This should not come as a surprise because the problem's \gls{analSol} is also a third degree polynomial, see \cref{eqn:q_1st_Degree_Denom_Solution}.
+
+	\item Convergence speed decreases as by growing \gls{N}. This is of course due the round off error. This fact is more clear for cubic \gls{FEMSol} because of its faster speed of convergence.
+\end{enumerate}	\text{}
+%
+Finally, the code in \cref{lst:Estimate_Error} estimates the squared error of \glspl{FEMSol} compared to the \gls{analSol} in each case.

@@ -1,0 +1,147 @@
+\section{Summary of Analytical Solutions} \label{cha:Analytical_Summary}
+%
+% A hyperbolic choice of q(x)
+\begin{case} \label{cas:q_1st_Degree_Denom}
+	Consider now the simple \gls{bar} problem with a hyperbolic $q \left( x \right)$ and a polynomial load function i.e.,
+	\begin{subequations} \label{eqn:q_1st_Degree_Denom_Problem}
+		\begin{align}	\label{eqn:q_1st_Degree_Denom_Diff_Eq}
+			-\frac{ d }{ dx } \Biggl[ \gls{q} \glsentryname{uPrime} \Biggr] &= \gls{fDegreen}, \quad x \in \left( 0, 1 \right),	\\
+			\gls{q} &= \frac{ e_1 }{ x + e_2 },  \label{eqn:q_1st_Degree_Denom_q_Func} \\
+			f_{n} \left( x \right) &= \sum_{i = 0}^{n}c_{i}x^{i}, \label{eqn:q_1st_Degree_Denom_Load_Func}
+		\end{align}
+		with boundary conditions
+		\begin{align}
+			\gls{u} \Big \vert_{x = 0}  &= \gls{delta},  \label{eqn:q_1st_Degree_Denom_Left_Boundary} \\
+			\Biggl[ \gls{q} \glsentryname{uPrime} \Biggr]_{x = 1} &= P. \label{eqn:q_1st_Degree_Denom_Right_Boundary}
+		\end{align}
+	\end{subequations}
+	\Gls{analSol} of \cref{cas:q_1st_Degree_Denom} for a general second degree polynomial load is
+	\begin{subequations}	\label{eqn:q_1st_Degree_Denom_Solution}
+		\begin{equation}
+			u \left( x \right) = \sum_{i = 0}^{5} d_i x^i,
+		\end{equation}
+		where
+		{\allowdisplaybreaks
+		\begin{align}
+			d_0 &= \gls{delta},	\\
+			d_1 &= \frac{e_2}{e_1} P + \frac{e_2}{e_1} c_0 + \frac{e_2}{2 e_1} c_1 + \frac{e_2}{3 e_1} c_2,	\\
+			d_2 &= \frac{1}{2 e_1} P + \frac{1 - e_2}{2 e_1} c_0 + \frac{1}{4 e_1} c_1 + \frac{1}{6 e_1} c_2,	\\
+			d_3 &= -\frac{1}{3 e_1} c_0 - \frac{e_2}{6 e_1} c_1,	\\ 
+			d_4 &= -\frac{1}{8 e_1} c_1 - \frac{e_2}{12 e_1} c_2, \\
+			d_5 &= -\frac{1}{15 e_1} c_2.
+		\end{align}}	% end of \allowdisplaybreaks
+	\end{subequations}
+\end{case}
+%
+\begin{remark}
+	Note that by setting either $c_1 = c_2 = 0$ or $c_2 = 0$ in \cref{eqn:q_1st_Degree_Denom_Solution} we automatically get
+	the solutions of linear and uniform load, respectively. The solution in \cref{eqn:Classical_Bar} is thus a special
+	case of \cref{eqn:q_1st_Degree_Denom_Solution}. 
+\end{remark}
+%
+% Solution of the classical problem with q(x) = e_1 / (x^2 + e_2)
+\begin{case}	\label{cas:q_2nd_Degree_Denom}
+	Consider now \cref{prb:Normalized_Problem}, with another choice of $q \left( x \right)$, i.e.,
+	\begin{subequations} \label{eqn:q_2nd_Degree_Denom_Problem}
+		\begin{align}
+			-\frac{d}{dx} \biggl[ q \left( x \right) \frac{du}{dx} \biggr] &= f_{n} \left( x \right),
+				\quad x \in \left( 0, 1 \right), \label{eqn:q_2nd_Degree_Denom_Diff_Eq}	\\
+			\gls{q} &= \frac{ e_1 }{x^{2} + e_2 },  \label{eqn:q_2nd_Degree_Denom_q_Func} \\
+			\gls{fDegreen} &= \sum_{i = 0}^{n} c_i x^i, \label{eqn:q_2nd_Degree_Denom_Load_Func}
+		\end{align}
+		with boundary conditions
+		\begin{align}
+			u \left( x \right) \Big \vert_{x = 0} &= \gls{delta},  \label{eqn:q_2nd_Degree_Denom_Left_Boundary} \\
+			\biggl[ q \left( x \right) \frac{du}{dx} \biggr]_{x = 1} &= P. \label{eqn:q_2nd_Degree_Denom_Right_Boundary}
+		\end{align}
+	\end{subequations}
+	\Gls{analSol} of \cref{cas:q_2nd_Degree_Denom} for a polynomial load up to second degree is
+	\begin{subequations}	\label{eqn:q_2nd_Degree_Denom_Solution}
+		\begin{equation}
+			u \left( x \right) = \sum_{i = 0}^{6} d_i x^i,
+		\end{equation}
+		where
+		{\allowdisplaybreaks
+		\begin{align}
+			d_0 &= \gls{delta},	\\
+			d_1 &= \frac{e_2}{e_1} P + \frac{e_2}{e_1} c_0 + \frac{e_2}{2 e_1} c_1 + \frac{e_2}{3 e_1} c_2,	\\
+			d_2 &= -\frac{e_2}{2 e_1} c_0,	\\
+			d_3 &= \frac{P}{3 e_1} + \frac{1}{3 e_1} c_0 + \frac{1 - e_2}{6 e_1} c_1 + \frac{1}{9 e_1} c_2,	\\
+			d_4 &= -\frac{1}{4 e_1} c_0 - \frac{e_2}{12 e_1} c_2,	\\
+			d_5 &= -\frac{1}{10 e_1} c_0,	\\
+			d_6 &= -\frac{1}{18 e_1} c_1.
+		\end{align} }% end of \allowdisplaybreaks
+	\end{subequations}
+\end{case}	\text{}
+%
+% An exponential q(x)
+\begin{case} \label{cas:q_Exponential}
+	Consider also \cref{prb:Normalized_Problem}, with an exponential $q \left( x \right)$, i.e.,
+	\begin{subequations} \label{eqn:q_Exponential_Problem}
+		\begin{align}
+			-\frac{d}{dx} \left[ q \left( x \right) \frac{du}{dx} \right] &= f_{n} \left( x \right),
+				\quad x \in \left( 0, 1 \right), \label{eqn:q_Exponential_Diff_Eq}	\\
+			\gls{q} &= \exp \left( - \alpha x \right),  \label{eqn:Exponential_q_Func} \\
+			\gls{fDegreen} &= \sum_{i = 0}^{n}c_{i}x^{i}, \label{eqn:Exponential_Polynomial_Load}	
+		\end{align}
+		with boundary conditions
+		\begin{align}	
+			u \left( x \right) \Bigg \vert_{x = 0} &= \gls{delta},  \label{eqn:q_Exponential_Left_Boundary} \\
+			\left[ q \left( x \right) \frac{du}{dx} \right]_{x = 1} &= P. \label{eqn:q_Exponential_Right_Boundary}
+		\end{align}
+	\end{subequations}
+	Again, we solve this for a polynomial load function up to second degree, i.e,
+	\begin{subequations}	\label{eqn:q_Exponential_Solution}
+		\begin{equation}
+			u \left( x \right) = \exp \left( \alpha x \right) \sum_{i = 1}^{4} d_i x^i,
+		\end{equation}
+		where
+		{\allowdisplaybreaks
+		\begin{align}
+			d_0 &= \gls{delta} - \frac{P}{\alpha} - \left( \frac{1}{\alpha} + \frac{1}{\alpha^2} \right) c_0
+					+\left( - \frac{1}{2 \alpha} + \frac{1}{\alpha^3} \right) c_1
+						-\left( \frac{1}{3 \alpha} + \frac{2}{\alpha^4} \right) c_2,	\\
+			d_1 &= \frac{P}{\alpha} + \left( \frac{1}{\alpha} + \frac{1}{\alpha^2} \right) c_0
+							+\left( \frac{1}{2 \alpha} - \frac{1}{\alpha^3} \right) c_1
+							+ \left( \frac{1}{3 \alpha} + \frac{2}{\alpha^4} \right) c_2, \\
+			d_2 &= -\frac{1}{\alpha} c_0 + \frac{1}{\alpha^2} c_1 - \frac{2}{\alpha^3} c_2, \\
+			d_3 &= -\frac{1}{2 \alpha} c_1 + \frac{1}{\alpha^2} c_2, \\
+			d_3 &= -\frac{1}{3 \alpha} c_2.
+		\end{align}}	% end of \allowdisplaybreaks
+	\end{subequations}
+\end{case}
+%
+% A constant q(x)
+\begin{case} \label{cas:q_Constant}
+	Finally, consider \cref{prb:Normalized_Problem}, with a constant rigidity, i.e.,
+	\begin{subequations} \label{eqn:q_Constant_Problem}
+		\begin{alignat}{2}
+			-\frac{d}{dx} \left[ q \left( x \right) \frac{du}{dx} \right] &= f_{n} \left( x \right),
+				\quad && x \in \left( 0, 1 \right),	\label{eqn:q_Constant_Diff_Eq}	\\
+			\gls{q} &= e_0,  \label{eqn:Constant_q_Func} \\
+			\gls{fDegreen} &= \sum_{i = 0}^{n}c_{i}x^{i}, \quad && n = 0, 1, 2, \label{eqn:Constant_Polynomial_Load}
+		\end{alignat}
+		with boundary conditions
+		\begin{align}
+			u \left( x \right) \Bigg \vert_{x = 0} & = \gls{delta},  \label{eqn:q_Constant_Left_Boundary} \\
+			\left[ q \left( x \right) \frac{du}{dx} \right]_{x = 1} &= P. \label{eqn:q_Constant_Right_Boundary}
+		\end{align}
+	\end{subequations}
+The solution is given by
+	\begin{subequations}	\label{eqn:q_Constant_Solution}
+		\begin{equation}
+			u \left( x \right) = \sum_{i = 0}^{4} d_i x^i,
+		\end{equation}
+		where
+		{\allowdisplaybreaks
+		\begin{align}
+			d_0 &= \gls{delta}, \\
+			d_1 &= \left( P + c_0 + \frac{c_1}{2} + \frac{c_2}{3} \right) \frac{1}{e_0}, \\
+			d_2 &= -\frac{c_0}{2e_0}, \\
+			d_3 &= -\frac{c_1}{6e_0}, \\
+			d_4 &= -\frac{c_2}{12e_0}.
+		\end{align}}	% end of \allowdisplaybreaks
+	\end{subequations}
+\end{case}
+In \cref{lst:Def_Problem} we have included the MATLAB-code for implementation of all analytical solutions discussed here.
+%

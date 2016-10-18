@@ -1,0 +1,21 @@
+\chapter{Conclusions} \label{cha:Conclusions}
+In this report we have introduced \glsfirst{FEM} as a numerical approach for solving \gls{diffEq}.
+We applied the method to a family of \glspl{BVP} with an essential and a \gls{naturalCondition} on the left and right boundaries, respectively. For some simplified choices the problem family has \glspl{analSol}. In each case we calculated the numerical solution, applying both linear and cubic basis-functions, then compared them to the analytical solution and studied the eventual convergence. 	\\
+
+We conclude this report by listing steps involved in a FEM:
+\begin{enumerate}
+	\item Deduction of a \gls{weakForm}: We relax the smoothness requirements on the numerical solution.
+
+	\item Meshing: Divide the \gls{region} into a finite No. of elements. Also determine the nodal points as element boundaries.
+
+	\item Choice of \glspl{basisFunction}: Usually we choose polynomial functions with \gls{localSupport} as \glspl{basisFunction}.
+		  The polynomial degree may in addition be chosen by the eventual requirements on solution smoothness.
+
+	\item Deduction of a \gls{linearEquationSystem} for unknowns: Insert the truncated solution into the \gls{weakForm} and
+		  simplify. Implement also \glspl{boundaryCondition} by adjusting the equation system.
+
+	\item Calculation of nodal values: Solve the system and find the unknowns.
+
+	\item Interpolation: Insert the nodal values into the truncated solution.
+\end{enumerate}
+%

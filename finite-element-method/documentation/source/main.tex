@@ -1,0 +1,33 @@
+%% Based on a TeXnicCenter-Template by Gyorgy SZEIDL.
+\documentclass{report}
+
+% ********************************** Preamble *********************************
+\include{Preamble}
+
+%\includeonly{A_Mechanical_Problem}
+%\includeonly{Finite_Element_Approach}
+%\includeonly{Error_Estimates}
+%\includeonly{Results}
+%\includeonly{Conclusions}
+
+% -----------------------------------------------------------------------------
+\begin{document}
+
+% ******************************* Front matter ********************************
+\include{frontmatter}
+
+% ******************************* Main document *******************************
+% Set page numberic to Arabic for the rest of document.
+\pagenumbering{arabic}
+
+\include{a-mechanical-problem}
+\include{finite-element-approach}
+\include{error-estimates}
+\include{results}
+\include{conclusions}
+
+% ******************************** Backmatter *********************************
+\include{Backmatter}
+
+\end{document}
+% -----------------------------------------------------------------------------

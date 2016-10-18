@@ -1,0 +1,155 @@
+\section{Cubic Basis-Functions} \label{cha:Cubic_Basis_Function}
+In \gls{FEM} generally and in a one-dimensional \gls{FEM} specifically, cubic polynomials are vastly chosen as \glspl{basisFunction}.
+There are several reasons for this popularity:
+\begin{enumerate}
+	\item Cubic basis-functions support \glsentryname{order1Cont}. This is a more smooth solution compared to linear choice of \glspl{basisFunction}.
+
+	\item They generally give rise to a more precise solution as well as a faster convergence speed than the linear case.
+
+	\item The cost of going up from linear to cubic \glspl{basisFunction} is low, specially for a one-dimensional problem. 
+\end{enumerate}
+%
+Remember that in the linear case it was attached a \gls{basisFunction} to every node, totally $N + 1$
+functions. It gave us $2$ \glspl{shapeFunction} over each \gls{element}. \\
+
+In the cubic case, on the other hand, we need $4$ \glspl{shapeFunction} over each \gls{element}, or totally $2N + 2$ \glspl{basisFunction}.
+Each cubic \gls{shapeFunction} has 4 parameters and thus must have $4$ conditions to be fully specified. The first $2$ conditions
+concern function values at the \glspl{nodePoint}, while the last $2$ give values of first derivatives at the same node points. \\
+
+The first \gls{shapeFunction} $\psi_1$, guarantees function values $1$ and $0$ on the left and right element boundaries, as well as a
+vanishing derivative at both ends
+\begin{subequations}	\label{eqn:Cond_On_Cubic_Psi_1_Local}
+	{\allowdisplaybreaks
+		\begin{align}
+			\psi_{1} \left( 0\right) &= 1,	\\
+			\psi_{1} \left( 1 \right) &= 0,	\\
+			\psi_{1,  x}\left( 0 \right) &= 0,	\\
+			\psi_{1,  x}\left( 1 \right) &= 0.
+		\end{align}
+	}% end of \allowdisplaybreaks
+\end{subequations}
+The second \gls{shapeFunction} has a value of unity at the right boundary, otherwise function and derivative values of zero at the boundaries.
+In the same manner the third and fourth \glspl{shapeFunction} have their unity values for the derivative at the left and right boundaries.	\\
+
+A general cubic polynomial and its derivative may be written as
+\begin{subequations}
+	\begin{align}
+		\psi _{i}\left( x \right) &= c_{0} + c_{1} x + c_{2}x^{2} + c_{3}x^{3},	\label{eqn:General_Cubic_Func}	\\
+		\psi _{i}^{\prime} \left( x \right) &= c_{1} + 2c_{2}x + 3c_{3}x^{2}.	\label{eqn:General_Cubic_Der}
+	\end{align}
+\end{subequations}
+%
+For each \gls{shapeFunction} coefficients $c_1, \dots, c_4$ may be found by applying conditions above to
+\cref{eqn:General_Cubic_Func,eqn:General_Cubic_Der}. Here are the results
+\begin{subequations}	\label{eqn:Cubic_Psi_Local}
+	\begin{align}
+		\psi _{1}\left( x \right) &= 1 - 3 x^{2} + 2x^{3},	\\
+		\psi _{2}\left( x \right) &= 3 x^{2} - 2 x^{3},	\\
+		\psi _{3}\left( x \right) &= x - 2 x^{2} + x^{3},	\\
+		\psi _{4}\left( x \right) &= -x^{2} + x^{3}.
+	\end{align}
+\end{subequations}
+%
+Cubic \glspl{shapeFunction} and \gls{piecewiseCubic}
+polynomials over the whole domain are depicted in \cref{fig:Cubic_Shape_Functions,fig:Cubic_Basis_Functions}, respectively. Observe
+from the latter that the first $N+1$ functions control the solution value at \glspl{nodePoint}, while the last $N+1$ functions
+take care of first derivatives at \glspl{nodePoint}. \\	\\
+Thus using \cref{eqn:Truncated_FEM_Solution} with $M = 2N + 2$, the solution value at \glspl{nodePoint} may be written as
+\begin{subequations}
+	\begin{align}
+		% Function u(x)
+		\gls{u} &= \sum_{i = 1}^{2N + 2} \glsentryname{ai} \gls{phii},	\notag \\
+		% Function value at x = x_j
+		\glsentryname{uAtXj} &= \sum_{i = 1}^{2N + 2} \glsentryname{ai} \gls{phii} \bigg \vert_{x = x_j} = a_j,	\label{eqn:Cubic_Solution_At_X_i}
+	\end{align}
+	In the same manner we apply \cref{eqn:u_Prime} with $M = 2N + 2$ to find the first derivative values at the \glspl{nodePoint}, i.e.,
+	\begin{equation}
+		% First derivate at x_j,
+		\glsentryname{uPrimeAtXj} = \sum_{i = 1}^{2N + 2} a_i \glsentryname{phiiPrime} \bigg \vert_{x = x_j}
+		= a_{j + N + 1}.	\label{eqn:Cubic_Solution_Derivative_At_X_i}
+	\end{equation}
+\end{subequations}
+%
+Thus the cubic choice results in $M = 2N + 2$ \glspl{dof}. \Glspl{shapeFunction} and their derivatives, in both the linear and
+cubic case are implemented in \cref{lst:Def_FEM_Func}.
+\begin{figure}
+	\includegraphics[width = \textwidth]{../figures/cubic-shape-functions}
+	\caption[Choice of Cubic Polynomials for Shape-Functions]
+		{Choice of Cubic Polynomials for Shape-Functions}
+	\label{fig:Cubic_Shape_Functions}
+\end{figure}
+\begin{figure}
+	\includegraphics[width = \textwidth]{../figures/cubic-basis-functions}
+	\caption[Choice of Cubic Polynomials for Basis-Functions]
+		{Choice of cubic polynomials for Basis-Functions gives a solution which is $\mathcal{O} \left( 1 \right)$-continuous.}
+	\label{fig:Cubic_Basis_Functions}
+\end{figure}
+%
+\subsection[Element Matrix and Element Load]{\Gls{elementMatrix} and \Gls{elementLoad}} \label{cha:Element_Matrix_Load_Cubic}
+Above we saw how we could calculate the global \gls{stiffnessMatrix} and \gls{loadVector} by summing element contributions,
+see under \cref{cha:Element_Matrix_Linear,cha:Element_Load_Linear,cha:Assembly_Process_Linear}. Note that we defined
+two \glspl{shapeFunction} over a typical \gls{element} in the linear case. The \gls{elementMatrix} and \gls{loadVector} for
+\gls{linearFEMSol} are then \gls{Ke} $\in$ \glsentryname{R22} and \gls{be} $\in$ \glsentryname{R21}, respectively. In the cubic
+case, on the other hand, there are $4$ non-zero \glspl{shapeFunction} over each \gls{element}. Thus
+\begin{subequations}
+	\begin{alignat}{2}
+		\glsentryname{Kmne} &= \frac{1}{h} \int_{0}^{1} q \Bigl[ \left( e - 1 + \xi \right) h \Bigr] \frac{ d \psi_m }{ d \xi }
+			\frac{ d \psi_n }{ d \xi } \dd \xi,	\quad& m, n = 1, \dots, 4,	\label{eqn:Cubic_Element_Stiffness_Entries}	\\
+			b_{m}^{e} &= h \int_{ 0 }^{ 1 } f \biggl[ h \left( e - 1 + \xi \right) \biggr] \psi_m \left( \xi \right) \dd \xi,
+				\quad& m = 1, \dots, 4.	\label{eqn:Cubic_Element_Load_Entries}
+	\end{alignat}
+\end{subequations}	\text{}
+\Cref{lst:Elem_Cont} shows MATLAB-code for implementation of element contributions in both linear and cubic case.
+%
+\subsection{Assembly Process} \label{cha:Assembly_Process_Cubic}
+Again, denote by \gls{K} and \gls{b} the global \gls{stiffnessMatrix} and \gls{loadVector}. Also let \gls{KGlobalE} and
+\gls{bGlobalE} describe status of \gls{K} and \gls{b} after addition of element and load contributions from elements
+$1,2, \ldots, e$. Then assembly process with cubic basis-functions are visualized in \crefrange{fig:K_1_Cubic}{fig:K_4_Cubic} and \cref{fig:b_1_To_b_4_Cubic}. MATLAB-code in \cref{lst:Setup_Eq_Sys} implements this process in both linear and cubic case.
+
+% ------------------ Insert Visualization of Cubic Assembly Process ------------------
+\input{assembly-cubic}
+%
+Another way of explaining the assembly process follows:
+\begin{enumerate}
+	\item For each element $e$ calculate \gls{Ke} and \gls{be} from
+	\cref{eqn:Cubic_Element_Stiffness_Entries,eqn:Cubic_Element_Load_Entries}.
+
+	\item \Gls{elementMatrix} \gls{Ke} $\in$ \glsentryname{R44} may then be divided into $4$ sub-matrices all of them in \glsentryname{R22} i.e., upper/lower left and right. Add these sub-matrices to the global \gls{stiffnessMatrix} entries
+	starting at entries $K_{e, e}$, $K_{e + N + 1, e}$, $K_{e, e + N + 1}$ and $K_{e + N + 1,e + N + 1}$, respectively.
+
+	\item \Gls{elementLoad} \gls{be} $\in$ \glsentryname{R41}, on the other hand, is divided to two sub vectors of size
+	$2\times 1$ each, i.e., upper and lower. These sub vectors are then added to the global \gls{loadVector} starting at entries
+	$b_{e}$ and $b_{e + N + 1}$, respectively.
+\end{enumerate}
+%
+\subsection[Implementation of Boundary Conditions]{Implementation of \glspl{boundaryCondition}}
+Before solving the system we must implement \glspl{boundaryCondition} by and adjust equations involving \glspl{basisFunction} near boundaries. Consider first the \gls{normalCondition}, in \cref{eqn:FEM_Right_Boundary}
+\begin{subequations}
+	\begin{align}
+		\gls{q} \glsentryname{uPrime} \bigg \vert_{x = 1} &= P, \notag \\
+		\frac{du}{dx} \bigg \vert_{x = 1} &= \frac{P}{ \gls{q} } \bigg \vert_{x = 1}. \label{eqn:FEM_Right_Boundary_Rewritten}
+	\end{align}
+	Now differentiate displacement function at the \gls{rightBoundary}
+	\begin{align}
+		\frac{du}{dx} \bigg \vert_{x = 1} &= \sum_{i = 1}^{2N + 2} \glsentryname{ai} \glsentryname{phiiPrime} \bigg \vert_{x = 1}
+		= a_{2N + 2}. \label{eqn:Cubic_du_dx_At_Right_Boundary}
+	\end{align}
+\end{subequations}
+%
+Combining \cref{eqn:FEM_Right_Boundary_Rewritten,eqn:Cubic_du_dx_At_Right_Boundary} gives
+\begin{equation}
+		a_{2N + 2} = \frac{P}{q \left( x \right) } \bigg \vert_{x = 1}. \label{eqn:a_2N_Plus_2}
+\end{equation}
+
+Then we need the following modifications to the equation system:
+\begin{itemize}
+	\item \Glspl{basisFunction} $\varphi_{N + 1},$ $\varphi_{N + 2}$ and $\varphi _{2N + 2}$ are special cases.\footnote{This is because they
+	consist of a single cubic polynomial, see \cref{fig:Cubic_Basis_Functions}.} Adjust the corresponding equations.
+	
+	\item Adjust the last equation to result $a_{2N + 2}$ given by \cref{eqn:a_2N_Plus_2}.
+\end{itemize}
+%
+\emph{MATLAB} code in \cref{lst:Solve_Eq_Sys} solves the equation system after implementation of the boundary conditions in both
+linear and cubic case. Note that in cubic case the first two terms are already calculated in the assembly process described above.
+We must only add the last term to get the correct value of load entry.
+%

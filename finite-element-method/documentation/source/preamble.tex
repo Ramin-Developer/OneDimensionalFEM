@@ -1,0 +1,195 @@
+% ***************************** Language and Font *****************************
+\usepackage[american]{babel}
+\usepackage[latin1]{inputenc} % as usual
+\usepackage[T1]{fontenc} % as usual
+
+% ***************************** Figure and Table Processing *****************************
+\usepackage{graphicx}
+
+% Allows to mark some entries in the tables with color
+\usepackage{color}
+
+% Colors for tables
+\usepackage[table]{xcolor}
+
+% These two are required to add the little picture on top of every page
+\usepackage{eso-pic}
+
+% These two are required to add the little picture on top of every page
+\usepackage{everyshi}
+
+% Convert eps files to pdf
+\usepackage{epstopdf}
+
+% The caption package is needed for the option to be recognized by Latex.
+\usepackage{caption}
+
+% Position of captions below each figure.
+\usepackage[position=below]{subfig}
+
+\usepackage{rotating}
+%\usepackage{tikz}
+
+\usepackage{floatrow}
+\floatsetup[table]{style=Plaintop,heightadjust=all,valign=c}
+\floatsetup[figure]{font=small,heightadjust=all,,valign=c}
+
+% ******************************** Matemathical *******************************
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mhsetup}
+\usepackage{mathtools}
+
+\usepackage{siunitx}
+\sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
+
+% ********************************* Footnotes *********************************
+\usepackage{footnote}
+\makesavenoteenv{table}
+\makesavenoteenv{tabular}
+\interfootnotelinepenalty=10000
+
+% ************************* Appendices and glossaries *************************
+% Prerequisite and glossaries package
+\usepackage{appendix}
+\usepackage{makeidx}
+\usepackage{ifthen}
+\usepackage{xkeyval}
+\usepackage{xfor}
+\usepackage{etoolbox}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage[xindy,nomain,nonumberlist,section]{glossaries}
+
+% ******************** Table of Contents and Other Listings ********************
+\usepackage[notlof,notlot,nottoc,chapter]{tocbibind}
+
+% ****************************** Code Insertion *******************************
+\usepackage{listings}
+
+% ************************** Smart Cross Referencing **************************
+\usepackage{cleveref}
+\newcommand{\crefrangeconjunction}{ -- }	% The conjunction used in a reference range
+
+% Referencing environments in the middle of sentences.
+\crefname{algorithm}{Algorithm}{Algorithms}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{axiom}{Axiom}{Axioms}
+\crefname{case}{Case}{Cases}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{conclusion}{Conclusion}{Conclusions}
+\crefname{condition}{Condition}{Conditions}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{corollary}{Corollary}{Corollarys}
+\crefname{criterion}{Criterion}{Criterions}
+\crefname{definition}{Definition}{Definitions}
+\crefname{enumi}{Point}{Points}
+\crefname{equation}{Eq.}{Eqs.}
+\crefname{example}{Example}{Examples}
+\crefname{exercise}{Exercise}{Exercises}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{listing}{Listing}{Listings}
+\crefname{notation}{Notation}{Notations}
+\crefname{problem}{Problem}{Problems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{remark}{Remark}{Remarks}
+\crefname{section}{Section}{Sections}
+\crefname{solution}{Solution}{Solutions}
+\crefname{subsection}{Section}{Sections}
+\crefname{subsubsection}{Section}{Sections}
+\crefname{subsubsubsection}{Section}{Sections}
+\crefname{summary}{Summary}{Summarys}
+\crefname{theorem}{Theorem}{Theorems}
+
+% Referencing environments in the beginning of sentences.
+\Crefname{algorithm}{Algorithm}{Algorithms}
+\Crefname{appendix}{Appendix}{Appendices}
+\Crefname{axiom}{Axiom}{Axioms}
+\Crefname{case}{Case}{Cases}
+\Crefname{chapter}{Chapter}{Chapters}
+\Crefname{conclusion}{Conclusion}{Conclusions}
+\Crefname{condition}{Condition}{Conditions}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{corollary}{Corollary}{Corollarys}
+\Crefname{criterion}{Criterion}{Criterions}
+\Crefname{definition}{Definition}{Definitions}
+\Crefname{enumi}{Point}{Points}
+\Crefname{equation}{Eq.}{Eqs.}
+\Crefname{example}{Example}{Examples}
+\Crefname{exercise}{Exercise}{Exercises}
+\Crefname{figure}{Fig.}{Figs.}
+\Crefname{lemma}{Lemma}{Lemmas}
+\Crefname{listing}{Listing}{Listings}
+\Crefname{notation}{Notation}{Notations}
+\Crefname{problem}{Problem}{Problems}
+\Crefname{proposition}{Proposition}{Propositions}
+\Crefname{remark}{Remark}{Remarks}
+\Crefname{section}{Section}{Sections}
+\Crefname{solution}{Solution}{Solutions}
+\Crefname{subsection}{Section}{Sections}
+\Crefname{subsubsection}{Section}{Sections}
+\Crefname{subsubsubsection}{Section}{Sections}
+\Crefname{summary}{Summary}{Summarys}
+\Crefname{theorem}{Theorem}{Theorems}
+
+% ************************* Theorem-like environments *************************
+\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}[chapter]
+\newtheorem{axiom}{Axiom}[chapter]
+\newtheorem{case}{Case}[chapter]
+\newtheorem{claim}{Claim}[chapter]
+\newtheorem{conclusion}{Conclusion}[chapter]
+\newtheorem{condition}{Condition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{criterion}{Criterion}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{notation}{Notation}[chapter]
+\newtheorem{problem}{Problem}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{solution}{Solution}[chapter]
+\newtheorem{summary}{Summary}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\numberwithin{equation}{chapter}
+
+% ******************************* Define colors *******************************
+\usepackage{graphicx}
+
+% Allows to mark some entries in the tables with color
+\usepackage{color}
+
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightCyan}{rgb}{0.88,1.00,1.00}
+\definecolor{Cream}{rgb}{1.00,1.00,0.88}
+\definecolor{Red}{rgb}{1.00,0.00,0.00}
+\definecolor{Blue}{rgb}{0.00,0.00,1.00}
+\definecolor{Brown}{rgb}{0.58,0.39,0.39}%
+\definecolor{Cyan}{rgb}{0.00,1.00,1.00}%
+\definecolor{Pink}{rgb}{1.00,0.60,0.78}%
+\definecolor{Green}{rgb}{0.23,0.44,0.34}%
+
+% ************************** New and Renew Commands **************************
+% Correct format for integration variable
+\newcommand{\dd}{\: \mathrm{d}}
+
+% Default: 0.5 allows two big pictures on one page
+\renewcommand{\floatpagefraction}{0.7}
+
+% ***************************** Making glossaries *****************************
+% Terminology and Symbol List
+\newglossary{terminology}{tin}{tut}{}
+\newglossary{symbols}{sym}{sbl}{}
+
+% Load glossary entries from the corresponding files.
+\loadglsentries[terminology]{Terminology}
+\loadglsentries[symbols]{Symbols}
+
+% Create gloassries
+\makeglossaries
+
+% Capitalize the first letter of glossary items in the glossary list
+\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}

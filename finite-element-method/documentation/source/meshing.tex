@@ -1,0 +1,88 @@
+\section[Meshing]{\Gls{meshing}}
+Let now \glssymbol{Omega} denote the whole \gls{domain} and divide it into \gls{N} elements
+\begin{subequations} \label{eqn:Element_Locations}
+	\begin{align}
+		\glssymbol{Omega} &= \left[ 0, 1 \right] = \sum \limits_{i = 1}^{\gls{N}} \gls{Omegai}, \label{eqn:Whole_Region}	\\
+		\gls{Omegai} &= \left[ \gls{xi},  x_{i + 1}, \right], \quad i = 1, 2, \dots, \gls{N}.	\label{eqn:Element_No_i}
+	\end{align}
+\end{subequations}
+%
+This introduces the following concepts:
+\begin{definition}
+	\Glspl{nodePoint} are distinct and fixed points in the \gls{domain}, i.e.,
+	\begin{align}
+		x_{i - 1} < & x_{i} < x_{i + 1}, \quad i = 2, 3, \dots, \gls{N}, \\
+		x_1  & = 0, \\
+		x_{N + 1} & = 1.
+	\end{align}
+\end{definition}
+\begin{definition}
+	\Glspl{element} are distinct parts of the \gls{domain}, i.e.,
+	\begin{equation}
+		\left\{ \glsentryname{Omegae}: \forall x \vert \quad x_{e} \le x \le x_{e + 1}, \quad e = 1, 2, \dots, \gls{N} \right\} .
+	\end{equation}
+\end{definition}
+Note that element boundaries and locations are expressed in \gls{globalCoord}.
+\begin{definition}
+	\Gls{meshing}: is a process where we divide the whole region
+	into smaller pieces, elements in \gls{FEM}-terminology. By the end of this process we have then chosen No. of elements, \gls{N} and
+	located the $N + 1$ \glspl{nodePoint}. Another term for \gls{meshing} is \gls{discretization}.
+\end{definition}
+\begin{remark}
+	Two \gls{adjacentElements} $\Omega_e$ and $\Omega_{e + 1}$ have then one and only one common point, $x_{e + 1}$.
+\end{remark}
+\begin{definition}
+	\Gls{uniformMeshing}: A \gls{meshing} is uniform if all \glspl{element} are of the same size. In the one-dimensional case in
+	hand the node points are then equidistant
+\end{definition}
+\begin{remark}
+	It is common practice to pre-mesh the \gls{domain}, solve the problem, then analyze the solution, return to the initial
+	\gls{meshing} and make it finer/grosser in the areas with rapid/slow solution change. This process, \gls{adaptivemeshing},
+	improves the solution and may be carried out iteratively. It will also result in a \gls{nonUniformMeshing}.
+\end{remark}
+\begin{figure}
+	\includegraphics[width = \textwidth]{../Figures/Meshing}
+	\caption{A Typical \Gls{region} with \Glspl{element} and \Glspl{nodePoint}}
+	\label{fig:Meshing}
+\end{figure}
+Consider now an approximation to the or \gls{exactSol} given by
+\begin{equation} \label{eqn:Truncated_FEM_Solution}
+	\glssymbol{uM} = \sum_{i = 1}^{\gls{M}} \glsentryname{ai} \gls{phii}.
+\end{equation}
+This is a series spanned by a total of \gls{M} linearly independent functions \gls{phii}, also called \glspl{shapeFunction} or
+\glspl{interpolationFunction}. The series is in addition truncated because we have replaced infinity ($\infty$) on the upper bound of
+summation by \gls{M}. The solution in \cref{eqn:Truncated_FEM_Solution} is thus a linear combination of $M$ \glspl{basisFunction}.
+and the task is then to determine the \gls{M} coefficients $a_j$, such that \cref{eqn:FEM_Problem}, as well as
+\glspl{boundaryCondition} in \cref{eqn:FEM_Left_Boundary,eqn:FEM_Right_Boundary} are satisfied. In FEM-terminology we say that
+the model has $M$ \glspl{dof}. \Glspl{basisFunction} have typically \gls{localSupport}, i.e., they are defined over a few \glspl{element}
+and are identically $0$ otherwise. \\
+
+The terms \Glsfirst{finite} and \Glsfirstplural{element} in \gls{FEM} refer to the facts that the solution is a truncated series and the
+\gls{region} is divided into subregions as explained above. From now on we denote the \gls{FEMSol} just by $u  = u \left( x \right)$
+and drop the truncation reference. The first derivative of $u$ may be written as
+\begin{equation} \label{eqn:u_Prime}
+	\frac{du}{dx} = \sum_{i = 1}^{\gls{M}} a_i \glsentryname{phiiPrime}.
+\end{equation}
+A particularly interesting choice of weight functions is \glspl{basisFunction}, i.e.,
+\begin{subequations} \label{eqn:Weight_Function}
+	\begin{align}
+		\gls{wi} &= \gls{phii}, & i &= 1, 2, \dots, \gls{M},
+		\shortintertext{such that}
+		\glsentryname{wiPrime} &= \glsentryname{phiiPrime} & i &= 1, 2, \dots, \gls{M},
+	\end{align}
+\end{subequations}
+Let us for simplicity assume a \gls{uniformMeshing}. Length of all elements is then equal and all nodes are
+equidistant Dividing the whole \gls{region} $x \in \left[ 0, 1 \right] $ into \gls{N} \glspl{element} will then result in the
+following element locations and element length
+\begin{subequations}
+	\begin{align}
+		\glssymbol{Omega} &= \left[ 0, 1 \right] = \sum \limits_{i = 0}^{\gls{N}} \gls{Omegai}, \\
+		\gls{h} & = \frac{x_{N + 1} - x_{1}}{\gls{N}} = \frac{1 - 0}{\gls{N}} = \frac{1}{\gls{N}}.
+	\end{align}
+	where
+	\begin{alignat}{2}
+		\gls{Omegai}	&= \left[ \gls{xi},  x_{i + 1} \right], \quad && i = 1, 2, \dots, \gls{N}, \\
+		\gls{xi} 		&= \left( i - 1 \right) h, 				\quad && i = 1, 2, \dots, N + 1.
+	\end{alignat}
+\end{subequations}
+ %

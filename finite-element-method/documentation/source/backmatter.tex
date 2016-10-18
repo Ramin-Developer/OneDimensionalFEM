@@ -1,0 +1,36 @@
+
+% Bibliography
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\clearpage
+
+\begin{appendices}
+	
+	% Nomenclature
+	\setlength{\glspagelistwidth}{\textwidth}
+	\setlength{\glsdescwidth}{0.85\textwidth}
+
+	\renewcommand*{\arraystretch}{1.2}	% Space after each entry in the glossary list. the default is 1.
+	
+	% Add all entries in the file referred to by \gls{label} and its plural variants.
+	\glsadd{gAtXj}
+	\glsadd{gPrime}
+	\glsadd{gFromAToB}
+	\glsadd{psii}
+		
+	% Space after each entry in the glossary list. the default is 1.
+	\setlength{\glspagelistwidth}{\textwidth}
+	\setlength{\glsdescwidth}{0.75\textwidth}
+
+	\renewcommand*{\arraystretch}{1.5}
+	\chapter{Glossary of Terms}	\label{cha:Glossary_of_Terms}
+	
+	\printglossary[type=terminology,style=altsuper4col]
+	
+	% MatLab-Code
+	\chapter{MatLab-Code} \label{cha:MatLab_Code}
+	\input{matLab-code}
+
+\end{appendices}

@@ -1,0 +1,584 @@
+\lstset{language = matlab}
+\lstset{numbers = left, numberstyle = \tiny, stepnumber = 2, numbersep = 5pt}
+\lstset{tabsize = 3}
+%\lstset{index={Condition!normal}}
+
+% Main Program
+\begin{lstlisting}[caption = {Main Program}, label = lst:Main_Program]
+
+clear;
+
+% Export the figure to the following file.
+% File_Name = 'Untitled';
+
+% Normal Condition on the left hand side.
+% P = 1;          % for q(x) equal to poly1 and poly 2
+P = 0.01;       % for an exponential q(x)
+
+% Dirichlet condition on theleft hand side.
+delta = 0;
+
+% Degree of denominator in q(x):
+% q_Denom_Type = 'Poly_1';
+% q_Denom_Type = 'Poly_2';
+q_Denom_Type = 'Exp';
+
+% Coefficients of the load function:
+% load_Coeff = 1;
+% load_Coeff = [1 2];
+load_Coeff = [1 2 -3];
+
+% Coefficients of q:
+% q_Coeff = [10 0.01]; % For q(x) with linear and quadratic denominator
+q_Coeff = 1;           % For the exponential choice
+
+% No. of elements:
+N = [4 8 16];
+
+[h, elem_Size, sol_Size, q_Func, load_Func, ...
+		x, u_FEM_Lin, u_FEM_Cub, u_Exact] = ...
+		Def_Problem( N, q_Denom_Type, load_Coeff, q_Coeff, delta, P );
+
+% Calculate FEM solution:
+for i = 1:1:length(N)
+		[u_FEM_Lin(:, i), u_FEM_Cub(:, i)] = ...
+				Solve_FEM_Problem( N( i ), h( i ), ...
+				elem_Size( i ), sol_Size, x, P, delta, q_Func, load_Func );
+end;
+
+% Error estimation:
+[conv_Factor, sq_Error] = ...
+		Estimate_Error( N, sol_Size, x, u_Exact, u_FEM_Lin, u_FEM_Cub );
+
+\end{lstlisting}
+\line(1,0){450}
+\vspace{5 mm}
+
+% Define the problem and its analytical solution:
+\begin{lstlisting}[caption = {Define the Problem and Its Analytical Solution}, label = lst:Def_Problem]
+
+function [h, elem_Size, sol_Size, q_Function, load_Func, ...
+		x, u_FEM_Lin, u_FEM_Cub, u_Exact] = ...
+		Def_Problem( N, q_Denom_Type, load_Coeff, q_Coeff, delta, P )
+
+% A uniform discretizatin
+h = 1 ./ N;
+
+% No. of points in the final plot:
+sol_Size = 2^16;
+
+% Element size in the FEM solution
+elem_Size = sol_Size ./ N;
+
+% Evaluation points in the final solution
+x = linspace(0, 1, sol_Size + 1 )';
+
+% Initialize FEM-solution
+u_FEM_Lin = zeros( sol_Size + 1, length(N) );
+u_FEM_Cub = zeros( sol_Size + 1, length(N) );
+load_Degree = length(load_Coeff) - 1;
+
+% Convert coefficients of the polynomial load to a general
+% quadratic polynomial.
+if load_Degree == 0
+		load_Coeff = [load_Coeff 0 0];
+elseif load_Degree == 1
+		load_Coeff = [load_Coeff 0];
+end;
+
+if strcmpi(q_Denom_Type, 'Poly_1') == 1
+		[q_Function, load_Func, u_Exact] = ...
+		Def_q_Denom_1( load_Coeff, q_Coeff, delta, P );
+
+elseif strcmpi(q_Denom_Type, 'Poly_2') == 1
+		[q_Function, load_Func, u_Exact] = ...
+		Def_q_Denom_2( load_Coeff, q_Coeff, delta, P );
+
+elseif strcmpi(q_Denom_Type, 'Exp') == 1
+		[q_Function, load_Func, u_Exact] = ...
+		Def_q_Exp( load_Coeff, q_Coeff, delta, P );
+end;
+
+
+function [q_Function, load_Func, u_Exact] = ...
+		Def_q_Denom_1( load_Coeff, q_Coeff, delta, P )
+
+d = zeros(1, 6);
+q_Function = @(x) q_Coeff(1) ./ ( x + q_Coeff(2) );
+load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x ...
+		+ load_Coeff(3) * x.^2;
+
+d(1) = delta;
+
+d(2) = q_Coeff(2) * P / q_Coeff(1) ...
+			 + q_Coeff(2) * load_Coeff(1) / q_Coeff(1) ...
+			 + q_Coeff(2) * load_Coeff(2) / ( 2 * q_Coeff(1) ) ...
+			 + q_Coeff(2) * load_Coeff(3) / ( 3 * q_Coeff(1) );
+
+d(3) = P / ( 2 * q_Coeff(1) ) ...
+		+ ( 1 - q_Coeff(2) ) * load_Coeff(1) / ( 2 * q_Coeff(1) ) ...
+		+ load_Coeff(2) / ( 4 * q_Coeff(1) ) ...
+		+ load_Coeff(3) / ( 6 * q_Coeff(1) );        
+
+d(4) = - load_Coeff(1) / ( 3 * q_Coeff(1) ) ...
+		- q_Coeff(2) * load_Coeff(2) / ( 6 * q_Coeff(1) );
+
+d(5) = - load_Coeff(2) / ( 8 * q_Coeff(1) ) ...
+		- q_Coeff(2) * load_Coeff(3) / ( 12 * q_Coeff(1) );
+
+d(6) = -load_Coeff(3) / ( 15 * q_Coeff(1) );
+
+u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 + ...
+		d(5)*x.^4 + d(6)*x.^5;
+
+
+function [q_Function, load_Func, u_Exact] = ...
+		Def_q_Denom_2( load_Coeff, q_Coeff, delta, P )
+		
+d = zeros(1, 7);
+q_Function = @(x) q_Coeff(1) ./ ( x.^2 + q_Coeff(2) );    
+load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x ...
+		+ load_Coeff(3) * x.^2;
+
+d(1) = delta;
+
+d(2) = q_Coeff(2) * P / q_Coeff(1) + ...
+		q_Coeff(2) * load_Coeff(1) / q_Coeff(1) + ...
+		q_Coeff(2) * load_Coeff(2) / ( 2 * q_Coeff(1) ) + ...
+		q_Coeff(2) * load_Coeff(3) / ( 3 * q_Coeff(1) );
+
+d(3) = -q_Coeff(2) * load_Coeff(1) / ( 2 * q_Coeff(1) );
+
+d(4) = P / ( 3 * q_Coeff(1) ) ...
+		+ load_Coeff(1) / ( 3 * q_Coeff(1) ) ...
+		+ ( 1 - q_Coeff(2) ) * load_Coeff(2) / ( 6 * q_Coeff(1) ) ...
+		+ load_Coeff(3) / ( 9 * q_Coeff(1) );
+
+d(5) = -load_Coeff(1) / ( 4 * q_Coeff(1) ) ...
+		- q_Coeff(2) * load_Coeff(3) / ( 12 * q_Coeff(1) );
+
+d(6) = - load_Coeff(2) / ( 10 * q_Coeff(1) ); 
+
+d(7) = - load_Coeff(3) / ( 18 * q_Coeff(1) );
+
+u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 ...
+		+ d(5)*x.^4 + d(6)*x.^5 + d(7)*x.^6;
+
+
+function [q_Function, load_Func, u_Exact] = ...
+				Def_q_Exp( load_Coeff, q_Coeff, delta, P )
+
+% An exponential q(x) and a general up to 2nd degree load polynomial:
+d = zeros(1, 5);
+alpha = q_Coeff(1);
+q_Function = @(x) exp( -alpha * x );
+load_Func = @(x) load_Coeff(1) + load_Coeff(2)*x + load_Coeff(3).*x.^2;
+
+d(1) = delta ...
+		- load_Coeff(1) / alpha ...
+		- load_Coeff(2) / (2 * alpha) ...
+		- load_Coeff(3) / (3 * alpha) ...
+		- load_Coeff(1) / alpha^2 ...
+		+ load_Coeff(2) / alpha^3 ...
+		- 2 * load_Coeff(3) / alpha^4 ...
+		- P / alpha;
+
+d(2) = load_Coeff(1) / alpha ...
+		+ load_Coeff(2) / ( 2 * alpha )...
+		+ load_Coeff(3) / (3 * alpha) ...
+		+ load_Coeff(1) / alpha^2 ...
+		- load_Coeff(2) / alpha^3 ...
+		+ 2 * load_Coeff(3) / alpha^4 + P/alpha;
+
+d(3) = - load_Coeff(1) / alpha ...
+		+ load_Coeff(2) / alpha^2 ...
+		- 2 * load_Coeff(3) / alpha^3;
+
+d(4) = - load_Coeff(2) / ( 2 * alpha ) ...
+		+ load_Coeff(3) / alpha^2;
+
+d(5) = - load_Coeff(3) / ( 3 * alpha );
+
+u_Exact = @(x) d( 1 ) ...
+		+ ( d(2) + d(3)*x + d(4)*x.^2 + d(5)*x.^3 ) .* exp(alpha * x);
+
+\end{lstlisting}
+\line(1,0){450}
+\vspace{5 mm}
+
+% Set up and solve Equation System. Then buildup the solution
+\begin{lstlisting}[caption = {Solve FEM-Problem and Build up Solution as a Power Series}, label = lst:Solve_Eq_Sys]
+
+function [u_FEM_Lin, u_FEM_Cub] = Solve_FEM_Problem( N, h, elem_Size, ...
+		sol_Size, x, P, delta, q_Func, load_Func )
+
+% Define local and global basis functions and their first derivative.
+[theta_Lin, theta_Prime_Lin, psi_Lin, psi_Prime_Lin, ...
+		theta_Cub, theta_Prime_Cub, psi_Cub, psi_Prime_Cub] = ...
+		Def_FEM_Func( delta );
+
+% Set up the Eq. system
+[K_Lin, b_Lin, K_Cub, b_Cub] = Setup_Eq_Sys( N, h, P, q_Func, load_Func, ...
+		theta_Prime_Lin, psi_Lin, psi_Prime_Lin, ...
+		theta_Prime_Cub, psi_Cub, psi_Prime_Cub );
+
+% Solve both systems.
+a_Lin = K_Lin\b_Lin;
+a_Cub = K_Cub\b_Cub;
+
+% Construct FEM-Solution as a linear combination of basis-functions.
+[u_FEM_Lin, u_FEM_Cub] = Build_FEM_Sol( N, elem_Size, x, ...
+		sol_Size, a_Lin, a_Cub, theta_Lin, theta_Cub, psi_Lin, psi_Cub );
+
+\end{lstlisting}
+\line(1,0){450}
+\vspace{5 mm}
+
+
+% Estimate the numerical error
+\begin{lstlisting}[caption = {Solution Visualization, Error Estimation and Eventual Convergence}, label = lst:Estimate_Error]
+
+function [max_Error_Lin, sq_Error_Lin, max_Error_Cub, sq_Error_Cub] = ...
+    Estimate_Error( N, sol_Size, x, u_Exact, u_FEM_Lin, u_FEM_Cub, ...
+    varargin )
+
+u_Exact = u_Exact(x);
+
+% Plot both Exact and Finite Element solutions
+n = length( N );
+u_FEM = zeros( sol_Size + 1, n, 2 );
+u_FEM(:, :, 1) = u_FEM_Lin;
+u_FEM(:, :, 2) = u_FEM_Cub;
+
+max_Error = zeros(2, n);
+sq_Error = zeros(2, n);
+
+h = figure();
+left = 0.09;
+bottom = 0.55;
+width = 0.24;
+height = 0.40;
+horizontalSpace = 0.08;
+
+for k = 1:1:2
+    for m = 1:1:n
+        subplot(2, n, (k - 1)*n + m, 'Position', ...
+            [left bottom width height] );
+        
+        plot(x, u_Exact , 'red', x, u_FEM(:, m, k), ...
+            'green', 'LineWidth', 2);
+        
+        left = left + width + horizontalSpace;
+
+        % Grid and thick marks:
+        grid;
+        set( gca, 'FontName', 'Arial', 'FontSize', 14 );
+        set( gca, 'XTick', [0.25 0.5 0.75 1] );
+                
+        % Legend
+        str_FEM = ['$u_{cub}$, ' 'N = ' num2str( N(m) ) ];
+        if k == 1
+            str_FEM = ['$u_{lin}$, ' 'N = ' num2str( N(m) ) ];
+        end;
+
+        h_leg = legend( '$u_{ex}$', str_FEM, ...
+            'Location', 'Northwest', 'Orientation', 'Vertical' );
+        set( h_leg, 'Interpreter', 'Latex', 'FontSize', 14 );
+
+        abs_Error = abs( u_Exact - u_FEM( :, m, k ) );
+        max_Error(k, m) = max( abs_Error );
+        sq_Error(k, m) = sqrt( sum( abs_Error.^2 ) );
+
+    end;
+    
+    left = 0.09;
+    bottom = 0.05;
+    width = 0.24;
+    height = 0.40;
+    horizontalSpace = 0.08;
+end;
+
+% Linear and cubic errors compared to exact solution:
+max_Error_Lin = max_Error(1, :);
+sq_Error_Lin = sq_Error(1, :);
+max_Error_Cub = max_Error(2, :);
+sq_Error_Cub = sq_Error(2, :);
+
+% Print figure
+if nargin == 7
+    paperWidth = 21;
+    paperHeight = 29.7;
+    Export_Figure( h, paperWidth, paperHeight, varargin{end} );
+end;
+
+\end{lstlisting}
+\clearpage
+
+% Define Finite Element Basis-Functions
+\begin{lstlisting}[caption = {Linear and Cubic Shape-Functions}, label = lst:Def_FEM_Func]
+
+function [theta_Lin, theta_Prime_Lin, psi_Lin, psi_Prime_Lin, ...
+    theta_Cub, theta_Prime_Cub, psi_Cub, psi_Prime_Cub] = ...
+    Def_FEM_Func( delta )
+
+[theta_Lin, theta_Prime_Lin, psi_Lin, psi_Prime_Lin] = ...
+        Def_Linear_FEM(delta);
+
+[theta_Cub, theta_Prime_Cub, psi_Cub, psi_Prime_Cub] = ...
+    Def_Cubic_FEM(delta);
+
+function [theta_Lin, theta_Prime_Lin, psi_Lin, psi_Prime_Lin] = ...
+        Def_Linear_FEM(delta)
+
+% Linear shape functions, in local coordinates.
+psi_Lin = cell( 2, 1 );
+psi_Lin{1} = @(y) 1 - y;
+psi_Lin{2} = @(y) y;
+
+% Derivative of lineat shape functions in the local coordinates.
+psi_Prime_Lin = cell( 2, 1);
+psi_Prime_Lin{1} = @(y) -1;
+psi_Prime_Lin{2} = @(y) 1;
+
+% The global function theta and its derivative to satisfy Dirichlet
+% boundary condition.
+theta_Lin = @(y) delta -delta*y;
+theta_Prime_Lin = @(y) -delta;
+
+function [theta_Cub, theta_Prime_Cub, psi_Cub, psi_Prime_Cub] = ...
+    Def_Cubic_FEM(delta)
+
+% Cubic shape functions, in local coordinates.
+psi_Cub = cell(4, 1);
+psi_Cub{1} = @(y) 1 - 3*y.^2 + 2*y.^3;
+psi_Cub{2} = @(y) 3*y.^2 - 2*y.^3;
+psi_Cub{3} = @(y) y -2*y.^2 + y.^3;
+psi_Cub{4} = @(y) -y.^2 + y.^3;
+
+% Derivative of cubic shape functions in the local coordinates.
+psi_Prime_Cub = cell(4, 1);
+psi_Prime_Cub{1} = @(y) -6*y + 6*y.^2;
+psi_Prime_Cub{2} = @(y) 6*y -6*y.^2;
+psi_Prime_Cub{3} = @(y) 1 - 4*y + 3*y.^2;
+psi_Prime_Cub{4} = @(y) -2*y + 3*y.^2;
+
+% The global function theta and its derivative to satisfy Dirichlet
+% boundary condition.
+theta_Cub = @(y) delta - 3*delta*y.^2 + 2*delta*y.^3;
+theta_Prime_Cub = @(y) -6*delta*y + 6*delta*y.^2;
+
+\end{lstlisting}
+\line(1,0){450}
+\vspace{5 mm}
+
+
+% Setup Equation System
+\begin{lstlisting}[caption = {Setup Equation System}, label = lst:Setup_Eq_Sys]
+
+function [K_Lin, b_Lin, K_Cub, b_Cub] = ...
+    Setup_Eq_Sys( N, h, P, q_Func, load_Func, ...
+    theta_Prime_Lin, psi_Lin, psi_Prime_Lin, ...
+    theta_Prime_Cub, psi_Cub, psi_Prime_Cub )
+
+K_Lin = zeros(N + 1, N + 1);
+b_Lin = zeros(N + 1, 1);
+K_Cub = zeros(2*N + 2, 2*N + 2);
+b_Cub = zeros(2*N + 2, 1);
+
+% Build up the global stiffness matrix and load vector
+for n = 1:1:N
+    
+    % Construct element stiffness matrix and element load vector
+    [K_Elem_Lin, b_Elem_Lin, K_Elem_Cub, b_Elem_Cub] = ...
+        Elem_Cont( h, n, q_Func, load_Func, ...
+        psi_Lin, psi_Prime_Lin, theta_Prime_Lin, ...
+        psi_Cub, psi_Prime_Cub, theta_Prime_Cub );
+
+    for i = n:1:n + 1
+        for j = n:1:n + 1
+            
+            % Linear assembly
+            K_Lin(i, j) = K_Lin(i, j) + K_Elem_Lin(i - n + 1, j - n + 1);
+            
+            % Cubic assembly
+            K_Cub(i, j) = K_Cub(i, j) + K_Elem_Cub(i - n + 1, j - n + 1);
+            K_Cub(i, j + N + 1) = K_Cub(i, j + N + 1) ...
+                + K_Elem_Cub(i - n + 1, j - n + 3);
+            K_Cub(i + N + 1, j) = K_Cub(i + N + 1, j) ...
+                + K_Elem_Cub(i - n + 3, j - n + 1);
+            K_Cub(i + N + 1, j + N + 1) = K_Cub(i + N + 1, j + N + 1) ...
+                + K_Elem_Cub(i - n + 3, j - n + 3);
+            
+        end;
+	 
+        % Linear load assembly
+        b_Lin(i) = b_Lin(i) + b_Elem_Lin(i - n + 1);
+
+        % Cubic load assembly
+        b_Cub(i) = b_Cub(i) + b_Elem_Cub(i - n + 1);
+        b_Cub(i + N + 1) = b_Cub(i + N + 1) + b_Elem_Cub(i - n + 3);
+        
+    end;    
+end;
+
+% Implement boundary conditions:
+[K_Lin, b_Lin, K_Cub, b_Cub] = ...
+    boundary(N, h, P, q_Func, theta_Prime_Cub, K_Lin, b_Lin, K_Cub, b_Cub);
+
+function [K_Lin, b_Lin, K_Cub, b_Cub] = ...
+    boundary(N, h, P, q_Func, theta_Prime_Cub, K_Lin, b_Lin, K_Cub, b_Cub)
+
+% Implementing boundary conditions with linear basis-functions:
+% Dirichlet condition at the left boundary:
+K_Lin(1, :) = zeros(1, N + 1);
+K_Lin(:, 1) = zeros(N + 1, 1);
+K_Lin(1, 1) = 1;
+b_Lin(1) = 0;
+
+% Normal condition at the right boundary:       
+b_Lin(N + 1) = b_Lin(N + 1) + P;
+
+% Implementing boundary conditions with cubic basis-functions:
+% Dirichlet condition at the left boundary:
+K_Cub(1, :) = zeros(1, 2*N + 2);
+K_Cub(:, 1) = zeros(2*N + 2, 1);
+K_Cub(1, 1) = 1;
+b_Cub(1) = 0;
+
+% Normal condition at the right boundary:
+K_Cub(2*N + 2, :) = zeros(1, 2*N + 2);
+K_Cub(2*N + 2, 2*N + 2) = 1;
+b_Cub(N + 1) = b_Cub(N + 1) + P;
+b_Cub(2*N + 2) = h * P / q_Func(1) - h * theta_Prime_Cub(1);
+
+\end{lstlisting}
+\line(1,0){450}
+\clearpage
+
+% Build Solutions
+\begin{lstlisting}[caption = {Build up FEM-Solution}, label = lst:Build_Sol]
+
+function [u_FEM_Lin, u_FEM_Cub] = Build_FEM_Sol( N, elem_Size, x, ...
+    sol_Size, a_Lin, a_Cub, theta_Lin, theta_Cub, psi_Lin, psi_Cub )
+
+u_FEM_Lin = Build_Linear_FEM( sol_Size, elem_Size, N, a_Lin, psi_Lin );
+u_FEM_Cub = Build_Cubic_FEM( sol_Size, elem_Size, N, a_Cub, psi_Cub );
+
+% Add the global function theta to the solution.
+u_FEM_Lin = u_FEM_Lin + theta_Lin(x);
+u_FEM_Cub = u_FEM_Cub + theta_Cub(x);
+
+
+function u_FEM = Build_Linear_FEM(sol_Size, elem_Size, N, a, psi)
+
+% Initialize FEM-Solution:
+u_FEM = zeros( sol_Size, 1 );
+
+% Shape-functions in local coordinates:
+y = linspace( 0, 1, elem_Size + 1 )';
+Gamma = zeros( elem_Size + 1, 2);
+for i = 1:1:2
+    Gamma(:, i) = psi{i}( y );
+end;
+
+% Construct FEM-Solution as a linear combination of the shape-functions.
+for e = 1:1:N
+    start = (e - 1) * elem_Size + 1;
+    last = start + elem_Size;
+    u_FEM(start:last) = a(e) * Gamma(:, 1) + a(e + 1) * Gamma(:, 2);
+end;
+
+
+function u_FEM = Build_Cubic_FEM(sol_Size, elem_Size, N, a, psi)
+
+% Initialize FEM-Solution:
+u_FEM = zeros( sol_Size, 1 );
+
+% Shape-functions in local coordinates:
+y = linspace( 0, 1, elem_Size + 1 )';
+Gamma = zeros( elem_Size + 1, 4 );
+for i = 1:1:4
+    Gamma(:, i) = psi{i}( y );
+end;
+
+% Construct a linear combination of the basis functions over all elements.
+for e = 1:1:N
+    start = (e - 1) * elem_Size + 1;
+    last = start + elem_Size;
+    u_FEM(start:last) = a(e) * Gamma(:, 1) ...
+        + a(e + 1) * Gamma(:, 2) ...
+        + a(e + N + 1) * Gamma(:, 3) ...
+        + a(e + N + 2) * Gamma(:, 4);
+end;
+
+\end{lstlisting}
+\line(1,0){450}
+\vspace{5 mm}
+
+
+% Build Solutions
+\begin{lstlisting}[caption = {Element Contributions in both Linear and Cubic Case}, label = lst:Elem_Cont]
+
+function [K_Elem_Lin, b_Elem_Lin, K_Elem_Cub, b_Elem_Cub] = ...
+        Elem_Cont( h, elem_No, q_Func, load_Func, ...
+        psi_Lin, psi_Prime_Lin, theta_Prime_Lin, ...
+        psi_Cub, psi_Prime_Cub, theta_Prime_Cub )
+
+% Set up element contribution for the linear basis-functions
+[K_Elem_Lin, b_Elem_Lin] = Cal_Cont( 1, h, elem_No, q_Func, ...
+    psi_Lin, psi_Prime_Lin, theta_Prime_Lin, load_Func );
+
+% Set up element contribution for the cubic basis-functions
+[K_Elem_Cub, b_Elem_Cub] = Cal_Cont( 3, h, elem_No, ...
+    q_Func, psi_Cub, psi_Prime_Cub, theta_Prime_Cub, load_Func );
+
+
+function [K_Elem, b_Elem] = Cal_Cont( basis_Degree, h, elem_No, ...
+    q_Func, psi, psi_Prime, theta_Prime, load_Func)
+
+% Initialize linear element contribution for the linear and
+% cubic basis-functions.
+if basis_Degree == 1
+    K_Elem = zeros(2, 2);
+    b_Elem = zeros(2, 1);
+    stiff_Elem_Int = cell(2, 2);
+    load_Int = cell(2, 1);
+
+elseif basis_Degree == 3
+    K_Elem = zeros(4, 4);
+    b_Elem = zeros(4, 1);
+    stiff_Elem_Int = cell(4, 4);
+    load_Int = cell(4, 1);
+end;
+
+% Calculate entries of element matrix and element load.
+for i = 1:1:basis_Degree + 1
+    for j = i:1:basis_Degree + 1
+        % Define integrands of the element matrix
+        stiff_Elem_Int{i, j} = @(y) ...
+            ( 1/h ) * ( q_Func( ( elem_No - 1 + y ) * h ) ) ...
+            .* ( psi_Prime{i}(y) .* psi_Prime{j}(y) );
+        
+        % Integrate over the element
+        K_Elem(i, j) = quadgk(stiff_Elem_Int{i, j}, 0, 1, ...
+            'RelTol', 1e-8, 'AbsTol', 1e-12);
+    end;
+    
+	% Define integrands of the element load
+	load_Int{i} = @(y) ...
+        h * load_Func( ( elem_No - 1 + y )*h ) .* psi{i}(y) ...
+        - h * q_Func( ( elem_No - 1 + y )*h ) .* theta_Prime(y);
+    
+    % Integrate over the element
+    b_Elem(i) = quadgk(load_Int{i}, 0, 1, ...
+    'RelTol', 1e-8, 'AbsTol', 1e-12);
+end;
+
+% Use symmetrical property of element matrix.
+for i = 1:1:basis_Degree + 1
+    for j = 1:1:i - 1
+        K_Elem(i, j) = K_Elem(j, i);
+    end;
+end;
+
+\end{lstlisting}

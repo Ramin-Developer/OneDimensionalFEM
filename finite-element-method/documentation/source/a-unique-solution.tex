@@ -1,0 +1,112 @@
+\section{A Unique Solution}
+It is essential to verify if the equation system given in \cref{eqn:Compact_Eq_Sys} has a
+\emph{unique} solution. From the linear algebra we know that such a system has always a
+unique solution if and only if determinant of the coefficient matrix is non-zero.
+
+\begin{definition} \label{def:Positive_Definite}
+	A real square matrix $\gls{matA} \in \gls{Rnn}$ is said to be \gls{posDef} if and only it is symmetrical and
+	$\gls{v}^{T} \gls{matA} \gls{v} > 0$, for an arbitrary vector $\gls{v} \in \mathbb{R}^{n \times 1}$
+	\begin{subequations}
+		\begin{align}
+			\gls{matA} &= \gls{matAT}, \label{eqn:Pos_Def_Prop_1} \\
+			\gls{v}^{T} \gls{matA} \gls{v} &= \sum \limits_{i = 1}^{n} \sum \limits_{j = 1}^{n} v_{i}  \gls{matAij} v_{j} > 0,
+				\quad \forall \mathbf{v} \in \mathbb{R}^{n \times 1} \label{eqn:Pos_Def_Prop_2}
+		\end{align}
+	\end{subequations}
+\end{definition}
+\begin{lemma} \label{lem:Pos_Def_Non_Singular}
+	Suppose $\gls{matA} \in \gls{Rnn}$ is positive-definite. Then
+	\begin{equation}
+		\gls{detA} \neq 0.
+	\end{equation}
+\end{lemma}
+For a proof of \cref{lem:Pos_Def_Non_Singular} any textbook in linear algebra may be conferred. In the following we will show
+that a \gls{posDef} matrix is \gls{nonSingular} for the simple case of $\mathbf{A} \in \mathbb{R}^{2 \times 2}$. \\
+\begin{example}
+Suppose that $\gls{matA} \in \glsentryname{R22}$ is a positive-definite matrix given by
+\begin{equation}
+	\gls{matA} =
+	\begin{bmatrix}
+		a & b \\
+		b & c	
+	\end{bmatrix}.
+\end{equation}
+Then note that
+\begin{equation}
+\gls{detA} =
+	\begin{vmatrix}
+		a & b \\
+		b & c	
+	\end{vmatrix} = a c - b^{2}.
+\end{equation}
+Now define \gls{v} $\in$ \glsentryname{R21} by
+\begin{equation}
+	\gls{v} = \begin{bmatrix}	x \\ y	\end{bmatrix},
+\end{equation}
+and calculate
+\begin{equation}	\label{eqn:Temp_Pos_Def_Exp}
+	\begin{aligned}
+		\gls{v}^T \gls{matA} \gls{v} &=
+			\begin{bmatrix} x & y \end{bmatrix}
+			\begin{bmatrix} a & b \\ b & c \end{bmatrix}
+			\begin{bmatrix} x \\ y \end{bmatrix} \\
+		&=	\begin{bmatrix} ax + by & bx + cy \end{bmatrix}
+			\begin{bmatrix} x \\ y \end{bmatrix} \\
+		&=	ax^{2} + 2bxy + cy^{2}.
+	\end{aligned}
+\end{equation}
+Factoring and rearranging the terms in \cref{eqn:Temp_Pos_Def_Exp} we get
+\begin{equation}	\label{eqn:Final_Pos_Def_Exp}
+	\begin{aligned}
+		\gls{v}^T \gls{matA} \gls{v} &= a \left( x^{2} + \frac{2b}{a} xy + \frac{c}{a} y^{2} \right) \\
+		&= a \left( x + \frac{b}{a}y \right)^2 + \frac{c}{a} y^2 - \frac{b^2}{a^2} y^2 \\
+		&= a \left( x + \frac{b}{a}y \right)^2 + \frac{ac - b^2}{a^2} y^2 > 0.
+	\end{aligned}
+\end{equation}
+Note that the last inequality is a consequence of the positive-definite property of $\mathbf{A}$. Sufficient
+condition to satisfy \cref{eqn:Final_Pos_Def_Exp} is
+\begin{equation}
+	a > 0, \quad ac - b^2 > 0 \Rightarrow \det(\mathbf{A}) > 0.
+\end{equation}
+A \gls{posDef} matrix $\mathbf{A}$ $\in \mathbb{R}^{2 \times 2}$ is then non-singular.
+\end{example}
+\begin{remark}
+	A square matrix \gls{matA} $\in$ \gls{Rnn} may be \gls{nonSingular}, $\gls{detA} \neq 0$ without being \gls{posDef}, but
+	if the matrix is \gls{posDef} then it is always \gls{nonSingular}, $\gls{detA} \neq 0$. On the other hand, if a matrix
+	$\gls{matA}$ is \gls{singular}, it can not be \gls{posDef}. These statements may be summarized as
+	\begin{subequations}
+		\begin{align} 
+			\gls{matA} \text{ is positive-definite} & \Longrightarrow \gls{detA} \neq 0, \\
+			\gls{detA} = 0 & \Longrightarrow \gls{matA} \text{ is not positive-definite}.
+		\end{align}
+		Thus positive definiteness is a more restrict condition than non-singularity.
+	\end{subequations}
+\end{remark}
+
+For proving uniqueness of \gls{FEM} it is then enough to show that the \gls{stiffnessMatrix} is positive-definite.\\
+First note that according to \cref{eqn:Stiffness_Matrix}
+\begin{equation}
+	\gls{K} = \gls{K}^T \Longleftrightarrow \glsentryname{Kij} = K_{j,i}.
+\end{equation}
+Furthermore
+\begin{equation}
+	\begin{aligned}
+		\gls{v}^{T} \gls{K} \gls{v}  &= \sum \limits_{i = 1}^{\gls{M}} \sum \limits_{j = 1}^{\gls{M}}
+			\gls{vi} \glsentryname{Kij} v_j \\
+		&= \sum \limits_{i = 1}^{\gls{M}} \sum \limits_{j = 1}^{\gls{M}} \gls{vi} \Biggl[ \int_{x = 0}^{1}
+			\gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x \Biggr] v_j \\
+		&= \sum \limits_{i = 1}^{\gls{M}} \Biggl[ \sum \limits_{j = 1}^{\gls{M}} \int_{x = 0}^{1}
+		\gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x \Biggr] \gls{vi} v_j.
+	\end{aligned}
+\end{equation}
+Now exchange the order of integration and summations to get
+\begin{equation} \label{eqn:Pos_Def_Simplified}
+	\begin{aligned}
+		\gls{v}^{T} \gls{K} \gls{v}  &= \int_{x = 0}^{1} \gls{q} \Biggl[ \sum \limits_{i = 1}^{\gls{M}} \gls{vi} \glsentryname{phiiPrime} \Biggr]
+		\Biggl[ \sum \limits_{j = 1}^{\gls{M}} v_j \glsentryname{phijPrime} \Biggr] \dd x \\
+		&= \int_{x = 0}^{1} \gls{q} \Biggl[ \sum \limits_{i = 1}^{\gls{M}} \gls{vi} \glsentryname{phiiPrime} \Biggr]^{2} \dd x > 
+		0, \quad \forall \gls{v} \neq 0.
+	\end{aligned}
+\end{equation}
+\Gls{stiffnessMatrix} satisfies both conditions in \cref{eqn:Pos_Def_Prop_1,eqn:Pos_Def_Prop_2}, and is therefore positive-definite.
+%

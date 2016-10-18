@@ -1,0 +1,92 @@
+\section[The Canonical Problem]{The \Gls{canonicalProblem}}
+Consider a homogeneous bar of length $L$, modulus of elasticity $E$, and a uniform cross-sectional area $\overline{A}$.
+Assume a vanishing displacement at both ends of the bar. This gives the following normalized problem 
+\begin{problem}	\label{prb:Symmetrical_Normalized_Problem} 
+	Find a function $\gls{u}$ supporting \glsentrysymbol{order1Cont}-continuity such that
+	\begin{subequations} \label{eqn:Symmetrical_Normalized_Problem}
+		\begin{align}
+			u^{ \prime \prime } + \gls{f} &= 0, && x \in \left( 0, 1 \right), \label{eqn:Symmetrical_Normalized_Diff_Eq}	\\
+		\intertext{with symmetrical boundary conditions}
+			\glssymbol{u} \left( 0 \right) &= 0,  \label{eqn:Symmetrical_Normalized_Left_Cond}  \\
+			\glssymbol{u} \left( 1 \right) &= 0.  \label{eqn:Symmetrical_Normalized_Right_Cond}
+		\end{align}
+	\end{subequations}
+\end{problem}
+%
+\cref{prb:Symmetrical_Weak_Problem} below is the result of applying \gls{weakForm} to \cref{prb:Symmetrical_Normalized_Problem}, see \cref{cha:WeakForm}.
+\begin{problem}	\label{prb:Symmetrical_Weak_Problem}
+	Find $u \in \gls{spaceS} = \glssymbol{spaceH10}$ such that
+	\begin{align}
+		a \left( u, w \right) &= \left\langle f, w \right\rangle, && w \in \gls{spaceW} = \glssymbol{spaceH10}.
+	\end{align}
+\end{problem}
+%
+\begin{remark}
+	Note that in \cref{prb:Symmetrical_Weak_Problem} both the trial solution $u \left( x \right)$ and weight functions $w \left( x \right)$ belong to
+	the same space, $\gls{spaceS} = \gls{spaceW} = \glssymbol{spaceH10}$. This is due to the symmetrical \glspl{DirichletCondition}, see
+	\cref{eqn:Symmetrical_Normalized_Left_Cond,eqn:Symmetrical_Normalized_Right_Cond}.
+\end{remark}
+%
+\subsection{Properties of the Canonical Problem}
+With the new toolbox of definitions and notations, let us first note the following important properties of \cref{prb:Symmetrical_Weak_Problem}:
+\begin{enumerate}
+	
+	\item The $a$-Form of $u$ and $w$ is symmetric, i.e.,
+	\begin{align}	\label{eqn:Property_Symmetry}
+		a \left( u, w \right) &= a \left( w, u \right),	& u, w \in \glssymbol{spaceH10}.
+	\end{align}
+	
+	\item The $a$-Form of $u$ and $w$ is bilinear, i.e., with $u, v, w \in \glssymbol{spaceH10}$ and $\alpha, \beta \in \mathbb{R}$
+	\begin{equation}	\label{eqn:Property_Bilinear}		
+		\begin{aligned}
+			a \left( \alpha u + \beta v, w \right) &= \alpha a \left( u, w \right) + \beta a \left( v, w \right), \\
+			a \left( u, w + \beta v \right) &= \alpha a \left( u, w \right) + \beta a \left( u, v \right).
+		\end{aligned}
+	\end{equation}		
+	Note that the second equation is a result of the symmetrical property.
+	
+	\item The \gls{aForm} obeys the bounding property, i.e., with $u, w \in H_0^1$ 
+	\begin{equation}	\label{eqn:Property_Bounding}
+		\big \vert a \left( f, g \right) \big \vert \leq \big\| f^\prime \big\|_{ L^2 } \big\| g^\prime \big\|_{ L^2 } \leq
+			\gamma \glsentrysymbol{H1Normf} \glsentrysymbol{H1Normg}.
+	\end{equation}
+	The first transition follows from Inequality (\ref{eqn:Cauchy_Schwarz}) and the second one from the fact that for an arbitrary
+	function in \glssymbol{spaceH1}, \glsentryname{H1Norm} is always greater than or equal to \glsentryname{L2Norm},
+	see \cref{eqn:H1Norm}. This bounding property is sometimes referred to as a continuity estimate. The constant $\gamma$ can be
+	taken to be trivially $1$ in our case. In more general settings it can differ from unity, but is always dependent of $f$ and $g$.
+	
+	\item The \gls{aForm} has also an important lower bound which is known as an ellipticity or coercivity estimate. It states that
+	\begin{align}	\label{eqn:Property_Elipticity}
+		\alpha \glssymbol{H1Normf}^2 &\leq a \left( f, f \right),	& f \in \glssymbol{spaceH10},
+	\end{align}
+	for some constant $\alpha$ independent of $f$.\footnote{In our case it is not difficult to prove that $\alpha = \frac{1}{2}$.
+	In high dimensions, such estimates mat be non-trivial to establish.} 
+	
+	\item Finally, note that the right hand side of \cref{prb:Symmetrical_Weak_Problem} satisfies 
+	\begin{align}	\label{eqn:Property_Load}
+		\left \langle f, w \right \rangle &\leq \glsentrysymbol{L2Normf} \glsentrysymbol{L2Normw} \leq
+			\Lambda \glsentrysymbol{H1Normw} & \forall f, w \in \glssymbol{spaceH10}.
+	\end{align}
+	where $\Lambda$ is a constant that essentially measures the severity of the load, but is otherwise independent of $w$. This is
+	also a kind of continuity estimate.
+\end{enumerate}
+%
+\subsection{Stability of the Exact Solution} \label{cha:Stability_Exact}
+Before turning back to FEM-estimates, let us take note of one property of the exact solution, measure of solution stability. Since
+\begin{align}
+		a \left( u, w \right) &= \left \langle f, w \right \rangle,\quad u \in \mathcal{S}, \quad w \in \mathcal{W},	\\
+		\mathcal{S}	&= \mathcal{W} = \glssymbol{spaceH10},
+\end{align}
+then we can choose $w = u$ and write
+\begin{equation}	\label{eqn:Stability_Exact_1}
+		\alpha \glsentrysymbol{H1Normu}^2 \leq \big \vert a \left( u, u \right) \big \vert = \big \vert \left \langle f, u \right \rangle \big \vert \leq
+			\Lambda \glsentrysymbol{H1Normu}.
+\end{equation}
+Now divide both sides of (\ref{eqn:Stability_Exact_1}) by $\left\| u \right\|_{ H^1 }$. Thus
+\begin{equation}	\label{eqn:Stability_Exact}
+		\glsentrysymbol{H1Normu} \leq  \frac{ \Lambda }{ \alpha }.
+\end{equation}
+\begin{remark}
+	Inequality (\ref{eqn:Stability_Exact}) is a stability estimate which tells us that \glsentryname{H1Norm} of the solution 
+	is directly proportional to the load severity constant and inversely proportional to the coercivity constant.
+\end{remark}

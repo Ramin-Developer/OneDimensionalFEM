@@ -1,0 +1,54 @@
+\section{Analytical Solution} \label{cha:Analytical_Sol}
+\Cref{prb:Normalized_Problem} may be solved by analytical methods for some choices of $q$ and $f$. 
+In particular we are interested in both constants and decreasing functions for \gls{q} and a polynomial function for \gls{f}. \\
+
+Consider for instance the classical problem of finding a \gls{bar}'s displacement function with a simple hyperbolic
+$q \left( x \right)$ and under a constant axial load, i.e.,
+\begin{subequations} \label{eqn:Classical_Bar}
+	\begin{equation}	\label{eqn:Classical_Diff}
+		-\frac{d}{dx} \left[ \frac{ e_1 }{ x + e_2 } \glsentryname{uPrime} \right] = c_0, \quad x \in \left( 0, 1 \right),
+	\end{equation}
+	with boundary conditions
+	\begin{align}
+		\gls{u} \Big \vert_{x = 0} &= \gls{delta},  \label{eqn:Classical_Dirichlet_Condition}  \\
+		\left[ \frac{ e_1 }{ x + e_2 } \glsentryname{uPrime} \right]_{x = 1} &= \gls{P}. \label{eqn:Classical_Normal_Condition}
+	\end{align}
+\end{subequations}
+Taking indefinite integral of both sides of \cref{eqn:Classical_Diff} we get 
+\begin{align} \label{eqn:Classical_Bar_Integrated}
+	\frac{e_{1}}{x + e_{2}} \frac{du}{dx} &= \int \frac{d}{dx} \left[ \frac{e_{1}}{x + e_{2}} \frac{du}{dx} \right] \dd x, \notag \\
+	\frac{e_{1}}{x + e_{2}} \frac{du}{dx} &= -c_0 x + c_1.
+\end{align}
+To find $c_{1}$ we must apply the \gls{normalCondition} in \cref{eqn:Classical_Normal_Condition}
+\begin{equation} \label{eqn:Middle_Disp_Derived} 
+	\begin{aligned}
+		\Bigg[ \frac{e_{1}}{x + e_{2}}  \frac{du}{dx} \Bigg]_{x = 1} &= P, \\
+		\frac{e_{1}}{x + e_{2}} \frac{du}{dx} &= P + c_0 - c_0 x.
+	\end{aligned}
+\end{equation}
+Multiply both sides of \cref{eqn:Middle_Disp_Derived} by $\frac{1}{q} = \frac{x + e_{2}}{e_{1}}$ and arrange the terms to get
+\begin{equation} \label{eqn:Disp_Derived}
+	\begin{split}
+		\frac{du}{dx} & = \frac{x + e_{2}}{e_{1}} \left( P + c_0 - c_0 x \right)  \\
+		& = \frac{\left( P + c_0 \right) e_{2}}{e_{1}} + \frac{P + c_0 - c_0 e_{2}}{e_{1}} x
+		- \frac{ c_0 }{e_{1}}x^{2}.
+	\end{split}
+\end{equation}
+Integrating \cref{eqn:Disp_Derived} again results
+\begin{equation} \label{eqn:Classical_Bar_Double_Integrated}
+	u \left( x\right) = c_2 + \frac{\left( P + c_0 \right) e_{2}}{e_{1}}x + \frac{ P + c_0 - c_0 e_2}{2e_{1}}x^{2}
+		-\frac{c_{0}}{3e_{1}}x^{3}.
+\end{equation}
+Applying \gls{DirichletCondition} in \cref{eqn:Classical_Dirichlet_Condition} gives 
+\begin{equation*}
+	c_{2} = \delta.
+\end{equation*}
+Thus
+\begin{equation}
+	\gls{u} = \gls{delta} + \frac{e_{2}\left( P + c_0 \right) }{e_{1}}x + \frac{P + c_0 - c_{0} e_{2}}{2e_{1}}x^{2}
+	- \frac{ c_{0} }{ 3e_{1} } x^{3}. \label{eqn:Solution_Classical}
+\end{equation}
+%
+In the same way we may solve \cref{prb:Normalized_Problem} for other choices of
+\gls{f} and \gls{q}. In \cref{cha:Analytical_Summary} we gather some of these \glspl{analSol}.
+%

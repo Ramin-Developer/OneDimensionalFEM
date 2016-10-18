@@ -1,0 +1,88 @@
+\section{Some Useful Spaces}
+%
+\begin{definition}	\label{def:SpaceL2}
+	Let \glssymbol{spaceL2} denote \gls{spaceL2}. Then
+	\begin{equation}
+		\glssymbol{spaceL2} = \left\{ \varphi \left( x \right) \bigg \vert \int_0^1 \varphi \left( x \right) \dd x < \infty \right\}.
+	\end{equation}
+\end{definition}
+%
+\begin{definition}	\label{def:Space_H1}
+	Let \glssymbol{spaceH1} denote \gls{spaceH1}. Then
+	\begin{equation}
+		\glssymbol{spaceH1} = \left\{ \varphi \left( x \right) \Big \vert \varphi \left( x \right) \in \glssymbol{spaceL2}, \;
+			\frac{d \varphi }{dx} \in \glssymbol{spaceL2} \right\}.
+	\end{equation}
+\end{definition}
+%
+\begin{definition}	\label{def:Space_H10}
+	Let \glssymbol{spaceH10} denote a \gls{spaceH10}. Then
+	\begin{equation}
+		\glssymbol{spaceH10} = \left\{ \varphi \left( x \right) \Big \vert \varphi \left( x \right) \in \glssymbol{spaceH1}, \;
+			\varphi \left( 0 \right) = \varphi \left( 1 \right) = 0 \right\}.
+	\end{equation}
+\end{definition}
+%
+\subsection{Inner Products and Norms}
+%
+\begin{definition}	\label{def:L2_Inner_product}
+	Let \glssymbol{L2InnerProduct} denote \gls{L2InnerProduct}. Then
+	\begin{subequations}
+		\begin{equation}	\label{eqn:L2_Inner_product}
+			\glssymbol{L2InnerProduct} = \int_0^1 f \left( ssx \right) g \left( x \right) \dd x,
+		\end{equation}
+		and the natural norm
+		\begin{equation}	\label{eqn:L2_Norm}
+			\glssymbol{L2Normf} = \sqrt{ \left \langle f, f \right \rangle }.
+		\end{equation}
+	\end{subequations}	
+\end{definition}
+\begin{lemma}	\label{lem:Cauchy-Schwarz}
+	Norms $\left\| f \right\|_{ L^2 }$ and $\left\| g \right\|_{ L^2 }$ obey Cauchy-Schwarz Inequality, i.e.,
+	\begin{equation}	\label{eqn:Cauchy_Schwarz}
+		\vert \glssymbol{L2InnerProduct} \vert \leq \glssymbol{L2Normf} \glsentrysymbol{L2Normg},
+			\qquad \forall f, g \in \glssymbol{spaceL2}.
+	\end{equation}
+\end{lemma}
+We also define a separate norm for functions in \gls{spaceH1}.
+\begin{definition}	\label{def:H1_Norm}
+	Let $\left\| f^\prime \right\|_{ H^1 }$ denote \gls{H1Normf}. Then
+	\begin{equation}	\label{eqn:H1Norm}
+		\glssymbol{H1Normf} = \sqrt{ \glssymbol{L2Normf}^2 + \big\| f^\prime \big\|_{ L^2 }^2 }.
+	\end{equation}
+\end{definition}
+Note that while $\left\| f^\prime \right\|_{ L^2 }$ only measures the function magnitude, $\left\| f^\prime \right\|_{ H^1 }$ is a
+measure of both function itself and its first derivative. We may also define a measure for \glsentryname{L2Norm} of the first derivative:
+\begin{definition}	\label{def:H1_Semi_Norm}
+	Let $\vert f \vert_{ H^1 }$ denote \gls{H1SemiNormf}. Then
+	\begin{equation}	\label{eqn:H1_Semi_Norm}
+		\glssymbol{H1SemiNormf} = \left\| f^\prime \right\|_{ L^2 }.
+	\end{equation}
+\end{definition}
+To measure magnitude of the second derivative we define \glssymbol{H2SemiNormf}.
+\begin{definition}	\label{def:H2_Semi_Norm}
+	Let $\vert f \vert_{ H^2 }$ denote \gls{H2SemiNormf}. Then
+	\begin{equation}	\label{eqn:H2_Semi_Norm}
+		\glssymbol{H2SemiNormf} = \big\| f^{ \prime \prime }\big\|_{ L^2 } .
+	\end{equation}
+\end{definition}
+\begin{remark}
+	A \emph{true} norm is only zero when its input is zero. Norms $\vert f \vert_{ H^1 }$ and $\vert f \vert_{ H^2 }$ can give zero
+	for non-zero inputs and are therefore called semi-norms.\footnote{For example for a linear polynomial function $f = ax + b$, we
+	have $\vert f \vert_{ H^2 } = 0$.} In all other aspects they behave (mathematically) as norms.
+\end{remark}
+Finally we define \gls{aForm}
+\begin{definition}	\label{def:a_Form}
+	Let \glssymbol{aForm} denote \gls{aForm}. Then
+	\begin{equation}	\label{eqn:a_Norm}
+		\glssymbol{aForm} = \int_0^1 f^{\prime} \left(x \right) g^{\prime} \left(x \right) \dd x.
+	\end{equation}
+\end{definition}
+\begin{remark}
+	Note that \glssymbol{aForm} is a kind of inner product. It gives the $L^2$-Inner Product of its arguments' derivatives.
+	Thus, for $f = g$, we have
+	\begin{equation}
+		a \left( f, f \right) = \int_0^1 \Bigl[ f^{\prime} \left(x \right) \Bigr]^2 \dd x = \glssymbol{H1SemiNormf}^2.
+	\end{equation}
+\end{remark}
+%

@@ -1,0 +1,82 @@
+\section{Weak Formulation}	\label{cha:WeakForm}
+Consider again \cref{prb:Normalized_Problem}, i.e.,
+\begin{subequations}
+	\begin{equation}	\label{eqn:FEM_Problem}
+		-\frac{d}{dx} \biggl[ \gls{q} \glsentryname{uPrime} \biggr] = \gls{f}, \quad x \in \left( 0, 1 \right),
+	\end{equation}
+	with boundary conditions
+	\begin{align}
+		\gls{u} \bigg \vert_{x = 0} &= \delta,  \label{eqn:FEM_Left_Boundary}  \\
+		\biggl[ q \left( x \right) \frac{du}{dx} \biggr]_{x = 1} &= P. \label{eqn:FEM_Right_Boundary}
+	\end{align}
+\end{subequations}
+Now introduce a \gls{r} by
+\begin{equation}	\label{eqn:Residual_Function}
+	r = \gls{r} = \frac{d}{dx} \left[ \gls{q} \glsentryname{uPrime} \right] + \gls{f} = 0,
+\end{equation}
+Next multiply both sides of \cref{eqn:Residual_Function} by arbitrary functions
+\glsname{wi}\footnote{These are called \glspl{wi} and will be shortly specified.} and integrate the product over
+$x \in \left[0, 1\right]$. Thus
+\begin{subequations}
+	\begin{align}
+		\int_{x = 0}^{1} \gls{r} \gls{wi} \dd x &= 0,	\\
+		\int_{x = 0}^{1} \frac{d}{dx} \left[ \gls{q} \frac{du}{dx} \right] \gls{wi} \dd x &+
+		\int_{x = 0}^{1} \gls{f} \gls{wi} \dd x = 0. \label{eqn:FEM_Rewritten}
+	\end{align}
+\end{subequations}
+%
+Applying integration by parts to \cref{eqn:FEM_Rewritten} we get
+\begin{equation}  \label{eqn:FEM2_Rewritten}
+	\left[ \gls{q} \glsentryname{uPrime} \gls{wi} \right]_{x = 0}^{1}
+	- \int_{x = 0}^{1} \gls{q} \frac{ du }{dx} \frac{d \glssymbol{wi}}{dx} \dd x = \int_{x = 0}^{1} \gls{f} \gls{wi} \dd x.
+\end{equation}
+Since the \gls{normalCondition} is only given on the \gls{rightBoundary}, i.e., at $x = 1$, we choose weight function such that
+\begin{equation}
+	\gls{wi} \Big \vert_{x = 0 } = 0.  \label{eqn:Weight_Condition}
+\end{equation}
+Now, insert the \gls{boundaryCondition} and the weight function property, i.e., \cref{eqn:FEM_Right_Boundary,eqn:Weight_Condition},
+into \cref{eqn:FEM2_Rewritten} and rearrange the terms,
+\begin{equation} \label{eqn:Weak_Formulation}
+	\int_{x = 0}^{1} \gls{q} \glsentryname{uPrime} \frac{ d \glssymbol{wi} }{dx} \dd x = P  \gls{wi} \Big \vert_{x = 0} + \int_{x = 0}^{1} \gls{f} \gls{wi} \dd x.
+\end{equation}
+%
+To summarize the \gls{weakForm} we need a couple of definitions. \\
+\begin{definition} \label{def:Cont_of_Derivatives}
+	Let $n \geq -1$ denote an integer. A general function of a single variable \gls{g} is said to support \gls{ordernCont},
+	if and only if the function and its first $n$ derivatives exist and are continuous.
+	Integer \glssymbol{orderOfCont} is then called \gls{orderOfCont}.
+\end{definition}
+Following terminology of \cref{def:Cont_of_Derivatives}, a single-variable function is known as:
+\begin{itemize}
+	\item discontinuous, if its \gls{orderOfCont} is $\glssymbol{orderOfCont} = -1$.
+	\item infinitely differentiable or smooth, if its \gls{orderOfCont} is $\glssymbol{orderOfCont} = \infty$.
+		Such a function supports \gls{orderInfCont}.
+	\item continuous but not differentiable, if its \gls{orderOfCont} is $\glssymbol{orderOfCont} = 0$.
+		Such a function supports \glsentryname{order0Cont}.
+	\item up to one-time differentiable, if its \gls{orderOfCont} is $\glssymbol{orderOfCont} = 1$.
+		Such a function supports \glsentryname{order1Cont}.
+	\item up to two-times differentiable, if its \gls{orderOfCont} is $\glssymbol{orderOfCont} = 2$.
+		Such a function supports \glsentryname{order2Cont}, and so on.
+\end{itemize}
+%
+\begin{remark}
+	Comparing left hand sides of \cref{eqn:FEM_Rewritten,eqn:Weak_Formulation} we observe that the second derivative involved in
+	\cref{eqn:FEM_Rewritten} is replaced by the product of two first derivatives in \cref{eqn:Weak_Formulation}. The original
+	requirement of \glsentryname{order1Cont} on \gls{u} is thus replaced by a weaker requirement on \gls{u} and \gls{wi},
+	\glsentryname{order0Cont}. This is the reason why \cref{eqn:Weak_Formulation} is called a \gls{weakForm}.
+\end{remark}
+We conclude that \cref{prb:Normalized_Weak_Problem} below is a \gls{weakForm} of \cref{prb:Normalized_Problem}.
+\begin{problem}	\label{prb:Normalized_Weak_Problem}
+	Find a function $\gls{u}$ supporting \glsentrysymbol{order0Cont}-continuity such that
+	\begin{subequations}
+		\begin{align}	\label{eqn:Normalized_Weak_Diff_Eq}
+			\int_{x = 0}^{1} \frac{d}{dx} \biggl[ \gls{q} \frac{du}{dx} \biggr] \gls{wi} \dd x
+			+\int_{x = 0}^{1} \gls{f} \gls{wi} \dd x &= 0, & x \in \left( 0, 1 \right),
+		\end{align}
+		with boundary conditions
+		\begin{align}
+			\gls{u} \bigg \vert_{x = 0} &= \delta,  \label{eqn:Normalized_Weak_Left_Boundary} \\
+			\Biggl[ \gls{q} \glsentryname{uPrime} \Biggr]_{x = 1} &= P. \label{eqn:Normalized_Weak_Right_Boundary}
+		\end{align}
+	\end{subequations}	
+\end{problem}

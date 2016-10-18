@@ -1,0 +1,58 @@
+The task in this section is to find the \gls{M} unknown coefficients $a_j$. We have to deduce a linear set of equations for coefficients of \glspl{basisFunction},
+and then solve it. To do this we begin by \cref{eqn:Weak_Formulation}
+\begin{equation*}
+	\int_{x = 0}^{1} \gls{q} \frac{du}{dx} \glsentryname{wiPrime} \dd x
+		= P \gls{wi} \Big \vert_{x = 1} + \int_{x = 0}^{1} \gls{f}  \gls{wi} \dd x.
+\end{equation*}
+Insert for $du / dx$ and $dw_i / dx$ from \cref{eqn:u_Prime,eqn:Weight_Function}
+\begin{equation}
+	\begin{split}
+		\int_{x = 0}^{1} \gls{f} \gls{phii} \dd x &+ P \gls{phii} \Big \vert_{x = 1} = \\
+		&\quad  \int_{x = 0}^{1} \gls{q} \Biggl[ \sum_{j = 1}^{\gls{M}} a_j
+			\frac{ d \varphi_j }{dx} \glsentryname{phiiPrime} \Biggr] \dd x
+	\end{split}
+\end{equation}
+Rearranging the terms we get
+\begin{align} \label{eqn:FEM_Eq_Sys}
+	\begin{split}
+		\sum_{j = 1}^{M} \Biggl[ \int_{x = 0}^{1} \gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x \Biggr] a_j
+			&= \int_{x = 0}^{1} \gls{f} \gls{phii} \dd x \\
+			& \quad + P \gls{phii} \Big \vert_{x = 1}.
+	\end{split}
+\end{align}
+Define now for $1 \leq i, j \leq M$
+\begin{subequations}
+	\begin{align}
+		\glsentryname{Kij} &= \int_{x = 0}^{1} \gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x,	\label{eqn:Stiffness_Matrix} \\
+		\glsentryname{bi} & = P  \gls{phii} \Big \vert_{x = 1} + \int_{x = 0}^{1} \gls{f} \gls{phii} \dd x.	\label{eqn:Load_Vector}
+	\end{align}	
+\end{subequations}
+Note that \cref{eqn:FEM_Eq_Sys} is then a linear system of equations, i.e., 
+\begin{subequations}
+	\begin{align}	\label{eqn:Compact_Eq_Sys}
+		\gls{K} \gls{a} &= \gls{b}, \\
+		\sum_{j = 1}^{\gls{M}} \glsentryname{Kij} a_j &= \glsentryname{bi},
+	\end{align}
+	where
+	\begin{alignat}{2}
+		\gls{K} &= \left[ \glsentryname{Kij} \right], 	\quad& i,j &= 1, 2, \dots, M, \\
+		\gls{a} &= \left[ \glsentryname{ai} \right],	\quad& i   &= 1, 2, \dots, M, \\
+		\gls{b} &= \left[ \glsentryname{bi} \right],	\quad& i   &= 1, 2, \dots, M.
+	\end{alignat}
+\end{subequations}
+%
+\Gls{basisFunction}s may be chosen among a variety of functions with \gls{globalSupport}
+or \gls{localSupport}. It is common, though, to choose them as polynomials with \gls{localSupport}. The polynomial
+choice can be defended by the fact that these
+functions are easy to evaluate. The \gls{localSupport} means that $\varphi_{i}$ is only non-zero over a few \glspl{element}.
+As we will see this gives a diagonal \gls{stiffnessMatrix}. In a \gls{diagonalMatrix} all non-zero entries are on the diagonals.
+The \gls{stiffnessMatrix} is in addition sparse. In a \gls{sparseMat}, most of entries are zero. In the literature we may find
+efficient \glspl{algorithm} for both saving and solving a \gls{linearEquationSystem} with \glspl{sparseMat}. \\
+
+A typical \gls{basisFunction} $\varphi _{i}$ actually consists of two polynomials joined together at \gls{nodePoint} $x_i$.
+It would be then desirable that these functions are continuous at the conjuncture. We may also be interested in more
+smoothness, for example \glsentryname{order1Cont}. In mathematical formulation we seek \glsname{ordernCont} where $n$ is
+a positive integer. While \glsentryname{order0Cont} is achieved by linear polynomials, we have to increase polynomial degree to at
+least $3$ to guarantee \glsentryname{order1Cont} and to at least $5$ for \glsentryname{order2Cont}. Both choices of linear and
+cubic polynomials for \glspl{basisFunction} are discussed in this report.
+%

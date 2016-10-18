@@ -1,0 +1,14 @@
+\begin{abstract}
+
+This report is meant as an introduction to \gls{FEM}. \Gls{FEM} is a numerical approach for solving ordinary and partial
+\glspl{diffEq}. First we derive the governing equations for a mechanical one-dimensional \gls{BVP} and normalize it.
+Before introduction of FEM-concepts we also study some variations of the problem with available analytical solutions. \\
+
+Next we cover the mathematical bvackground of FEM including variational formulation, discretization, and the concept of truncated
+solution. A whole chapter is also dedicated to deriving error estimates for a slightly simplified version of the problem. \\
+
+Finite Element-solution is typically a truncated series of \glspl{basisFunction}. Any function satisfying the necessary
+conditions may be chosen as \glspl{basisFunction}. However, because of their simplicity, polynomial functions with
+\gls{localSupport} are a very popular choice, so we apply both linear and cubic polynomials. Since we also had the \gls{analSol}
+we analyzed the error development and eventual \gls{solConv} for both linear and cubic \gls{basisFunction}.
+\end{abstract}

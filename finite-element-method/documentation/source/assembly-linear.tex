@@ -1,0 +1,96 @@
+% Linear K^{1}
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		\mathbf{K}^{\left( 1 \right)} =
+		\begin{bmatrix}
+			k_{11}^{1} & k_{12}^{1} & 0 & 0 & 0 \\ \\
+			k_{21}^{1} & k_{22}^{1} & 0 & 0 & 0 \\ \\
+			0 & 0 & 0 & 0 & 0 \\ \\
+			0 & 0 & 0 & 0 & 0 \\ \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+	\caption{Stiffness Assembly with Linear Basis-Functions, $\mathbf{K}^{\left(1\right)}$ }
+	\label{fig:K_1_Linear}
+\end{figure}
+% Linear K^{2}
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		\mathbf{K}^{\left( 2 \right)} =
+		\begin{bmatrix}
+			k_{11}^{1} & k_{12}^{1} & 0 & 0 & 0 \\ \\
+			k_{21}^{1} & k_{22}^{1} + k_{11}^{2} & k_{12}^{2} & 0 & 0 \\ \\
+			0 & k_{21}^{2} & k_{22}^{2}	& 0 & 0 \\ \\
+			0 & 0 & 0 & 0 & 0 \\ \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+	\caption{Stiffness Assembly with Linear Basis-Functions, $\mathbf{K}^{\left(2\right)}$ }
+	\label{fig:K_2_Linear}
+\end{figure}
+%
+% Linear K^{3}
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		\mathbf{K}^{\left( 3 \right)} =
+		\begin{bmatrix}
+			k_{11}^{1} & k_{12}^{1} & 0 & 0 & 0 \\ \\
+			k_{21}^{1} & k_{22}^{1} + k_{11}^{2} & k_{12}^{2} & 0 & 0 \\ \\
+			0 & k_{21}^{2} & k_{22}^{2} + k_{11}^{3} & k_{12}^{3} & 0 \\ \\
+			0 & 0 & k_{21}^{3} & k_{22}^{3}	& 0 \\ \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+	\caption{Stiffness Assembly with Linear Basis-Functions, $\mathbf{K}^{\left(3\right)}$ }
+	\label{fig:K_3_Linear}
+\end{figure}
+%
+% Linear K^{4}
+\begin{figure}[H]
+	\centering
+	\begin{equation*}
+		\mathbf{K}^{\left( 4 \right)} =
+		\begin{bmatrix}
+			k_{11}^{1} & k_{12}^{1} & 0 & 0 & 0 \\ \\
+			k_{21}^{1} & k_{22}^{1} + k_{11}^{2} & k_{12}^{2} & 0 & 0 \\ \\
+			0 & k_{21}^{2} & k_{22}^{2} + k_{11}^{3} & k_{12}^{3} & 0 \\ \\
+			0 & 0 & k_{21}^{3} & k_{22}^{3} + k_{11}^{4} & k_{12}^{4} \\ \\
+			0 & 0 & 0 & k_{21}^{4} & k_{22}^{4}
+		\end{bmatrix}
+	\end{equation*}
+	\caption{Stiffness Assembly with Linear Basis-Functions, $\mathbf{K}^{\left(4\right)}$ }
+	\label{fig:K_4_Linear}
+\end{figure}
+%
+% Linear Load b^{1}, ... , b^{4}
+\begin{figure}[H]
+	\centering
+	% b_{1}
+	\begin{align*}
+	\mathbf{b}^{\left( 1 \right)} &=
+	\begin{bmatrix}
+	b_{1}^{1} & b_{2}^{1} & 0 & 0 & 0
+	\end{bmatrix}^{T},	\\
+	% b_{2}
+	\mathbf{b}^{\left( 2 \right)} &=
+	\begin{bmatrix}
+	b_{1}^{1} & b_{2}^{1} + b_{1}^{2} & b_{2}^{2} & 0 & 0
+	\end{bmatrix}^{T},	\\
+	% b_{3}
+	\mathbf{b}^{\left( 3 \right)} &=
+	\begin{bmatrix}
+	b_{1}^{1} & b_{2}^{1} + b_{1}^{2} & b_{2}^{2} + b_{1}^{3} & b_{2}^{3} & 0
+	\end{bmatrix}^{T},	\\
+	% b_{4}
+	\mathbf{b}^{\left( 4 \right)} &=
+	\begin{bmatrix}
+	b_{1}^{1} & b_{2}^{1} + b_{1}^{2} & b_{2}^{2} + b_{1}^{3} & b_{2}^{3} + b_{1}^{4} & b_{2}^{4}
+	\end{bmatrix}^{T}.
+	\end{align*}
+	\caption{Load Assembly with Linear Basis-Functions, $\mathbf{b}^{\left( 1 \right)}, \dots, \mathbf{b}^{ \left( 4 \right) }$}
+	\label{fig:b_1_To_b_4_Linear}
+\end{figure}
+%

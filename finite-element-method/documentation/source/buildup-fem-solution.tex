@@ -1,0 +1,13 @@
+\section{Buildup FEM-Solution}
+The next step is to solve this system and find the unknowns. This is done by using \emph{MATLAB Equation Solver}. For large No.
+of elements we should take advantage of the sparse system property to save both memory and processor resources. This means that
+we don't have to save the full stiffness matrix and \gls{loadVector}, but just non-zero diagonals in \gls{stiffnessMatrix} and load vector.
+For the \gls{sparseMat} we also have access to much more efficient solver \glspl{algorithm}. For the problem in hand,
+however, we have saved and solved the full system. \Cref{lst:Build_Sol} shows the MATLAB-code for building up \gls{FEMSol} with
+both linear and cubic \glspl{basisFunction}.
+\begin{remark}
+	The primary solution in some numerical methods\footnote{Such as \glspl{finiteDiffMethod}.} are the function values at
+	predefined nodal points. In each case a smooth solution may then be constructed by interpolating these points. In FEM, on the
+	other hand, interpolation is an integrated part of the method, see \cref{eqn:Truncated_FEM_Solution}.
+\end{remark}	\text{}
+For a discussion of these and other relevant materials consult \cite{Bertoti:1997,Carlson:1967,KarelRektorys:1975,Szeidl:2001}.
