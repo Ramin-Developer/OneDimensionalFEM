@@ -1,0 +1,29 @@
+# MATLAB autosave and backup
+*.asv
+*.m~
+
+# MATLAB generated binaries and mex files
+*.mex*
+*.p
+
+# MATLAB Simulink generated artifacts
+slprj/
+*.slxc
+
+# MATLAB cache and preferences
+prefdir/
+
+# Figures and temporary exports
+*.fig
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.eps
+*.pdf
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
