@@ -17,3 +17,8 @@ MATLAB implementation of a one-dimensional boundary value problem solved with th
 
 - This repository is being prepared for modernization and refactoring.
 - Baseline behavior should be preserved while improving structure and testability.
+
+## Plan and Progress
+
+- Living modernization plan: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
+- Active modernization branch: feat/refactor-core
