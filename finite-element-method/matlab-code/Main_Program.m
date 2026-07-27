@@ -16,7 +16,7 @@ for size_Ind = 1:1:length(no_Of_Elements)
     [u_FEM_Lin{ size_Ind }, u_FEM_Cub{ size_Ind } ] = ...
         Calc_FEM_Sol( no_Of_Elements( size_Ind ), h( size_Ind ), ...
         delta, P, q_Func, load_Func, RelTol );
-end;
+end
 
 
 % Error estimation:
