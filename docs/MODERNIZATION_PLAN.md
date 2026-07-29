@@ -55,7 +55,7 @@ Definition of Done:
 - [x] B2: Element-assembly consistency checks.
 - [x] B3: End-to-end refinement regression checks.
 - [x] B4: Add deterministic golden-data regression snapshots (values and tolerances).
-- [ ] B5: Add negative tests for invalid inputs to Validate_Input.
+- [x] B5: Add negative tests for invalid inputs to Validate_Input.
 
 Definition of Done:
 
@@ -158,3 +158,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, squared errors, and convergence factors.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: implement Workstream B5 negative-input tests for Validate_Input.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added Validate_Input negative tests for invalid q_Type, unsupported q_Type, invalid coefficients, invalid boundary values, and invalid element vectors.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: begin Workstream C1 reference-case snapshot expansion for selected N values.
