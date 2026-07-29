@@ -71,6 +71,25 @@ assert(all(femData.sq_Error_Lin > 0), ...
 assert(all(femData.sq_Error_Cub > 0), ...
     'Compute_FEM_Data cubic squared-error summary should be positive.');
 
+function testConvergenceRatesExceedThresholds(~)
+num_Elements = [4 8 16 32];
+q_Type = 'q_Const';
+q_Coeff = 1;
+load_Coeff = [1 2 -3];
+delta = 0;
+P = 0.01;
+
+femData = Compute_FEM_Data(num_Elements, q_Type, q_Coeff, load_Coeff, delta, P);
+
+% Explicit rate thresholds tuned from baseline behavior with safety margin.
+lin_Min = 2.5;
+cub_Min = 9.0;
+
+assert(all(femData.conv_Factor_Lin >= lin_Min), ...
+    'Linear convergence factor fell below threshold.');
+assert(all(femData.conv_Factor_Cub >= cub_Min), ...
+    'Cubic convergence factor fell below threshold.');
+
 function err = ComputeL2Error(u_Exact, local_Fields, N, relTol)
 
 h = 1 / N;
