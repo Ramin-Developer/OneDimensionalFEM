@@ -35,24 +35,3 @@ uFEMCub = Build_Local_Solution(3, numElements, aCub, psiCub);
 assert(numel(uFEMLin) == numElements && numel(uFEMCub) == numElements, ...
     'Calc_FEM_Sol:InvalidOutput', ...
     'Returned FEM field cells must match numElements.');
-
-function uFEM = Build_Local_Solution(degree, numElements, a, psi)
-
-uFEM = cell(numElements, 1);
-
-% Construct Linear-FEM solution:
-if degree == 1
-    for elemNo = 1:1:numElements
-        uFEM{elemNo} = @(y) a(elemNo) * psi{1}(y) ...
-            + a(elemNo + 1) * psi{2}(y);
-    end;
-    return;
-end;
-
-% Construct Cubic-FEM solution:
-for elemNo = 1:1:numElements
-    uFEM{elemNo} = @(y) a(elemNo) * psi{1}(y) ...
-        + a(elemNo + 1) * psi{2}(y) ...
-        + a(elemNo + numElements + 1) * psi{3}(y) ...
-        + a(elemNo + numElements + 2) * psi{4}(y);
-end;
