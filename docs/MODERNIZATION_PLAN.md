@@ -66,7 +66,7 @@ Definition of Done:
 
 - [x] C1: Add reference-case JSON/ MAT snapshots for selected N values.
 - [x] C2: Add convergence-rate checks with explicit thresholds.
-- [ ] C3: Add boundary-condition residual checks as formal assertions.
+- [x] C3: Add boundary-condition residual checks as formal assertions.
 
 Definition of Done:
 
@@ -176,3 +176,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added explicit convergence-rate threshold assertions for linear and cubic FEM factors using baseline-derived margins.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: implement Workstream C3 boundary-condition residual assertions.
+
+- Date: 2026-07-29
+- Branch: test/boundary-residual-checks-20260729
+- What changed: Added formal right-boundary residual assertions for linear and cubic FEM, including linear refinement trend checks and explicit tolerances.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: continue Workstream D2 benchmark repeat-count and summary statistics.

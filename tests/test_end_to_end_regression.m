@@ -90,6 +90,38 @@ assert(all(femData.conv_Factor_Lin >= lin_Min), ...
 assert(all(femData.conv_Factor_Cub >= cub_Min), ...
     'Cubic convergence factor fell below threshold.');
 
+function testRightBoundaryResidualsAreControlled(~)
+num_Elements = [8 16 32];
+q_Type = 'q_Const';
+q_Coeff = 1;
+load_Coeff = [1 2 -3];
+delta = 0;
+P = 0.01;
+
+[meshSize, ~, q_Func, load_Func, ~, ~, ~, ~, relTol] = ...
+    Def_Problem(num_Elements, q_Type, load_Coeff, q_Coeff, delta, P);
+
+resLin = zeros(size(num_Elements));
+resCub = zeros(size(num_Elements));
+
+for idx = 1:numel(num_Elements)
+    numElem = num_Elements(idx);
+    [uLin, uCub] = Calc_FEM_Sol( ...
+        numElem, meshSize(idx), delta, P, q_Func, load_Func, relTol);
+
+    resLin(idx) = abs(ComputeRightBoundaryResidual( ...
+        uLin{numElem}, meshSize(idx), q_Func, P));
+    resCub(idx) = abs(ComputeRightBoundaryResidual( ...
+        uCub{numElem}, meshSize(idx), q_Func, P));
+end
+
+assert(all(diff(resLin) < 0), ...
+    'Linear right-boundary residual should decrease with mesh refinement.');
+assert(all(resCub <= 1e-6), ...
+    'Cubic right-boundary residual exceeded tolerance.');
+assert(resLin(end) <= 1e-3, ...
+    'Linear right-boundary residual exceeded finest-mesh threshold.');
+
 function err = ComputeL2Error(u_Exact, local_Fields, N, relTol)
 
 h = 1 / N;
@@ -100,3 +132,10 @@ for elem_No = 1:N
     accum = accum + quadgk(sqErr, 0, 1, 'RelTol', relTol);
 end
 err = sqrt(accum);
+
+function residual = ComputeRightBoundaryResidual(localField, h, q_Func, P)
+
+dy = 1e-6;
+dUdy = (localField(1) - localField(1 - dy)) / dy;
+dUdx = dUdy / h;
+residual = q_Func(1) * dUdx - P;
