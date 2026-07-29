@@ -19,10 +19,13 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
 
-      - name: Run smoke check
+      - name: Run tests
         uses: matlab-actions/run-command@v2
         with:
           command: |
             addpath(genpath('finite-element-method/matlab-code'));
+            addpath('tests');
             assert(exist('Main_Program','file') == 2, 'Main_Program.m not found');
-            disp('MATLAB smoke check passed.');
+            results = runtests('tests');
+            assert(all([results.Passed]), 'One or more tests failed.');
+            disp('MATLAB tests passed.');

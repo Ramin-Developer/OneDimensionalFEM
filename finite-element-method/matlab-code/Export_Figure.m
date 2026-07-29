@@ -1,5 +1,7 @@
 function Export_Figure( h, paperWidth, paperHeight, FileName )
 
+%EXPORT_FIGURE Export figure as .fig and .pdf with centered page layout.
+
 % Set figure size and print
 set(h, 'PaperUnits', 'centimeters');
 paperSize = get(h, 'PaperSize');
@@ -11,10 +13,12 @@ set(h, 'PaperPosition', FigureSize);
 File_FIG = FileName;
 File_PDF = FileName;
 
-if length( File_FIG ) > 4 && ...
-        strcmpi( File_FIG(end - 3):File_FIG( end ), '.pdf' ) == 0
-    File_FIG = [File_FIG '.fig'];
-    File_PDF = [File_PDF '.pdf'];
+if length(FileName) >= 4 && strcmpi(FileName(end-3:end), '.pdf')
+    File_PDF = FileName;
+    File_FIG = [FileName(1:end-4) '.fig'];
+else
+    File_FIG = [FileName '.fig'];
+    File_PDF = [FileName '.pdf'];
 end;
 
 saveas( h, File_FIG, 'fig' );

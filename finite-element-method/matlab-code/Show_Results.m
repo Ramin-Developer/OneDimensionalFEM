@@ -2,11 +2,13 @@ function [factor_Lin, factor_Cub] = ...
     Show_Results(no_Of_Elements, sol_Size, ...
     x, u_Exact, u_FEM_Lin, u_FEM_Cub, RelTol)
 
+%SHOW_RESULTS Plot FEM results and compute convergence summaries.
+
 % Plot exact and FEM-Solution of the problem for different element numbers:
 Plot_Solutions(no_Of_Elements, sol_Size, ...
     x, u_Exact, u_FEM_Lin, u_FEM_Cub);
 
-% Estimate squared errors and convergence factors: 
+% Estimate squared errors and convergence factors:
 [factor_Lin, factor_Cub] = ...
     Estimate_Error(no_Of_Elements, u_Exact, u_FEM_Lin, u_FEM_Cub, RelTol);
 
@@ -28,22 +30,11 @@ u_FEM = zeros( sol_Size + 1, size_N, 2 );
 
 % Construct FEM-Solution as a linear combination of the shape-functions:
 for size_Ind = 1:1:size_N
-    
-    N = no_Of_Elements( size_Ind );
-	y = linspace( 0, 1, elem_Size( size_Ind ) + 1 )';
-    for elem_No = 1:1:N
-        
-        start = (elem_No - 1) * elem_Size( size_Ind ) + 1;
-        last = start + elem_Size( size_Ind );
-        
-        % Linear Solution:
-        u_FEM( start:last, size_Ind, 1) = ...
-            u_FEM_Lin{ size_Ind }{ elem_No }( y );
-        
-        % Cubic Solution:
-        u_FEM( start:last, size_Ind, 2) = ...
-            u_FEM_Cub{ size_Ind }{ elem_No }( y );
-    end;
+    points_Per_Element = elem_Size(size_Ind);
+    u_FEM(:, size_Ind, 1) = Evaluate_FEM_Field( ...
+        u_FEM_Lin{size_Ind}, points_Per_Element );
+    u_FEM(:, size_Ind, 2) = Evaluate_FEM_Field( ...
+        u_FEM_Cub{size_Ind}, points_Per_Element );
 end;
 
 figure();
@@ -67,7 +58,7 @@ for k = 1:1:2
         grid;
         set( gca, 'FontName', 'Arial', 'FontSize', 14 );
         set( gca, 'XTick', [0.25 0.5 0.75 1] );
-                
+
         % Legend
         str_FEM = ['$u_{cub}$, ' 'N = ' num2str( N ) ];
         if k == 1
@@ -77,7 +68,7 @@ for k = 1:1:2
             'Location', 'Northwest', 'Orientation', 'Vertical' );
         set( h_leg, 'Interpreter', 'Latex', 'FontSize', 14 );
     end;
-    
+
     left = 0.09;
     bottom = 0.05;
     width = 0.24;
@@ -92,29 +83,11 @@ size_N = length( no_Of_Elements );
 tot_Error = zeros(2, size_N );
 
 for size_Ind = 1:1:size_N
-    
     N = no_Of_Elements( size_Ind );
-    h = 1 / N;
-    for elem_No = 1:1:N
-        
-        global_Coord = @( y ) ( elem_No - 1 + y ) .* h;
-        
-        % Setup linear and cubic squared error functions:
-        sq_Error_Lin = @( y ) ...
-            ( u_Exact( global_Coord( y ) ) ...
-            - u_FEM_Lin{ size_Ind }{ elem_No }( y ) ).^2;
-
-        sq_Error_Cub = @( y ) ...
-            ( u_Exact( global_Coord( y ) ) ...
-            - u_FEM_Cub{ size_Ind }{ elem_No }( y ) ).^2;
-
-        % Integrate the error functions to find linear and cubic errors:
-        tot_Error( 1, size_Ind ) = tot_Error( 1, size_Ind ) + ...
-            quadgk( sq_Error_Lin, 0, 1, 'RelTol', RelTol );
-        
-        tot_Error( 2, size_Ind ) = tot_Error( 2, size_Ind ) + ...
-            quadgk( sq_Error_Cub, 0, 1, 'RelTol', RelTol );
-    end;
+    tot_Error(1, size_Ind) = Integrate_Squared_Error( ...
+        u_Exact, u_FEM_Lin{size_Ind}, N, RelTol);
+    tot_Error(2, size_Ind) = Integrate_Squared_Error( ...
+        u_Exact, u_FEM_Cub{size_Ind}, N, RelTol);
 end;
 
 tot_Error = sqrt( tot_Error );
@@ -139,13 +112,37 @@ if degree == 1
     Title  = sprintf( 'Linear Case:');
     Error_Val = sprintf( '%0.4e\t\t\t', sq_Error(1, :) );
     Conv_Val = sprintf( '%0.2e\t\t\t', conv_Factor(1, :) );
-    
+
 elseif degree == 3
     Title  = sprintf( 'Cubic Case:');
     Error_Val = sprintf( '%0.4e\t\t\t', sq_Error(2, :) );
     Conv_Val = sprintf( '%0.2e\t\t\t', conv_Factor(2, :) );
-    
+
 end;
 
 str_Error_Estimate = sprintf( '\n %s \n %s %s \n %s %s', Title, ...
     Title_Error, Error_Val, Title_Conv, Conv_Val);
+
+function values = Evaluate_FEM_Field(local_Fields, points_Per_Element)
+
+y = linspace(0, 1, points_Per_Element + 1)';
+num_Elements = numel(local_Fields);
+values = zeros(points_Per_Element * num_Elements + 1, 1);
+
+for elem_No = 1:num_Elements
+    start_Ind = (elem_No - 1) * points_Per_Element + 1;
+    end_Ind = start_Ind + points_Per_Element;
+    values(start_Ind:end_Ind) = local_Fields{elem_No}(y);
+end
+
+function sq_Error = Integrate_Squared_Error(u_Exact, local_Fields, N, RelTol)
+
+h = 1 / N;
+sq_Error = 0;
+
+for elem_No = 1:N
+    global_Coord = @(y) (elem_No - 1 + y) .* h;
+    sq_Error_Local = @(y) ...
+        (u_Exact(global_Coord(y)) - local_Fields{elem_No}(y)).^2;
+    sq_Error = sq_Error + quadgk(sq_Error_Local, 0, 1, 'RelTol', RelTol);
+end

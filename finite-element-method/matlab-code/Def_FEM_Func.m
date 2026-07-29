@@ -1,5 +1,7 @@
 function [psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub] = Def_FEM_Func
 
+%DEF_FEM_FUNC Define local linear and cubic shape functions.
+
 [psi_Lin, psi_Prime_Lin] = Def_Linear_FEM;
 [psi_Cub, psi_Prime_Cub] = Def_Cubic_FEM;
 
@@ -10,7 +12,7 @@ psi_Lin = cell( 2, 1 );
 psi_Lin{1} = @(y) 1 - y;
 psi_Lin{2} = @(y) y;
 
-% Derivative of lineat shape functions in the local coordinates:
+% Derivative of linear shape functions in local coordinates:
 psi_Prime_Lin = cell( 2, 1);
 psi_Prime_Lin{1} = @(y) -1;
 psi_Prime_Lin{2} = @(y) 1;

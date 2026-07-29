@@ -1,6 +1,8 @@
 function [u_FEM_Lin, u_FEM_Cub] = Calc_FEM_Sol( N, h, ...
     delta, P, q_Func, load_Func, RelTol )
 
+%CALC_FEM_SOL Solve linear and cubic FEM approximations on one mesh.
+
 % Define local and global basis functions and their first derivative:
 [psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub] = Def_FEM_Func;
 
@@ -10,10 +12,10 @@ function [u_FEM_Lin, u_FEM_Cub] = Calc_FEM_Sol( N, h, ...
     psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub, RelTol );
 
 % Construct FEM-Solution as a linear combination of basis-functions:
-u_FEM_Lin = Build_FEM_Sol( 1, N, a_Lin, psi_Lin );
-u_FEM_Cub = Build_FEM_Sol( 3, N, a_Cub, psi_Cub );
+u_FEM_Lin = Build_Local_Solution(1, N, a_Lin, psi_Lin);
+u_FEM_Cub = Build_Local_Solution(3, N, a_Cub, psi_Cub);
 
-function u_FEM = Build_FEM_Sol(degree, N, a, psi)
+function u_FEM = Build_Local_Solution(degree, N, a, psi)
 
 u_FEM = cell( N, 1 );
 

@@ -1,5 +1,7 @@
 function [q_Type, q_Coeff, load_Coeff, delta, P, N ] = Read_input
 
+%READ_INPUT Return default solver configuration for the demo run.
+
 % ------------------------ Rigidity Function q(x) ------------------------
 
 % A constant q(x):
@@ -29,7 +31,7 @@ q_Coeff = 1;
 % Coefficients of a quadratic polynomial load:
 load_Coeff = [1 2 -3];
 
-% ------------------------- Bounadary Conditions -------------------------
+% ------------------------- Boundary Conditions -------------------------
 
 % Dirichlet condition on the left hand side:
 delta = 0;
@@ -48,7 +50,7 @@ P = 0.01;
 % For an exponential choice of q(x):
 % P = 0.01;
 
-% ------------------------------- Meshing ------------------------------- 
+% ------------------------------- Meshing -------------------------------
 
 % No of elements in a uniform meshing:
 N = [4 8 16];

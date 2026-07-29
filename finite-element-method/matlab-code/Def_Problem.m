@@ -2,47 +2,51 @@ function [h, sol_Size, q_Function, load_Func, ...
     x, u_FEM_Lin, u_FEM_Cub, u_Exact, RelTol] = ...
     Def_Problem( N, q_Type, load_Coeff, q_Coeff, delta, P )
 
-% A uniform discretizatin
+%DEF_PROBLEM Define mesh parameters and exact model data.
+
+% Uniform element size for each mesh setup.
 h = 1 ./ N;
 
-% No. of points in the final plot:
+% Number of points used for result visualization.
 sol_Size = 2^10;
 
-% Evaluation points in the final solution
+% Evaluation points in global coordinate.
 x = linspace(0, 1, sol_Size + 1 )';
 
-% Initialize FEM-solution:
-u_FEM_Lin = cell( 1, length(N) );
-u_FEM_Cub = cell( 1, length(N) );
+% Allocate solution containers.
+u_FEM_Lin = cell(1, numel(N));
+u_FEM_Cub = cell(1, numel(N));
 
-% Relative tolerance for numerical integration:
+% Relative tolerance for numerical integration.
 RelTol = 1e-12;
 
-% Convert coefficients of the polynomial load to a general
-% quadratic polynomial:
-load_Degree = length(load_Coeff) - 1;
-if load_Degree == 0
-    load_Coeff = [load_Coeff 0 0];
-elseif load_Degree == 1
-    load_Coeff = [load_Coeff 0];
-end;
+load_Coeff = Normalize_Load_Coefficients(load_Coeff);
 
-if strcmpi(q_Type, 'q_Const') == 1
-    [q_Function, load_Func, u_Exact] = ...
-    Def_q_Const( load_Coeff, q_Coeff, delta, P );
+switch lower(strtrim(char(q_Type)))
+    case 'q_const'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Const(load_Coeff, q_Coeff, delta, P);
+    case 'q_frac_with_denom_1st_degree'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Frac_Denom_1st_Degree(load_Coeff, q_Coeff, delta, P);
+    case 'q_frac_with_denom_2nd_degree'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Frac_Denom_2nd_Degree(load_Coeff, q_Coeff, delta, P);
+    case 'exponential'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Exp(load_Coeff, q_Coeff, delta, P);
+    otherwise
+        error('Def_Problem:UnsupportedQType', ...
+            'Unsupported q_Type: %s', char(q_Type));
+end
 
-elseif strcmpi(q_Type, 'q_Frac_With_Denom_1st_Degree') == 1
-    [q_Function, load_Func, u_Exact] = ...
-    Def_q_Frac_Denom_1st_Degree( load_Coeff, q_Coeff, delta, P );
+function coeff = Normalize_Load_Coefficients(load_Coeff)
 
-elseif strcmpi(q_Type, 'q_Frac_With_Denom_2nd_Degree') == 1
-    [q_Function, load_Func, u_Exact] = ...
-    Def_q_Frac_Denom_2nd_Degree( load_Coeff, q_Coeff, delta, P );
-
-elseif strcmpi(q_Type, 'Exponential') == 1
-    [q_Function, load_Func, u_Exact] = ...
-    Def_q_Exp( load_Coeff, q_Coeff, delta, P );
-end;
+coeff = load_Coeff(:).';
+if numel(coeff) < 3
+    coeff = [coeff zeros(1, 3 - numel(coeff))];
+end
+coeff = coeff(1:3);
 
 function [q_Function, load_Func, u_Exact] = ...
     Def_q_Const( load_Coeff, q_Coeff, delta, P )
@@ -81,7 +85,7 @@ d(2) = q_Coeff(2) * P / q_Coeff(1) ...
 d(3) = P / ( 2 * q_Coeff(1) ) ...
     + ( 1 - q_Coeff(2) ) * load_Coeff(1) / ( 2 * q_Coeff(1) ) ...
     + load_Coeff(2) / ( 4 * q_Coeff(1) ) ...
-    + load_Coeff(3) / ( 6 * q_Coeff(1) );        
+    + load_Coeff(3) / ( 6 * q_Coeff(1) );
 
 d(4) = - load_Coeff(1) / ( 3 * q_Coeff(1) ) ...
     - q_Coeff(2) * load_Coeff(2) / ( 6 * q_Coeff(1) );
@@ -96,9 +100,9 @@ u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 + ...
 
 function [q_Function, load_Func, u_Exact] = ...
     Def_q_Frac_Denom_2nd_Degree( load_Coeff, q_Coeff, delta, P )
-    
+
 d = zeros(1, 7);
-q_Function = @(x) q_Coeff(1) ./ ( x.^2 + q_Coeff(2) );    
+q_Function = @(x) q_Coeff(1) ./ ( x.^2 + q_Coeff(2) );
 load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x ...
     + load_Coeff(3) * x.^2;
 
@@ -119,7 +123,7 @@ d(4) = P / ( 3 * q_Coeff(1) ) ...
 d(5) = -load_Coeff(1) / ( 4 * q_Coeff(1) ) ...
     - q_Coeff(2) * load_Coeff(3) / ( 12 * q_Coeff(1) );
 
-d(6) = - load_Coeff(2) / ( 10 * q_Coeff(1) ); 
+d(6) = - load_Coeff(2) / ( 10 * q_Coeff(1) );
 
 d(7) = - load_Coeff(3) / ( 18 * q_Coeff(1) );
 
