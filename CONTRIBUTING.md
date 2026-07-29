@@ -6,6 +6,7 @@
 - Prefer branch names that describe the scope, such as `feat/*`, `test/*`, `perf/*`, or `docs/*`.
 - Open a pull request back into `main` when the branch is ready.
 - Keep changes small and focused so they are easy to review and merge.
+- Use the repository's PR workflow for refactoring and maintenance changes.
 - Delete merged local and remote branches after the PR lands.
 
 ## MATLAB Compatibility
