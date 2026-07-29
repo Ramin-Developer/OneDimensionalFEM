@@ -46,6 +46,31 @@ assert(abs(uCub{1}(0) - delta) < 1e-10, 'Cubic FEM left Dirichlet value mismatch
 assert(isfinite(uLin{end}(1)), 'Linear FEM right-end value is not finite.');
 assert(isfinite(uCub{end}(1)), 'Cubic FEM right-end value is not finite.');
 
+function testComputeApiHasNoPlottingSideEffects(~)
+num_Elements = [4 8 16];
+q_Type = 'q_Const';
+q_Coeff = 1;
+load_Coeff = [1 2 -3];
+delta = 0;
+P = 0.01;
+
+num_Figures_Before = numel(findall(0, 'Type', 'figure'));
+
+femData = Compute_FEM_Data(num_Elements, q_Type, q_Coeff, load_Coeff, delta, P);
+
+num_Figures_After = numel(findall(0, 'Type', 'figure'));
+
+assert(num_Figures_After == num_Figures_Before, ...
+    'Compute_FEM_Data should not create figures.');
+assert(isfield(femData, 'u_FEM_Lin') && numel(femData.u_FEM_Lin) == numel(num_Elements), ...
+    'Compute_FEM_Data linear field output mismatch.');
+assert(isfield(femData, 'u_FEM_Cub') && numel(femData.u_FEM_Cub) == numel(num_Elements), ...
+    'Compute_FEM_Data cubic field output mismatch.');
+assert(all(femData.sq_Error_Lin > 0), ...
+    'Compute_FEM_Data linear squared-error summary should be positive.');
+assert(all(femData.sq_Error_Cub > 0), ...
+    'Compute_FEM_Data cubic squared-error summary should be positive.');
+
 function err = ComputeL2Error(u_Exact, local_Fields, N, relTol)
 
 h = 1 / N;

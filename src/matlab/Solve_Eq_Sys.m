@@ -1,58 +1,87 @@
 function [sysSolLin, sysSolCub] = ...
-     Solve_Eq_Sys( N, h, delta, P, q_Func, load_Func, ...
-    psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub, RelTol )
+    Solve_Eq_Sys(numElements, meshSize, delta, P, qFunc, loadFunc, ...
+    psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol)
 
 %SOLVE_EQ_SYS Assemble and solve linear/cubic FEM systems.
 
-K_Lin = zeros(N + 1, N + 1);
-b_Lin = zeros(N + 1, 1);
-K_Cub = zeros(2*N + 2, 2*N + 2);
-b_Cub = zeros(2*N + 2, 1);
+assert(isnumeric(numElements) && isscalar(numElements) ...
+    && numElements > 0 && mod(numElements, 1) == 0, ...
+    'Solve_Eq_Sys:InvalidNumElements', ...
+    'numElements must be a positive integer scalar.');
+assert(isnumeric(meshSize) && isscalar(meshSize) && meshSize > 0, ...
+    'Solve_Eq_Sys:InvalidMeshSize', ...
+    'meshSize must be a positive numeric scalar.');
+assert(isa(qFunc, 'function_handle') && isa(loadFunc, 'function_handle'), ...
+    'Solve_Eq_Sys:InvalidFunctions', ...
+    'qFunc and loadFunc must be function handles.');
+assert(iscell(psiLin) && numel(psiLin) == 2 && iscell(psiPrimeLin) ...
+    && numel(psiPrimeLin) == 2, ...
+    'Solve_Eq_Sys:InvalidLinearBasis', ...
+    'Linear basis and derivative basis must each contain 2 functions.');
+assert(iscell(psiCub) && numel(psiCub) == 4 && iscell(psiPrimeCub) ...
+    && numel(psiPrimeCub) == 4, ...
+    'Solve_Eq_Sys:InvalidCubicBasis', ...
+    'Cubic basis and derivative basis must each contain 4 functions.');
+assert(isnumeric(relTol) && isscalar(relTol) && relTol > 0, ...
+    'Solve_Eq_Sys:InvalidRelTol', ...
+    'relTol must be a positive numeric scalar.');
+
+K_Lin = zeros(numElements + 1, numElements + 1);
+b_Lin = zeros(numElements + 1, 1);
+K_Cub = zeros(2*numElements + 2, 2*numElements + 2);
+b_Cub = zeros(2*numElements + 2, 1);
 
 % Build up the global stiffness matrix and load vector:
-for n = 1:1:N
+for elemNo = 1:1:numElements
 
     % Construct element stiffness matrix and element load vector:
     [K_Elem_Lin, b_Elem_Lin, K_Elem_Cub, b_Elem_Cub] = ...
-        Elem_Cont( h, n, q_Func, load_Func, ...
-        psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub, RelTol );
+        Elem_Cont(meshSize, elemNo, qFunc, loadFunc, ...
+        psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol);
 
-    idx_Lin = n:n + 1;
+    idx_Lin = elemNo:elemNo + 1;
     K_Lin(idx_Lin, idx_Lin) = K_Lin(idx_Lin, idx_Lin) + K_Elem_Lin;
     b_Lin(idx_Lin) = b_Lin(idx_Lin) + b_Elem_Lin;
 
-    idx_Cub_Node = n:n + 1;
-    idx_Cub_Slope = idx_Cub_Node + N + 1;
+    idx_Cub_Node = elemNo:elemNo + 1;
+    idx_Cub_Slope = idx_Cub_Node + numElements + 1;
     idx_Cub = [idx_Cub_Node idx_Cub_Slope];
     K_Cub(idx_Cub, idx_Cub) = K_Cub(idx_Cub, idx_Cub) + K_Elem_Cub;
     b_Cub(idx_Cub) = b_Cub(idx_Cub) + b_Elem_Cub;
 end;
 
 % Implement boundary conditions for the linear-FEM:
-sysSolLin = Bound_Cond(1, N, h, delta, P, q_Func, K_Lin, b_Lin);
+sysSolLin = Bound_Cond(1, numElements, meshSize, delta, P, qFunc, K_Lin, b_Lin);
 
 % Implement boundary conditions for the cubic-FEM:
-sysSolCub = Bound_Cond(3, N, h, delta, P, q_Func, K_Cub, b_Cub);
+sysSolCub = Bound_Cond(3, numElements, meshSize, delta, P, qFunc, K_Cub, b_Cub);
 
-function sysSol = Bound_Cond(basis_Degree, N, h, delta, P, q_Func, K, b)
+assert(isvector(sysSolLin) && numel(sysSolLin) == numElements + 1, ...
+    'Solve_Eq_Sys:InvalidOutput', ...
+    'Linear system solution size mismatch.');
+assert(isvector(sysSolCub) && numel(sysSolCub) == 2*numElements + 2, ...
+    'Solve_Eq_Sys:InvalidOutput', ...
+    'Cubic system solution size mismatch.');
+
+function sysSol = Bound_Cond(basisDegree, numElements, meshSize, delta, P, qFunc, K, b)
 
 % Apply boundary conditions for linear and cubic systems.
 
-if basis_Degree == 1
-    dim = N + 1;
+if basisDegree == 1
+    dim = numElements + 1;
 
     % Adjusting load value on the right boundary:
 	b(dim) = P + b(dim);
 
 else
-    dim = 2*N + 2;
+    dim = 2*numElements + 2;
     % Adjusting load value on the right boundary:
-    b(N + 1) = b(N + 1) + P;
+    b(numElements + 1) = b(numElements + 1) + P;
 
     % Implement Normal Condition on the right boundary:
     K(dim, :) = zeros(1, dim);
     K(dim, dim) = 1;
-    b(dim) = h * P / q_Func(1);
+    b(dim) = meshSize * P / qFunc(1);
 end;
 
 % Implement Dirichlet Condition on the left boundary:

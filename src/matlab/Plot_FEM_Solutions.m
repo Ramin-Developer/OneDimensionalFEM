@@ -1,0 +1,92 @@
+function Plot_FEM_Solutions(numElements, solutionSize, x, uExact, uFEMLin, uFEMCub)
+%PLOT_FEM_SOLUTIONS Plot exact and FEM solutions for selected mesh sizes.
+
+assert(isnumeric(numElements) && isvector(numElements) && ~isempty(numElements), ...
+    'Plot_FEM_Solutions:InvalidNumElements', ...
+    'numElements must be a non-empty numeric vector.');
+assert(isscalar(solutionSize) && isnumeric(solutionSize) && solutionSize > 0, ...
+    'Plot_FEM_Solutions:InvalidSolutionSize', ...
+    'solutionSize must be a positive numeric scalar.');
+assert(isvector(x) && numel(x) == solutionSize + 1, ...
+    'Plot_FEM_Solutions:InvalidCoordinates', ...
+    'x must contain solutionSize + 1 coordinates.');
+assert(isa(uExact, 'function_handle'), ...
+    'Plot_FEM_Solutions:InvalidExactSolution', ...
+    'uExact must be a function handle.');
+assert(iscell(uFEMLin) && iscell(uFEMCub) ...
+    && numel(uFEMLin) == numel(numElements) ...
+    && numel(uFEMCub) == numel(numElements), ...
+    'Plot_FEM_Solutions:InvalidFEMFields', ...
+    'FEM field cell arrays must align with numElements length.');
+
+% Element size in the FEM solution
+elem_Size = solutionSize ./ numElements;
+
+% Construct exact solution:
+sol_Exact = uExact(x);
+size_N = length(numElements);
+
+% Construct a three dimensional matrix for the FEM-solution of the problem.
+% Element (i, j, 1) is the Linear-FEM Solution at x_i with j elements.
+% Element (i, j, 2) is the Cubic-FEM Solution at x_i with j elements.
+u_FEM = zeros(solutionSize + 1, size_N, 2);
+
+% Construct FEM-Solution as a linear combination of the shape-functions:
+for size_Ind = 1:1:size_N
+    points_Per_Element = elem_Size(size_Ind);
+    u_FEM(:, size_Ind, 1) = Evaluate_FEM_Field( ...
+        uFEMLin{size_Ind}, points_Per_Element);
+    u_FEM(:, size_Ind, 2) = Evaluate_FEM_Field( ...
+        uFEMCub{size_Ind}, points_Per_Element);
+end
+
+figure();
+left = 0.09;
+bottom = 0.55;
+width = 0.24;
+height = 0.40;
+horizontalSpace = 0.08;
+
+for k = 1:1:2
+    for size_Ind = 1:1:min(size_N, 3)
+
+        numElem = numElements(size_Ind);
+        subplot(2, size_N, (k - 1)*size_N + size_Ind, 'Position', ...
+            [left bottom width height]);
+        plot(x, sol_Exact, 'red', x, u_FEM(:, size_Ind, k), ...
+            'green', 'LineWidth', 2);
+        left = left + width + horizontalSpace;
+
+        % Grid and thick marks:
+        grid;
+        set(gca, 'FontName', 'Arial', 'FontSize', 14);
+        set(gca, 'XTick', [0.25 0.5 0.75 1]);
+
+        % Legend
+        str_FEM = ['$u_{cub}$, ' 'N = ' num2str(numElem)];
+        if k == 1
+            str_FEM = ['$u_{lin}$, ' 'N = ' num2str(numElem)];
+        end;
+        h_leg = legend('$u_{ex}$', str_FEM, ...
+            'Location', 'Northwest', 'Orientation', 'Vertical');
+        set(h_leg, 'Interpreter', 'Latex', 'FontSize', 14);
+    end;
+
+    left = 0.09;
+    bottom = 0.05;
+    width = 0.24;
+    height = 0.40;
+    horizontalSpace = 0.08;
+end;
+
+function values = Evaluate_FEM_Field(local_Fields, points_Per_Element)
+
+y = linspace(0, 1, points_Per_Element + 1)';
+num_Elements = numel(local_Fields);
+values = zeros(points_Per_Element * num_Elements + 1, 1);
+
+for elem_No = 1:num_Elements
+    start_Ind = (elem_No - 1) * points_Per_Element + 1;
+    end_Ind = start_Ind + points_Per_Element;
+    values(start_Ind:end_Ind) = local_Fields{elem_No}(y);
+end

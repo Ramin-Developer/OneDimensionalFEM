@@ -1,4 +1,4 @@
-function [q_Type, q_Coeff, load_Coeff, delta, P, N ] = Read_input
+function [q_Type, q_Coeff, load_Coeff, delta, P, numElements] = Read_input
 
 %READ_INPUT Return default solver configuration for the demo run.
 
@@ -52,5 +52,5 @@ P = 0.01;
 
 % ------------------------------- Meshing -------------------------------
 
-% No of elements in a uniform meshing:
-N = [4 8 16];
+% Number of elements in a uniform meshing:
+numElements = [4 8 16];

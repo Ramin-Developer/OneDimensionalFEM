@@ -39,10 +39,10 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ### Workstream A: Code Analysis and Refactor
 
-- [ ] A1: Extract a pure compute API that returns solution/error data without plotting side effects.
-- [ ] A2: Isolate plotting from Show_Results into dedicated plotting utility.
-- [ ] A3: Standardize function signatures and naming across src/matlab.
-- [ ] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
+- [x] A1: Extract a pure compute API that returns solution/error data without plotting side effects.
+- [x] A2: Isolate plotting from Show_Results into dedicated plotting utility.
+- [x] A3: Standardize function signatures and naming across src/matlab.
+- [x] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
 
 Definition of Done:
 
@@ -54,8 +54,8 @@ Definition of Done:
 - [x] B1: Shape-function sanity checks.
 - [x] B2: Element-assembly consistency checks.
 - [x] B3: End-to-end refinement regression checks.
-- [ ] B4: Add deterministic golden-data regression snapshots (values and tolerances).
-- [ ] B5: Add negative tests for invalid inputs to Validate_Input.
+- [x] B4: Add deterministic golden-data regression snapshots (values and tolerances).
+- [x] B5: Add negative tests for invalid inputs to Validate_Input.
 
 Definition of Done:
 
@@ -64,7 +64,7 @@ Definition of Done:
 
 ### Workstream C: Numerical Validation
 
-- [ ] C1: Add reference-case JSON/ MAT snapshots for selected N values.
+- [x] C1: Add reference-case JSON/ MAT snapshots for selected N values.
 - [ ] C2: Add convergence-rate checks with explicit thresholds.
 - [ ] C3: Add boundary-condition residual checks as formal assertions.
 
@@ -128,3 +128,45 @@ Append a short note at the top of the log below after each session:
 - What changed: Canonical src/matlab layout finalized, docs moved to docs/latex, wrapper path removed, regression tests and benchmark scaffold added, CI test execution confirmed.
 - Tests run: MATLAB test suite executed locally and in CI workflow.
 - Next action: implement Workstream A and B4/B5 (pure compute API and deterministic golden-data checks).
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added Compute_FEM_Data as a compute-only API, updated Main_Program to orchestrate compute then plotting, and added tests validating no plotting side effects in compute flow.
+- Tests run: Not executed locally in this session (MATLAB runner not invoked from terminal).
+- Next action: implement Workstream A2 by splitting plotting out of Show_Results into a dedicated plotting utility.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Extracted plotting from Show_Results into Plot_FEM_Solutions and kept Show_Results focused on orchestration and error estimation.
+- Tests run: MATLAB suite executed via batch runner (exit code 0).
+- Next action: implement Workstream A3 by standardizing signatures and naming across src/matlab.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Standardized naming/signatures across core src/matlab pipeline (Def_Problem, Calc_FEM_Sol, Solve_Eq_Sys, Show_Results, Plot_FEM_Solutions, Compute_FEM_Data, Main_Program, Read_input) without behavior changes.
+- Tests run: MATLAB suite executed via batch runner (exit code 0).
+- Next action: implement Workstream A4 by adding lightweight function-level contracts.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added lightweight inline contracts (assert-based input/output assumptions) across core compute, assembly, and result functions.
+- Tests run: MATLAB suite executed via batch runner (exit code 0).
+- Next action: start Workstream B4 deterministic golden-data regression snapshots.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, squared errors, and convergence factors.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream B5 negative-input tests for Validate_Input.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added Validate_Input negative tests for invalid q_Type, unsupported q_Type, invalid coefficients, invalid boundary values, and invalid element vectors.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: begin Workstream C1 reference-case snapshot expansion for selected N values.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added per-mesh reference-case MAT snapshots for selected N values and test coverage that validates exact/FEM field and error values against those snapshots.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream C2 convergence-rate checks with explicit thresholds.

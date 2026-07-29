@@ -8,21 +8,14 @@ clear;
 close('all');
 
 % Read and validate model configuration.
-[q_Type, q_Coeff, load_Coeff, delta, P, num_Elements] = Read_input;
-Validate_Input(q_Type, q_Coeff, load_Coeff, delta, P, num_Elements);
+[q_Type, q_Coeff, load_Coeff, delta, P, numElements] = Read_input;
+Validate_Input(q_Type, q_Coeff, load_Coeff, delta, P, numElements);
 
-% Define problem data and solve for each mesh size.
-[mesh_Size, solution_Size, q_Func, load_Func, ...
-    x, u_FEM_Lin, u_FEM_Cub, u_Exact, rel_Tol] = ...
-    Def_Problem(num_Elements, q_Type, load_Coeff, q_Coeff, delta, P);
-
-for idx = 1:numel(num_Elements)
-    [u_FEM_Lin{idx}, u_FEM_Cub{idx}] = Calc_FEM_Sol( ...
-        num_Elements(idx), mesh_Size(idx), delta, P, ...
-        q_Func, load_Func, rel_Tol);
-end
+% Compute FEM data with no plotting side effects.
+fem_Data = Compute_FEM_Data( ...
+    numElements, q_Type, q_Coeff, load_Coeff, delta, P);
 
 % Error estimation and plotting.
 [conv_Factor, sq_Error] = ...
-    Show_Results(num_Elements, solution_Size, x, ...
-    u_Exact, u_FEM_Lin, u_FEM_Cub, rel_Tol);
+    Show_Results(fem_Data.num_Elements, fem_Data.solution_Size, fem_Data.x, ...
+    fem_Data.u_Exact, fem_Data.u_FEM_Lin, fem_Data.u_FEM_Cub, fem_Data.rel_Tol);
