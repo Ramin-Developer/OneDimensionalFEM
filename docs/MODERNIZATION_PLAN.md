@@ -77,7 +77,7 @@ Definition of Done:
 - [x] D1: Baseline benchmark script available.
 - [x] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
 - [x] D3: Profile hot paths and document optimization opportunities.
-- [ ] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
+- [x] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
 
 Definition of Done:
 
@@ -194,3 +194,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added `scripts/profile_solver_hotpaths.m`, generated profiling artifact `docs/performance_hotspots.txt`, and documented measured hotspots plus prioritized optimization opportunities in `docs/PERFORMANCE_PROFILE_D3.md`.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: implement Workstream D4 optional CI/nightly performance guardrails.
+
+- Date: 2026-07-29
+- Branch: perf/d4-ci-guardrails-20260729
+- What changed: Added `scripts/ci_performance_guardrail.m` and updated `.github/workflows/matlab-ci.yml` with nightly/manual informational performance guardrail job and event gating for test vs. nightly jobs.
+- Tests run: Local guardrail run via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: begin Workstream E1 README command refresh.

@@ -8,9 +8,13 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+  schedule:
+    - cron: '30 2 * * *'
 
 jobs:
   test:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,3 +28,20 @@ jobs:
         with:
           command: |
             run('tests/run_tests_with_coverage.m');
+
+  performance-guardrail:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+
+      - name: Run informational performance guardrail
+        uses: matlab-actions/run-command@v3
+        with:
+          command: |
+            addpath('scripts');
+            ci_performance_guardrail;
