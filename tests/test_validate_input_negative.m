@@ -7,6 +7,10 @@ function testRejectsNonCharQType(testCase)
 verifyError(testCase, @() Validate_Input(42, 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQType');
 
+function testAcceptsNormalizedConstantAlias(testCase)
+verifyWarningFree(testCase, @() Validate_Input('constant', 1, [1 2 -3], 0, 0.01, [4 8 16]));
+end
+
 function testRejectsUnsupportedQType(testCase)
 verifyError(testCase, @() Validate_Input('q_unknown', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:UnsupportedQType');
