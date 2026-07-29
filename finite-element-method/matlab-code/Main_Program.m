@@ -1,3 +1,4 @@
+function Main_Program()
 % Legacy compatibility wrapper. Canonical implementation moved to src/matlab.
 
 legacyFile = mfilename('fullpath');
@@ -6,3 +7,4 @@ srcDir = fullfile(legacyDir, '..', '..', 'src', 'matlab');
 
 addpath(genpath(srcDir));
 run(fullfile(srcDir, 'Main_Program.m'));
+end
