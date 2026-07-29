@@ -1,0 +1,31 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# MATLAB / Octave
+*.asv
+*.m~
+*.mex*
+*.slxc
+*.slnx
+*.pcode
+*.autosave
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.xdv
+*.pdf
+
+# Temporary files
+*.tmp
+*.temp
