@@ -10,10 +10,10 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Current Baseline
 
-- Active feature branch: feat/refactor-core
+- Active feature branch: feat/matlab-phase2-tests-refactor
 - Existing CI: MATLAB smoke check in .github/workflows/matlab-ci.yml
 - Canonical code location: src/matlab
-- Legacy compatibility wrappers: finite-element-method/matlab-code
+- LaTeX documentation location: docs/latex
 
 ## Working Rules
 
@@ -51,8 +51,8 @@ Status update (2026-07-29):
 
 ## Phase 2: Structural Refactor
 
-- [ ] Introduce src folder and move core computational functions.
-- [ ] Keep thin compatibility wrappers for old entry points.
+- [x] Introduce src folder and move core computational functions.
+- [x] Remove compatibility wrappers to avoid source-of-truth ambiguity.
 - [ ] Separate I/O and plotting from numerical core.
 - [ ] Standardize function signatures and naming.
 
@@ -70,8 +70,7 @@ Status update (2026-07-29):
 ## Branching Strategy
 
 - main: stable branch
-- feat/refactor-core: active integration branch for modernization
-- short-lived branches for focused tasks, merged into feat/refactor-core
+- short-lived branches for focused tasks, merged into main via PR
 
 ## Session Update Template
 

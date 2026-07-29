@@ -5,8 +5,7 @@ MATLAB implementation of a one-dimensional boundary value problem solved with th
 ## Repository Layout
 
 - `src/matlab/`: Canonical MATLAB source files.
-- `finite-element-method/matlab-code/`: Legacy compatibility wrappers.
-- `finite-element-method/documentation/`: LaTeX sources and figure assets.
+- `docs/latex/`: LaTeX sources and figure assets.
 - `docs/reference/main.pdf`: Reference/problem documentation artifact.
 - `tests/`: MATLAB test harness (R2017a-compatible).
 
@@ -30,4 +29,4 @@ MATLAB implementation of a one-dimensional boundary value problem solved with th
 ## Plan and Progress
 
 - Living modernization plan: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
-- Active modernization branch: feat/refactor-core
+- Active development branch: use short-lived `feat/*` branches from `main`
