@@ -4,15 +4,17 @@ function tests = test_reference_cases_snapshot
 tests = functiontests(localfunctions);
 
 function testReferenceCasesByN(testCase)
-addpath(genpath('src/matlab'));
-addpath('tests/golden');
+testDir = fileparts(mfilename('fullpath'));
+repoRoot = fileparts(testDir);
+addpath(genpath(fullfile(repoRoot, 'src', 'matlab')));
+addpath(fullfile(testDir, 'golden'));
 ensure_golden_snapshots();
 
 selectedNumElements = [4 8 16];
 
 for idx = 1:numel(selectedNumElements)
     numElements = selectedNumElements(idx);
-    snapshotPath = sprintf('tests/golden/reference_qconst_N%d.mat', numElements);
+    snapshotPath = fullfile(testDir, 'golden', sprintf('reference_qconst_N%d.mat', numElements));
 
     assert(exist(snapshotPath, 'file') == 2, ...
         'Missing reference snapshot file: %s', snapshotPath);

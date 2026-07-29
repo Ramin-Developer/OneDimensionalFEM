@@ -1,7 +1,11 @@
 function generate_reference_cases()
 %GENERATE_REFERENCE_CASES Generate deterministic reference snapshots by N.
 
-addpath(genpath('src/matlab'));
+goldenDir = fileparts(mfilename('fullpath'));
+testsDir = fileparts(goldenDir);
+repoRoot = fileparts(testsDir);
+
+addpath(genpath(fullfile(repoRoot, 'src', 'matlab')));
 
 [qType, qCoeff, loadCoeff, delta, P, ~] = Read_input;
 selectedNumElements = [4 8 16];
@@ -34,7 +38,7 @@ for idx = 1:numel(selectedNumElements)
         'generate_reference_cases:InvalidSnapshotData', ...
         'Reference snapshot payload must be struct data.');
 
-    outputPath = sprintf('tests/golden/reference_qconst_N%d.mat', numElements);
+    outputPath = fullfile(goldenDir, sprintf('reference_qconst_N%d.mat', numElements));
     save(outputPath, 'referenceCase', 'tol');
 end
 

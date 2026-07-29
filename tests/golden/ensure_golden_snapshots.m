@@ -1,11 +1,15 @@
 function ensure_golden_snapshots()
 %ENSURE_GOLDEN_SNAPSHOTS Ensure required golden MAT files exist.
 
+goldenDir = fileparts(mfilename('fullpath'));
+testsDir = fileparts(goldenDir);
+repoRoot = fileparts(testsDir);
+
 requiredFiles = { ...
-    'tests/golden/baseline_qconst_snapshot.mat', ...
-    'tests/golden/reference_qconst_N4.mat', ...
-    'tests/golden/reference_qconst_N8.mat', ...
-    'tests/golden/reference_qconst_N16.mat' ...
+    fullfile(goldenDir, 'baseline_qconst_snapshot.mat'), ...
+    fullfile(goldenDir, 'reference_qconst_N4.mat'), ...
+    fullfile(goldenDir, 'reference_qconst_N8.mat'), ...
+    fullfile(goldenDir, 'reference_qconst_N16.mat') ...
 };
 
 isMissing = false;
@@ -26,7 +30,11 @@ generate_reference_cases();
 
 function generate_baseline_snapshot()
 
-addpath(genpath('src/matlab'));
+goldenDir = fileparts(mfilename('fullpath'));
+testsDir = fileparts(goldenDir);
+repoRoot = fileparts(testsDir);
+
+addpath(genpath(fullfile(repoRoot, 'src', 'matlab')));
 [q_Type, q_Coeff, load_Coeff, delta, P, numElements] = Read_input;
 femData = Compute_FEM_Data(numElements, q_Type, q_Coeff, load_Coeff, delta, P);
 
@@ -55,7 +63,7 @@ tol.fieldAbs = 5e-10;
 tol.errorAbs = 5e-10;
 tol.convAbs = 5e-8;
 
-save('tests/golden/baseline_qconst_snapshot.mat', 'snapshot', 'tol');
+save(fullfile(goldenDir, 'baseline_qconst_snapshot.mat'), 'snapshot', 'tol');
 
 function values = EvaluateFieldsByMesh(localFieldsByMesh, numElementsList, sampleX)
 

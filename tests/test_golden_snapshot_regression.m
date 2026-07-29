@@ -4,11 +4,13 @@ function tests = test_golden_snapshot_regression
 tests = functiontests(localfunctions);
 
 function testBaselineSnapshotMatches(~)
-addpath(genpath('src/matlab'));
-addpath('tests/golden');
+testDir = fileparts(mfilename('fullpath'));
+repoRoot = fileparts(testDir);
+addpath(genpath(fullfile(repoRoot, 'src', 'matlab')));
+addpath(fullfile(testDir, 'golden'));
 ensure_golden_snapshots();
 
-data = load('tests/golden/baseline_qconst_snapshot.mat');
+data = load(fullfile(testDir, 'golden', 'baseline_qconst_snapshot.mat'));
 snapshot = data.snapshot;
 tol = data.tol;
 
