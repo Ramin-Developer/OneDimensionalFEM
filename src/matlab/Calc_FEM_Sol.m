@@ -1,37 +1,37 @@
-function [u_FEM_Lin, u_FEM_Cub] = Calc_FEM_Sol( N, h, ...
-    delta, P, q_Func, load_Func, RelTol )
+function [uFEMLin, uFEMCub] = Calc_FEM_Sol(numElements, meshSize, ...
+    delta, P, qFunc, loadFunc, relTol)
 
 %CALC_FEM_SOL Solve linear and cubic FEM approximations on one mesh.
 
 % Define local and global basis functions and their first derivative:
-[psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub] = Def_FEM_Func;
+[psiLin, psiPrimeLin, psiCub, psiPrimeCub] = Def_FEM_Func;
 
-% Setup and solve the Eq. system for yhe unknown coefficients:
-[a_Lin, a_Cub] = ...
-    Solve_Eq_Sys( N, h, delta, P, q_Func, load_Func, ...
-    psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub, RelTol );
+% Setup and solve the equation system for the unknown coefficients:
+[aLin, aCub] = ...
+    Solve_Eq_Sys(numElements, meshSize, delta, P, qFunc, loadFunc, ...
+    psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol);
 
 % Construct FEM-Solution as a linear combination of basis-functions:
-u_FEM_Lin = Build_Local_Solution(1, N, a_Lin, psi_Lin);
-u_FEM_Cub = Build_Local_Solution(3, N, a_Cub, psi_Cub);
+uFEMLin = Build_Local_Solution(1, numElements, aLin, psiLin);
+uFEMCub = Build_Local_Solution(3, numElements, aCub, psiCub);
 
-function u_FEM = Build_Local_Solution(degree, N, a, psi)
+function uFEM = Build_Local_Solution(degree, numElements, a, psi)
 
-u_FEM = cell( N, 1 );
+uFEM = cell(numElements, 1);
 
 % Construct Linear-FEM solution:
 if degree == 1
-    for e = 1:1:N
-        u_FEM{ e } = @(y) a(e) * psi{ 1 }( y ) ...
-            + a(e + 1) * psi{ 2 }( y );
+    for elemNo = 1:1:numElements
+        uFEM{elemNo} = @(y) a(elemNo) * psi{1}(y) ...
+            + a(elemNo + 1) * psi{2}(y);
     end;
     return;
 end;
 
 % Construct Cubic-FEM solution:
-for e = 1:1:N
-    u_FEM{ e } = @(y) a(e) * psi{ 1 }( y ) ...
-        + a(e + 1) * psi{ 2 }( y ) ...
-        + a(e + N + 1) * psi{ 3 }( y ) ...
-        + a(e + N + 2) * psi{ 4 }( y );
+for elemNo = 1:1:numElements
+    uFEM{elemNo} = @(y) a(elemNo) * psi{1}(y) ...
+        + a(elemNo + 1) * psi{2}(y) ...
+        + a(elemNo + numElements + 1) * psi{3}(y) ...
+        + a(elemNo + numElements + 2) * psi{4}(y);
 end;

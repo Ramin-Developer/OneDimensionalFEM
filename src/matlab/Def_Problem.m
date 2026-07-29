@@ -1,39 +1,39 @@
-function [h, sol_Size, q_Function, load_Func, ...
-    x, u_FEM_Lin, u_FEM_Cub, u_Exact, RelTol] = ...
-    Def_Problem( N, q_Type, load_Coeff, q_Coeff, delta, P )
+function [meshSize, solutionSize, qFunc, loadFunc, ...
+    x, uFEMLin, uFEMCub, uExact, relTol] = ...
+    Def_Problem(numElements, q_Type, load_Coeff, q_Coeff, delta, P)
 
 %DEF_PROBLEM Define mesh parameters and exact model data.
 
 % Uniform element size for each mesh setup.
-h = 1 ./ N;
+meshSize = 1 ./ numElements;
 
 % Number of points used for result visualization.
-sol_Size = 2^10;
+solutionSize = 2^10;
 
 % Evaluation points in global coordinate.
-x = linspace(0, 1, sol_Size + 1 )';
+x = linspace(0, 1, solutionSize + 1)';
 
 % Allocate solution containers.
-u_FEM_Lin = cell(1, numel(N));
-u_FEM_Cub = cell(1, numel(N));
+uFEMLin = cell(1, numel(numElements));
+uFEMCub = cell(1, numel(numElements));
 
 % Relative tolerance for numerical integration.
-RelTol = 1e-12;
+relTol = 1e-12;
 
 load_Coeff = Normalize_Load_Coefficients(load_Coeff);
 
 switch lower(strtrim(char(q_Type)))
     case 'q_const'
-        [q_Function, load_Func, u_Exact] = ...
+        [qFunc, loadFunc, uExact] = ...
             Def_q_Const(load_Coeff, q_Coeff, delta, P);
     case 'q_frac_with_denom_1st_degree'
-        [q_Function, load_Func, u_Exact] = ...
+        [qFunc, loadFunc, uExact] = ...
             Def_q_Frac_Denom_1st_Degree(load_Coeff, q_Coeff, delta, P);
     case 'q_frac_with_denom_2nd_degree'
-        [q_Function, load_Func, u_Exact] = ...
+        [qFunc, loadFunc, uExact] = ...
             Def_q_Frac_Denom_2nd_Degree(load_Coeff, q_Coeff, delta, P);
     case 'exponential'
-        [q_Function, load_Func, u_Exact] = ...
+        [qFunc, loadFunc, uExact] = ...
             Def_q_Exp(load_Coeff, q_Coeff, delta, P);
     otherwise
         error('Def_Problem:UnsupportedQType', ...

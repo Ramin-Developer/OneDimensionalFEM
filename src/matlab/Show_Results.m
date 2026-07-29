@@ -1,29 +1,28 @@
 function [factor_Lin, factor_Cub] = ...
-    Show_Results(no_Of_Elements, sol_Size, ...
-    x, u_Exact, u_FEM_Lin, u_FEM_Cub, RelTol)
+    Show_Results(numElements, solutionSize, ...
+    x, uExact, uFEMLin, uFEMCub, relTol)
 
 %SHOW_RESULTS Plot FEM results and compute convergence summaries.
 
 % Plot exact and FEM-Solution of the problem for different element numbers:
-Plot_FEM_Solutions(no_Of_Elements, sol_Size, ...
-    x, u_Exact, u_FEM_Lin, u_FEM_Cub);
+Plot_FEM_Solutions(numElements, solutionSize, x, uExact, uFEMLin, uFEMCub);
 
 % Estimate squared errors and convergence factors:
 [factor_Lin, factor_Cub] = ...
-    Estimate_Error(no_Of_Elements, u_Exact, u_FEM_Lin, u_FEM_Cub, RelTol);
+    Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol);
 
 function [error_Lin, error_Cub] = ...
-    Estimate_Error(no_Of_Elements, u_Exact, u_FEM_Lin, u_FEM_Cub, RelTol)
+    Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol)
 
-size_N = length( no_Of_Elements );
-tot_Error = zeros(2, size_N );
+size_N = length(numElements);
+tot_Error = zeros(2, size_N);
 
 for size_Ind = 1:1:size_N
-    N = no_Of_Elements( size_Ind );
+    numElem = numElements(size_Ind);
     tot_Error(1, size_Ind) = Integrate_Squared_Error( ...
-        u_Exact, u_FEM_Lin{size_Ind}, N, RelTol);
+        uExact, uFEMLin{size_Ind}, numElem, relTol);
     tot_Error(2, size_Ind) = Integrate_Squared_Error( ...
-        u_Exact, u_FEM_Cub{size_Ind}, N, RelTol);
+        uExact, uFEMCub{size_Ind}, numElem, relTol);
 end;
 
 tot_Error = sqrt( tot_Error );
@@ -59,14 +58,14 @@ end;
 str_Error_Estimate = sprintf( '\n %s \n %s %s \n %s %s', Title, ...
     Title_Error, Error_Val, Title_Conv, Conv_Val);
 
-function sq_Error = Integrate_Squared_Error(u_Exact, local_Fields, N, RelTol)
+function sq_Error = Integrate_Squared_Error(uExact, localFields, numElements, relTol)
 
-h = 1 / N;
+h = 1 / numElements;
 sq_Error = 0;
 
-for elem_No = 1:N
-    global_Coord = @(y) (elem_No - 1 + y) .* h;
+for elemNo = 1:numElements
+    global_Coord = @(y) (elemNo - 1 + y) .* h;
     sq_Error_Local = @(y) ...
-        (u_Exact(global_Coord(y)) - local_Fields{elem_No}(y)).^2;
-    sq_Error = sq_Error + quadgk(sq_Error_Local, 0, 1, 'RelTol', RelTol);
+        (uExact(global_Coord(y)) - localFields{elemNo}(y)).^2;
+    sq_Error = sq_Error + quadgk(sq_Error_Local, 0, 1, 'RelTol', relTol);
 end

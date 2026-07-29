@@ -8,12 +8,12 @@ clear;
 close('all');
 
 % Read and validate model configuration.
-[q_Type, q_Coeff, load_Coeff, delta, P, num_Elements] = Read_input;
-Validate_Input(q_Type, q_Coeff, load_Coeff, delta, P, num_Elements);
+[q_Type, q_Coeff, load_Coeff, delta, P, numElements] = Read_input;
+Validate_Input(q_Type, q_Coeff, load_Coeff, delta, P, numElements);
 
 % Compute FEM data with no plotting side effects.
 fem_Data = Compute_FEM_Data( ...
-    num_Elements, q_Type, q_Coeff, load_Coeff, delta, P);
+    numElements, q_Type, q_Coeff, load_Coeff, delta, P);
 
 % Error estimation and plotting.
 [conv_Factor, sq_Error] = ...
