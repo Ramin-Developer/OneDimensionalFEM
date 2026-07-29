@@ -1,0 +1,73 @@
+function fem_Data = Compute_FEM_Data(num_Elements, q_Type, q_Coeff, load_Coeff, delta, P)
+%COMPUTE_FEM_DATA Compute FEM solutions and error metrics without plotting.
+%
+%   fem_Data = COMPUTE_FEM_DATA(num_Elements, q_Type, q_Coeff, ...
+%       load_Coeff, delta, P) returns a struct with mesh parameters,
+%   exact solution, local FEM fields, and L2-style error summaries.
+
+% Define problem data and allocate per-mesh solution containers.
+[mesh_Size, solution_Size, q_Func, load_Func, x, ...
+    u_FEM_Lin, u_FEM_Cub, u_Exact, rel_Tol] = ...
+    Def_Problem(num_Elements, q_Type, load_Coeff, q_Coeff, delta, P);
+
+for idx = 1:numel(num_Elements)
+    [u_FEM_Lin{idx}, u_FEM_Cub{idx}] = Calc_FEM_Sol( ...
+        num_Elements(idx), mesh_Size(idx), delta, P, ...
+        q_Func, load_Func, rel_Tol);
+end
+
+[sq_Error_Lin, sq_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+    Compute_Error_Summary(num_Elements, u_Exact, u_FEM_Lin, u_FEM_Cub, rel_Tol);
+
+fem_Data = struct( ...
+    'num_Elements', num_Elements, ...
+    'mesh_Size', mesh_Size, ...
+    'solution_Size', solution_Size, ...
+    'x', x, ...
+    'u_Exact', u_Exact, ...
+    'u_FEM_Lin', {u_FEM_Lin}, ...
+    'u_FEM_Cub', {u_FEM_Cub}, ...
+    'rel_Tol', rel_Tol, ...
+    'sq_Error_Lin', sq_Error_Lin, ...
+    'sq_Error_Cub', sq_Error_Cub, ...
+    'conv_Factor_Lin', conv_Factor_Lin, ...
+    'conv_Factor_Cub', conv_Factor_Cub);
+
+function [sq_Error_Lin, sq_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+    Compute_Error_Summary(no_Of_Elements, u_Exact, u_FEM_Lin, u_FEM_Cub, relTol)
+
+size_N = length(no_Of_Elements);
+tot_Error = zeros(2, size_N);
+
+for size_Ind = 1:1:size_N
+    N = no_Of_Elements(size_Ind);
+    tot_Error(1, size_Ind) = Integrate_Squared_Error( ...
+        u_Exact, u_FEM_Lin{size_Ind}, N, relTol);
+    tot_Error(2, size_Ind) = Integrate_Squared_Error( ...
+        u_Exact, u_FEM_Cub{size_Ind}, N, relTol);
+end
+
+tot_Error = sqrt(tot_Error);
+sq_Error_Lin = tot_Error(1, :);
+sq_Error_Cub = tot_Error(2, :);
+
+if size_N > 1
+    conv_Factor = tot_Error(:, 1:end - 1) ./ tot_Error(:, 2:end);
+    conv_Factor_Lin = conv_Factor(1, :);
+    conv_Factor_Cub = conv_Factor(2, :);
+else
+    conv_Factor_Lin = [];
+    conv_Factor_Cub = [];
+end
+
+function sq_Error = Integrate_Squared_Error(u_Exact, local_Fields, N, relTol)
+
+h = 1 / N;
+sq_Error = 0;
+
+for elem_No = 1:N
+    global_Coord = @(y) (elem_No - 1 + y) .* h;
+    sq_Error_Local = @(y) ...
+        (u_Exact(global_Coord(y)) - local_Fields{elem_No}(y)).^2;
+    sq_Error = sq_Error + quadgk(sq_Error_Local, 0, 1, 'RelTol', relTol);
+end

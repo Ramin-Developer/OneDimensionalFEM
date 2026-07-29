@@ -10,3 +10,5 @@ function testCoreFunctionsExist(~)
 assert(exist('Def_Problem', 'file') == 2, 'Def_Problem.m not found on MATLAB path.');
 assert(exist('Solve_Eq_Sys', 'file') == 2, 'Solve_Eq_Sys.m not found on MATLAB path.');
 assert(exist('Show_Results', 'file') == 2, 'Show_Results.m not found on MATLAB path.');
+assert(exist('Compute_FEM_Data', 'file') == 2, 'Compute_FEM_Data.m not found on MATLAB path.');
+assert(exist('Plot_FEM_Solutions', 'file') == 2, 'Plot_FEM_Solutions.m not found on MATLAB path.');
