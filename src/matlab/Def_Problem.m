@@ -1,0 +1,169 @@
+function [h, sol_Size, q_Function, load_Func, ...
+    x, u_FEM_Lin, u_FEM_Cub, u_Exact, RelTol] = ...
+    Def_Problem( N, q_Type, load_Coeff, q_Coeff, delta, P )
+
+%DEF_PROBLEM Define mesh parameters and exact model data.
+
+% Uniform element size for each mesh setup.
+h = 1 ./ N;
+
+% Number of points used for result visualization.
+sol_Size = 2^10;
+
+% Evaluation points in global coordinate.
+x = linspace(0, 1, sol_Size + 1 )';
+
+% Allocate solution containers.
+u_FEM_Lin = cell(1, numel(N));
+u_FEM_Cub = cell(1, numel(N));
+
+% Relative tolerance for numerical integration.
+RelTol = 1e-12;
+
+load_Coeff = Normalize_Load_Coefficients(load_Coeff);
+
+switch lower(strtrim(char(q_Type)))
+    case 'q_const'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Const(load_Coeff, q_Coeff, delta, P);
+    case 'q_frac_with_denom_1st_degree'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Frac_Denom_1st_Degree(load_Coeff, q_Coeff, delta, P);
+    case 'q_frac_with_denom_2nd_degree'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Frac_Denom_2nd_Degree(load_Coeff, q_Coeff, delta, P);
+    case 'exponential'
+        [q_Function, load_Func, u_Exact] = ...
+            Def_q_Exp(load_Coeff, q_Coeff, delta, P);
+    otherwise
+        error('Def_Problem:UnsupportedQType', ...
+            'Unsupported q_Type: %s', char(q_Type));
+end
+
+function coeff = Normalize_Load_Coefficients(load_Coeff)
+
+coeff = load_Coeff(:).';
+if numel(coeff) < 3
+    coeff = [coeff zeros(1, 3 - numel(coeff))];
+end
+coeff = coeff(1:3);
+
+function [q_Function, load_Func, u_Exact] = ...
+    Def_q_Const( load_Coeff, q_Coeff, delta, P )
+
+d = zeros(1, 5);
+q_Function = @(x) q_Coeff(1)*x.^0;
+load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x + load_Coeff(3) * x.^2;
+
+d(1) = delta;
+
+d(2) = (P + load_Coeff(1) + load_Coeff(2) / 2 ...
+    + load_Coeff(3) / 3) / q_Coeff(1);
+
+d(3) = -load_Coeff(1) / ( 2 * q_Coeff(1) );
+
+d(4) = -load_Coeff(2) / ( 6 * q_Coeff(1) );
+
+d(5) = -load_Coeff(3) / ( 12 * q_Coeff(1) );
+
+u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 + d(5)*x.^4;
+
+function [q_Function, load_Func, u_Exact] = ...
+    Def_q_Frac_Denom_1st_Degree( load_Coeff, q_Coeff, delta, P )
+
+d = zeros(1, 6);
+q_Function = @(x) q_Coeff(1) ./ ( x + q_Coeff(2) );
+load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x + load_Coeff(3) * x.^2;
+
+d(1) = delta;
+
+d(2) = q_Coeff(2) * P / q_Coeff(1) ...
+       + q_Coeff(2) * load_Coeff(1) / q_Coeff(1) ...
+       + q_Coeff(2) * load_Coeff(2) / ( 2 * q_Coeff(1) ) ...
+       + q_Coeff(2) * load_Coeff(3) / ( 3 * q_Coeff(1) );
+
+d(3) = P / ( 2 * q_Coeff(1) ) ...
+    + ( 1 - q_Coeff(2) ) * load_Coeff(1) / ( 2 * q_Coeff(1) ) ...
+    + load_Coeff(2) / ( 4 * q_Coeff(1) ) ...
+    + load_Coeff(3) / ( 6 * q_Coeff(1) );
+
+d(4) = - load_Coeff(1) / ( 3 * q_Coeff(1) ) ...
+    - q_Coeff(2) * load_Coeff(2) / ( 6 * q_Coeff(1) );
+
+d(5) = - load_Coeff(2) / ( 8 * q_Coeff(1) ) ...
+    - q_Coeff(2) * load_Coeff(3) / ( 12 * q_Coeff(1) );
+
+d(6) = -load_Coeff(3) / ( 15 * q_Coeff(1) );
+
+u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 + ...
+    d(5)*x.^4 + d(6)*x.^5;
+
+function [q_Function, load_Func, u_Exact] = ...
+    Def_q_Frac_Denom_2nd_Degree( load_Coeff, q_Coeff, delta, P )
+
+d = zeros(1, 7);
+q_Function = @(x) q_Coeff(1) ./ ( x.^2 + q_Coeff(2) );
+load_Func = @(x) load_Coeff(1) + load_Coeff(2) * x ...
+    + load_Coeff(3) * x.^2;
+
+d(1) = delta;
+
+d(2) = q_Coeff(2) * P / q_Coeff(1) + ...
+    q_Coeff(2) * load_Coeff(1) / q_Coeff(1) + ...
+    q_Coeff(2) * load_Coeff(2) / ( 2 * q_Coeff(1) ) + ...
+    q_Coeff(2) * load_Coeff(3) / ( 3 * q_Coeff(1) );
+
+d(3) = -q_Coeff(2) * load_Coeff(1) / ( 2 * q_Coeff(1) );
+
+d(4) = P / ( 3 * q_Coeff(1) ) ...
+    + load_Coeff(1) / ( 3 * q_Coeff(1) ) ...
+    + ( 1 - q_Coeff(2) ) * load_Coeff(2) / ( 6 * q_Coeff(1) ) ...
+    + load_Coeff(3) / ( 9 * q_Coeff(1) );
+
+d(5) = -load_Coeff(1) / ( 4 * q_Coeff(1) ) ...
+    - q_Coeff(2) * load_Coeff(3) / ( 12 * q_Coeff(1) );
+
+d(6) = - load_Coeff(2) / ( 10 * q_Coeff(1) );
+
+d(7) = - load_Coeff(3) / ( 18 * q_Coeff(1) );
+
+u_Exact = @(x) d(1) + d(2)*x + d(3)*x.^2 + d(4)*x.^3 ...
+    + d(5)*x.^4 + d(6)*x.^5 + d(7)*x.^6;
+
+function [q_Function, load_Func, u_Exact] = ...
+        Def_q_Exp( load_Coeff, q_Coeff, delta, P )
+
+% An exponential q(x) and a general up to 2nd degree load polynomial:
+d = zeros(1, 5);
+alpha = q_Coeff(1);
+q_Function = @(x) exp( -alpha * x );
+load_Func = @(x) load_Coeff(1) + load_Coeff(2)*x + load_Coeff(3).*x.^2;
+
+d(1) = delta ...
+    - load_Coeff(1) / alpha ...
+    - load_Coeff(2) / (2 * alpha) ...
+    - load_Coeff(3) / (3 * alpha) ...
+    - load_Coeff(1) / alpha^2 ...
+    + load_Coeff(2) / alpha^3 ...
+    - 2 * load_Coeff(3) / alpha^4 ...
+    - P / alpha;
+
+d(2) = load_Coeff(1) / alpha ...
+    + load_Coeff(2) / ( 2 * alpha )...
+    + load_Coeff(3) / (3 * alpha) ...
+    + load_Coeff(1) / alpha^2 ...
+    - load_Coeff(2) / alpha^3 ...
+    + 2 * load_Coeff(3) / alpha^4 + P/alpha;
+
+d(3) = - load_Coeff(1) / alpha ...
+    + load_Coeff(2) / alpha^2 ...
+    - 2 * load_Coeff(3) / alpha^3;
+
+d(4) = - load_Coeff(2) / ( 2 * alpha ) ...
+    + load_Coeff(3) / alpha^2;
+
+d(5) = - load_Coeff(3) / ( 3 * alpha );
+
+u_Exact = @(x) d( 1 ) ...
+    + ( d(2) + d(3)*x + d(4)*x.^2 + d(5)*x.^3 ) .* exp(alpha * x);
+

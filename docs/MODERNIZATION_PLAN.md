@@ -1,0 +1,80 @@
+# Modernization Plan (Living Document)
+
+This plan is the single source of truth for incremental updates across sessions.
+
+## Scope
+
+- Preserve numerical behavior of current 1D FEM implementation.
+- Improve readability, modularity, and testability.
+- Add reproducible checks in CI.
+
+## Current Baseline
+
+- Active feature branch: feat/refactor-core
+- Existing CI: MATLAB smoke check in .github/workflows/matlab-ci.yml
+- Canonical code location: src/matlab
+- Legacy compatibility wrappers: finite-element-method/matlab-code
+
+## Working Rules
+
+- Keep changes small and reversible.
+- One concern per commit.
+- Add tests before or together with refactors when feasible.
+- Keep a short session note in this file after each work block.
+
+## Phase Plan
+
+## Phase 0: Baseline Safety (Done/Ready)
+
+- [x] Move repository to new GitHub remote.
+- [x] Add repository README and .gitignore.
+- [x] Add initial MATLAB CI smoke check.
+- [ ] Add deterministic sample inputs and expected outputs snapshot.
+
+## Phase 1: Test Harness
+
+- [ ] Add tests folder: tests
+- [ ] Add matlab.unittest runner script.
+- [ ] Add at least 3 baseline tests:
+  - [ ] Shape function sanity test
+  - [ ] Element assembly consistency test
+  - [ ] End-to-end solution regression test
+- [ ] Update CI to run the test suite.
+
+## Phase 2: Structural Refactor
+
+- [ ] Introduce src folder and move core computational functions.
+- [ ] Keep thin compatibility wrappers for old entry points.
+- [ ] Separate I/O and plotting from numerical core.
+- [ ] Standardize function signatures and naming.
+
+## Phase 3: Reliability and UX
+
+- [ ] Add input validation and clear error messages.
+- [ ] Add reproducible example scripts.
+- [ ] Add result export conventions.
+- [ ] Add minimal performance benchmark script.
+
+## Branching Strategy
+
+- main: stable branch
+- feat/refactor-core: active integration branch for modernization
+- short-lived branches for focused tasks, merged into feat/refactor-core
+
+## Session Update Template
+
+Append a short note at the top of the log below after each session:
+
+- Date:
+- Branch:
+- What changed:
+- Tests run:
+- Next action:
+
+## Session Log
+
+- Date: 2026-07-27
+- Branch: feat/refactor-core
+- What changed: Repository moved to new GitHub account, branch renamed to main, feature branch created, Main_Program change preserved and pushed, initial MATLAB CI workflow added.
+- Tests run: CI smoke workflow file added (not yet executed locally in MATLAB).
+- Next action: create matlab.unittest baseline tests and wire CI to run them.
