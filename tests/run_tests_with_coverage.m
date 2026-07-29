@@ -11,28 +11,16 @@ assert(exist(fullfile(repoRoot, 'src', 'matlab', 'Main_Program.m'), 'file') == 2
 
 import matlab.unittest.TestRunner
 import matlab.unittest.TestSuite
-import matlab.unittest.plugins.CodeCoveragePlugin
 
 suite = TestSuite.fromFolder(scriptDir, 'IncludingSubfolders', true);
 runner = TestRunner.withTextOutput;
 
-coverageDir = fullfile(repoRoot, 'artifacts', 'coverage');
-if exist(coverageDir, 'dir') ~= 7
-    mkdir(coverageDir);
-end
-
-coverageXmlPath = fullfile(coverageDir, 'cobertura.xml');
+coverageXmlPath = fullfile(repoRoot, 'artifacts', 'coverage', 'cobertura.xml');
 coverageAttached = false;
 
-try
-    coveragePlugin = CodeCoveragePlugin.forFolder( ...
-        fullfile(repoRoot, 'src', 'matlab'), ...
-        'IncludingSubfolders', true, ...
-        'Producing', matlab.unittest.plugins.codecoverage.CoberturaFormat(coverageXmlPath));
-    runner.addPlugin(coveragePlugin);
+[coveragePlugin, coverageAttached, coverageXmlPath] = coverage_support(repoRoot, runner);
+if ~isempty(coveragePlugin)
     coverageAttached = true;
-catch ME
-    warning('Coverage plugin setup failed: %s', ME.message);
 end
 
 results = runner.run(suite);
