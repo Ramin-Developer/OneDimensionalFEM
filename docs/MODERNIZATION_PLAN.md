@@ -10,8 +10,8 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Current Baseline
 
-- Active feature branch: feat/matlab-phase2-tests-refactor
-- Existing CI: MATLAB smoke check in .github/workflows/matlab-ci.yml
+- Active branch: main (use short-lived feat/* branches per task)
+- Existing CI: MATLAB tests in .github/workflows/matlab-ci.yml
 - Canonical code location: src/matlab
 - LaTeX documentation location: docs/latex
 
@@ -24,53 +24,86 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Phase Plan
 
-## Phase 0: Baseline Safety (Done/Ready)
+## Completed Milestones
 
-- [x] Move repository to new GitHub remote.
-- [x] Add repository README and .gitignore.
-- [x] Add initial MATLAB CI smoke check.
-- [ ] Add deterministic sample inputs and expected outputs snapshot.
+- [x] Repository migrated and cleaned to a single active repo.
+- [x] Canonical MATLAB code moved to src/matlab.
+- [x] Legacy MATLAB wrapper path removed to avoid ambiguity.
+- [x] Documentation tree normalized to docs/latex and docs/reference.
+- [x] Baseline validation added in src/matlab/Validate_Input.m.
+- [x] Initial test suite added under tests/.
+- [x] CI executes MATLAB tests.
+- [x] Baseline benchmark scaffold added at scripts/benchmark_solver.m.
 
-## Phase 1: Test Harness
+## Workstream Plan (Competency-Driven)
 
-- [ ] Add tests folder: tests
-- [ ] Add matlab.unittest runner script.
-- [ ] Add at least 3 baseline tests:
-  - [ ] Shape function sanity test
-  - [ ] Element assembly consistency test
-  - [ ] End-to-end solution regression test
-- [ ] Update CI to run the test suite.
+### Workstream A: Code Analysis and Refactor
 
-Status update (2026-07-29):
+- [ ] A1: Extract a pure compute API that returns solution/error data without plotting side effects.
+- [ ] A2: Isolate plotting from Show_Results into dedicated plotting utility.
+- [ ] A3: Standardize function signatures and naming across src/matlab.
+- [ ] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
 
-- Added tests/run_all_tests.m
-- Added tests/test_shape_functions.m
-- Added tests/test_element_assembly.m
-- Added tests/test_end_to_end_regression.m
-- CI workflow executes tests from tests/
+Definition of Done:
 
-## Phase 2: Structural Refactor
+- Numerical outputs unchanged for baseline scenarios.
+- Main_Program remains a thin orchestration script.
 
-- [x] Introduce src folder and move core computational functions.
-- [x] Remove compatibility wrappers to avoid source-of-truth ambiguity.
-- [ ] Separate I/O and plotting from numerical core.
-- [ ] Standardize function signatures and naming.
+### Workstream B: Unit and Regression Testing
 
-## Phase 3: Reliability and UX
+- [x] B1: Shape-function sanity checks.
+- [x] B2: Element-assembly consistency checks.
+- [x] B3: End-to-end refinement regression checks.
+- [ ] B4: Add deterministic golden-data regression snapshots (values and tolerances).
+- [ ] B5: Add negative tests for invalid inputs to Validate_Input.
 
-- [ ] Add input validation and clear error messages.
-- [ ] Add reproducible example scripts.
-- [ ] Add result export conventions.
-- [ ] Add minimal performance benchmark script.
+Definition of Done:
 
-Status update (2026-07-29):
+- run_all_tests passes locally and in CI.
+- Failures provide actionable messages.
 
-- Added scripts/benchmark_solver.m for baseline runtime tracking.
+### Workstream C: Numerical Validation
+
+- [ ] C1: Add reference-case JSON/ MAT snapshots for selected N values.
+- [ ] C2: Add convergence-rate checks with explicit thresholds.
+- [ ] C3: Add boundary-condition residual checks as formal assertions.
+
+Definition of Done:
+
+- Regression tests detect unintended numerical drift.
+
+### Workstream D: Performance and Vectorization
+
+- [x] D1: Baseline benchmark script available.
+- [ ] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
+- [ ] D3: Profile hot paths and document optimization opportunities.
+- [ ] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
+
+Definition of Done:
+
+- Benchmark output is reproducible and version-comparable.
+
+### Workstream E: Documentation and Release Hygiene
+
+- [ ] E1: Update README with canonical run/test/benchmark commands only.
+- [ ] E2: Add CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
+- [ ] E3: Keep modernization plan status current per merged PR.
+
+Definition of Done:
+
+- New contributors can run, test, and benchmark without ambiguity.
 
 ## Branching Strategy
 
 - main: stable branch
 - short-lived branches for focused tasks, merged into main via PR
+
+Recommended branch naming:
+
+- feat/refactor-*
+- test/*
+- perf/*
+- docs/*
 
 ## Session Update Template
 
@@ -89,3 +122,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Repository moved to new GitHub account, branch renamed to main, feature branch created, Main_Program change preserved and pushed, initial MATLAB CI workflow added.
 - Tests run: CI smoke workflow file added (not yet executed locally in MATLAB).
 - Next action: create matlab.unittest baseline tests and wire CI to run them.
+
+- Date: 2026-07-29
+- Branch: main (after PR merges)
+- What changed: Canonical src/matlab layout finalized, docs moved to docs/latex, wrapper path removed, regression tests and benchmark scaffold added, CI test execution confirmed.
+- Tests run: MATLAB test suite executed locally and in CI workflow.
+- Next action: implement Workstream A and B4/B5 (pure compute API and deterministic golden-data checks).
