@@ -117,6 +117,12 @@ Append a short note at the top of the log below after each session:
 
 ## Session Log
 
+- Date: 2026-07-29
+- Branch: chore/next-cycle-20260729
+- What changed: Reset local branches to a clean follow-up branch after syncing the merged MATLAB coverage fix back into main.
+- Tests run: Not run; branch-management and documentation-only update.
+- Next action: wait for the next requested maintenance item.
+
 - Date: 2026-07-27
 - Branch: feat/refactor-core
 - What changed: Repository moved to new GitHub account, branch renamed to main, feature branch created, Main_Program change preserved and pushed, initial MATLAB CI workflow added.
