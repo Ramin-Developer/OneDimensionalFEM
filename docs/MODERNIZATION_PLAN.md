@@ -75,7 +75,7 @@ Definition of Done:
 ### Workstream D: Performance and Vectorization
 
 - [x] D1: Baseline benchmark script available.
-- [ ] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
+- [x] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
 - [ ] D3: Profile hot paths and document optimization opportunities.
 - [ ] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
 
@@ -122,6 +122,12 @@ Append a short note at the top of the log below after each session:
 - What changed: Repository moved to new GitHub account, branch renamed to main, feature branch created, Main_Program change preserved and pushed, initial MATLAB CI workflow added.
 - Tests run: CI smoke workflow file added (not yet executed locally in MATLAB).
 - Next action: create matlab.unittest baseline tests and wire CI to run them.
+
+- Date: 2026-07-29
+- Branch: perf/benchmark-d2-followup-20260729
+- What changed: Updated benchmark_solver to support configurable repeat counts and report min/median/max elapsed seconds per mesh size.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream D3 profiling of hot paths and summarize optimization opportunities.
 
 - Date: 2026-07-29
 - Branch: main (after PR merges)
