@@ -23,9 +23,4 @@ jobs:
         uses: matlab-actions/run-command@v3
         with:
           command: |
-            addpath(genpath('src/matlab'));
-            addpath('tests');
-            assert(exist('Main_Program','file') == 2, 'Main_Program.m not found');
-            results = runtests('tests');
-            assert(all([results.Passed]), 'One or more tests failed.');
-            disp('MATLAB tests passed.');
+            run('tests/run_tests_with_coverage.m');
