@@ -5,6 +5,8 @@ tests = functiontests(localfunctions);
 
 function testReferenceCasesByN(testCase)
 addpath(genpath('src/matlab'));
+addpath('tests/golden');
+ensure_golden_snapshots();
 
 selectedNumElements = [4 8 16];
 

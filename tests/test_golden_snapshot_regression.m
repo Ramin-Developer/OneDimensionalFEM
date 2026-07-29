@@ -5,6 +5,8 @@ tests = functiontests(localfunctions);
 
 function testBaselineSnapshotMatches(~)
 addpath(genpath('src/matlab'));
+addpath('tests/golden');
+ensure_golden_snapshots();
 
 data = load('tests/golden/baseline_qconst_snapshot.mat');
 snapshot = data.snapshot;
