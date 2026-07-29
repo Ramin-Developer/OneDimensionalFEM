@@ -64,7 +64,7 @@ Definition of Done:
 
 ### Workstream C: Numerical Validation
 
-- [ ] C1: Add reference-case JSON/ MAT snapshots for selected N values.
+- [x] C1: Add reference-case JSON/ MAT snapshots for selected N values.
 - [ ] C2: Add convergence-rate checks with explicit thresholds.
 - [ ] C3: Add boundary-condition residual checks as formal assertions.
 
@@ -164,3 +164,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added Validate_Input negative tests for invalid q_Type, unsupported q_Type, invalid coefficients, invalid boundary values, and invalid element vectors.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: begin Workstream C1 reference-case snapshot expansion for selected N values.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added per-mesh reference-case MAT snapshots for selected N values and test coverage that validates exact/FEM field and error values against those snapshots.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream C2 convergence-rate checks with explicit thresholds.
