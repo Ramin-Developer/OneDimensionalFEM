@@ -85,9 +85,9 @@ Definition of Done:
 
 ### Workstream E: Documentation and Release Hygiene
 
-- [ ] E1: Update README with canonical run/test/benchmark commands only.
-- [ ] E2: Add CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
-- [ ] E3: Keep modernization plan status current per merged PR.
+- [x] E1: Update README with canonical run/test/benchmark commands only.
+- [x] E2: Add CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
+- [x] E3: Keep modernization plan status current per merged PR.
 
 Definition of Done:
 
@@ -200,3 +200,21 @@ Append a short note at the top of the log below after each session:
 - What changed: Added `scripts/ci_performance_guardrail.m` and updated `.github/workflows/matlab-ci.yml` with nightly/manual informational performance guardrail job and event gating for test vs. nightly jobs.
 - Tests run: Local guardrail run via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: begin Workstream E1 README command refresh.
+
+- Date: 2026-07-29
+- Branch: docs/e1-readme-commands-20260729
+- What changed: Simplified `README.md` to canonical run/test/benchmark commands only and removed the older narrative quick-start/test steps.
+- Tests run: Not run; documentation-only change.
+- Next action: implement Workstream E2 CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
+
+- Date: 2026-07-29
+- Branch: docs/e1-readme-commands-20260729
+- What changed: Added `CONTRIBUTING.md` with branch/PR workflow and MATLAB R2017a guidance, and added a README test coverage window section for the CI summary thresholds.
+- Tests run: Not run; documentation-only change.
+- Next action: continue Workstream E3 to keep the modernization plan status current after merged PRs.
+
+- Date: 2026-07-29
+- Branch: docs/e1-readme-commands-20260729
+- What changed: Refreshed the living plan against the latest merged PRs (#7 through #10) and marked Workstream E3 complete.
+- Tests run: Not run; documentation-only change.
+- Next action: move to the next requested maintenance item if any.
