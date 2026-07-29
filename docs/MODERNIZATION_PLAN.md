@@ -41,6 +41,14 @@ This plan is the single source of truth for incremental updates across sessions.
   - [ ] End-to-end solution regression test
 - [ ] Update CI to run the test suite.
 
+Status update (2026-07-29):
+
+- Added tests/run_all_tests.m
+- Added tests/test_shape_functions.m
+- Added tests/test_element_assembly.m
+- Added tests/test_end_to_end_regression.m
+- CI workflow executes tests from tests/
+
 ## Phase 2: Structural Refactor
 
 - [ ] Introduce src folder and move core computational functions.
@@ -54,6 +62,10 @@ This plan is the single source of truth for incremental updates across sessions.
 - [ ] Add reproducible example scripts.
 - [ ] Add result export conventions.
 - [ ] Add minimal performance benchmark script.
+
+Status update (2026-07-29):
+
+- Added scripts/benchmark_solver.m for baseline runtime tracking.
 
 ## Branching Strategy
 
