@@ -65,7 +65,7 @@ Definition of Done:
 ### Workstream C: Numerical Validation
 
 - [x] C1: Add reference-case JSON/ MAT snapshots for selected N values.
-- [ ] C2: Add convergence-rate checks with explicit thresholds.
+- [x] C2: Add convergence-rate checks with explicit thresholds.
 - [ ] C3: Add boundary-condition residual checks as formal assertions.
 
 Definition of Done:
@@ -170,3 +170,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added per-mesh reference-case MAT snapshots for selected N values and test coverage that validates exact/FEM field and error values against those snapshots.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: implement Workstream C2 convergence-rate checks with explicit thresholds.
+
+- Date: 2026-07-29
+- Branch: test/convergence-thresholds-20260729
+- What changed: Added explicit convergence-rate threshold assertions for linear and cubic FEM factors using baseline-derived margins.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream C3 boundary-condition residual assertions.
