@@ -3,6 +3,9 @@ function results = run_all_tests()
 %
 %   Intended for MATLAB R2017a-compatible local and CI usage.
 
+addpath(genpath('src/matlab'));
+addpath('tests');
+
 results = runtests('tests');
 
 if ~all([results.Passed])

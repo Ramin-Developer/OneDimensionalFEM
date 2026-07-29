@@ -10,10 +10,10 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Current Baseline
 
-- Active feature branch: feat/refactor-core
+- Active feature branch: feat/matlab-phase2-tests-refactor
 - Existing CI: MATLAB smoke check in .github/workflows/matlab-ci.yml
 - Canonical code location: src/matlab
-- Legacy compatibility wrappers: finite-element-method/matlab-code
+- LaTeX documentation location: docs/latex
 
 ## Working Rules
 
@@ -41,10 +41,18 @@ This plan is the single source of truth for incremental updates across sessions.
   - [ ] End-to-end solution regression test
 - [ ] Update CI to run the test suite.
 
+Status update (2026-07-29):
+
+- Added tests/run_all_tests.m
+- Added tests/test_shape_functions.m
+- Added tests/test_element_assembly.m
+- Added tests/test_end_to_end_regression.m
+- CI workflow executes tests from tests/
+
 ## Phase 2: Structural Refactor
 
-- [ ] Introduce src folder and move core computational functions.
-- [ ] Keep thin compatibility wrappers for old entry points.
+- [x] Introduce src folder and move core computational functions.
+- [x] Remove compatibility wrappers to avoid source-of-truth ambiguity.
 - [ ] Separate I/O and plotting from numerical core.
 - [ ] Standardize function signatures and naming.
 
@@ -55,11 +63,14 @@ This plan is the single source of truth for incremental updates across sessions.
 - [ ] Add result export conventions.
 - [ ] Add minimal performance benchmark script.
 
+Status update (2026-07-29):
+
+- Added scripts/benchmark_solver.m for baseline runtime tracking.
+
 ## Branching Strategy
 
 - main: stable branch
-- feat/refactor-core: active integration branch for modernization
-- short-lived branches for focused tasks, merged into feat/refactor-core
+- short-lived branches for focused tasks, merged into main via PR
 
 ## Session Update Template
 
