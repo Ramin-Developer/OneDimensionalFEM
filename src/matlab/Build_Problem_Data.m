@@ -30,8 +30,7 @@ relTol = 1e-12;
 
 loadCoeff = Normalize_Load_Coefficients(loadCoeff);
 
-normalizedQType = lower(strtrim(char(qType)));
-normalizedQType = strrep(normalizedQType, '-', '_');
+normalizedQType = Normalize_Q_Type(qType);
 
 switch normalizedQType
     case {'q_const', 'constant', 'const'}
@@ -54,6 +53,11 @@ if numel(coeff) < 3
     coeff = [coeff zeros(1, 3 - numel(coeff))];
 end
 coeff = coeff(1:3);
+
+function normalizedQType = Normalize_Q_Type(qType)
+
+normalizedQType = lower(strtrim(char(qType)));
+normalizedQType = strrep(normalizedQType, '-', '_');
 
 function [qFunction, loadFunc, uExact] = Def_q_Const(loadCoeff, qCoeff, delta, P)
 
