@@ -54,7 +54,7 @@ Definition of Done:
 - [x] B1: Shape-function sanity checks.
 - [x] B2: Element-assembly consistency checks.
 - [x] B3: End-to-end refinement regression checks.
-- [ ] B4: Add deterministic golden-data regression snapshots (values and tolerances).
+- [x] B4: Add deterministic golden-data regression snapshots (values and tolerances).
 - [ ] B5: Add negative tests for invalid inputs to Validate_Input.
 
 Definition of Done:
@@ -152,3 +152,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added lightweight inline contracts (assert-based input/output assumptions) across core compute, assembly, and result functions.
 - Tests run: MATLAB suite executed via batch runner (exit code 0).
 - Next action: start Workstream B4 deterministic golden-data regression snapshots.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, squared errors, and convergence factors.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream B5 negative-input tests for Validate_Input.
