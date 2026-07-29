@@ -30,14 +30,17 @@ relTol = 1e-12;
 
 loadCoeff = Normalize_Load_Coefficients(loadCoeff);
 
-switch lower(strtrim(char(qType)))
-    case 'q_const'
+normalizedQType = lower(strtrim(char(qType)));
+normalizedQType = strrep(normalizedQType, '-', '_');
+
+switch normalizedQType
+    case {'q_const', 'constant', 'const'}
         [qFunc, loadFunc, uExact] = Def_q_Const(loadCoeff, qCoeff, delta, P);
-    case 'q_frac_with_denom_1st_degree'
+    case {'q_frac_with_denom_1st_degree', 'frac_with_denom_1st_degree', 'frac1'}
         [qFunc, loadFunc, uExact] = Def_q_Frac_Denom_1st_Degree(loadCoeff, qCoeff, delta, P);
-    case 'q_frac_with_denom_2nd_degree'
+    case {'q_frac_with_denom_2nd_degree', 'frac_with_denom_2nd_degree', 'frac2'}
         [qFunc, loadFunc, uExact] = Def_q_Frac_Denom_2nd_Degree(loadCoeff, qCoeff, delta, P);
-    case 'exponential'
+    case {'exponential', 'exp', 'q_exp'}
         [qFunc, loadFunc, uExact] = Def_q_Exp(loadCoeff, qCoeff, delta, P);
     otherwise
         error('Build_Problem_Data:UnsupportedQType', ...
