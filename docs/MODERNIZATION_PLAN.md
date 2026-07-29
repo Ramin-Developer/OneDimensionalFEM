@@ -42,7 +42,7 @@ This plan is the single source of truth for incremental updates across sessions.
 - [x] A1: Extract a pure compute API that returns solution/error data without plotting side effects.
 - [x] A2: Isolate plotting from Show_Results into dedicated plotting utility.
 - [x] A3: Standardize function signatures and naming across src/matlab.
-- [ ] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
+- [x] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
 
 Definition of Done:
 
@@ -146,3 +146,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Standardized naming/signatures across core src/matlab pipeline (Def_Problem, Calc_FEM_Sol, Solve_Eq_Sys, Show_Results, Plot_FEM_Solutions, Compute_FEM_Data, Main_Program, Read_input) without behavior changes.
 - Tests run: MATLAB suite executed via batch runner (exit code 0).
 - Next action: implement Workstream A4 by adding lightweight function-level contracts.
+
+- Date: 2026-07-29
+- Branch: chore/modernization-followup-20260729
+- What changed: Added lightweight inline contracts (assert-based input/output assumptions) across core compute, assembly, and result functions.
+- Tests run: MATLAB suite executed via batch runner (exit code 0).
+- Next action: start Workstream B4 deterministic golden-data regression snapshots.
