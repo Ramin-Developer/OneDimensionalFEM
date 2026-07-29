@@ -12,7 +12,8 @@ This plan is the single source of truth for incremental updates across sessions.
 
 - Active feature branch: feat/refactor-core
 - Existing CI: MATLAB smoke check in .github/workflows/matlab-ci.yml
-- Legacy code location: finite-element-method/matlab-code
+- Canonical code location: src/matlab
+- Legacy compatibility wrappers: finite-element-method/matlab-code
 
 ## Working Rules
 
