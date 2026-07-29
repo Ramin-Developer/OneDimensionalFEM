@@ -1,0 +1,15 @@
+PROFILE_SOLVER_HOTPATHS
+numElementsList: 32 64 
+repeatCount: 2
+totalProfiledTime: 4.15585794432
+TOP_FUNCTIONS
+1|profile_solver_hotpaths|0.639945699399|1|0.639945699399|d:\repos\Code\OneDimensionalFEM\scripts\profile_solver_hotpaths.m>profile_solver_hotpaths
+2|Calc_FEM_Sol|0.632620695972|4|0.158155173993|d:\repos\Code\OneDimensionalFEM\src\matlab\Calc_FEM_Sol.m>Calc_FEM_Sol
+3|Solve_Eq_Sys|0.618456989345|4|0.154614247336|d:\repos\Code\OneDimensionalFEM\src\matlab\Solve_Eq_Sys.m>Solve_Eq_Sys
+4|Elem_Cont|0.57556986928|192|0.00299775973584|d:\repos\Code\OneDimensionalFEM\src\matlab\Elem_Cont.m>Elem_Cont
+5|Elem_Cont>Cal_Cont|0.573994368543|384|0.00149477700141|d:\repos\Code\OneDimensionalFEM\src\matlab\Elem_Cont.m>Cal_Cont
+6|quadgk|0.510424538802|3648|0.000139919007347|C:\Program Files\MATLAB\R2017a\toolbox\matlab\funfun\quadgk.m>quadgk
+7|quadgk>vadapt|0.235059809973|3648|6.44352549267e-05|C:\Program Files\MATLAB\R2017a\toolbox\matlab\funfun\quadgk.m>quadgk/vadapt
+8|quadgk>f1|0.104488248885|3648|2.86426120847e-05|C:\Program Files\MATLAB\R2017a\toolbox\matlab\funfun\quadgk.m>quadgk/f1
+9|quadgk>evalFun|0.0939029439325|3648|2.5740938578e-05|C:\Program Files\MATLAB\R2017a\toolbox\matlab\funfun\quadgk.m>quadgk/evalFun
+10|Elem_Cont>@(y)(1/h).*q_Func((elem_No-1+y)*h).*psi_Prime{i}(y).*psi_Prime{j}(y)|0.0358075167525|2496|1.43459602374e-05|d:\repos\Code\OneDimensionalFEM\src\matlab\Elem_Cont.m>@(y)(1/h).*q_Func((elem_No-1+y)*h).*psi_Prime{i}(y).*psi_Prime{j}(y)

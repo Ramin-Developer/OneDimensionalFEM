@@ -76,7 +76,7 @@ Definition of Done:
 
 - [x] D1: Baseline benchmark script available.
 - [x] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
-- [ ] D3: Profile hot paths and document optimization opportunities.
+- [x] D3: Profile hot paths and document optimization opportunities.
 - [ ] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
 
 Definition of Done:
@@ -188,3 +188,9 @@ Append a short note at the top of the log below after each session:
 - What changed: Added formal right-boundary residual assertions for linear and cubic FEM, including linear refinement trend checks and explicit tolerances.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: continue Workstream D2 benchmark repeat-count and summary statistics.
+
+- Date: 2026-07-29
+- Branch: perf/profile-hotpaths-d3-20260729
+- What changed: Added `scripts/profile_solver_hotpaths.m`, generated profiling artifact `docs/performance_hotspots.txt`, and documented measured hotspots plus prioritized optimization opportunities in `docs/PERFORMANCE_PROFILE_D3.md`.
+- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
+- Next action: implement Workstream D4 optional CI/nightly performance guardrails.
