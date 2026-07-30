@@ -104,6 +104,12 @@ verifyError(@() Calc_FEM_Sol(4, NaN, 0, 0.01, @(x) 1, @(x) 1, 1e-12), ...
     'Calc_FEM_Sol:InvalidMeshSize');
 end
 
+function testBuildLocalSolutionRejectsNonFiniteCoefficients(~)
+psi = {@(x) 1, @(x) x};
+verifyError(@() Build_Local_Solution(1, 2, [1 NaN], psi), ...
+    'Build_Local_Solution:InvalidCoefficients');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
