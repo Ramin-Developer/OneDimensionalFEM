@@ -33,6 +33,11 @@ if isempty(normalizedQType)
     error('Validate_Input:InvalidQType', ...
         'q_Type must not be empty.');
 end
+
+if any(isspace(normalizedQType))
+    error('Validate_Input:InvalidQType', ...
+        'q_Type must not contain whitespace-only content.');
+end
 normalizedQType = strrep(normalizedQType, '-', '_');
 normalizedQType = strrep(normalizedQType, ' ', '_');
 
