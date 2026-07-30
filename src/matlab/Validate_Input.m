@@ -15,9 +15,9 @@ supported_Types = { ...
     'exp' ...
 };
 
-if ~ischar(q_Type)
+if ~(ischar(q_Type) || (isstring(q_Type) && isscalar(q_Type)))
     error('Validate_Input:InvalidQType', ...
-    'q_Type must be a character vector.');
+    'q_Type must be a character vector or string scalar.');
 end
 
 normalizedQType = lower(strtrim(char(q_Type)));
