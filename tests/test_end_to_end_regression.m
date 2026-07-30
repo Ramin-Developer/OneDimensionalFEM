@@ -89,6 +89,11 @@ verifyError(@() Build_Problem_Data([4 8], ['q'; 'const'], [1 2 -3], 1, 0, 0.01),
     'Build_Problem_Data:InvalidQType');
 end
 
+function testBuildProblemDataRejectsEmptyQType(~)
+verifyError(@() Build_Problem_Data([4 8], '', [1 2 -3], 1, 0, 0.01), ...
+    'Build_Problem_Data:InvalidQType');
+end
+
 function testComputeFEMDataRejectsNonFiniteBoundaryData(~)
 verifyError(@() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
     'Compute_FEM_Data:InvalidBoundaryData');
