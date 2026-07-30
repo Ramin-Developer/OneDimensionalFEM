@@ -94,6 +94,11 @@ verifyError(@() Compute_FEM_Data([4 8], 'constant', [1 NaN], [1 2 -3], 0, 0.01),
     'Compute_FEM_Data:InvalidQCoeff');
 end
 
+function testDefProblemRejectsNonFiniteBoundaryData(~)
+verifyError(@() Def_Problem([4 8], 'constant', [1 2 -3], 1, NaN, 0.01), ...
+    'Def_Problem:InvalidBoundaryData');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
