@@ -30,8 +30,7 @@ relTol = 1e-12;
 
 loadCoeff = Normalize_Load_Coefficients(loadCoeff);
 
-normalizedQType = lower(strtrim(char(qType)));
-normalizedQType = strrep(normalizedQType, '-', '_');
+normalizedQType = Normalize_Q_Type(qType);
 
 switch normalizedQType
     case {'q_const', 'constant', 'const'}
