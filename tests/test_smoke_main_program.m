@@ -18,3 +18,11 @@ addpath(genpath('src/matlab'));
 verifyError(@() Build_Local_Solution(1, 2, [1 2], { @(x) x, @(x) 1 }), ...
     'Build_Local_Solution:InvalidCoefficients');
 end
+
+function testBuildProblemDataRejectsEmptyCoefficients(~)
+addpath(genpath('src/matlab'));
+verifyError(@() Build_Problem_Data([4 8], 'constant', [], [], 0, 0), ...
+    'Build_Problem_Data:InvalidLoadCoeff');
+verifyError(@() Build_Problem_Data([4 8], 'constant', 1, [], 0, 0), ...
+    'Build_Problem_Data:InvalidQCoeff');
+end
