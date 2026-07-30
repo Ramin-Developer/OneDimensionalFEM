@@ -20,6 +20,11 @@ verifyError(testCase, @() Validate_Input('   ', 1, [1 2 -3], 0, 0.01, [4 8 16]),
     'Validate_Input:InvalidQType');
 end
 
+function testRejectsWhitespaceOnlyStringQType(testCase)
+verifyError(testCase, @() Validate_Input(' 	 ', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidQType');
+end
+
 function testRejectsEmptyStringQType(testCase)
 verifyError(testCase, @() Validate_Input('', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQType');
