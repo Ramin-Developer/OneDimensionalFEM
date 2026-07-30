@@ -57,6 +57,17 @@ verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], [0 1], 0.01, [4
 function testRejectsInvalidP(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, Inf, [4 8 16]), ...
     'Validate_Input:InvalidP');
+end
+
+function testRejectsNonScalarDelta(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], [0 1], 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidDelta');
+end
+
+function testRejectsNonScalarP(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, [0.01 0.02], [4 8 16]), ...
+    'Validate_Input:InvalidP');
+end
 
 function testRejectsInvalidElementsType(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, 'bad'), ...
