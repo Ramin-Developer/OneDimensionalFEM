@@ -73,6 +73,13 @@ assert(all(femData.sq_Error_Cub > 0), ...
 assert(ischar(femData.q_Type) && strcmp(femData.q_Type, 'q_const'), ...
     'Compute_FEM_Data should preserve the normalized q-type identifier.');
 
+function testBuildProblemDataAcceptsSpaceSeparatedAlias(~)
+num_Elements = [4 8];
+[qMeshSize, ~, ~, ~, ~, ~, ~, ~, ~] = Build_Problem_Data( ...
+    num_Elements, 'q const', [1 2 -3], 1, 0, 0.01);
+assert(isequal(size(qMeshSize), size(num_Elements)), ...
+    'Build_Problem_Data should accept space-separated q-type aliases.');
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
