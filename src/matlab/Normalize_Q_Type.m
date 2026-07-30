@@ -3,3 +3,4 @@ function normalizedQType = Normalize_Q_Type(qType)
 
 normalizedQType = lower(strtrim(char(qType)));
 normalizedQType = strrep(normalizedQType, '-', '_');
+normalizedQType = strrep(normalizedQType, ' ', '_');
