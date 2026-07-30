@@ -21,6 +21,10 @@ if ~(ischar(q_Type) || (isstring(q_Type) && isscalar(q_Type)))
 end
 
 normalizedQType = lower(strtrim(char(q_Type)));
+if isempty(normalizedQType)
+    error('Validate_Input:InvalidQType', ...
+        'q_Type must not be empty.');
+end
 normalizedQType = strrep(normalizedQType, '-', '_');
 
 if ~any(strcmpi(normalizedQType, supported_Types))
