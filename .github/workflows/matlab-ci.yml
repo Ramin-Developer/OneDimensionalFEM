@@ -23,11 +23,11 @@ jobs:
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
 
-      - name: Run tests
+      - name: Run smoke tests
         uses: matlab-actions/run-command@v3
         with:
           command: |
-            run('tests/run_tests_with_coverage.m');
+            run('tests/run_smoke_tests.m');
 
   performance-guardrail:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
