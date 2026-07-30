@@ -4,6 +4,13 @@
 # Custom for Visual Studio
 *.cs     diff=csharp
 
+# GitHub language detection
+*.tex linguist-language=TeX
+*.bib linguist-language=TeX
+*.sty linguist-language=TeX
+*.cls linguist-language=TeX
+docs/latex/** linguist-language=TeX
+
 # Standard to msysgit
 *.doc	 diff=astextplain
 *.DOC	 diff=astextplain
