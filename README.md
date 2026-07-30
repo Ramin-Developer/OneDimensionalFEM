@@ -1,13 +1,15 @@
-# One-Dimensional FEM (MATLAB)
+# One-Dimensional FEM
 
-MATLAB implementation of a one-dimensional boundary value problem solved with the finite element method (FEM).
+MATLAB-based implementation of a one-dimensional finite element method (FEM) solver, together with LaTeX documentation for the accompanying mathematical write-up and figures.
 
-## Repository Layout
+## Project Profile
 
-- `src/matlab/`: Canonical MATLAB source files.
-- `docs/latex/`: LaTeX sources and figure assets.
-- `docs/reference/main.pdf`: Reference/problem documentation artifact.
-- `tests/`: MATLAB test harness (R2017a-compatible).
+This repository is a mixed software/documentation project:
+
+- `src/matlab/`: MATLAB solver and supporting numerical routines.
+- `docs/latex/`: LaTeX source, bibliography, and figure assets for the documentation.
+- `docs/reference/`: compiled reference/documentation artifacts.
+- `tests/`: MATLAB test harness and regression coverage.
 
 ## Quick Start
 
