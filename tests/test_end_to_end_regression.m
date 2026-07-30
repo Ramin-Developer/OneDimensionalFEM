@@ -117,6 +117,11 @@ verifyError(@() Elem_Cont(0.25, 1, @(x) 1, @(x) 1, psiLin, psiPrimeLin, psiLin, 
     'Elem_Cont:InvalidRelTol');
 end
 
+function testComputeErrorSummaryRejectsNonFiniteRelTol(~)
+verifyError(@() Compute_Error_Summary([4 8], @(x) x, { @(x) x }, { @(x) x }, NaN), ...
+    'Compute_Error_Summary:InvalidRelTol');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
