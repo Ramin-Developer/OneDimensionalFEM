@@ -32,6 +32,16 @@ function testRejectsUnsupportedQType(testCase)
 verifyError(testCase, @() Validate_Input('q_unknown', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:UnsupportedQType');
 
+function testRejectsMatrixQCoeff(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', [1 2; 3 4], [1 2 -3], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidQCoeff');
+end
+
+function testRejectsMatrixLoadCoeff(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2; 3 4], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidLoadCoeff');
+end
+
 function testRejectsInvalidQCoeff(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', [1 NaN], [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQCoeff');

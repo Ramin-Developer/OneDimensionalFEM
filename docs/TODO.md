@@ -4,7 +4,7 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 
 ## Suggested backlog items
 
-- Review the MATLAB solver for additional input-validation edge cases beyond the current q-type checks.
+- [x] Review the MATLAB solver for additional input-validation edge cases beyond the current q-type checks.
 - Consider consolidating any remaining scattered notes or usage examples into the docs area.
 - Periodically revisit the benchmarking and profiling notes to see whether new hotspots should be documented.
 - Keep the modernization plan and this backlog in sync after major changes.
