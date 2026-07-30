@@ -54,7 +54,7 @@ if ~isscalar(P) || ~isfinite(P)
         'P must be a finite scalar.');
 end
 
-if ~isnumeric(num_Elements) || isempty(num_Elements) || any(~isfinite(num_Elements(:)))
+if ~isnumeric(num_Elements) || isempty(num_Elements) || ~isvector(num_Elements) || any(~isfinite(num_Elements(:)))
     error('Validate_Input:InvalidElements', ...
         'num_Elements must be a finite numeric vector.');
 end

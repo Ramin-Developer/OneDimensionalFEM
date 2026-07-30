@@ -62,8 +62,16 @@ function testRejectsInvalidElementsType(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, 'bad'), ...
     'Validate_Input:InvalidElements');
 
+function testRejectsEmptyElements(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, []), ...
+    'Validate_Input:InvalidElements');
+end
+
 function testRejectsInvalidElementsValues(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 7.5 16]), ...
     'Validate_Input:InvalidElements');
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 -8 16]), ...
     'Validate_Input:InvalidElements');
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 NaN 16]), ...
+    'Validate_Input:InvalidElements');
+end
