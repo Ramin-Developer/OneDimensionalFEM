@@ -54,11 +54,6 @@ if numel(coeff) < 3
 end
 coeff = coeff(1:3);
 
-function normalizedQType = Normalize_Q_Type(qType)
-
-normalizedQType = lower(strtrim(char(qType)));
-normalizedQType = strrep(normalizedQType, '-', '_');
-
 function [qFunction, loadFunc, uExact] = Def_q_Const(loadCoeff, qCoeff, delta, P)
 
 coeffs = zeros(1, 5);
