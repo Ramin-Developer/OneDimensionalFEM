@@ -29,3 +29,7 @@ The current modernization work emphasizes:
 - reduced duplication and simpler structure
 - better documentation and maintainability
 - more readable MATLAB and LaTeX organization
+
+## Project backlog
+
+A lightweight backlog of future follow-up ideas is maintained in [TODO.md](TODO.md).
