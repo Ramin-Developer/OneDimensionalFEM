@@ -80,6 +80,10 @@ num_Elements = [4 8];
 assert(isequal(size(qMeshSize), size(num_Elements)), ...
     'Build_Problem_Data should accept space-separated q-type aliases.');
 
+function testNormalizeQTypeRejectsWhitespaceOnlyAlias(~)
+verifyError(@() Normalize_Q_Type('   '), 'Normalize_Q_Type:InvalidQType');
+end
+
 function testComputeFEMDataRejectsNonFiniteBoundaryData(~)
 verifyError(@() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
     'Compute_FEM_Data:InvalidBoundaryData');
