@@ -34,12 +34,12 @@ if ~any(strcmpi(normalizedQType, supported_Types))
         'Unsupported q_Type value: %s', char(q_Type));
 end
 
-if ~isnumeric(q_Coeff) || isempty(q_Coeff) || any(~isfinite(q_Coeff(:)))
+if ~isnumeric(q_Coeff) || isempty(q_Coeff) || ~isvector(q_Coeff) || any(~isfinite(q_Coeff(:)))
     error('Validate_Input:InvalidQCoeff', ...
         'q_Coeff must be a finite numeric vector.');
 end
 
-if ~isnumeric(load_Coeff) || isempty(load_Coeff) || any(~isfinite(load_Coeff(:)))
+if ~isnumeric(load_Coeff) || isempty(load_Coeff) || ~isvector(load_Coeff) || any(~isfinite(load_Coeff(:)))
     error('Validate_Input:InvalidLoadCoeff', ...
         'load_Coeff must be a finite numeric vector.');
 end
