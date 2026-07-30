@@ -80,6 +80,16 @@ num_Elements = [4 8];
 assert(isequal(size(qMeshSize), size(num_Elements)), ...
     'Build_Problem_Data should accept space-separated q-type aliases.');
 
+function testComputeFEMDataRejectsNonFiniteBoundaryData(~)
+verifyError(@() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
+    'Compute_FEM_Data:InvalidBoundaryData');
+end
+
+function testComputeFEMDataRejectsNonFiniteCoefficients(~)
+verifyError(@() Compute_FEM_Data([4 8], 'constant', [1 NaN], [1 2 -3], 0, 0.01), ...
+    'Compute_FEM_Data:InvalidQCoeff');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
