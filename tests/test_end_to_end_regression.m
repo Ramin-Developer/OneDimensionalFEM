@@ -110,6 +110,13 @@ verifyError(@() Build_Local_Solution(1, 2, [1 NaN], psi), ...
     'Build_Local_Solution:InvalidCoefficients');
 end
 
+function testElemContRejectsNonFiniteRelTol(~)
+psiLin = {@(x) 1, @(x) x};
+psiPrimeLin = {@(x) 1, @(x) 1};
+verifyError(@() Elem_Cont(0.25, 1, @(x) 1, @(x) 1, psiLin, psiPrimeLin, psiLin, psiPrimeLin, NaN), ...
+    'Elem_Cont:InvalidRelTol');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
