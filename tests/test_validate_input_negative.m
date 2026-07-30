@@ -49,6 +49,17 @@ verifyError(testCase, @() Validate_Input('q_Const', [1 NaN], [1 2 -3], 0, 0.01, 
 function testRejectsInvalidLoadCoeff(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidLoadCoeff');
+end
+
+function testRejectsComplexQCoeff(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', [1 2i], [1 2 -3], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidQCoeff');
+end
+
+function testRejectsComplexLoadCoeff(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2i -3], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidLoadCoeff');
+end
 
 function testRejectsInvalidDelta(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], [0 1], 0.01, [4 8 16]), ...
