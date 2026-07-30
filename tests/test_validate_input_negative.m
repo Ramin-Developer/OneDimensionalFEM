@@ -107,3 +107,8 @@ verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 -8 
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 NaN 16]), ...
     'Validate_Input:InvalidElements');
 end
+
+function testRejectsComplexElements(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, [4 8i 16]), ...
+    'Validate_Input:InvalidElements');
+end
