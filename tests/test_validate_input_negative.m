@@ -24,6 +24,10 @@ function testAcceptsSpaceSeparatedAlias(testCase)
 verifyWarningFree(testCase, @() Validate_Input('q const', 1, [1 2 -3], 0, 0.01, [4 8 16]));
 end
 
+function testAcceptsShortConstantAlias(testCase)
+verifyWarningFree(testCase, @() Validate_Input('const', 1, [1 2 -3], 0, 0.01, [4 8 16]));
+end
+
 function testRejectsUnsupportedQType(testCase)
 verifyError(testCase, @() Validate_Input('q_unknown', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:UnsupportedQType');
