@@ -24,3 +24,8 @@ assert(all(isfinite(fem_Data.sq_Error_Lin)), 'Linear error values must be finite
 assert(all(isfinite(fem_Data.sq_Error_Cub)), 'Cubic error values must be finite.');
 assert(all(isfinite(fem_Data.conv_Factor_Lin)), 'Linear convergence factors must be finite.');
 assert(all(isfinite(fem_Data.conv_Factor_Cub)), 'Cubic convergence factors must be finite.');
+
+function testRejectsEmptyMeshVector(~)
+verifyError(@() Compute_Error_Summary([], @(x) x, {}, {}, 1e-8), ...
+    'Compute_Error_Summary:InvalidNumElements');
+end
