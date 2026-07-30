@@ -40,6 +40,12 @@ verifyError(@() Calc_FEM_Sol(2, 0.5, 0, 0, @(x) 1, @(x) 1, 1e-8), ...
     'Calc_FEM_Sol:InvalidCoefficientVector');
 end
 
+function testNormalizeQTypeRejectsUnsupportedAlias(~)
+addpath(genpath('src/matlab'));
+verifyError(@() Normalize_Q_Type('q_unknown'), ...
+    'Normalize_Q_Type:UnsupportedQType');
+end
+
 function testBuildProblemDataRejectsNonFiniteCoefficients(~)
 addpath(genpath('src/matlab'));
 verifyError(@() Build_Problem_Data([4 8], 'constant', [1 NaN], [1 2], 0, 0), ...
