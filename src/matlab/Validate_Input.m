@@ -44,14 +44,14 @@ if ~isnumeric(load_Coeff) || isempty(load_Coeff) || ~isvector(load_Coeff) || any
         'load_Coeff must be a finite numeric vector.');
 end
 
-if ~isscalar(delta) || ~isfinite(delta)
+if ~isscalar(delta) || ~isfinite(delta) || ~isreal(delta)
     error('Validate_Input:InvalidDelta', ...
-        'delta must be a finite scalar.');
+        'delta must be a finite real scalar.');
 end
 
-if ~isscalar(P) || ~isfinite(P)
+if ~isscalar(P) || ~isfinite(P) || ~isreal(P)
     error('Validate_Input:InvalidP', ...
-        'P must be a finite scalar.');
+        'P must be a finite real scalar.');
 end
 
 if ~isnumeric(num_Elements) || isempty(num_Elements) || ~isvector(num_Elements) || any(~isfinite(num_Elements(:)))

@@ -69,6 +69,16 @@ verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, [0.01 0.02],
     'Validate_Input:InvalidP');
 end
 
+function testRejectsComplexDelta(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 1i, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidDelta');
+end
+
+function testRejectsComplexP(testCase)
+verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 1i, [4 8 16]), ...
+    'Validate_Input:InvalidP');
+end
+
 function testRejectsInvalidElementsType(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, 'bad'), ...
     'Validate_Input:InvalidElements');
