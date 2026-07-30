@@ -99,6 +99,11 @@ verifyError(@() Def_Problem([4 8], 'constant', [1 2 -3], 1, NaN, 0.01), ...
     'Def_Problem:InvalidBoundaryData');
 end
 
+function testCalcFEMSolRejectsNonFiniteMeshSize(~)
+verifyError(@() Calc_FEM_Sol(4, NaN, 0, 0.01, @(x) 1, @(x) 1, 1e-12), ...
+    'Calc_FEM_Sol:InvalidMeshSize');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
