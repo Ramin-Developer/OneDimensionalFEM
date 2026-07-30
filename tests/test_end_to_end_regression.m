@@ -122,6 +122,11 @@ verifyError(@() Compute_Error_Summary([4 8], @(x) x, { @(x) x }, { @(x) x }, NaN
     'Compute_Error_Summary:InvalidRelTol');
 end
 
+function testSolveEqSysRejectsNonFiniteMeshSize(~)
+verifyError(@() Solve_Eq_Sys(4, NaN, 0, 0.01, @(x) 1, @(x) 1, {@(x) 1, @(x) x}, {@(x) 1, @(x) 1}, {@(x) 1, @(x) x, @(x) x.^2, @(x) x.^3}, {@(x) 1, @(x) 1, @(x) x, @(x) x.^2}, 1e-12), ...
+    'Solve_Eq_Sys:InvalidMeshSize');
+end
+
 function testConvergenceRatesExceedThresholds(~)
 num_Elements = [4 8 16 32];
 q_Type = 'q_Const';
