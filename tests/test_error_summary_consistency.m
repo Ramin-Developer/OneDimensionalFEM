@@ -29,3 +29,8 @@ function testRejectsEmptyMeshVector(~)
 verifyError(@() Compute_Error_Summary([], @(x) x, {}, {}, 1e-8), ...
     'Compute_Error_Summary:InvalidNumElements');
 end
+
+function testRejectsMismatchedFEMFieldCount(~)
+verifyError(@() Compute_Error_Summary([4 8], @(x) x, { @(x) x }, { @(x) x, @(x) x }, 1e-8), ...
+    'Compute_Error_Summary:InvalidFEMFieldCount');
+end
