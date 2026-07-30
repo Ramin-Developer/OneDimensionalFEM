@@ -45,3 +45,9 @@ energyCub = vCub.' * K_Cub * vCub;
 
 assert(energyLin > -1e-10, 'Linear element matrix violates non-negative energy check.');
 assert(energyCub > -1e-10, 'Cubic element matrix violates non-negative energy check.');
+
+function testRejectsInvalidFunctions(~)
+addpath(genpath('src/matlab'));
+verifyError(@() Elem_Cont(0.5, 1, 1, @(x) x, { @(x) x }, { @(x) x }, { @(x) x }, { @(x) x }, 1e-8), ...
+    'Elem_Cont:InvalidFunctions');
+end
