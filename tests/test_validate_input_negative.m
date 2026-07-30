@@ -20,6 +20,11 @@ verifyError(testCase, @() Validate_Input('   ', 1, [1 2 -3], 0, 0.01, [4 8 16]),
     'Validate_Input:InvalidQType');
 end
 
+function testRejectsCharMatrixQType(testCase)
+verifyError(testCase, @() Validate_Input(['q'; 'const'], 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
+    'Validate_Input:InvalidQType');
+end
+
 function testAcceptsSpaceSeparatedAlias(testCase)
 verifyWarningFree(testCase, @() Validate_Input('q const', 1, [1 2 -3], 0, 0.01, [4 8 16]));
 end
