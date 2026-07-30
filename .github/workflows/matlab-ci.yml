@@ -27,7 +27,10 @@ jobs:
         uses: matlab-actions/run-command@v3
         with:
           command: |
-            run('tests/run_smoke_tests.m');
+            addpath(genpath('src/matlab'));
+            addpath('tests');
+            results = runtests({'test_smoke_main_program', 'test_validate_input_negative'});
+            assert(all([results.Passed]), 'One or more smoke tests failed.');
 
   performance-guardrail:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
