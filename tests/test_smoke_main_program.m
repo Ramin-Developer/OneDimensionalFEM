@@ -26,3 +26,16 @@ verifyError(@() Build_Problem_Data([4 8], 'constant', [], [], 0, 0), ...
 verifyError(@() Build_Problem_Data([4 8], 'constant', 1, [], 0, 0), ...
     'Build_Problem_Data:InvalidQCoeff');
 end
+
+function testBuildLocalSolutionRejectsInvalidBasisHandles(~)
+addpath(genpath('src/matlab'));
+verifyError(@() Build_Local_Solution(1, 2, [1 2 3], { @(x) x, 1 }), ...
+    'Build_Local_Solution:InvalidBasis');
+end
+
+function testCalcFEMSolRejectsInsufficientCoefficientsViaStub(~)
+addpath(genpath('src/matlab'));
+addpath('tests/stubs');
+verifyError(@() Calc_FEM_Sol(2, 0.5, 0, 0, @(x) 1, @(x) 1, 1e-8), ...
+    'Calc_FEM_Sol:InvalidCoefficientVector');
+end
