@@ -4,8 +4,11 @@ function results = run_smoke_tests()
 % This keeps PR feedback fast by avoiding coverage instrumentation while still
 % validating the main entry points and a representative validation path.
 
-addpath(genpath('src/matlab'));
-addpath('tests');
+scriptDir = fileparts(mfilename('fullpath'));
+repoRoot = fileparts(scriptDir);
+
+addpath(genpath(fullfile(repoRoot, 'src', 'matlab')));
+addpath(scriptDir);
 
 smokeTests = {'test_smoke_main_program', 'test_validate_input_negative'};
 
