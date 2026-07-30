@@ -99,6 +99,16 @@ verifyError(@() Build_Problem_Data([4 8], 42, [1 2 -3], 1, 0, 0.01), ...
     'Build_Problem_Data:InvalidQType');
 end
 
+function testBuildProblemDataRejectsComplexQCoeff(~)
+verifyError(@() Build_Problem_Data([4 8], 'constant', [1 2 -3], [1+1i], 0, 0.01), ...
+    'Build_Problem_Data:InvalidQCoeff');
+end
+
+function testBuildProblemDataRejectsComplexBoundaryData(~)
+verifyError(@() Build_Problem_Data([4 8], 'constant', [1 2 -3], 1, 0+1i, 0.01), ...
+    'Build_Problem_Data:InvalidBoundaryData');
+end
+
 function testComputeFEMDataRejectsNonFiniteBoundaryData(~)
 verifyError(@() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
     'Compute_FEM_Data:InvalidBoundaryData');
