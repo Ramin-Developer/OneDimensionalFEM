@@ -26,6 +26,7 @@ if isempty(normalizedQType)
         'q_Type must not be empty.');
 end
 normalizedQType = strrep(normalizedQType, '-', '_');
+normalizedQType = strrep(normalizedQType, ' ', '_');
 
 if ~any(strcmpi(normalizedQType, supported_Types))
     error('Validate_Input:UnsupportedQType', ...
