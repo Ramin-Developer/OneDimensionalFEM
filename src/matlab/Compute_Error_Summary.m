@@ -1,8 +1,10 @@
-function [l2_Error_Lin, l2_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+function [l2ErrorLin, l2ErrorCub, convergenceFactorLin, ...
+    convergenceFactorCub, convergenceOrderLin, convergenceOrderCub] = ...
     Compute_Error_Summary(numElements, uExact, uFEMLin, uFEMCub, relTol)
-%COMPUTE_ERROR_SUMMARY Compute L2 error norms and convergence factors.
+%COMPUTE_ERROR_SUMMARY Compute L2 errors, reduction factors, and orders.
 %
-%   [l2_Error_Lin, l2_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+%   [l2ErrorLin, l2ErrorCub, convergenceFactorLin, ...
+%       convergenceFactorCub, convergenceOrderLin, convergenceOrderCub] = ...
 %       COMPUTE_ERROR_SUMMARY(numElements, uExact, uFEMLin, uFEMCub, relTol)
 %   summarizes the FEM solution quality for each mesh.
 
@@ -41,26 +43,32 @@ for size_Ind = 1:size_N
 end
 
 l2Error = sqrt(squaredError);
-l2_Error_Lin = l2Error(1, :);
-l2_Error_Cub = l2Error(2, :);
+l2ErrorLin = l2Error(1, :);
+l2ErrorCub = l2Error(2, :);
 
 if size_N > 1
-    conv_Factor = l2Error(:, 1:end - 1) ./ l2Error(:, 2:end);
-    conv_Factor_Lin = conv_Factor(1, :);
-    conv_Factor_Cub = conv_Factor(2, :);
+    convergenceFactor = l2Error(:, 1:end - 1) ./ l2Error(:, 2:end);
+    convergenceFactorLin = convergenceFactor(1, :);
+    convergenceFactorCub = convergenceFactor(2, :);
+    meshRatio = numElements(2:end) ./ numElements(1:end - 1);
+    convergenceOrderLin = log(convergenceFactorLin) ./ log(meshRatio);
+    convergenceOrderCub = log(convergenceFactorCub) ./ log(meshRatio);
 else
-    conv_Factor_Lin = [];
-    conv_Factor_Cub = [];
+    convergenceFactorLin = [];
+    convergenceFactorCub = [];
+    convergenceOrderLin = [];
+    convergenceOrderCub = [];
 end
 
-function sq_Error = Integrate_Squared_Error(uExact, localFields, N, relTol)
+function squaredError = Integrate_Squared_Error(uExact, localFields, N, relTol)
 
 h = 1 / N;
-sq_Error = 0;
+squaredError = 0;
 
 for elemNo = 1:N
     globalCoord = @(y) (elemNo - 1 + y) .* h;
-    sq_ErrorLocal = @(y) ...
+    squaredErrorLocal = @(y) ...
         (uExact(globalCoord(y)) - localFields{elemNo}(y)).^2;
-    sq_Error = sq_Error + h * quadgk(sq_ErrorLocal, 0, 1, 'RelTol', relTol);
+    squaredError = squaredError + h * quadgk( ...
+        squaredErrorLocal, 0, 1, 'RelTol', relTol);
 end

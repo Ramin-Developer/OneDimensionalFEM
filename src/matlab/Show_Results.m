@@ -1,4 +1,4 @@
-function [factor_Lin, factor_Cub] = ...
+function [resultTextLin, resultTextCub] = ...
     Show_Results(numElements, solutionSize, ...
     x, uExact, uFEMLin, uFEMCub, relTol)
 
@@ -28,44 +28,54 @@ assert(isnumeric(relTol) && isscalar(relTol) && relTol > 0, ...
 % Plot exact and FEM-Solution of the problem for different element numbers:
 Plot_FEM_Solutions(numElements, solutionSize, x, uExact, uFEMLin, uFEMCub);
 
-% Estimate L2 error norms and convergence factors:
-[factor_Lin, factor_Cub] = ...
+% Estimate L2 error norms, reduction factors, and observed orders:
+[resultTextLin, resultTextCub] = ...
     Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol);
 
-assert(all(isfinite(factor_Lin)) && all(isfinite(factor_Cub)), ...
+assert(ischar(resultTextLin) && ischar(resultTextCub), ...
     'Show_Results:InvalidOutput', ...
-    'Convergence factors must be finite values.');
+    'Formatted result outputs must be character vectors.');
 
 function [error_Lin, error_Cub] = Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol)
 
-[l2_Error_Lin, l2_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+[l2ErrorLin, l2ErrorCub, convergenceFactorLin, convergenceFactorCub, ...
+    convergenceOrderLin, convergenceOrderCub] = ...
     Compute_Error_Summary(numElements, uExact, uFEMLin, uFEMCub, relTol);
 
 % Display the results:
 [error_Lin, error_Cub] = Convert_2_Str( ...
-    [conv_Factor_Lin; conv_Factor_Cub], [l2_Error_Lin; l2_Error_Cub]);
+    [convergenceFactorLin; convergenceFactorCub], ...
+    [convergenceOrderLin; convergenceOrderCub], ...
+    [l2ErrorLin; l2ErrorCub]);
 disp(error_Lin);
 disp(error_Cub);
 
-function [error_Lin, error_Cub] = Convert_2_Str(conv_Factor, l2_Error)
+function [error_Lin, error_Cub] = Convert_2_Str( ...
+    convergenceFactor, convergenceOrder, l2Error)
 
-error_Lin = Make_Str(conv_Factor, l2_Error, 1);
-error_Cub = Make_Str(conv_Factor, l2_Error, 3);
+error_Lin = Make_Str(convergenceFactor, convergenceOrder, l2Error, 1);
+error_Cub = Make_Str(convergenceFactor, convergenceOrder, l2Error, 3);
 
-function str_Error_Estimate = Make_Str(conv_Factor, l2_Error, degree)
+function str_Error_Estimate = Make_Str( ...
+    convergenceFactor, convergenceOrder, l2Error, degree)
 
 Title_Error = sprintf('\tL2 Error Norm            ');
-Title_Conv = sprintf('\tConvergence Factor        ');
+Title_Factor = sprintf('\tError Reduction Factor    ');
+Title_Order = sprintf('\tObserved Order            ');
 
 if degree == 1
     Title  = sprintf('Linear Case:');
-    Error_Val = sprintf('%0.4e\t\t\t', l2_Error(1, :));
-    Conv_Val = sprintf('%0.2e\t\t\t', conv_Factor(1, :));
+    Error_Val = sprintf('%0.4e\t\t\t', l2Error(1, :));
+    Factor_Val = sprintf('%0.2e\t\t\t', convergenceFactor(1, :));
+    Order_Val = sprintf('%0.2f\t\t\t', convergenceOrder(1, :));
 elseif degree == 3
     Title  = sprintf('Cubic Case:');
-    Error_Val = sprintf('%0.4e\t\t\t', l2_Error(2, :));
-    Conv_Val = sprintf('%0.2e\t\t\t', conv_Factor(2, :));
+    Error_Val = sprintf('%0.4e\t\t\t', l2Error(2, :));
+    Factor_Val = sprintf('%0.2e\t\t\t', convergenceFactor(2, :));
+    Order_Val = sprintf('%0.2f\t\t\t', convergenceOrder(2, :));
 end
 
-str_Error_Estimate = sprintf('\n %s \n %s %s \n %s %s', Title, ...
-    Title_Error, Error_Val, Title_Conv, Conv_Val);
+str_Error_Estimate = sprintf( ...
+    '\n %s \n %s %s \n %s %s \n %s %s', Title, ...
+    Title_Error, Error_Val, Title_Factor, Factor_Val, ...
+    Title_Order, Order_Val);
