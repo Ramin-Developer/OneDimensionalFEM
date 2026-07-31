@@ -6,9 +6,6 @@
 % ***************************** Figure and Table Processing *****************************
 \usepackage{graphicx}
 
-% Allows to mark some entries in the tables with color
-\usepackage{color}
-
 % Colors for tables
 \usepackage[table]{xcolor}
 
@@ -32,7 +29,7 @@
 
 \usepackage{floatrow}
 \floatsetup[table]{style=Plaintop,heightadjust=all,valign=c}
-\floatsetup[figure]{font=small,heightadjust=all,,valign=c}
+\floatsetup[figure]{font=small,heightadjust=all,valign=c}
 
 % ******************************** Matemathical *******************************
 \usepackage{amsmath,amssymb,amsfonts}
@@ -163,11 +160,6 @@
 \numberwithin{equation}{chapter}
 
 % ******************************* Define colors *******************************
-\usepackage{graphicx}
-
-% Allows to mark some entries in the tables with color
-\usepackage{color}
-
 \definecolor{Gray}{gray}{0.85}
 \definecolor{LightCyan}{rgb}{0.88,1.00,1.00}
 \definecolor{Cream}{rgb}{1.00,1.00,0.88}
@@ -191,8 +183,8 @@
 \newglossary{symbols}{sym}{sbl}{}
 
 % Load glossary entries from the corresponding files.
-\loadglsentries[terminology]{Terminology}
-\loadglsentries[symbols]{Symbols}
+\loadglsentries[terminology]{terminology}
+\loadglsentries[symbols]{symbols}
 
 % Create gloassries
 \makeglossaries

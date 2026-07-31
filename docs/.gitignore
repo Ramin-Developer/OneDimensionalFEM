@@ -21,8 +21,11 @@ Thumbs.db
 *.fls
 *.log
 *.lof
+*.glg
 *.out
 *.sbl
+*.sym
+*.tin
 *.toc
 *.tut
 *.synctex.gz

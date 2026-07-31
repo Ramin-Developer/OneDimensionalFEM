@@ -21,7 +21,7 @@ unique solution if and only if determinant of the coefficient matrix is nonzero.
 	\end{equation}
 \end{lemma}
 For a proof of \cref{lem:Pos_Def_Non_Singular} any textbook in linear algebra may be conferred. In the following we will show
-that a \gls{posDef} matrix is \gls{nonSingular} for the simple case of $\mathbf{A} \in \mathbb{R}^{2 \times 2}$. \\
+that a \gls{posDef} matrix is \gls{nonSingular} for the simple case of $\mathbf{A} \in \mathbb{R}^{2 \times 2}$.
 \begin{example}
 Suppose that $\gls{matA} \in \glsentryname{R22}$ is a positive-definite matrix given by
 \begin{equation}
@@ -83,7 +83,9 @@ A \gls{posDef} matrix $\mathbf{A}$ $\in \mathbb{R}^{2 \times 2}$ is then non-sin
 	\end{subequations}
 \end{remark}
 
-Before imposing the essential boundary condition, the assembled stiffness matrix is only positive semidefinite: the constant function belongs to its nullspace. Uniqueness follows after restricting the discrete space to functions satisfying the homogeneous essential condition at the left boundary.
+Before imposing the essential boundary condition, the assembled stiffness matrix is positive semidefinite because its nullspace
+contains the constant function. Restricting the discrete space to functions satisfying the homogeneous essential condition at the
+left boundary restores uniqueness.
 
 Let $\mathbf{K}_0$ denote the stiffness matrix on the free degrees of freedom. According to \cref{eqn:Stiffness_Matrix},
 \begin{equation}

@@ -10,7 +10,7 @@ approaches. In case of actual convergence we also need a factor that indicates s
 		\item \gls{uNcub}: Cubic \gls{FEMSol} of \cref{prb:Normalized_Problem} with $N$ elements.
 	\end{itemize}
 \end{enumerate}
-Define now following measures for solution deviations: \\
+Define the following measures of solution error:
 \begin{definition} \label{def:L2_Error}
 	The $L^2$ error norm measures the deviation between the numerical and analytical solutions as
 	\begin{equation}	\label{eqn:L2_Error}
@@ -125,13 +125,13 @@ Convergence speed of \glspl{FEMSol} in \cref{cas:q_1st_Degree_Denom,cas:q_2nd_De
 
 	\item The \gls{naturalCondition} is imposed through the boundary term in the weak formulation for both linear and cubic \glspl{FEMSol}. The pointwise boundary flux converges under mesh refinement but is not prescribed as an additional essential condition.
 
-	\item The linear and cubic \glspl{FEMSol} seem to converge as $\mathcal{O} \left( h^2 \right)$ and $\mathcal{O} \left( h^4 \right)$. This is in accordance with the results in \cref{cha:Error_Estimates}, see \cref{eqn:FEM_Error_To_h_And_Exact_Sol}.
+	\item The linear and cubic solutions converge as $\mathcal{O}(h^2)$ and $\mathcal{O}(h^4)$, respectively, consistent with
+	\cref{eqn:FEM_Error_To_h_And_Exact_Sol}.
 
-	\item \Cref{fig:q_1_Load_0,tbl:q_1st_Degree_Denom_Error} suggest that the cubic finite element error is comparable to numerical
-	roundoff because the analytical solution is also a cubic polynomial; see \cref{eqn:q_1st_Degree_Denom_Solution}.
+	\item The cubic errors reach the roundoff floor when the analytical solution is itself a cubic polynomial.
 
 	\item The observed convergence rate deteriorates as \gls{N} increases because the discretization error approaches the roundoff
 	error floor. This effect is more apparent for the faster-converging cubic solution.
 \end{enumerate}	\text{}
 %
-Finally, the code in \cref{lst:Estimate_Error} estimates the $L^2$ error norm of each \gls{FEMSol} compared with the \gls{analSol}.
+\Cref{lst:Estimate_Error} computes each finite element solution's $L^2$ error norm.

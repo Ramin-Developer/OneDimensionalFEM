@@ -39,7 +39,7 @@ Note that element boundaries and locations are expressed in \gls{globalCoord}.
 	a \gls{nonUniformMeshing} and can improve solution accuracy.
 \end{remark}
 \begin{figure}
-	\includegraphics[width = \textwidth]{../Figures/Meshing}
+	\includegraphics[width = \textwidth]{../figures/meshing}
 	\caption{A Typical \Gls{region} with \Glspl{element} and \Glspl{nodePoint}}
 	\label{fig:Meshing}
 \end{figure}
@@ -53,7 +53,7 @@ summation by \gls{M}. The solution in \cref{eqn:Truncated_FEM_Solution} is thus 
 and the task is then to determine the \gls{M} coefficients $a_j$, such that \cref{eqn:FEM_Problem}, as well as
 \glspl{boundaryCondition} in \cref{eqn:FEM_Left_Boundary,eqn:FEM_Right_Boundary} are satisfied. In FEM-terminology we say that
 the model has $M$ \glspl{dof}. \Glspl{basisFunction} have typically \gls{localSupport}, i.e., they are defined over a few \glspl{element}
-and are identically $0$ otherwise. \\
+and are identically $0$ otherwise.
 
 The terms \Glsfirst{finite} and \Glsfirstplural{element} in \gls{FEM} refer to the facts that the solution is a truncated series and the
 \gls{region} is divided into subregions as explained above. From now on we denote the \gls{FEMSol} just by $u  = u \left( x \right)$
