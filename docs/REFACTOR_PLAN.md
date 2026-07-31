@@ -16,7 +16,7 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 - [x] Multiply each reference-element squared-error integral by the physical Jacobian $h$.
 - [x] Consolidate duplicated error integration in `Compute_Error_Summary.m` and `Compute_FEM_Data.m`.
-- [x] Add canonical `l2_Error_*` outputs while retaining `sq_Error_*` as compatibility aliases.
+- [x] Add canonical `l2_Error_*` outputs and remove misleading `sq_Error_*` aliases.
 - [x] Add an independent analytic norm test and correct duplicated test integration.
 - [x] Regenerate affected snapshots and report tables, then validate the complete suite.
 
@@ -51,11 +51,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### V2. Align outputs and terminology
 
-- Use consistent names for squared integrals, norms, convergence factors, and orders.
-- Ensure console labels, APIs, tests, plots, tables, and report equations describe the same quantities.
-- Record tolerances and their numerical justification.
+- [x] Use consistent names for squared integrals, norms, reduction factors, and observed orders.
+- [x] Ensure console labels, APIs, tests, plots, tables, and report equations describe the same quantities.
+- [x] Record tolerances and their numerical justification.
 
-**Value:** High. Makes later refactoring measurable and reviewable.
+**Status:** Complete. Public outputs now distinguish $L^2$ norms, error reduction factors, and mesh-ratio-aware observed orders.
 
 ## Priority 3: Performance
 

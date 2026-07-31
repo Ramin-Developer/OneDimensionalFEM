@@ -24,15 +24,17 @@ Define now following measures for solution deviations: \\
 		\gls{ENmax} &= \max_{ 0 \leq x \leq 1 } \Big \vert  \gls{uEx} - \gls{uNfem} \Big \vert.
 	\end{align}
 \end{definition}
-In this report we have chosen the $L^2$ error norm, denoted by $E_{sq}$, for measuring the deviation. Having defined an error measure we move forward and define a
+In this report we use the $L^2$ error norm, denoted by $E_{L^2}$, to measure the deviation. Having defined an error measure we next define an
 \gls{convFactor}.
 %
 \begin{definition} \label{def:Conv_Factor}
 	Suppose that we have solved problem in \crefrange{eqn:FEM_Problem}{eqn:FEM_Right_Boundary} by applying \gls{FEM} with two different No.
 	of elements, $N_{1}$ and $N_{2} = 2N_{1}$. Denote these solutions by $u_{1}$ and $u_{2}$ and let $E_{1}$
-	and $E_{2}$ indicate the $L^2$ error norms, see \cref{def:L2_Error}. Define a \gls{convFactor} by
+	and $E_{2}$ indicate the $L^2$ error norms, see \cref{def:L2_Error}. Define the error reduction factor and observed order by
 	\begin{equation} \label{eqn:Conv_Factor}
-		\gls{fConv} = \frac{E_{1}}{E_{2}}.
+		\gls{fConv} = \frac{E_{1}}{E_{2}},
+		\qquad
+		p = \frac{\log(E_{1}/E_{2})}{\log(N_{2}/N_{1})}.
 	\end{equation}
 \end{definition}
 %
@@ -109,8 +111,7 @@ In this report we have chosen the $L^2$ error norm, denoted by $E_{sq}$, for mea
 		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_Exponential} with $\alpha = 1$ and Boundary Parameters $\delta = 0$ and $P = 0.01$}
 	\label{tbl:q_Exponential_Error}
 \end{table}
-Then the solution is convergent if $f_{con} > 1$ for all choices of $N_{1}$. Furthermore the larger $f_{con}$, the faster convergence. A value of $f_{c} = 4$, for example, indicates that doubling No. of elements results in a
-reduction of the error by a factor $4$. Speed of convergence in this case is said to be of $\mathcal{O}\left( N^2\right) $. \\
+The error decreases when $f_c>1$. If doubling the number of elements gives $f_c=4$, then $p=2$ and the error behaves as $\mathcal{O}(N^{-2})$, equivalently $\mathcal{O}(h^2)$.
 
 Convergence speed of \glspl{FEMSol} in \cref{cas:q_1st_Degree_Denom,cas:q_2nd_Degree_Denom,cas:q_Exponential} is shown in \crefrange{tbl:q_1st_Degree_Denom_Error}{tbl:q_Exponential_Error}. A closer look at \cref{fig:q_1_Load_0} and \cref{tbl:q_1st_Degree_Denom_Error,tbl:q_2nd_Degree_Denom_Error} reveals the following facts:
 \begin{enumerate}

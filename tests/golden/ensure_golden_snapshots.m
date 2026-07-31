@@ -55,8 +55,10 @@ snapshot.linVals = linVals;
 snapshot.cubVals = cubVals;
 snapshot.l2ErrorLin = femData.l2_Error_Lin;
 snapshot.l2ErrorCub = femData.l2_Error_Cub;
-snapshot.convLin = femData.conv_Factor_Lin;
-snapshot.convCub = femData.conv_Factor_Cub;
+snapshot.convergenceFactorLin = femData.convergence_Factor_Lin;
+snapshot.convergenceFactorCub = femData.convergence_Factor_Cub;
+snapshot.convergenceOrderLin = femData.convergence_Order_Lin;
+snapshot.convergenceOrderCub = femData.convergence_Order_Cub;
 
 tol = struct;
 tol.fieldAbs = 5e-10;

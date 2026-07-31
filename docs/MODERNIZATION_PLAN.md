@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: refactor/align-error-terminology
+- What changed: Removed misleading error aliases, canonicalized reduction-factor fields, added mesh-ratio-aware observed orders, and synchronized console/report terminology.
+- Tests run: Focused output-contract suite, all tests passing.
+- Next action: implement P1 sparse global assembly.
+
+- Date: 2026-07-31
 - Branch: test/add-independent-element-oracles
 - What changed: Added closed-form element expectations, an independent fixed Gauss oracle for every rigidity family and basis order, and manufactured nonzero-boundary checks over multiple meshes.
 - Tests run: Focused independent-oracle suite, all tests passing.
@@ -209,7 +215,7 @@ Append a short note at the top of the log below after each session:
 
 - Date: 2026-07-29
 - Branch: chore/modernization-followup-20260729
-- What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, squared errors, and convergence factors.
+- What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, $L^2$ error norms, and error reduction factors.
 - Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
 - Next action: implement Workstream B5 negative-input tests for Validate_Input.
 
