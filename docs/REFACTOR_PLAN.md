@@ -93,9 +93,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### R2. Improve wording and readability
 
-- Correct typographical and grammatical errors.
-- Shorten awkward sentences, remove repetition, and standardize mathematical terminology.
-- Ensure each section states its purpose, assumptions, and conclusion clearly.
+- [x] Correct typographical and grammatical errors.
+- [x] Shorten awkward sentences, remove repetition, and standardize mathematical terminology.
+- [x] Ensure each major section states its purpose, assumptions, and conclusion clearly.
+
+**Status:** Complete. Front matter, chapter framing, core derivations, results discussion, glossary definitions, and appendix captions now use concise and consistent prose.
 
 ### R3. Normalize layout and formatting
 

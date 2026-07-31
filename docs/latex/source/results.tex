@@ -1,5 +1,8 @@
 \chapter{Results} \label{cha:Results}
-Now we have the fundamental background for the FEA. We begin this chapter by deriving physical meaning of the stiffness matrix. This is done for a simplified, but important version of \cref{prb:Non_Normalized_Problem}. Then apply FEM to some variations of \cref{prb:Non_Normalized_Problem}, namely \cref{cas:q_1st_Degree_Denom,cas:q_2nd_Degree_Denom,cas:q_Exponential}, see \cref{cha:Mechanical_Problem}. In each case we calculate the FEM-solution with both the linear and cubic basis-functions and for different No. of elements. To study FEM-convergence we will then compare these solutions with the known analytical solution.
+This chapter first gives a physical interpretation of the stiffness matrix for a simplified version of
+\cref{prb:Non_Normalized_Problem}. It then applies FEM to the variants in
+\cref{cas:q_1st_Degree_Denom,cas:q_2nd_Degree_Denom,cas:q_Exponential} using linear and cubic basis functions and several mesh
+resolutions. The resulting approximations are compared with the known analytical solutions to study convergence.
 %
 \input{stiffness-matrix}
 \input{fem-results}

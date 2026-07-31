@@ -5,7 +5,7 @@ $\glssymbol{spaceWh} \subset \glssymbol{spaceH10}$. This produces a solution $u^
 	a \left( u^h, w^h \right) = \left \langle f, w^h \right \rangle\quad \forall w^h \in \glssymbol{spaceWh}.
 \end{equation}
 %
-\subsection[Stability of the FEM-Solution]{Stability of the \glssymbol{FEM}-Solution}	\label{cha:Stability_FEM}
+\subsection[Stability of the finite element solution]{Stability of the \glssymbol{FEM}-Solution}	\label{cha:Stability_FEM}
 The \glssymbol{FEM}-Solution satisfies \cref{eqn:FEM_Canonical_Truncated_u_w}. If we use the same reasoning as in \cref{cha:Stability_Exact},
 we will conclude that the \glssymbol{FEM}-Solution satisfies the same stability estimate as the exact solution, i.e.,
 \begin{equation}	\label{eqn:Stability_FEM}
@@ -26,7 +26,7 @@ Next, subtract \cref{eqn:FEM_Canonical_Truncated_u_w} from \cref{eqn:FEM_Canonic
 \begin{equation}	\label{eqn:Error_Orthogonal_FEM}
 		a \left( e, w^h \right) = 0, \quad \forall w^h \in \glssymbol{spaceWh}.
 \end{equation}
-This tells us that the error in FEM-Solution is orthogonal to the space of functions \glssymbol{spaceWh}, when measured in the
+This tells us that the error in finite element solution is orthogonal to the space of functions \glssymbol{spaceWh}, when measured in the
 $a$-Inner Product.
 %
 \subsection{Best approximation: Energy Norm}	\label{cha:Energy_Norm}
@@ -53,7 +53,7 @@ If we measure \textsl{energy} of this error we see that
 		&= a \left( e, e \right) + 2 a \left( e, w^h \right) + a \left( w^h, w^h \right)	\label{eqn:Energy_a_Form_2} \\
 		&= a \left( e, e \right) + a \left( w^h, w^h \right).	\label{eqn:Energy_a_Form_3} 
 	\end{align}
-Transition from \cref{eqn:Energy_a_Form_1} to \cref{eqn:Energy_a_Form_2} follows as a consequence of the bi-linearity and
+Transition from \cref{eqn:Energy_a_Form_1} to \cref{eqn:Energy_a_Form_2} follows as a consequence of the bilinearity and
 symmetrical properties of $a \left( E, E \right)$. The middle term in \cref{eqn:Energy_a_Form_2} is zero by orthogonality property,
 see \cref{eqn:Error_Orthogonal_FEM}. Finally, observe that the last term in \cref{eqn:Energy_a_Form_3} is always non-negative.
 Thus
@@ -64,12 +64,12 @@ Thus
 \begin{remark}
 	Note that while $e \left( x \right)$ represent the FEM-Error, $E$ is the error associated with any other arbitrary member of
 	\glssymbol{spaceSh}. Then (\ref{eqn:Energy_a_Form_4}) states that among all functions in \glssymbol{spaceSh}, the derivative
-	of the error associated with the FEM-Solution has the least \glsentryname{L2Norm}, i.e., the least \emph{energy}. This is the so-called
+	of the error associated with the finite element solution has the least \glsentryname{L2Norm}, i.e., the least \emph{energy}. This is the so-called
 	\emph{best approximation property}.
 \end{remark}
 
 \subsection{An Estimate for FEA Error Stability}
-The error estimate in (\ref{eqn:Energy_a_Form_4}) gives the magnitude of the derivative of the FEA-error relative to other
+The error estimate in (\ref{eqn:Energy_a_Form_4}) gives the magnitude of the derivative of the finite element error relative to other
 possible choices in \glssymbol{spaceSh}; it does not say anything about the error itself. To make such a statement the coercivity
 estimate for the $a$-Form can help us. We know from coercivity estimate in (\ref{eqn:Property_Elipticity}) that
 \begin{subequations}
@@ -87,14 +87,14 @@ Combining \cref{eqn:Error_Stability_Estimate_FEM,eqn:Upper_Bound_For_e} we have 
 	\glsentrysymbol{H1Norme} \leq \frac{\gamma}{\alpha} \glsentrysymbol{H1NormE}.
 \end{equation}
 \begin{remark}
-	\Cref{eqn:Energy_a_Form_4} gives an error estimate for the FEM-Solution relative to the error associated with any other member
+	\Cref{eqn:Energy_a_Form_4} gives an error estimate for the finite element solution relative to the error associated with any other member
 	of $\mathcal{S}^h$. Due to appearance of the coercivity constant, this estimate, while being a type of best approximation estimate,
 	is also a type of stability estimate.
 \end{remark}
 %
 \subsection{Interpolation Errors}	\label{cha:Interpolation_Errors}
 Consider now more specifically, FEM-subspaces consisting piecewise linear functions. The approximation space is linearly complete
-over individual elements with the choice of piecewise linear basis-functions. Let $\Omega_e$ denote a typical element with
+over individual elements with the choice of piecewise linear basis functions. Let $\Omega_e$ denote a typical element with
 $x \in \left[ x_1^e, x_2^e \right]$. Due to linear completeness of $\mathcal{S}^h$ over individual elements we can find a
 $U^h \in \mathcal{S}^h$ with the same function values at the node points as the exact solution. This function is known as the interpolant.
 Its error
@@ -196,7 +196,7 @@ This gives the following estimation for the interpolation error
 \end{equation}
 
 \subsection[An $L^2$-Norm Estimate for FEA-Error]{An \glsentryname{L2Norm} Estimate for FEM-Error}
-We are finally in a position to compute an error estimate for the FEM-Solution which shows how the error depends upon the
+We are finally in a position to compute an error estimate for the finite element solution which shows how the error depends upon the
 discretization and the exact solution character. To do this we use a so-called duality argument. This utilizes an
 auxiliary dual problem:
 \begin{problem}	\label{prb:Dual_Problem}
@@ -207,7 +207,7 @@ auxiliary dual problem:
 			\intertext{with symmetrical boundary conditions}
 			\phi \left( 0 \right) &= 0,	\label{eqn:Dual_Problem_Left_Boundary}	\\
 			\phi \left( 1 \right) &= 0,	\label{eqn:Dual_Problem_Right_Boundary}	\\
-			\intertext{where \glssymbol{FEAerror} is the FEM-error defined by}
+			\intertext{where \glssymbol{FEAerror} is the finite element error defined by}
 			\glssymbol{FEAerror} &= u \left( x \right) - u^h \left( x \right).	\label{eqn:Dual_Problem_FEM_Error}
 		\end{align}
 	\end{subequations}
@@ -220,10 +220,10 @@ about this problem:
 	The space of weight functions and trial solutions for the dual problem are the same as for the original problem.
 	
 	\item	\label{itm:Dual_FEM_Error}
-	The FEM-error is an element of the space of test functions for the dual problem, $e \in \glssymbol{spaceW}$.
+	The finite element error is an element of the space of test functions for the dual problem, $e \in \glssymbol{spaceW}$.
 	
 	\item \label{itm:Dual_Norm_Relation}
-	The norms of the dual field $\phi$ and the FEM-error $e$ are related by\footnote{This property is one of the main reasons for
+	The norms of the dual field $\phi$ and the finite element error $e$ are related by\footnote{This property is one of the main reasons for
 	introducing the dual problem.}
 	\begin{equation}
 		\big \vert \phi \big \vert_{H^2} = \big\| e  \big\|_{L^2}.
@@ -231,7 +231,7 @@ about this problem:
 	This can be seen by combining definition of $H^2$-Semi-Norm and the dual problem, i.e., \cref{eqn:H2_Semi_Norm,prb:Dual_Problem}.
 		
 	\item \label{itm:Interpolant_Estimate}
-	There exist an element $\glsname{dualWeakInt} \in \glssymbol{spaceSh}$ (and consequently also in $\glssymbol{spaceWh}$) such that the interpolation
+	There exists an element $\glsname{dualWeakInt} \in \glssymbol{spaceSh}$ (and consequently also in $\glssymbol{spaceWh}$) such that the interpolation
 	error estimate in (\ref{eqn:FEM_Error_in_H1}) also holds for the dual problem. Given the exact solution $\phi$ of the dual
 	problem, function \glssymbol{dualWeakInt} is then the interpolant of this solution.
 \end{enumerate}
@@ -247,7 +247,7 @@ Using \cref{itm:Dual_FEM_Error,prb:Dual_Weak_Problem} above note first that
 \begin{equation}
 	\glsentrysymbol{L2Norme}^2 = a \left( \phi, e \right).
 \end{equation}
-By orthogonality of the FEM-error to the space of functions $\mathcal{W}^h$ we then have
+By orthogonality of the finite element error to the space of functions $\mathcal{W}^h$ we then have
 \begin{equation}	\label{eqn:Orthogonality_e_Wh_1}
 	\glsentrysymbol{L2Norme}^2 = a \left( \phi, e \right) = a \left( \phi - \Phi^h, e \right).
 \end{equation}
@@ -255,7 +255,7 @@ Take absolute value of \cref{eqn:Orthogonality_e_Wh_1} and apply continuity boun
 \begin{equation}	\label{eqn:Orthogonality_e_Wh_2}
 	\glsentrysymbol{L2Norme}^2 \leq \gamma \big\| \phi - \Phi^h \big\|_{H^1} \glsentrysymbol{H1Norme}.
 \end{equation}
-\Cref{eqn:FEM_Error_in_H1} estimates the interpolation error magnitude associated to the dual problem. Applying this and
+\Cref{eqn:FEM_Error_in_H1} estimates the interpolation error magnitude associated with the dual problem. Applying this and
 \cref{itm:Dual_Norm_Relation} above to \cref{eqn:Orthogonality_e_Wh_2} gives
 \begin{equation}	\label{eqn:Orthogonality_e_Wh_3}
 	\glsentrysymbol{L2Norme}^2 \leq \gamma h \glsentrysymbol{H1Norme} \big \vert \phi \big \vert_{H^2} =
@@ -265,7 +265,7 @@ Dividing \cref{eqn:Orthogonality_e_Wh_3} by $\|e\|_{L^2}$ (the zero-error case b
 \begin{equation}	\label{eqn:Orthogonality_e_Wh_4}
 	\left\| e \right\|_{L^2} \leq \gamma h \left\| e \right\|_{H^1}.
 \end{equation}
-We may now apply the error stability estimate in (\ref{eqn:H1_Error_Estimate_FEM}) together and the interpolation error estimate
+We may now apply the error stability estimate in (\ref{eqn:H1_Error_Estimate_FEM}) together with the interpolation error estimate
 in (\ref{eqn:FEM_Error_in_H1}) to \cref{eqn:Orthogonality_e_Wh_4}. Thus
 \begin{equation}	\label{eqn:FEM_Error_To_h_And_Exact_Sol_1}
 	\begin{aligned}

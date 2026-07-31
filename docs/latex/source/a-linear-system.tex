@@ -44,13 +44,13 @@ Note that \cref{eqn:FEM_Eq_Sys} is then a linear system of equations, i.e.,
 \Gls{basisFunction}s may be chosen among a variety of functions with \gls{globalSupport}
 or \gls{localSupport}. It is common, though, to choose them as polynomials with \gls{localSupport}. The polynomial
 choice can be defended by the fact that these
-functions are easy to evaluate. The \gls{localSupport} means that $\varphi_{i}$ is only non-zero over a few \glspl{element}.
+functions are easy to evaluate. The \gls{localSupport} means that $\varphi_{i}$ is only nonzero over a few \glspl{element}.
 As we will see this gives a sparse banded \gls{stiffnessMatrix}, because basis functions interact only when their supports overlap.
 In a \gls{sparseMat}, most entries are zero. In the literature we may find
 efficient \glspl{algorithm} for both saving and solving a \gls{linearEquationSystem} with \glspl{sparseMat}. \\
 
 A typical \gls{basisFunction} $\varphi _{i}$ actually consists of two polynomials joined together at \gls{nodePoint} $x_i$.
-It would be then desirable that these functions are continuous at the conjuncture. We may also be interested in more
+It would be then desirable that these functions are continuous at the junction. We may also be interested in more
 smoothness, for example \glsentryname{order1Cont}. In mathematical formulation we seek \glsname{ordernCont} where $n$ is
 a positive integer. While \glsentryname{order0Cont} is achieved by linear polynomials, we have to increase polynomial degree to at
 least $3$ to guarantee \glsentryname{order1Cont} and to at least $5$ for \glsentryname{order2Cont}. Both choices of linear and

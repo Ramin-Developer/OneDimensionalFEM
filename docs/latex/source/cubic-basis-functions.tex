@@ -1,16 +1,15 @@
 \section{Cubic Basis-Functions} \label{cha:Cubic_Basis_Function}
-In \gls{FEM} generally and in a one-dimensional \gls{FEM} specifically, cubic polynomials are vastly chosen as \glspl{basisFunction}.
+Cubic polynomial basis functions are widely used in FEM, including in one-dimensional problems.
 There are several reasons for this popularity:
 \begin{enumerate}
-	\item Cubic basis-functions support \glsentryname{order1Cont}. This is a more smooth solution compared to linear choice of \glspl{basisFunction}.
+	\item Cubic basis functions support \glsentryname{order1Cont}, producing a smoother solution than the linear choice.
 
-	\item They generally give rise to a more precise solution as well as a faster convergence speed than the linear case.
+	\item They generally provide a more accurate solution and a higher convergence rate than the linear case.
 
-	\item The cost of going up from linear to cubic \glspl{basisFunction} is low, specially for a one-dimensional problem.
+	\item The additional cost of using cubic rather than linear basis functions is modest, especially in one dimension.
 \end{enumerate}
 %
-Remember that in the linear case it was attached a \gls{basisFunction} to every node, totally $N + 1$
-functions. It gave us $2$ \glspl{shapeFunction} over each \gls{element}. \\
+In the linear case, one basis function was associated with each node, giving $N+1$ functions and two shape functions per element.
 
 In the cubic case, on the other hand, we need $4$ \glspl{shapeFunction} over each \gls{element}, or totally $2N + 2$ \glspl{basisFunction}.
 Each cubic \gls{shapeFunction} has 4 parameters and thus must have $4$ conditions to be fully specified. The first $2$ conditions
@@ -90,7 +89,7 @@ Above we saw how we could calculate the global \gls{stiffnessMatrix} and \gls{lo
 see under \cref{cha:Element_Matrix_Linear,cha:Element_Load_Linear,cha:Assembly_Process_Linear}. Note that we defined
 two \glspl{shapeFunction} over a typical \gls{element} in the linear case. The \gls{elementMatrix} and \gls{loadVector} for
 \gls{linearFEMSol} are then \gls{Ke} $\in$ \glsentryname{R22} and \gls{be} $\in$ \glsentryname{R21}, respectively. In the cubic
-case, on the other hand, there are $4$ non-zero \glspl{shapeFunction} over each \gls{element}. Thus
+case, on the other hand, there are $4$ nonzero \glspl{shapeFunction} over each \gls{element}. Thus
 \begin{subequations}
 	\begin{alignat}{2}
 		\glsentryname{Kmne} &= \frac{1}{h} \int_{0}^{1} q \Bigl[ \left( e - 1 + \xi \right) h \Bigr] \frac{ d \psi_m }{ d \xi }
@@ -99,12 +98,12 @@ case, on the other hand, there are $4$ non-zero \glspl{shapeFunction} over each 
 				\quad& m = 1, \dots, 4.	\label{eqn:Cubic_Element_Load_Entries}
 	\end{alignat}
 \end{subequations}	\text{}
-\Cref{lst:Elem_Cont} shows MATLAB-code for implementation of element contributions in both linear and cubic case.
+\Cref{lst:Elem_Cont} shows MATLAB code for implementation of element contributions in both linear and cubic case.
 %
 \subsection{Assembly Process} \label{cha:Assembly_Process_Cubic}
 Again, denote by \gls{K} and \gls{b} the global \gls{stiffnessMatrix} and \gls{loadVector}. Also let \gls{KGlobalE} and
 \gls{bGlobalE} describe status of \gls{K} and \gls{b} after addition of element and load contributions from elements
-$1,2, \ldots, e$. Then assembly process with cubic basis-functions are visualized in \crefrange{fig:K_1_Cubic}{fig:K_4_Cubic} and \cref{fig:b_1_To_b_4_Cubic}. MATLAB-code in \cref{lst:Setup_Eq_Sys} implements this process in both linear and cubic case.
+$1,2, \ldots, e$. Then assembly process with cubic basis functions are visualized in \crefrange{fig:K_1_Cubic}{fig:K_4_Cubic} and \cref{fig:b_1_To_b_4_Cubic}. MATLAB code in \cref{lst:Setup_Eq_Sys} implements this process in both linear and cubic case.
 
 % ------------------ Insert Visualization of Cubic Assembly Process ------------------
 \input{assembly-cubic}

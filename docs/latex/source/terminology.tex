@@ -11,11 +11,9 @@
 	name={bar},
 	first={\emph{bar}},
 	sort=Bar,
-	description={In s structural mechanics, a bar is a component characterized by two properties: First, it has a one preferred
-		dimension called the longitudinal or axial dimension. This defines the longitudinal axis and is much larger than the other
-		two, which are collectively known as transverse dimensions. The intersection of a plane normal to longitudinal dimension
-		and the bar defines the cross sections. The longitudinal dimension defines the longitudinal axis. Second, The bar only
-		resists an internal axial loads}}
+	description={In structural mechanics, a bar is a component whose axial dimension is much larger than its two transverse
+		dimensions. A cross-section is the intersection of the bar with a plane normal to its longitudinal axis. A bar resists
+		internal axial loads}}
 			
 \newglossaryentry{dof}{
 	type=terminology,
@@ -25,13 +23,9 @@
 	plural={Degrees of Freedom},
 	firstplural={\emph{Degrees of Freedom}},
 	sort=Degree of Freedom,
-	description={In mechanics the degrees of freedom is the number of independent parameters that determine the state of a physical
-		system. The motion of a ship at sea, for example, has the six degrees of freedom of a rigid body, three translational and
-		three rotational parameters. The translational parameters are heaving (moving up and down), swaying (moving left and right)
-		and surging (moving forward and backward). The rotational parameters are pitching (tilting forward and backward), yawing
-		(turning left and right) and rolling (tilting side to side). Other terms of DOFs are generalized coordinates, state variables
-		and primary variables. A system or a mathematical model is discrete, if its DOF-number is finite, otherwise continuous.
-		Because FEM is a discretization method, the number of DOF of a FEM model is necessarily finite, collected in a column vector}}
+	description={In mechanics, the number of degrees of freedom is the number of independent parameters required to determine the
+		state of a physical system. Depending on the context, they may be represented by generalized coordinates, state variables,
+		or primary variables. A finite element model has finitely many degrees of freedom, collected in a coefficient vector}}
 		
 \newglossaryentry{energyConservation}{
 	type=terminology,
@@ -48,45 +42,37 @@
 	name={Minimum Potential Energy},
 	first={\emph{Minimum Potential Energy}},
 	sort=Minimum Potential Energy,
-	description={The principle of minimum total potential energy has many applications in structural analysis and solid mechanics.
-		It asserts that a structure or body shall deform or displace to a position that minimizes the total potential energy, with the
-		lost potential energy being dissipated as heat. The tendency to minimum total potential energy is due to the second law of
-		thermodynamics, which states that the entropy of a system will maximize at equilibrium. Given two possibilities - a low heat
-		content and a high potential energy, or a high heat content and low potential energy, the latter will be the state with the
-		highest entropy, and will therefore be the state towards which the system moves}}	
+	description={For a conservative elastic system in stable equilibrium, the admissible displacement field minimizes the system's
+		total potential energy. Admissible fields must satisfy the essential boundary conditions}}
 	
 \newglossaryentry{GalerkinMethod}{
 	type=terminology,
 	name={Galerkin's Method},
 	first={\emph{Galerkin's Method}},
 	sort=Galerkin Method,
-	description={Named after the Russian mathematician Boris Galerkin, this is a class of methods for converting a continuous
-		operator problem (such as a differential equation) to a discrete problem. In principle, it is the equivalent of applying the
-		method of variation of parameters to a function space, by converting the equation to a weak formulation. Typically one then
-		applies some constraints on the function space to characterize the space with a finite set of basis functions. Often when
-		using a Galerkin method one also gives the name along with typical approximation methods used, such as Petrov-Galerkin
-		method (after Alexander G. Petrov) or Ritz-Galerkin method (after Walther Ritz)}}
+	description={A Galerkin method approximates the solution in a finite-dimensional trial space and requires the residual to be
+		orthogonal to a chosen test space, commonly after deriving a weak formulation}}
 		
 \newglossaryentry{diagonalMatrix}{
 	type=terminology,
 	name={diagonal matrix},
 	first={\emph{diagonal matrix}},
 	sort=Diagonal Matrix,
-	description={In a diagonal matrix all non-zero entries are placed on a few diagonals}}
+	description={A diagonal matrix is a square matrix whose entries outside the main diagonal are zero}}
 	
 \newglossaryentry{smoothFunction}{
 	type=terminology,
 	name={smooth function},
 	sort=Smooth Function,
-	description={A function which supports \gls{orderInfCont} }}
+	description={A smooth function has continuous derivatives of all orders on its domain}}
 	
 \newglossaryentry{finite}{
 	type=terminology,
 	name={finite},
 	first={\emph{Finite}},
 	sort=Finite,
-	description={This term refers to the fact that the \gls{FEMSol} is a truncated power series, i.e., the upper limit in the power
-	series, $\infty$, is replaced by a finite integer}}
+	description={In FEM, finite refers to representing the solution in a finite-dimensional function space defined over a finite
+		number of elements}}
 
 \newglossaryentry{finiteDiffMethod}{
 	type=terminology,
@@ -101,9 +87,7 @@
 	name={Well-Defined Problem},
 	first={\emph{Well-Defined Problem}},
 	sort=Well-Defined Problem,
-	description={In mathematics we say a problem is well-defined if it has a unique solution. A well-defined problem expressed as
-		\glspl{diffEq} always specifies values of the unknown function or its derivatives on the boundaries and/or at the start or on
-		the end, i.e., for $t = t_0$, $t = T$ or $t = \infty$ }}
+	description={A mathematical problem is well posed if a solution exists, is unique, and depends continuously on the problem data}}
 
 \newglossaryentry{domain}{type=terminology,name={domain},first={\emph{domain}},sort=Domain,
 	description={See \gls{region}}}
@@ -136,7 +120,7 @@
 	name={boundary},
 	plural={boundaries},first={\emph{boundary}},firstplural={\emph{boundaries}},sort=Boundary,
 	description={End points of the function's definition interval. In a \gls{1DimProblem} with $D_f = \left[ a, b \right]$
-		the bounaries are either \gls{leftBoundary} at $x = a$ or \gls{rightBoundary} at $x = b$}}
+		the boundaries are either \gls{leftBoundary} at $x = a$ or \gls{rightBoundary} at $x = b$}}
 
 \newglossaryentry{leftBoundary}{
 	type=terminology,
@@ -185,14 +169,14 @@
 
 \newglossaryentry{basisFunction}{
 	type=terminology,
-	name={basis-function},
+	name={basis function},
 	sort=Basis-Function,
-	description={In the one-dimensional case, a typical basis-function $\varphi _{i}\left( x\right)$ consists of two
+	description={In the one-dimensional case, a typical basis function $\varphi _{i}\left( x\right)$ consists of two
 		\glspl{shapeFunction} joined at node point $x_{i}$}}
 
 \newglossaryentry{shapeFunction}{
 	type=terminology,
-	name={shape-function},
+	name={shape function},
 	sort=Shape-Function,
 	description={In \gls{FEM}-terminology the solution of a \gls{diffEq}  is expressed as a linear combination of independent
 		Shape-functions. This is a truncation of the exact power series for a smooth function. Shape-functions are usually chosen as
@@ -214,8 +198,8 @@
 	type=terminology,
 	name={local support},
 	sort=Local Support,
-	description={A function is said to have a local support if it only is non-zero on a small part of the region, identically
-	0 otherwise}}
+	description={A function has local support if it is nonzero only on a limited subset of the domain and is identically zero
+	elsewhere}}
 
 \newglossaryentry{DirichletCondition}{
 	type=terminology,
@@ -233,7 +217,7 @@
 	type=terminology,
 	name={Normal Condition},
 	sort=Normal Condition,
-	description={In \gls{1DimProblem}, a Normal Condition specifies the value of solution's first derivative}}
+	description={In a one-dimensional problem, a normal condition specifies a boundary flux or traction}}
 	
 \newglossaryentry{naturalCondition}{
 	type=terminology,
@@ -245,8 +229,7 @@
 	type=terminology,
 	name={differential equation},
 	sort=Differential Equation,
-	description={A differential equation is an implicit relatation between the function's derivatives and its independent variables,
-		eventually the function itself}}	
+	description={A differential equation relates an unknown function, its derivatives, and one or more independent variables}}
 	
 \newglossaryentry{sysOfDiffEqs}{
 	type=terminology,
@@ -266,11 +249,11 @@
 
 \newglossaryentry{PDE}{
 	type=terminology,
-	name={Parial Differential Equation},
+	name={Partial Differential Equation},
 	symbol={PDE},
 	first={Partial Differential Equation (PDE)},
 	firstplural={Partial Differential Equations (PDEs)},
-	sort=Parial Differential Equation,
+	sort=Partial Differential Equation,
 	description={We call a \gls{diffEq} partial if the unknown function has at least two independent variables}}
 	
 \newglossaryentry{1DimProblem}{
@@ -284,12 +267,12 @@
 	type=terminology,
 	name={linear differential equation},sort=Linear Differential Equation,
 	description={A \gls{diffEq} is linear if the unknown function and all of its derivatives appear linearly in all terms, otherwise
-		the equation is non-linear. A \gls{sysOfDiffEqs} is linear if all of its constituting \glspl{diffEq} are linear, otherwise it
-		is non-linear}}
+		the equation is nonlinear. A \gls{sysOfDiffEqs} is linear if all of its constituting \glspl{diffEq} are linear, otherwise it
+		is nonlinear}}
 
 \newglossaryentry{nonLinearDiffEq}{
 	type=terminology,
-	name={non-linear differential equation},
+	name={nonlinear differential equation},
 	sort=Non-Linear Differential Equation,
 	description={See \gls{linearDiffEq}}}
 
@@ -336,16 +319,15 @@
 	type=terminology,
 	name={adaptive meshing},
 	sort=Aadaptive Meshing,
-	description={is the process of initially \gls{meshing} the \gls{region}, solve the problem, analyse the solution, return to the
-		initial meshing and make it finer/grosser in the areas with rapid/slow solution change. This improves the solution and may be
-		carried out iteratively. It will also result in a \gls{nonUniformMeshing}}}
+	description={The iterative process of solving on an initial mesh and then refining or coarsening regions according to estimated
+		solution behavior or error. It generally produces a \gls{nonUniformMeshing}}}
 
 \newglossaryentry{element}{
 	type=terminology,
 	name={element},
 	first={\emph{Element}},
 	sort=Element,
-	description={In \gls{FEM}-terminology an element is a part of the problem \gls{region}. Elements are ditinct, i.e.,
+	description={In \gls{FEM}-terminology an element is a part of the problem \gls{region}. Elements are distinct, i.e.,
 		they do not overlap, except than \gls{adjacentElements} on a part of their boundaries}}
 
 \newglossaryentry{nodePoint}{
@@ -365,8 +347,8 @@
 \newglossaryentry{linearEquationSystem}{
 	type=terminology,
 	name={linear equation system},sort=Linear Equation System,
-	description={is a set of algebraic equations linear with respect to all unknowns. This system has a unique solution if and only
-		if the coefficient matrix $\mathbf{A}$ is quadratic and $\det \left( \mathbf{A} \right) \neq 0$}}
+	description={A set of algebraic equations linear in all unknowns. A square system has a unique solution if and only if its
+		coefficient matrix $\mathbf{A}$ is nonsingular}}
 		
 \newglossaryentry{elementLoad}{
 	type=terminology,
@@ -405,9 +387,8 @@
 	type=terminology,
 	name={numerical solution},
 	sort=Numerical Solution,
-	description={For the majority of real world problems the problem's \gls{analSol} is impossible or too complicated to obtain.
-		In these cases we have to resort to numerical approaches which result in numerical solutions. A numerical solution is an
-		approximation to the \gls{analSol}}}
+	description={An approximation obtained by a numerical method when an analytical solution is unavailable or impractical to
+		compute}}
 
 \newglossaryentry{approxSol}{
 	type=terminology,
@@ -421,23 +402,20 @@
 	first={Finite Element Method (FEM)},
 	symbol={FEM},
 	sort=Finite Element Method,
-	description={is a numerical approach to solving \glspl{diffEq}. The problem may consist of a single \gls{diffEq} or a
-	\gls{sysOfDiffEqs}. Nature of the differential equation(s) may be ordinary or partial, with any complexity, linear or
-	non-linear. It handles both \glspl{boundaryCondition} and \glspl{initialCondition}. This report is meant as an introduction
-	to Finite Element Method }}
+	description={A numerical method that approximates solutions of differential equations in a finite-dimensional space assembled
+		from local element contributions}}
 	
 \newglossaryentry{FEMSol}{
 	type=terminology,
-	name={FEM-Solution},
+	name={finite element solution},
 	sort=FEM Solution,
-	description={The numerical solution obtained by applying the \gls{FEM} to the problem in hand. In this report we apply \gls{FEM}
-		to a one-dimensional bar under an axial load. We choose two different types of \glspl{basisFunction}, linear and
-		cubic polynomials. The results are then refered to as \gls{linearFEMSol} and \gls{cubicFEMSol} }}
+	description={The numerical approximation obtained by applying \gls{FEM}. This report uses linear and cubic polynomial basis
+		functions, producing \gls{linearFEMSol} and \gls{cubicFEMSol}, respectively}}
 		
 \newglossaryentry{linearFEMSol}{
 	type=terminology,
 	name={linear-FEM-solution},
-	sort=Linear-FEM-Solution,
+	sort=Linear-finite element solution,
 	description={The \gls{FEMSol} of the bar problem with \gls{piecewiseLinear} \glspl{basisFunction} }}
 	
 \newglossaryentry{piecewiseLinear}{
@@ -457,7 +435,7 @@
 \newglossaryentry{cubicFEMSol}{
 	type=terminology,
 	name={cubic-FEM-solution},
-	sort=Cubic-FEM-Solution,
+	sort=Cubic-finite element solution,
 	description={The \gls{FEMSol} of the bar problem with \gls{piecewiseCubic} \glspl{basisFunction} }}	
 	
 \newglossaryentry{solConv}{
@@ -465,7 +443,7 @@
 	name={solution convergence},
 	sort=Solution Convergence,
 	description={A numerical solution is said to converge if the deviation between consecutive solution goes to zero with increasing
-		No. of nodal points. In this report we solve the bar problem numerically for the cases with known analytical solutions.
+		number of nodal points. In this report we solve the bar problem numerically for the cases with known analytical solutions.
 		We measure then convergence of the \gls{FEMSol} towards the \gls{analSol} }}
 	
 \newglossaryentry{convFactor}{
@@ -478,7 +456,7 @@
 	type=terminology,
 	name={algorithm},
 	sort=Algorithm,
-	description={In mathematics and software developement an algorithm is a step-by-step procedure for calculations}}
+	description={In mathematics and software development an algorithm is a step-by-step procedure for calculations}}
 	
 \newglossaryentry{localCoord}{
 	type=terminology,
@@ -519,7 +497,7 @@
 	name={symmetrical matrix},
 	plural={symmetrical matrices},
 	sort=Symmetrical Matrix,
-	description={A matrix $\mathbf{A}$ is symmetrical if $\mathbf{A} = \mathbf{A}^T \Longleftrightarrow a_{ij} = a_{ji}$ }}
+	description={A matrix $\mathbf{A}$ is symmetric if $\mathbf{A} = \mathbf{A}^T$, equivalently $a_{ij}=a_{ji}$}}
 
 \newglossaryentry{posDef}{
 	type=terminology,
@@ -531,9 +509,9 @@
 	type=terminology,
 	name={singular},
 	sort=Singular,
-	description={A quadratic matrix $\mathbf{A}$ is singular if $\det \left( \mathbf{A} \right) = 0$, otherwise it is non-singular.
-		The equation system $\mathbf{A} x = \mathbf{b}$ with a singular matrix $\mathbf{A}$ will not be well-defined, i.e., based on
-		the vector $\mathbf{b}$ it will either have no solution at all or infinite No. of solutions}}	
+	description={A square matrix $\mathbf{A}$ is singular if $\det \left( \mathbf{A} \right)=0$; otherwise, it is nonsingular.
+		Depending on $\mathbf{b}$, the system $\mathbf{A}x=\mathbf{b}$ with singular $\mathbf{A}$ has either no solution or infinitely
+		many solutions}}
 	
 \newglossaryentry{nonSingular}{
 	type=terminology,

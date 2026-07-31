@@ -33,7 +33,7 @@ Solving these systems give fully specified \glspl{shapeFunction} as
 	\label{fig:Linear_Shape_Functions}
 \end{figure}
 \begin{figure}
-	\includegraphics[width = \textwidth]{../Figures/linear-basis-functions}
+	\includegraphics[width = \textwidth]{../figures/linear-basis-functions}
 	\caption[Choice of Cubic Polynomials for Basis-Functions]
 		{Choice of linear polynomials for Basis-Functions gives a solution which is $\mathcal{O} \left( 0 \right)$-continuous.}
 		\label{fig:Linear_Basis_Functions}
@@ -80,8 +80,8 @@ integrals each over a single \gls{element}, i.e.,
 			&= \sum \limits_{e = 1}^{\gls{N}} \int_{x \in \Omega_{e}} \gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x.
 	\end{aligned}
 \end{equation}
-Observe that $\varphi_i \left( x \right)$ is only non-zero over the two \gls{adjacentElements} $\Omega_{i - 1}$ and $\Omega_{i}$.
-In the same manner $\varphi_j \left( x \right)$ is only non-zero over $\Omega_{j - 1}$ and $\Omega_{j}$. Thus the global stiffness
+Observe that $\varphi_i \left( x \right)$ is only nonzero over the two \gls{adjacentElements} $\Omega_{i - 1}$ and $\Omega_{i}$.
+In the same manner $\varphi_j \left( x \right)$ is only nonzero over $\Omega_{j - 1}$ and $\Omega_{j}$. Thus the global stiffness
 matrix is tridiagonal, i.e.,
 \begin{equation}	\label{eqn:Global_Stiffness_Properties}
 	\begin{aligned}
@@ -108,7 +108,7 @@ matrix is tridiagonal, i.e.,
 Consider now \cref{eqn:Stiffness_Linear_Diag1_1} and note that it consists of contribution from a single element,
 $\Omega_{i}$. We have derived shape functions in terms of the local variable $\xi \in \left[ 0, 1 \right]$. Generally speaking,
 we need then a transformation from the global variable $x \in \Omega_{e} = \left[ x_e, x_{e + 1} \right]$ to the local variable
-$\xi \in \left[ 0, 1 \right]$. This brings the global basis-function $\varphi_i$ back to the local shape functions
+$\xi \in \left[ 0, 1 \right]$. This brings the global basis function $\varphi_i$ back to the local shape functions
 $\psi_m, \quad m = 1, 2$. The variable change is given by
 \begin{equation}	\label{eqn:Global_2_Local_1}
 	\begin{alignedat}{3}
@@ -170,7 +170,7 @@ components from \cref{eqn:Load_Vector}
 	\glsentryname{bi} = P  \varphi _{i}\left( x \right) \Bigg \vert_{x = 1} +
 	\int_{0}^{1} \gls{f} \gls{phii} \dd x.
 \end{equation}
-Note again that the only non-zero basis-function at $x = 1$ is the last one, i.e.,
+Note again that the only nonzero basis function at $x = 1$ is the last one, i.e.,
 \begin{align}
 	\varphi_i \left( x \right) \Big \vert_{x = 1} &= 
 	\begin{cases}

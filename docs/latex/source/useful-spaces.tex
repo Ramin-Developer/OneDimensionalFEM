@@ -38,7 +38,7 @@
 	\end{subequations}	
 \end{definition}
 \begin{lemma}	\label{lem:Cauchy-Schwarz}
-	Norms $\left\| f \right\|_{ L^2 }$ and $\left\| g \right\|_{ L^2 }$ obey Cauchy-Schwarz Inequality, i.e.,
+	The $L^2$ inner product satisfies the Cauchy--Schwarz inequality:
 	\begin{equation}	\label{eqn:Cauchy_Schwarz}
 		\vert \glssymbol{L2InnerProduct} \vert \leq \glssymbol{L2Normf} \glsentrysymbol{L2Normg},
 			\qquad \forall f, g \in \glssymbol{spaceL2}.
@@ -46,13 +46,13 @@
 \end{lemma}
 We also define a separate norm for functions in \gls{spaceH1}.
 \begin{definition}	\label{def:H1_Norm}
-	Let $\left\| f^\prime \right\|_{ H^1 }$ denote \gls{H1Normf}. Then
+	Let $\left\| f \right\|_{ H^1 }$ denote \gls{H1Normf}. Then
 	\begin{equation}	\label{eqn:H1Norm}
 		\glssymbol{H1Normf} = \sqrt{ \glssymbol{L2Normf}^2 + \big\| f^\prime \big\|_{ L^2 }^2 }.
 	\end{equation}
 \end{definition}
-Note that while $\left\| f^\prime \right\|_{ L^2 }$ only measures the function magnitude, $\left\| f^\prime \right\|_{ H^1 }$ is a
-measure of both function itself and its first derivative. We may also define a measure for \glsentryname{L2Norm} of the first derivative:
+While $\|f\|_{L^2}$ measures only the magnitude of $f$, $\|f\|_{H^1}$ measures both $f$ and its first derivative. The $L^2$
+norm of the first derivative defines the $H^1$ seminorm:
 \begin{definition}	\label{def:H1_Semi_Norm}
 	Let $\vert f \vert_{ H^1 }$ denote \gls{H1SemiNormf}. Then
 	\begin{equation}	\label{eqn:H1_Semi_Norm}
@@ -67,11 +67,12 @@ To measure magnitude of the second derivative we define \glssymbol{H2SemiNormf}.
 	\end{equation}
 \end{definition}
 \begin{remark}
-	A \emph{true} norm is only zero when its input is zero. Norms $\vert f \vert_{ H^1 }$ and $\vert f \vert_{ H^2 }$ can give zero
-	for non-zero inputs and are therefore called semi-norms.\footnote{For example for a linear polynomial function $f = ax + b$, we
+	A norm is zero if and only if its argument is the zero function. The quantities $\vert f \vert_{ H^1 }$ and
+	$\vert f \vert_{ H^2 }$ can vanish for nonzero functions and are therefore seminorms.\footnote{For example, for a linear
+	polynomial $f = ax + b$, we
 	have $\vert f \vert_{ H^2 } = 0$.} In all other aspects they behave (mathematically) as norms.
 \end{remark}
-Finally we define \gls{aForm}
+Finally, we define \gls{aForm}.
 \begin{definition}	\label{def:a_Form}
 	Let \glssymbol{aForm} denote \gls{aForm}. Then
 	\begin{equation}	\label{eqn:a_Norm}
@@ -79,7 +80,7 @@ Finally we define \gls{aForm}
 	\end{equation}
 \end{definition}
 \begin{remark}
-	Note that \glssymbol{aForm} is a kind of inner product. It gives the $L^2$-Inner Product of its arguments' derivatives.
+	On $H_0^1$, \glssymbol{aForm} is an inner product: it is the $L^2$ inner product of the derivatives of its arguments.
 	Thus, for $f = g$, we have
 	\begin{equation}
 		a \left( f, f \right) = \int_0^1 \Bigl[ f^{\prime} \left(x \right) \Bigr]^2 \dd x = \glssymbol{H1SemiNormf}^2.
