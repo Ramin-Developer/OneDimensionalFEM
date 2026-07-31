@@ -33,11 +33,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### M3. Harden coefficient admissibility
 
-- Define valid coefficient counts and domains for every `q_Type`.
-- Reject zero exponential parameters, singular rational denominators, non-finite values, and invalid aliases consistently.
-- Add positive and negative tests for every supported model.
+- [x] Define valid coefficient counts and domains for every `q_Type`.
+- [x] Reject zero exponential parameters, singular rational denominators, non-finite values, and invalid aliases consistently.
+- [x] Add positive and negative tests for every supported model.
 
-**Value:** High. Prevents undefined or misleading solutions.
+**Status:** Complete. All public construction paths share canonical aliases and enforce finite, strictly positive rigidity on $[0,1]$.
 
 ## Priority 2: Trustworthy Verification
 
