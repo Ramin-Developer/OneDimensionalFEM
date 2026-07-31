@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: fix/validate-q-coefficients
+- What changed: Centralized rigidity coefficient validation, canonicalized aliases, enforced exact counts and positive finite domains, and documented admissible model parameters.
+- Tests run: Complete guarded MATLAB suite with ten test files, exit code 0.
+- Next action: implement V1 independent element matrix and load oracles.
+
+- Date: 2026-07-31
 - Branch: fix/correct-natural-boundary
 - What changed: Corrected natural boundary enforcement, removed the cubic endpoint slope overconstraint, added independent constant- and variable-coefficient weak-row tests, and regenerated affected evidence.
 - Tests run: Complete guarded MATLAB suite with nine test files, exit code 0.
