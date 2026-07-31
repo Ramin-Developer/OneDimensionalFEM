@@ -2,6 +2,7 @@ function tests = test_element_assembly
 %TEST_ELEMENT_ASSEMBLY Verify basic element matrix/vector consistency.
 
 tests = functiontests(localfunctions);
+end
 
 function testElementSymmetryAndSizes(~)
 [psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub] = Def_FEM_Func;
@@ -23,6 +24,7 @@ assert(isequal(size(b_Cub), [4 1]));
 
 assert(norm(K_Lin - K_Lin.', inf) < 1e-12, 'Linear element matrix not symmetric.');
 assert(norm(K_Cub - K_Cub.', inf) < 1e-12, 'Cubic element matrix not symmetric.');
+end
 
 function testElementEnergyNonNegative(~)
 [psi_Lin, psi_Prime_Lin, psi_Cub, psi_Prime_Cub] = Def_FEM_Func;
@@ -45,9 +47,10 @@ energyCub = vCub.' * K_Cub * vCub;
 
 assert(energyLin > -1e-10, 'Linear element matrix violates non-negative energy check.');
 assert(energyCub > -1e-10, 'Cubic element matrix violates non-negative energy check.');
+end
 
-function testRejectsInvalidFunctions(~)
-addpath(genpath('src/matlab'));
-verifyError(@() Elem_Cont(0.5, 1, 1, @(x) x, { @(x) x }, { @(x) x }, { @(x) x }, { @(x) x }, 1e-8), ...
+function testRejectsInvalidFunctions(testCase)
+verifyError(testCase, @() Elem_Cont(0.5, 1, 1, @(x) x, ...
+    { @(x) x }, { @(x) x }, { @(x) x }, { @(x) x }, 1e-8), ...
     'Elem_Cont:InvalidFunctions');
 end

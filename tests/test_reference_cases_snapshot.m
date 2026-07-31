@@ -36,8 +36,8 @@ for idx = 1:numel(selectedNumElements)
     verifyLessThanOrEqual(testCase, max(abs(exactVals - referenceCase.exactVals)), tol.fieldAbs);
     verifyLessThanOrEqual(testCase, max(abs(linVals - referenceCase.linVals)), tol.fieldAbs);
     verifyLessThanOrEqual(testCase, max(abs(cubVals - referenceCase.cubVals)), tol.fieldAbs);
-    verifyLessThanOrEqual(testCase, max(abs(femData.sq_Error_Lin - referenceCase.sqErrorLin)), tol.errorAbs);
-    verifyLessThanOrEqual(testCase, max(abs(femData.sq_Error_Cub - referenceCase.sqErrorCub)), tol.errorAbs);
+    verifyLessThanOrEqual(testCase, max(abs(femData.l2_Error_Lin - referenceCase.l2ErrorLin)), tol.errorAbs);
+    verifyLessThanOrEqual(testCase, max(abs(femData.l2_Error_Cub - referenceCase.l2ErrorCub)), tol.errorAbs);
 end
 
 function values = EvaluateFieldsAtSamples(localFields, numElements, sampleX)

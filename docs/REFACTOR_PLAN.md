@@ -14,12 +14,13 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### M1. Correct the error norm
 
-- Multiply each reference-element squared-error integral by the physical Jacobian $h$.
-- Consolidate duplicated error integration in `Compute_Error_Summary.m` and `Compute_FEM_Data.m`.
-- Rename misleading `sq_Error_*` outputs or clearly define their compatibility meaning.
-- Add analytic norm tests, update convergence tests, snapshots, tables, and report claims.
+- [x] Multiply each reference-element squared-error integral by the physical Jacobian $h$.
+- [x] Consolidate duplicated error integration in `Compute_Error_Summary.m` and `Compute_FEM_Data.m`.
+- [x] Add canonical `l2_Error_*` outputs while retaining `sq_Error_*` as compatibility aliases.
+- [x] Add an independent analytic norm test and correct duplicated test integration.
+- [x] Regenerate affected snapshots and report tables, then validate the complete suite.
 
-**Value:** Critical. Current error magnitudes are wrong and existing snapshots preserve the defect.
+**Status:** Complete. Error magnitudes, snapshots, report tables, and terminology now use the physical $L^2$ norm.
 
 ### M2. Correct and verify boundary treatment
 

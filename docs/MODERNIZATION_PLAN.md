@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: fix/correct-l2-error-norm
+- What changed: Corrected the physical $L^2$ error norm, consolidated its implementation, regenerated evidence, synchronized the report, and restored all R2017a test files to the guarded suite.
+- Tests run: Complete MATLAB suite with exclusion detection, exit code 0.
+- Next action: implement M2 boundary-treatment verification and correction.
+
+- Date: 2026-07-31
 - Branch: main
 - What changed: Updated the living plan to reflect that validation hardening is complete for the current scope and documented the highest-value near-term performance tasks.
 - Tests run: MATLAB regression suite executed via headless runner, exit code 0.

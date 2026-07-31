@@ -11,10 +11,9 @@ approaches. In case of actual convergence we also need a factor that indicates s
 	\end{itemize}
 \end{enumerate}
 Define now following measures for solution deviations: \\
-\begin{definition} \label{def:Squared_Error}
-	In a Squared Error Measure we penalize the deviation between the numerical and analytical solutions by squaring its absolute
-	value. Then we integrate this function over the whole region and take its square root, i.e.,
-	\begin{equation}	\label{eqn:Squared_Error}
+\begin{definition} \label{def:L2_Error}
+	The $L^2$ error norm measures the deviation between the numerical and analytical solutions as
+	\begin{equation}	\label{eqn:L2_Error}
 		\gls{ENsq} = \Bigg\{ \int_{x=0}^{1}\Big[ \gls{uEx} - \gls{uNfem} \Big] ^{2} \dd x \Bigg\}^{1/2}.
 	\end{equation}
 \end{definition}
@@ -25,13 +24,13 @@ Define now following measures for solution deviations: \\
 		\gls{ENmax} &= \max_{ 0 \leq x \leq 1 } \Big \vert  \gls{uEx} - \gls{uNfem} \Big \vert.
 	\end{align}
 \end{definition}
-In this report we have chosen $E_{sq}$ for measuring the deviation. Having defined an error measure we move forward and define a
+In this report we have chosen the $L^2$ error norm, denoted by $E_{sq}$, for measuring the deviation. Having defined an error measure we move forward and define a
 \gls{convFactor}.
 %
 \begin{definition} \label{def:Conv_Factor}
 	Suppose that we have solved problem in \crefrange{eqn:FEM_Problem}{eqn:FEM_Right_Boundary} by applying \gls{FEM} with two different No.
 	of elements, $N_{1}$ and $N_{2} = 2N_{1}$. Denote these solutions by $u_{1}$ and $u_{2}$ and let $E_{1}$
-	and $E_{2}$ indicate the solution errors in the squared sense, see \cref{def:Squared_Error}. Define a \gls{convFactor} by
+	and $E_{2}$ indicate the $L^2$ error norms, see \cref{def:L2_Error}. Define a \gls{convFactor} by
 	\begin{equation} \label{eqn:Conv_Factor}
 		\gls{fConv} = \frac{E_{1}}{E_{2}}.
 	\end{equation}
@@ -44,17 +43,17 @@ In this report we have chosen $E_{sq}$ for measuring the deviation. Having defin
 	\begin{tabular}{| c | c | c | c | c | c |} \hline
 		% A constant
 		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
-		$f_{n} \left( x \right) = 1$ & $4$ & \num{6.1 e-1} & \num{1.4 e-15} & - & -  \\ \hline
-		$f_{n} \left( x \right) = 1$ & $8$	& \num{1.7 e-1} & \num{8.8 e-15} & $3.58$ & - \\ \hline
-		$f_{n} \left( x \right) = 1$ & $16$ & \num{4.5 e-2} & \num{5.0 e-14} & $3.77$ & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{2.4 e-3} & \num{6.7 e-18} & - & -  \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$	& \num{6.7 e-4} & \num{2.6 e-17} & $3.58$ & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{1.8 e-4} & \num{4.6 e-17} & $3.77$ & - \\ \hline
 		% A linear function
-		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{1.0 e0} & \num{5.6 e-4} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x$ & $8$ & \num{2.8 e-1} & \num{3.4 e-5} & $3.61$&$16.3$ \\ \hline
-		$f_{n} \left( x \right)=1 + 2x$ & $16$ & \num{7.3 e-2} & \num{2.1 e-6} & $3.79$ & $16.1$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{3.9 e-3} & \num{2.2 e-6} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$ & \num{1.1 e-3} & \num{1.3 e-7} & $3.61$&$16.3$ \\ \hline
+		$f_{n} \left( x \right)=1 + 2x$ & $16$ & \num{2.8 e-4} & \num{8.3 e-9} & $3.79$ & $16.1$ \\ \hline
 		% A quadratic function
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{5.8 e-1} & \num{7.8 e-4} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{1.6 e-1} & \num{5.1 e-5} & $3.55$ & $15.3$ \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$	& \num{4.3 e-2} & \num{3.2 e-6} & $3.76$ & $15.8$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{2.3 e-3} & \num{3.1 e-6} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{6.4 e-4} & \num{2.0 e-7} & $3.55$ & $15.3$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$	& \num{1.7 e-4} & \num{1.3 e-8} & $3.76$ & $15.8$ \\ \hline
 	\end{tabular}
 	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_1st_Degree_Denom}]
 		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_1st_Degree_Denom} with $e_1 = 10$ and $e_2 = 0.01$
@@ -69,17 +68,17 @@ In this report we have chosen $E_{sq}$ for measuring the deviation. Having defin
 	\begin{tabular}{| c | c | c | c | c | c |} \hline
 		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
 		% A constant
-		$f_{n} \left( x \right) = 1$ & $4$ & \num{1.9 e-1} & \num{5.8 e-4} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1$ & $8$& \num{5.0 e-2} & \num{3.4 e-5} & $3.89$ & $17.0$	\\ \hline
-		$f_{n} \left( x \right) = 1$ & $16$ & \num{1.3 e-2} & \num{2.1 e-6} & $3.94$ & $16.2$	\\ \hline
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{7.6 e-4} & \num{2.3 e-6} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$& \num{2.0 e-4} & \num{1.3 e-7} & $3.89$ & $17.0$	\\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{5.0 e-5} & \num{8.2 e-9} & $3.94$ & $16.2$	\\ \hline
 		% A linear function
-		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{3.4 e-1} & \num{1.9 e-3} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{8.9 e-2} & \num{1.1 e-4} & $3.83$ & $16.7$ \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{2.3 e-2} & \num{6.9 e-6} & $3.93$ & $16.2$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{1.3 e-3} & \num{7.3 e-6} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{3.5 e-4} & \num{4.4 e-7} & $3.83$ & $16.7$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{8.8 e-5} & \num{2.7 e-8} & $3.93$ & $16.2$ \\ \hline
 		% A quadratic function
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{1.7 e-1} & \num{8.6 e-4} & -& - \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{4.2 e-2} & \num{6.2 e-5} & $3.94$ & $14.4$ \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$ & \num{1.1 e-2} & \num{4.0 e-6} & $3.95$ & $15.3$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $4$ & \num{6.5 e-4} & \num{3.4 e-6} & -& - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $8$ & \num{1.6 e-4} & \num{2.4 e-7} & $3.94$ & $13.9$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x - 3x^2$ & $16$ & \num{4.2 e-5} & \num{1.6 e-8} & $3.95$ & $15.4$ \\ \hline
 	\end{tabular}
 	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_2nd_Degree_Denom}]
 		{Error Estimates for \glspl{FEMSol} of \cref{cas:q_2nd_Degree_Denom} with $e_1 = 10$ and $e_2 = 0.01$ and Boundary Parameters $\delta = 0$ and $P = 1$}
@@ -93,17 +92,17 @@ In this report we have chosen $E_{sq}$ for measuring the deviation. Having defin
 	\begin{tabular}{| c | c | c | c | c | c |} \hline
 		\rowcolor{Cream} Load Function & $N$ & \gls{ENlin} & \gls{ENcub} & \gls{fConvLin} & \gls{fConvCub} \\ \hline
 		% A constant
-		$f_{n} \left( x \right) = 1$ & $4$ & \num{1.3 e0}	& \num{4.2 e-3} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1$ & $8$	& \num{3.4 e-1} & \num{2.7 e-4} & $3.92$ & $15.6$ \\ \hline
-		$f_{n} \left( x \right) = 1$ & $16$ & \num{8.5 e-2} & \num{1.7 e-5} & $3.98$ & $15.9$ \\ \hline
+		$f_{n} \left( x \right) = 1$ & $4$ & \num{5.2 e-3}	& \num{1.6 e-5} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1$ & $8$	& \num{1.3 e-3} & \num{1.0 e-6} & $3.92$ & $15.6$ \\ \hline
+		$f_{n} \left( x \right) = 1$ & $16$ & \num{3.3 e-4} & \num{6.6 e-8} & $3.98$ & $15.9$ \\ \hline
 		% A linear function
-		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{3.9 e0} & \num{1.9 e-2} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{1.0 e0} & \num{1.2 e-3} & $3.87$ & $15.5$ \\ \hline
-		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{2.5 e-1} & \num{7.8 e-5} & $3.97$ & $15.9$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $4$	& \num{1.5 e-2} & \num{7.5 e-5} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $8$	& \num{3.9 e-3} & \num{4.8 e-6} & $3.87$ & $15.5$ \\ \hline
+		$f_{n} \left( x \right) = 1 + 2x$ & $16$ & \num{9.8 e-4} & \num{3.0 e-7} & $3.97$ & $15.9$ \\ \hline
 		% A quadratic function
-		$f_{n} \left( x \right) = 1+2x-3x^2$ & $4$ & \num{1.1 e0} & \num{1.7 e-2} & - & - \\ \hline
-		$f_{n} \left( x \right) = 1+2x-3x^2$ & $8$ & \num{2.9 e-1} & \num{1.1 e-3} & $3.87$ & $15.0$ \\ \hline
-		$f_{n} \left( x \right) = 1+2x-3x^2$ & $16$	& \num{7.4 e-2} & \num{7.0 e-5} & $3.96$ & $15.7$ \\ \hline
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $4$ & \num{4.4 e-3} & \num{6.5 e-5} & - & - \\ \hline
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $8$ & \num{1.1 e-3} & \num{4.3 e-6} & $3.87$ & $15.0$ \\ \hline
+		$f_{n} \left( x \right) = 1+2x-3x^2$ & $16$	& \num{2.9 e-4} & \num{2.7 e-7} & $3.96$ & $15.7$ \\ \hline
 
 	\end{tabular}
 	\caption[Error Estimates for \glspl{FEMSol} of \cref{cas:q_Exponential}]
@@ -131,4 +130,4 @@ Convergence speed of \glspl{FEMSol} in \cref{cas:q_1st_Degree_Denom,cas:q_2nd_De
 	\item Convergence speed decreases as by growing \gls{N}. This is of course due the round off error. This fact is more clear for cubic \gls{FEMSol} because of its faster speed of convergence.
 \end{enumerate}	\text{}
 %
-Finally, the code in \cref{lst:Estimate_Error} estimates the squared error of \glspl{FEMSol} compared to the \gls{analSol} in each case.
+Finally, the code in \cref{lst:Estimate_Error} estimates the $L^2$ error norm of each \gls{FEMSol} compared with the \gls{analSol}.
