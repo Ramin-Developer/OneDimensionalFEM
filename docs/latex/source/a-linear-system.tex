@@ -45,8 +45,8 @@ Note that \cref{eqn:FEM_Eq_Sys} is then a linear system of equations, i.e.,
 or \gls{localSupport}. It is common, though, to choose them as polynomials with \gls{localSupport}. The polynomial
 choice can be defended by the fact that these
 functions are easy to evaluate. The \gls{localSupport} means that $\varphi_{i}$ is only non-zero over a few \glspl{element}.
-As we will see this gives a diagonal \gls{stiffnessMatrix}. In a \gls{diagonalMatrix} all non-zero entries are on the diagonals.
-The \gls{stiffnessMatrix} is in addition sparse. In a \gls{sparseMat}, most of entries are zero. In the literature we may find
+As we will see this gives a sparse banded \gls{stiffnessMatrix}, because basis functions interact only when their supports overlap.
+In a \gls{sparseMat}, most entries are zero. In the literature we may find
 efficient \glspl{algorithm} for both saving and solving a \gls{linearEquationSystem} with \glspl{sparseMat}. \\
 
 A typical \gls{basisFunction} $\varphi _{i}$ actually consists of two polynomials joined together at \gls{nodePoint} $x_i$.

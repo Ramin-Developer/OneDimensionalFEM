@@ -85,9 +85,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### R1. Correct mathematical statements
 
-- Fix the weak-form endpoint, bilinearity identity, continuity-constant wording, and convergence notation $\mathcal{O}(N^{-2})$.
-- Replace the claim that linear FEM cannot satisfy a natural boundary condition with its weak-form interpretation.
-- Reconcile every numerical table with corrected code output.
+- [x] Fix the weak formulation, bilinearity identity, continuity estimate, interpolation inequalities, and convergence notation.
+- [x] Correct natural-flux interpretation, constrained-space uniqueness, function-space definitions, and analytical formulas.
+- [x] Reconcile numerical tables with corrected code output and identify roundoff-only results explicitly.
+
+**Status:** Complete. The mathematical derivations and claims now agree with the implemented boundary-value problem and verified numerical behavior.
 
 ### R2. Improve wording and readability
 

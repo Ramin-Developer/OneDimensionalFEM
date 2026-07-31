@@ -129,6 +129,12 @@ Append a short note at the top of the log below after each session:
 
 ## Session Log
 
+- Date: 2026-08-01
+- Branch: docs/correct-report-mathematics
+- What changed: Corrected the weak problem, bilinearity and continuity statements, interpolation bounds, spaces, analytical formulas, constrained uniqueness proof, flux/sparsity claims, and roundoff table entries.
+- Tests run: Forced LaTeX build completed without undefined references or duplicate labels; independent post-edit mathematical review completed.
+- Next action: implement R2 wording and readability improvements.
+
 - Date: 2026-07-31
 - Branch: perf/stable-performance-gates
 - What changed: Added a versioned warmed performance baseline, deterministic runtime/memory evaluation, JIT warm-up, baseline ratios, and stable informational CI limits.

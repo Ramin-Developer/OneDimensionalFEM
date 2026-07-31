@@ -3,7 +3,7 @@
 \begin{definition}	\label{def:SpaceL2}
 	Let \glssymbol{spaceL2} denote \gls{spaceL2}. Then
 	\begin{equation}
-		\glssymbol{spaceL2} = \left\{ \varphi \left( x \right) \bigg \vert \int_0^1 \varphi \left( x \right) \dd x < \infty \right\}.
+		\glssymbol{spaceL2} = \left\{ \varphi \left( x \right) \bigg \vert \int_0^1 \left|\varphi \left( x \right)\right|^2 \dd x < \infty \right\}.
 	\end{equation}
 \end{definition}
 %
@@ -29,7 +29,7 @@
 	Let \glssymbol{L2InnerProduct} denote \gls{L2InnerProduct}. Then
 	\begin{subequations}
 		\begin{equation}	\label{eqn:L2_Inner_product}
-			\glssymbol{L2InnerProduct} = \int_0^1 f \left( ssx \right) g \left( x \right) \dd x,
+			\glssymbol{L2InnerProduct} = \int_0^1 f \left( x \right) g \left( x \right) \dd x,
 		\end{equation}
 		and the natural norm
 		\begin{equation}	\label{eqn:L2_Norm}
