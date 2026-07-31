@@ -13,7 +13,7 @@ In the linear case, one basis function was associated with each node, giving $N+
 
 In the cubic case, on the other hand, we need $4$ \glspl{shapeFunction} over each \gls{element}, or totally $2N + 2$ \glspl{basisFunction}.
 Each cubic \gls{shapeFunction} has 4 parameters and thus must have $4$ conditions to be fully specified. The first $2$ conditions
-concern function values at the \glspl{nodePoint}, while the last $2$ give values of first derivatives at the same node points. \\
+concern function values at the \glspl{nodePoint}, while the last $2$ give values of first derivatives at the same node points.
 
 The first \gls{shapeFunction} $\psi_1$, guarantees function values $1$ and $0$ on the left and right element boundaries, as well as a
 vanishing derivative at both ends
@@ -28,7 +28,7 @@ vanishing derivative at both ends
 	}% end of \allowdisplaybreaks
 \end{subequations}
 The second \gls{shapeFunction} has a value of unity at the right boundary, otherwise function and derivative values of zero at the boundaries.
-In the same manner the third and fourth \glspl{shapeFunction} have their unity values for the derivative at the left and right boundaries.	\\
+In the same manner the third and fourth \glspl{shapeFunction} have their unity values for the derivative at the left and right boundaries.
 
 A general cubic polynomial and its derivative may be written as
 \begin{subequations}
@@ -52,7 +52,7 @@ For each \gls{shapeFunction} coefficients $c_1, \dots, c_4$ may be found by appl
 Cubic \glspl{shapeFunction} and \gls{piecewiseCubic}
 polynomials over the whole domain are depicted in \cref{fig:Cubic_Shape_Functions,fig:Cubic_Basis_Functions}, respectively. Observe
 from the latter that the first $N+1$ functions control the solution value at \glspl{nodePoint}, while the last $N+1$ functions
-take care of first derivatives at \glspl{nodePoint}. \\	\\
+represent first derivatives at \glspl{nodePoint}.
 Thus using \cref{eqn:Truncated_FEM_Solution} with $M = 2N + 2$, the solution value at \glspl{nodePoint} may be written as
 \begin{subequations}
 	\begin{align}

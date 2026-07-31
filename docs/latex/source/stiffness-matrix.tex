@@ -38,8 +38,7 @@ $\psi_2^{\prime} \left( \xi \right) = 1$,
 \end{equation}
 %
 \subsection{A Direct Approach}
-Stiffness matrix in \cref{eqn:Stiffness_Matrix_FEM_Linear} may also be derived by other approaches. In the following we introduce
-two such methods, a direct and a formal approach.	\\	\\
+The stiffness matrix in \cref{eqn:Stiffness_Matrix_FEM_Linear} may also be derived by a direct or a formal approach.
 Now assume a linear variation of \gls{uBar} above along the bar axis. Thus
 \begin{equation}	\label{eqn:Disp_Direct}
 	\gls{u} = \left[ 1 - \frac{z}{L} \right] \overline{u}_i + \frac{z}{L} \overline{u}_j.
@@ -101,8 +100,8 @@ with stiffness \glssymbol{KBar}. Thus
 \end{remark}
 %
 \subsection{A Formal Approach}
-We could also derive element stiffness matrix in \cref{eqn:Stiffness_Matrix_FEM_Linear} using a formal approach. This approach is
-more general and may be applied to many other and more complicated situations. \\	\\
+We can also derive the element stiffness matrix in \cref{eqn:Stiffness_Matrix_FEM_Linear} formally. This approach applies to a
+broader class of problems.
 Define a vector for nodal shape functions
 \begin{subequations}
 	\begin{align}
@@ -134,7 +133,7 @@ where \gls{eVec} is the element strain-displacement matrix. Stress in the bar is
 \begin{equation}	\label{eqn:Stress_Formal}
 	\gls{sigma} = E \gls{epsilon} = E \gls{eVec} \gls{vecuBar}.
 \end{equation}
-Next consider the strain energy stored in the bar and apply \cref{eqn:Stress_Formal,eqn:Strain_Formal}
+Applying \cref{eqn:Stress_Formal,eqn:Strain_Formal}, the strain energy is
 \begin{equation}	\label{eqn:Strain_Energy}
 	\begin{aligned}
 		\gls{U} &= \frac{1}{2} \int_V \sigma^T \epsilon \dd V
@@ -170,7 +169,8 @@ Thus
 \end{subequations}
 %
 \begin{remark}
-	Element stiffness matrix in \cref{eqn:Stiffness_Matrix_Formal_1} is a general result which can be used for the construction of other types of elements. This result may also be derived using other more rigorous approaches, such as the principle of \gls{minPotentialEnergy} or the \gls{GalerkinMethod}.
+	The element stiffness matrix in \cref{eqn:Stiffness_Matrix_Formal_1} generalizes to other element types. It can also be derived
+	from the principle of \gls{minPotentialEnergy} or the \gls{GalerkinMethod}.
 \end{remark}
 Now, we may evaluate \cref{eqn:Stiffness_Matrix_Formal_1} for the bar element by using \cref{eqn:Strain_Disp_Vector}
 \begin{equation}	\label{eqn:Stiffness_Matrix_Formal} 
@@ -182,7 +182,7 @@ Now, we may evaluate \cref{eqn:Stiffness_Matrix_Formal_1} for the bar element by
 	\end{aligned}
 \end{equation}
 %
-which is the same result as \cref{eqn:Stiffness_Matrix_Direct}, direct method. Finally, combining
+which agrees with the direct result in \cref{eqn:Stiffness_Matrix_Direct}. Finally, combining
 \cref{eqn:Stiffness_Matrix_Formal,eqn:Strain_Energy}, the strain energy stored in the bar may be written as
 \begin{equation}
 	U = \frac{1}{2} \left. \gls{vecuBar} \right.^T \gls{matKBar} \gls{vecuBar}.

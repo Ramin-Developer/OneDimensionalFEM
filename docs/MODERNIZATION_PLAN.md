@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: docs/normalize-report-layout
+- What changed: Added glossary-aware report automation, restored both glossaries, normalized portable paths and glossary display names, removed forced prose breaks, and resolved actionable layout warnings.
+- Tests run: Complete report build passed; glossary text extraction, PDF metadata, path scan, and warning audit completed.
+- Next action: implement C1 maintainability boundary cleanup.
+
+- Date: 2026-08-01
 - Branch: docs/improve-report-wording
 - What changed: Rewrote front matter and chapter summaries, corrected recurring grammar and spelling, clarified core explanatory prose, and standardized glossary and appendix terminology.
 - Tests run: Known-defect scan and VS Code diagnostics completed; forced 78-page LaTeX build passed without undefined references or duplicate labels.

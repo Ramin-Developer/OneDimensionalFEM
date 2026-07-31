@@ -58,6 +58,14 @@ ci_performance_guardrail
 
 The versioned baseline and threshold policy are documented in [docs/PERFORMANCE_GUARDRAIL.md](docs/PERFORMANCE_GUARDRAIL.md).
 
+## Building the Report
+
+Build the PDF, nomenclature, and terminology glossary:
+
+```powershell
+.\scripts\build_report.ps1
+```
+
 ## Notes
 
 - This repository is being prepared for modernization and refactoring.

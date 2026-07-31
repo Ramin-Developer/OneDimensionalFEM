@@ -101,10 +101,12 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### R3. Normalize layout and formatting
 
-- Replace forced `\\` paragraph breaks with semantic paragraphs.
-- Normalize filename capitalization, cross-reference names, labels, captions, and glossary plurals.
-- Correct preamble inclusion and eliminate actionable LaTeX warnings.
-- Verify clean `latexmk` builds and inspect the resulting PDF.
+- [x] Replace forced `\\` paragraph breaks with semantic paragraphs.
+- [x] Normalize filename capitalization, cross-reference names, labels, captions, and glossary display names.
+- [x] Correct preamble configuration and eliminate actionable LaTeX warnings.
+- [x] Generate both glossaries, verify the complete build, and inspect the resulting PDF.
+
+**Status:** Complete. The reproducible build now produces an 87-page PDF with nomenclature and terminology entries, no overfull boxes, and no missing or undefined references.
 
 **Value:** Medium. Produces an accurate, portable, professional report after numerical claims are trustworthy.
 
