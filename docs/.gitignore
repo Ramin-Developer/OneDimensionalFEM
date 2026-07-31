@@ -20,10 +20,14 @@ Thumbs.db
 *.fdb_latexmk
 *.fls
 *.log
+*.lof
 *.out
+*.sbl
 *.toc
+*.tut
 *.synctex.gz
 *.xdv
+*.xdy
 *.pdf
 
 # Temporary files

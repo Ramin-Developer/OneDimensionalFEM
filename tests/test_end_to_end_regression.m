@@ -2,6 +2,7 @@ function tests = test_end_to_end_regression
 %TEST_END_TO_END_REGRESSION Verify convergence trends for baseline setup.
 
 tests = functiontests(localfunctions);
+end
 
 function testErrorImprovesWithRefinement(~)
 num_Elements = [4 8];
@@ -27,6 +28,7 @@ errCub8 = ComputeL2Error(u_Exact, u_FEM_Cub{2}, num_Elements(2), relTol);
 assert(errLin8 < errLin4, 'Linear FEM error did not improve with refinement.');
 assert(errCub8 < errCub4, 'Cubic FEM error did not improve with refinement.');
 assert(errCub8 < errLin8, 'Cubic FEM should outperform linear FEM for this baseline case.');
+end
 
 function testBoundaryConditionsAreRespected(~)
 num_Elements = 8;
@@ -45,6 +47,7 @@ assert(abs(uLin{1}(0) - delta) < 1e-10, 'Linear FEM left Dirichlet value mismatc
 assert(abs(uCub{1}(0) - delta) < 1e-10, 'Cubic FEM left Dirichlet value mismatch.');
 assert(isfinite(uLin{end}(1)), 'Linear FEM right-end value is not finite.');
 assert(isfinite(uCub{end}(1)), 'Cubic FEM right-end value is not finite.');
+end
 
 function testComputeApiHasNoPlottingSideEffects(~)
 num_Elements = [4 8 16];
@@ -66,12 +69,13 @@ assert(isfield(femData, 'u_FEM_Lin') && numel(femData.u_FEM_Lin) == numel(num_El
     'Compute_FEM_Data linear field output mismatch.');
 assert(isfield(femData, 'u_FEM_Cub') && numel(femData.u_FEM_Cub) == numel(num_Elements), ...
     'Compute_FEM_Data cubic field output mismatch.');
-assert(all(femData.sq_Error_Lin > 0), ...
-    'Compute_FEM_Data linear squared-error summary should be positive.');
-assert(all(femData.sq_Error_Cub > 0), ...
-    'Compute_FEM_Data cubic squared-error summary should be positive.');
+assert(all(femData.l2_Error_Lin > 0), ...
+    'Compute_FEM_Data linear L2 error norms should be positive.');
+assert(all(femData.l2_Error_Cub > 0), ...
+    'Compute_FEM_Data cubic L2 error norms should be positive.');
 assert(ischar(femData.q_Type) && strcmp(femData.q_Type, 'q_const'), ...
     'Compute_FEM_Data should preserve the normalized q-type identifier.');
+end
 
 function testBuildProblemDataAcceptsSpaceSeparatedAlias(~)
 num_Elements = [4 8];
@@ -79,81 +83,92 @@ num_Elements = [4 8];
     num_Elements, 'q const', [1 2 -3], 1, 0, 0.01);
 assert(isequal(size(qMeshSize), size(num_Elements)), ...
     'Build_Problem_Data should accept space-separated q-type aliases.');
-
-function testNormalizeQTypeRejectsWhitespaceOnlyAlias(~)
-verifyError(@() Normalize_Q_Type('   '), 'Normalize_Q_Type:InvalidQType');
 end
 
-function testBuildProblemDataRejectsCharMatrixQType(~)
-verifyError(@() Build_Problem_Data([4 8], ['q'; 'const'], [1 2 -3], 1, 0, 0.01), ...
+function testNormalizeQTypeRejectsWhitespaceOnlyAlias(testCase)
+verifyError(testCase, @() Normalize_Q_Type('   '), 'Normalize_Q_Type:InvalidQType');
+end
+
+function testBuildProblemDataRejectsCharMatrixQType(testCase)
+verifyError(testCase, @() Build_Problem_Data( ...
+    [4 8], char('q', 'const'), [1 2 -3], 1, 0, 0.01), ...
     'Build_Problem_Data:InvalidQType');
 end
 
-function testBuildProblemDataRejectsEmptyQType(~)
-verifyError(@() Build_Problem_Data([4 8], '', [1 2 -3], 1, 0, 0.01), ...
+function testBuildProblemDataRejectsEmptyQType(testCase)
+verifyError(testCase, @() Build_Problem_Data([4 8], '', [1 2 -3], 1, 0, 0.01), ...
     'Build_Problem_Data:InvalidQType');
 end
 
-function testBuildProblemDataRejectsNonStringQType(~)
-verifyError(@() Build_Problem_Data([4 8], 42, [1 2 -3], 1, 0, 0.01), ...
+function testBuildProblemDataRejectsNonStringQType(testCase)
+verifyError(testCase, @() Build_Problem_Data([4 8], 42, [1 2 -3], 1, 0, 0.01), ...
     'Build_Problem_Data:InvalidQType');
 end
 
-function testBuildProblemDataRejectsComplexQCoeff(~)
-verifyError(@() Build_Problem_Data([4 8], 'constant', [1 2 -3], [1+1i], 0, 0.01), ...
+function testBuildProblemDataRejectsComplexQCoeff(testCase)
+verifyError(testCase, @() Build_Problem_Data([4 8], 'constant', [1 2 -3], [1+1i], 0, 0.01), ...
     'Build_Problem_Data:InvalidQCoeff');
 end
 
-function testBuildProblemDataRejectsComplexBoundaryData(~)
-verifyError(@() Build_Problem_Data([4 8], 'constant', [1 2 -3], 1, 0+1i, 0.01), ...
+function testBuildProblemDataRejectsComplexBoundaryData(testCase)
+verifyError(testCase, @() Build_Problem_Data([4 8], 'constant', [1 2 -3], 1, 0+1i, 0.01), ...
     'Build_Problem_Data:InvalidBoundaryData');
 end
 
-function testComputeFEMDataRejectsNonFiniteBoundaryData(~)
-verifyError(@() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
+function testComputeFEMDataRejectsNonFiniteBoundaryData(testCase)
+verifyError(testCase, @() Compute_FEM_Data([4 8], 'constant', 1, [1 2 -3], NaN, 0), ...
     'Compute_FEM_Data:InvalidBoundaryData');
 end
 
-function testComputeFEMDataRejectsNonFiniteCoefficients(~)
-verifyError(@() Compute_FEM_Data([4 8], 'constant', [1 NaN], [1 2 -3], 0, 0.01), ...
+function testComputeFEMDataRejectsNonFiniteCoefficients(testCase)
+verifyError(testCase, @() Compute_FEM_Data([4 8], 'constant', [1 NaN], [1 2 -3], 0, 0.01), ...
     'Compute_FEM_Data:InvalidQCoeff');
 end
 
-function testDefProblemRejectsNonFiniteBoundaryData(~)
-verifyError(@() Def_Problem([4 8], 'constant', [1 2 -3], 1, NaN, 0.01), ...
+function testDefProblemRejectsNonFiniteBoundaryData(testCase)
+verifyError(testCase, @() Def_Problem([4 8], 'constant', [1 2 -3], 1, NaN, 0.01), ...
     'Def_Problem:InvalidBoundaryData');
 end
 
-function testCalcFEMSolRejectsNonFiniteMeshSize(~)
-verifyError(@() Calc_FEM_Sol(4, NaN, 0, 0.01, @(x) 1, @(x) 1, 1e-12), ...
+function testCalcFEMSolRejectsNonFiniteMeshSize(testCase)
+verifyError(testCase, @() Calc_FEM_Sol(4, NaN, 0, 0.01, @(x) 1, @(x) 1, 1e-12), ...
     'Calc_FEM_Sol:InvalidMeshSize');
 end
 
-function testBuildLocalSolutionRejectsNonFiniteCoefficients(~)
+function testBuildLocalSolutionRejectsNonFiniteCoefficients(testCase)
 psi = {@(x) 1, @(x) x};
-verifyError(@() Build_Local_Solution(1, 2, [1 NaN], psi), ...
+verifyError(testCase, @() Build_Local_Solution(1, 2, [1 NaN], psi), ...
     'Build_Local_Solution:InvalidCoefficients');
 end
 
-function testElemContRejectsNonFiniteRelTol(~)
+function testElemContRejectsNonFiniteRelTol(testCase)
 psiLin = {@(x) 1, @(x) x};
 psiPrimeLin = {@(x) 1, @(x) 1};
-verifyError(@() Elem_Cont(0.25, 1, @(x) 1, @(x) 1, psiLin, psiPrimeLin, psiLin, psiPrimeLin, NaN), ...
+verifyError(testCase, @() Elem_Cont(0.25, 1, @(x) 1, @(x) 1, ...
+    psiLin, psiPrimeLin, psiLin, psiPrimeLin, NaN), ...
     'Elem_Cont:InvalidRelTol');
 end
 
-function testComputeErrorSummaryRejectsNonFiniteRelTol(~)
-verifyError(@() Compute_Error_Summary([4 8], @(x) x, { @(x) x }, { @(x) x }, NaN), ...
+function testComputeErrorSummaryRejectsNonFiniteRelTol(testCase)
+validFields = {{@(x) x}, {@(x) x}};
+verifyError(testCase, @() Compute_Error_Summary( ...
+    [4 8], @(x) x, validFields, validFields, NaN), ...
     'Compute_Error_Summary:InvalidRelTol');
 end
 
-function testComputeErrorSummaryRejectsNonCallableFEMFields(~)
-verifyError(@() Compute_Error_Summary([4 8], @(x) x, { 1 }, { @(x) x }, 1e-12), ...
+function testComputeErrorSummaryRejectsNonCallableFEMFields(testCase)
+invalidFields = {{1}, {@(x) x}};
+validFields = {{@(x) x}, {@(x) x}};
+verifyError(testCase, @() Compute_Error_Summary( ...
+    [4 8], @(x) x, invalidFields, validFields, 1e-12), ...
     'Compute_Error_Summary:InvalidFEMFields');
 end
 
-function testSolveEqSysRejectsNonFiniteMeshSize(~)
-verifyError(@() Solve_Eq_Sys(4, NaN, 0, 0.01, @(x) 1, @(x) 1, {@(x) 1, @(x) x}, {@(x) 1, @(x) 1}, {@(x) 1, @(x) x, @(x) x.^2, @(x) x.^3}, {@(x) 1, @(x) 1, @(x) x, @(x) x.^2}, 1e-12), ...
+function testSolveEqSysRejectsNonFiniteMeshSize(testCase)
+verifyError(testCase, @() Solve_Eq_Sys(4, NaN, 0, 0.01, ...
+    @(x) 1, @(x) 1, {@(x) 1, @(x) x}, {@(x) 1, @(x) 1}, ...
+    {@(x) 1, @(x) x, @(x) x.^2, @(x) x.^3}, ...
+    {@(x) 1, @(x) 1, @(x) x, @(x) x.^2}, 1e-12), ...
     'Solve_Eq_Sys:InvalidMeshSize');
 end
 
@@ -175,6 +190,7 @@ assert(all(femData.conv_Factor_Lin >= lin_Min), ...
     'Linear convergence factor fell below threshold.');
 assert(all(femData.conv_Factor_Cub >= cub_Min), ...
     'Cubic convergence factor fell below threshold.');
+end
 
 function testRightBoundaryResidualsAreControlled(~)
 num_Elements = [8 16 32];
@@ -207,6 +223,7 @@ assert(all(resCub <= 1e-6), ...
     'Cubic right-boundary residual exceeded tolerance.');
 assert(resLin(end) <= 1e-3, ...
     'Linear right-boundary residual exceeded finest-mesh threshold.');
+end
 
 function err = ComputeL2Error(u_Exact, local_Fields, N, relTol)
 
@@ -215,9 +232,10 @@ accum = 0;
 for elem_No = 1:N
     global_Coord = @(y) (elem_No - 1 + y) .* h;
     sqErr = @(y) (u_Exact(global_Coord(y)) - local_Fields{elem_No}(y)).^2;
-    accum = accum + quadgk(sqErr, 0, 1, 'RelTol', relTol);
+    accum = accum + h * quadgk(sqErr, 0, 1, 'RelTol', relTol);
 end
 err = sqrt(accum);
+end
 
 function residual = ComputeRightBoundaryResidual(localField, h, q_Func, P)
 
@@ -225,3 +243,4 @@ dy = 1e-6;
 dUdy = (localField(1) - localField(1 - dy)) / dy;
 dUdx = dUdy / h;
 residual = q_Func(1) * dUdx - P;
+end

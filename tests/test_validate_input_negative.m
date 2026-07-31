@@ -2,10 +2,12 @@ function tests = test_validate_input_negative
 %TEST_VALIDATE_INPUT_NEGATIVE Validate expected failures for bad inputs.
 
 tests = functiontests(localfunctions);
+end
 
 function testRejectsNonCharQType(testCase)
 verifyError(testCase, @() Validate_Input(42, 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQType');
+end
 
 function testAcceptsNormalizedConstantAlias(testCase)
 verifyWarningFree(testCase, @() Validate_Input('constant', 1, [1 2 -3], 0, 0.01, [4 8 16]));
@@ -31,7 +33,8 @@ verifyError(testCase, @() Validate_Input('', 1, [1 2 -3], 0, 0.01, [4 8 16]), ..
 end
 
 function testRejectsCharMatrixQType(testCase)
-verifyError(testCase, @() Validate_Input(['q'; 'const'], 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
+verifyError(testCase, @() Validate_Input( ...
+    char('q', 'const'), 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQType');
 end
 
@@ -46,6 +49,7 @@ end
 function testRejectsUnsupportedQType(testCase)
 verifyError(testCase, @() Validate_Input('q_unknown', 1, [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:UnsupportedQType');
+end
 
 function testRejectsMatrixQCoeff(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', [1 2; 3 4], [1 2 -3], 0, 0.01, [4 8 16]), ...
@@ -60,6 +64,7 @@ end
 function testRejectsInvalidQCoeff(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', [1 NaN], [1 2 -3], 0, 0.01, [4 8 16]), ...
     'Validate_Input:InvalidQCoeff');
+end
 
 function testRejectsInvalidLoadCoeff(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [], 0, 0.01, [4 8 16]), ...
@@ -79,6 +84,7 @@ end
 function testRejectsInvalidDelta(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], [0 1], 0.01, [4 8 16]), ...
     'Validate_Input:InvalidDelta');
+end
 
 function testRejectsInvalidP(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, Inf, [4 8 16]), ...
@@ -108,6 +114,7 @@ end
 function testRejectsInvalidElementsType(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, 'bad'), ...
     'Validate_Input:InvalidElements');
+end
 
 function testRejectsEmptyElements(testCase)
 verifyError(testCase, @() Validate_Input('q_Const', 1, [1 2 -3], 0, 0.01, []), ...

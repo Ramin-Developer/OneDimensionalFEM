@@ -34,10 +34,6 @@ if isempty(normalizedQType)
         'q_Type must not be empty.');
 end
 
-if ~ischar(q_Type) || size(q_Type, 1) ~= 1 || any(isspace(normalizedQType))
-    error('Validate_Input:InvalidQType', ...
-        'q_Type must not contain whitespace-only content.');
-end
 normalizedQType = strrep(normalizedQType, '-', '_');
 normalizedQType = strrep(normalizedQType, ' ', '_');
 

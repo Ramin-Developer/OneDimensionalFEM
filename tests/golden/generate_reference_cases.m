@@ -31,8 +31,8 @@ for idx = 1:numel(selectedNumElements)
     referenceCase.exactVals = femData.u_Exact(sampleX);
     referenceCase.linVals = EvaluateFieldsAtSamples(femData.u_FEM_Lin{1}, numElements, sampleX);
     referenceCase.cubVals = EvaluateFieldsAtSamples(femData.u_FEM_Cub{1}, numElements, sampleX);
-    referenceCase.sqErrorLin = femData.sq_Error_Lin;
-    referenceCase.sqErrorCub = femData.sq_Error_Cub;
+    referenceCase.l2ErrorLin = femData.l2_Error_Lin;
+    referenceCase.l2ErrorCub = femData.l2_Error_Cub;
 
     assert(isstruct(referenceCase) && isstruct(tol), ...
         'generate_reference_cases:InvalidSnapshotData', ...

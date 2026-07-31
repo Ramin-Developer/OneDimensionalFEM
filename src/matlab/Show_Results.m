@@ -28,7 +28,7 @@ assert(isnumeric(relTol) && isscalar(relTol) && relTol > 0, ...
 % Plot exact and FEM-Solution of the problem for different element numbers:
 Plot_FEM_Solutions(numElements, solutionSize, x, uExact, uFEMLin, uFEMCub);
 
-% Estimate squared errors and convergence factors:
+% Estimate L2 error norms and convergence factors:
 [factor_Lin, factor_Cub] = ...
     Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol);
 
@@ -38,32 +38,32 @@ assert(all(isfinite(factor_Lin)) && all(isfinite(factor_Cub)), ...
 
 function [error_Lin, error_Cub] = Estimate_Error(numElements, uExact, uFEMLin, uFEMCub, relTol)
 
-[sq_Error_Lin, sq_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
+[l2_Error_Lin, l2_Error_Cub, conv_Factor_Lin, conv_Factor_Cub] = ...
     Compute_Error_Summary(numElements, uExact, uFEMLin, uFEMCub, relTol);
 
 % Display the results:
 [error_Lin, error_Cub] = Convert_2_Str( ...
-    [conv_Factor_Lin; conv_Factor_Cub], [sq_Error_Lin; sq_Error_Cub]);
+    [conv_Factor_Lin; conv_Factor_Cub], [l2_Error_Lin; l2_Error_Cub]);
 disp(error_Lin);
 disp(error_Cub);
 
-function [error_Lin, error_Cub] = Convert_2_Str(conv_Factor, sq_Error)
+function [error_Lin, error_Cub] = Convert_2_Str(conv_Factor, l2_Error)
 
-error_Lin = Make_Str(conv_Factor, sq_Error, 1);
-error_Cub = Make_Str(conv_Factor, sq_Error, 3);
+error_Lin = Make_Str(conv_Factor, l2_Error, 1);
+error_Cub = Make_Str(conv_Factor, l2_Error, 3);
 
-function str_Error_Estimate = Make_Str(conv_Factor, sq_Error, degree)
+function str_Error_Estimate = Make_Str(conv_Factor, l2_Error, degree)
 
-Title_Error = sprintf('\tSquared Error            ');
+Title_Error = sprintf('\tL2 Error Norm            ');
 Title_Conv = sprintf('\tConvergence Factor        ');
 
 if degree == 1
     Title  = sprintf('Linear Case:');
-    Error_Val = sprintf('%0.4e\t\t\t', sq_Error(1, :));
+    Error_Val = sprintf('%0.4e\t\t\t', l2_Error(1, :));
     Conv_Val = sprintf('%0.2e\t\t\t', conv_Factor(1, :));
 elseif degree == 3
     Title  = sprintf('Cubic Case:');
-    Error_Val = sprintf('%0.4e\t\t\t', sq_Error(2, :));
+    Error_Val = sprintf('%0.4e\t\t\t', l2_Error(2, :));
     Conv_Val = sprintf('%0.2e\t\t\t', conv_Factor(2, :));
 end
 

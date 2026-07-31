@@ -25,3 +25,5 @@
 
 - Keep README command examples canonical and minimal.
 - Update `docs/MODERNIZATION_PLAN.md` when a milestone or workstream changes state.
+- Update `docs/REFACTOR_PLAN.md` in every corrective implementation PR.
+- Update affected report sections, tests, snapshots, benchmarks, and user documentation whenever behavior or evidence changes.

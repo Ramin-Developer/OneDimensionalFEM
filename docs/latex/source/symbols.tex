@@ -14,15 +14,15 @@
 	sort=zzphi,
 	description={Solution of \cref{prb:Dual_Problem} on \cpageref{prb:Dual_Problem}},
 	parent=greek}
-	
+
 \newglossaryentry{dualWeakInt}{
 	type=symbols,
 	name={ \ensuremath{ \Phi^h } },
 	symbol={ \ensuremath{ \Phi^h \left( x \right) } },
 	sort=zzPhi h,
 	description={Interpolant of solution of \cref{prb:Dual_Weak_Problem} on \cpageref{prb:Dual_Weak_Problem}},
-	parent=greek}  
-	
+	parent=greek}
+
 \newglossaryentry{Delta}{
 	type=symbols,
 	name={ \ensuremath{ \Delta } },
@@ -69,7 +69,7 @@
 	symbol={ \ensuremath{ { \ensuremath{ \psi_i = \psi_i \left( x \right) } } } },
 	sort=psi sub i,
 	description={Shape functions, \cref{eqn:Linear_Psi_Local,eqn:Cubic_Psi_Local} on \cpageref{eqn:Linear_Psi_Local,eqn:Cubic_Psi_Local}},
-	parent=greek} 
+	parent=greek}
 
 \newglossaryentry{Omegai}{
 	type=symbols,
@@ -159,26 +159,26 @@
 
 \newglossaryentry{ENsq}{
 	type=symbols,
-	name={ \ensuremath{ E_{N, \, sq} } },
-	symbol={ \ensuremath{ E_{N, \, sq } } },
+	name={ \ensuremath{ E_{N, \, L^2} } },
+	symbol={ \ensuremath{ E_{N, \, L^2} } },
 	sort=zzError of FEM with N Elements,
-	description={Squared error of \Gls{FEMSol} with $N$ elements, \cref{def:Squared_Error} on \cpageref{def:Squared_Error}},
+	description={$L^2$ error norm of \Gls{FEMSol} with $N$ elements, \cref{def:L2_Error} on \cpageref{def:L2_Error}},
 	parent=roman}
 
 \newglossaryentry{ENlin}{
 	type=symbols,
 	name={ \ensuremath{ E_{N, \, lin} } },
 	symbol={ \ensuremath{ E_{N, \, lin} } },
-	sort=zzError of FEM with N Elements Squared Linear,
-	description={Squared error of Linear \Gls{FEMSol} with $N$ elements},
+	sort=zzError of FEM with N Elements L2 Linear,
+	description={$L^2$ error norm of linear \Gls{FEMSol} with $N$ elements},
 	parent=roman}
 
 \newglossaryentry{ENcub}{
 	type=symbols,
 	name={ \ensuremath{ E_{N, \, cub} } },
 	symbol={ \ensuremath{ E_{N, \, cub} } },
-	sort=zzError of FEM with N Elements Squared Cubic,
-	description={Squared Error of Cubic \Gls{FEMSol} with $N$ elements},
+	sort=zzError of FEM with N Elements L2 Cubic,
+	description={$L^2$ error norm of cubic \Gls{FEMSol} with $N$ elements},
 	parent=roman}
 
 \newglossaryentry{fConv}{
@@ -186,7 +186,7 @@
 	name={ \ensuremath{ f_{c} } },
 	symbol={ \ensuremath{ f_{c} } },
 	sort=Convergence factor of the FEM-Solution,
-	description={Convergence factor of the FEM-Solution, \cref{eqn:Squared_Error} on \cpageref{eqn:Squared_Error}},
+	description={Convergence factor of the FEM-Solution, \cref{eqn:L2_Error} on \cpageref{eqn:L2_Error}},
 	parent=roman}
 
 \newglossaryentry{fConvLin}{
@@ -212,7 +212,7 @@
 	sort=Error of FEA,
 	description={Error of FEA-Solution, \cref{eqn:Error_In_FEM} on \cpageref{eqn:Error_In_FEM}},
 	parent=roman}
-	
+
 \newglossaryentry{trialSolError}{
 	type=symbols,
 	name={Trial Solution Error},
@@ -228,7 +228,7 @@
 	sort=zzU,
 	description={Strain energy of the bar, \cref{eqn:Strain_Energy} on \cpageref{eqn:Strain_Energy}},
 	parent=roman}
-	
+
 \newglossaryentry{W}{
 	type=symbols,
 	name={ \ensuremath{ W } },
@@ -236,7 +236,7 @@
 	sort=zzW,
 	description={Total amount of work done on the bar by the external force},
 	parent=roman}
-	
+
 \newglossaryentry{F}{
 	type=symbols,
 	name={ \ensuremath{ F } },
@@ -244,7 +244,7 @@
 	sort=zzF,
 	description={Axial force applied to the bar},
 	parent=roman}
-	
+
 \newglossaryentry{matAij}{
 	type=symbols,
 	name={ \ensuremath{ A_{i,j} } },
@@ -252,21 +252,21 @@
 	sort=zzA sub i and j,
 	description={Entry No. $\left( i, j \right)$ in Matrix \gls{matA}},
 	parent=roman}
-	
+
 \newglossaryentry{Kij}{
 	type=symbols,
 	name={ \ensuremath{ K_{i,j} } },
 	sort=zzK sub i and j,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{Kmne}{
 	type=symbols,
 	name={ \ensuremath{ K_{m,n}^{e} } },
 	sort=zzK sub m and n sup e,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{h}{
 	type=symbols,
 	name={ \ensuremath{ h } },
@@ -274,14 +274,14 @@
 	sort=h,
 	description={Size of elements in a \gls{1DimProblem} with \gls{uniformMeshing}},
 	parent=roman}
-	
+
 \newglossaryentry{xi}{
 	type=symbols,
 	name={ \ensuremath{ x_i } },
 	symbol={ \ensuremath{ x_i } },
 	sort=x sub i,
 	description={Node point No. $i$},
-	parent=roman}	
+	parent=roman}
 
 \newglossaryentry{N}{
 	type=symbols,
@@ -290,7 +290,7 @@
 	sort=zzN,
 	description={No. of elements, \cref{eqn:Element_No_i} on \cpageref{eqn:Element_No_i}},
 	parent=roman}
-	
+
 \newglossaryentry{M}{
 	type=symbols,
 	name={ \ensuremath{ M } },
@@ -298,7 +298,7 @@
 	sort=zzM,
 	description={No. of \glspl{basisFunction}, \cref{eqn:Truncated_FEM_Solution} on \cpageref{eqn:Truncated_FEM_Solution}},
 	parent=roman}
-	
+
 \newglossaryentry{ai}{
 	type=symbols,
 	name={ \ensuremath{ a_i } },
@@ -306,14 +306,14 @@
 	sort=a sub i,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{bi}{
 	type=symbols,
 	name={ \ensuremath{ b_i } },
 	sort=b sub i,
 	description={\nopostdesc},
 	parent=roman}
-		
+
 \newglossaryentry{vi}{
 	type=symbols,
 	name={ \ensuremath{ v_i } },
@@ -321,7 +321,7 @@
 	sort=v sub i,
 	description={Entry No. $i$ in Vector \gls{v}},
 	parent=roman}
-		
+
 \newglossaryentry{r}{
 	type=symbols,
 	name={ \ensuremath{ r \left( x \right) } },
@@ -330,7 +330,7 @@
 	sort=r,
 	description={Residual Function, \cref{eqn:Residual_Function} on \cpageref{eqn:Residual_Function}},
 	parent=roman}
-	
+
 \newglossaryentry{wi}{
 	type=symbols,
 	name={ \ensuremath{ w_i \left( x \right) } },
@@ -338,28 +338,28 @@
 	sort=w sub i,
 	description={Weight Function No. $i$, \cref{eqn:Weight_Function} on \cpageref{eqn:Weight_Function}},
 	parent=roman}
-	
+
 \newglossaryentry{wiPrime}{
 	type=symbols,
 	name={ \ensuremath{ \frac{d w_i }{dx} } },
 	sort=w sub i sup Prime,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{qBarLx}{
 	type=symbols,
 	name={\ensuremath{ \overline{q} \left( Lx \right) }},
 	sort=qBar at Lx,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{qBarX0}{
 	type=symbols,
 	name={\ensuremath{ \overline{q} \left( Lx \right) \big \vert_{x = 0} }},
 	sort=qBar at x0,
 	description={\nopostdesc},
 	parent=roman}
-	
+
 \newglossaryentry{fDegreen}{
 	type=symbols,
 	name={ \ensuremath{ f_{n} \left( x \right) } },
@@ -376,7 +376,7 @@
 	sort=zzE,
 	description={Bar's modulus of elasticity},
 	parent=roman}
-	
+
 \newglossaryentry{L}{
 	type=symbols,
 	name={ \ensuremath{ L } },
@@ -384,7 +384,7 @@
 	sort=zzL,
 	description={Length of the bar},
 	parent=roman}
-	
+
 \newglossaryentry{x}{
 	type=symbols,
 	name={ \ensuremath{ x } },
@@ -408,7 +408,7 @@
 	sort=g at x,
 	description={A general function of a single variable},
 	parent=roman}
-	
+
 \newglossaryentry{q}{
 	type=symbols,
 	name={ \ensuremath{ q \left( x \right) } },
@@ -416,15 +416,15 @@
 	sort=q at x,
 	description={Normalized version of \gls{qBar}},
 	parent=roman}
-	
+
 \newglossaryentry{qBar}{
 	type=symbols,
 	name={\ensuremath{ \overline{q} \left( z \right) } },
 	symbol={ \ensuremath{ \overline{q} } },
 	sort=q Bar at z,
 	description={Axial rigidity},
-	parent=roman}	
-	
+	parent=roman}
+
 \newglossaryentry{u}{
 	type=symbols,
 	name={ \ensuremath{ u \left( x \right) } },
@@ -432,15 +432,15 @@
 	sort=u,
 	description={Normalized version of \gls{uBar}},
 	parent=roman}
-	
+
 \newglossaryentry{uBar}{
 	type=symbols,
 	name={ \ensuremath{ \overline{u} \left( z \right) } },
 	symbol={ \ensuremath{ \overline{u} } },
 	sort=u Bar at z,
 	description={Displacement function of the bar},
-	parent=roman}	
-	
+	parent=roman}
+
 \newglossaryentry{f}{
 	type=symbols,
 	name={ \ensuremath{ f \left( x \right) } },
@@ -448,15 +448,15 @@
 	sort=f at x,
 	description={Normalized version of \gls{fBar}},
 	parent=roman}
-	
+
 \newglossaryentry{fBar}{
 	type=symbols,
 	name={ \ensuremath{ \overline{f} \left( z \right) } },
 	symbol={ \ensuremath{ \overline{f} } },
 	sort=f Bar at z,
 	description={Distributed axial force per unit bar length},
-	parent=roman}	
-	
+	parent=roman}
+
 \newglossaryentry{P}{
 	type=symbols,
 	name={ \ensuremath{ P } },
@@ -472,7 +472,7 @@
 	sort=zzPbar,
 	description={Prescribed end force},
 	parent=roman}
-	
+
 \newglossaryentry{ABar}{
 	type=symbols,
 	name={ \ensuremath{ \overline{A} \left( z \right) } },
@@ -488,7 +488,7 @@
 	sort=zzK Bar,
 	description={Stiffness of the bar, \cref{eqn:Bar_Stiffness} on \cpageref{eqn:Bar_Stiffness}},
 	parent=roman}
-	
+
 % ----------------------------------------------------------- Tensors -----------------------------------------------------------
 \newglossaryentry{psiVec}{
 	type=symbols,
@@ -559,7 +559,7 @@
 	symbol={ \ensuremath{ \mathbf{A} } },
 	sort=zzA,
 	description={A real matrix},parent=tensor}
-	
+
 \newglossaryentry{a}{
 	type=symbols,
 	name={ \ensuremath{ \mathbf{a} } },
@@ -567,7 +567,7 @@
 	sort=a,
 	description={Solution vector in \gls{FEM}},
 	parent=tensor}
-	
+
 \newglossaryentry{K}{
 	type=symbols,
 	name={ \ensuremath{ \mathbf{K} } },
@@ -575,7 +575,7 @@
 	sort=zzK,
 	description={Global \gls{stiffnessMatrix}},
 	parent=tensor}
-	
+
 \newglossaryentry{b}{
 	type=symbols,
 	name={ \ensuremath{ \mathbf{b} } },
@@ -608,7 +608,7 @@
 	sort=u sup M at x,
 	description={Truncated Taylor Series of \gls{u}, \cref{eqn:Truncated_FEM_Solution} on \cpageref{eqn:Truncated_FEM_Solution}},
 	parent=notation}
-	
+
 \newglossaryentry{gAtXj}{
 	type=symbols,
 	name={ \ensuremath{ g \left( x \right) \Bigg \vert_{x = x_j} } },
@@ -616,7 +616,7 @@
 	sort=g at x sub j,
 	description={Function $g \left( x \right)$ evaluated at $x = x_j$},
 	parent=notation}
-	
+
 \newglossaryentry{gFromAToB}{
 	type=symbols,
 	name={ \ensuremath{ \Bigg[ g \left( x \right) \Bigg]_{x = a}^{b} } },
@@ -624,7 +624,7 @@
 	sort=g from a to b,
 	description={Difference in of function values between $x = a$ and $x = b$},
 	parent=notation}
-	
+
 \newglossaryentry{gPrime}{
 	type=symbols,
 	name={ \ensuremath{ g^\frac{dg}{dx} } },
@@ -632,21 +632,21 @@
 	sort=g sup Prime,
 	description={First derivative of $g \left( x \right)$},
 	parent=notation}
-	
+
 \newglossaryentry{uAtXj}{
 	type=symbols,
 	name={ \ensuremath{ u \left( x \right) \Big \vert_{x = x_j} } },
 	sort=u at x sub j,
 	description={\nopostdesc},
 	parent=notation}
-		
+
 \newglossaryentry{uPrime}{
 	type=symbols,
 	name={ \ensuremath{ \frac{du}{dx} } },
 	sort=u sup Prime,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{uPrimeAtXj}{
 	type=symbols,
 	name={ \ensuremath{ \frac{du}{dx} \Bigg \vert_{x = x_j} } },
@@ -661,7 +661,7 @@
 	sort=zzA Transpose,
 	description={Transpose of $\mathbf{A}$},
 	parent=notation}
-	
+
 \newglossaryentry{detA}{
 	type=symbols,
 	name={ \ensuremath{ \det \left( \mathbf{A} \right) } },
@@ -677,35 +677,35 @@
 	sort=zzR n by n,
 	description={Space of all $n \times n$ real matrices},
 	parent=notation}
-	
+
 \newglossaryentry{R21}{
 	type=symbols,
 	name={ \ensuremath{ \mathbb{R}^{2 \times 1} } },
 	sort=zzR 2 by 1,
 	description={\nopostdesc},
 	parent=notation}
-		
+
 \newglossaryentry{R22}{
 	type=symbols,
 	name={ \ensuremath{ \mathbb{R}^{2 \times 2} } },
 	sort=zzR 2 by 2,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{R41}{
 	type=symbols,
 	name={ \ensuremath{ \mathbb{R}^{4 \times 1} } },
 	sort=zzR 4 by 1,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{R44}{
 	type=symbols,
 	name={ \ensuremath{ \mathbb{R}^{4 \times 4} } },
 	sort=zzR 4 by 4,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{limGXtoAPos}{
 	type=symbols,
 	name={ \ensuremath{ \lim_{x \longrightarrow a^{+}} g \left( x \right) } },
@@ -737,7 +737,7 @@
 	sort=Continuity of Order N,
 	description={Continuity of order $n$, \cref{def:Cont_of_Derivatives} on \cpageref{def:Cont_of_Derivatives}},
 	parent=notation}
-	
+
 \newglossaryentry{order0Cont}{
 	type=symbols,
 	name={continuity of \ensuremath{ \mathcal{O} \left( 0 \right) }},
@@ -769,7 +769,7 @@
 	sort=Continuity of Order NN,
 	description={Continuity of order $\infty$, \cref{def:Cont_of_Derivatives} on \cpageref{def:Cont_of_Derivatives}},
 	parent=notation}
-	
+
 \newglossaryentry{spaceL2}{
 	type=symbols,
 	name={Space of All Square Integrable Functions},
@@ -777,7 +777,7 @@
 	sort=zzzSpace of L2,
 	description={Space of all square integrable functions, \cref{def:SpaceL2} on \cpageref{def:SpaceL2}},
 	parent=notation}
-	
+
 \newglossaryentry{spaceH1}{
 	type=symbols,
 	name={Sobolev's Space},
@@ -785,7 +785,7 @@
 	sort=zzzH1 Space,
 	description={Space of $H^1$, \cref{def:Space_H1} on \cpageref{def:Space_H1}},
 	parent=notation}
-	
+
 \newglossaryentry{spaceH10}{
 	type=symbols,
 	name={Subset of Sobolev's Space with 0 Function Values at Boundaries},
@@ -793,7 +793,7 @@
 	sort=zzzH10 Space,
 	description={The subset of \glssymbol{spaceH1}, \cref{def:Space_H10} on \cpageref{def:Space_H10}},
 	parent=notation}
-	
+
 \newglossaryentry{spaceS}{
 	type=symbols,
 	name={\ensuremath{ \mathcal{S} }},
@@ -801,15 +801,15 @@
 	sort=zzzS Space,
 	description={Space $\mathcal{S}$ is identical to $H_0^1$},
 	parent=notation}
-	
+
 \newglossaryentry{spaceW}{
 	type=symbols,
 	name={\ensuremath{ \mathcal{W} }},
 	symbol={\ensuremath{ \mathcal{W} }},
 	sort=zzzW Space,
 	description={Space $\mathcal{W}$ is identical to $H_0^1$},
-	parent=notation}	
-	
+	parent=notation}
+
 \newglossaryentry{spaceSh}{
 	type=symbols,
 	name={\ensuremath{ \mathcal{S}^h }},
@@ -817,7 +817,7 @@
 	sort=zzzSh Space,
 	description={Subspace of $H_0^1$ with solution of the weak formulation},
 	parent=notation}
-	
+
 \newglossaryentry{spaceWh}{
 	type=symbols,
 	name={\ensuremath{ \mathcal{W}^h }},
@@ -825,7 +825,7 @@
 	sort=zzzWh Space,
 	description={Subspace of $H_0^1$ with solution of the weak formulation},
 	parent=notation}
-	
+
 \newglossaryentry{L2InnerProduct}{
 	type=symbols,
 	name={\ensuremath{ L^2 }-Inner Product of $f$ and $g$},
@@ -841,7 +841,7 @@
 	sort=zzzL2 Norm of f,
 	description={$L^2$-Norm of $f$, \cref{def:L2_Inner_product} on \cpageref{def:L2_Inner_product}},
 	parent=notation}
-	
+
 \newglossaryentry{L2Normw}{
 	type=symbols,
 	name={\ensuremath{ L^2 }-Norm of $w$},
@@ -849,28 +849,28 @@
 	sort=zzzL2 Norm of w,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{L2Normg}{
 	type=symbols,
 	symbol={\ensuremath{ \big\| g \big\|_{ L^2 } }},
 	sort=zzzL2 Norm of g,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{L2Norme}{
 	type=symbols,
 	symbol={\ensuremath{ \big\| e \big\|_{ L^2 } }},
 	sort=zzzL2 Norm of e,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{L2Norm}{
 	type=symbols,
 	name={$L^2$-Norm},
 	sort=zzzL2 Norm,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{H1Norm}{
 	type=symbols,
 	name={$H^1$-Norm},
@@ -908,13 +908,13 @@
 	sort=zzzH1 Norm of g,
 	description={\nopostdesc},
 	parent=notation}
-	
+
 \newglossaryentry{H1Norme}{
 	type=symbols,
 	symbol={\ensuremath{ \big\| e \big\|_{ H^1 } }},
 	sort=zzzH1 Norm of e,
 	description={\nopostdesc},
-	parent=notation}	
+	parent=notation}
 
 \newglossaryentry{H1NormE}{
 	type=symbols,
@@ -938,7 +938,7 @@
 	sort=zzzH2 Semi Norm of f,
 	description={$H^2$-Semi-Norm of $f$, \cref{def:H2_Semi_Norm} on \cpageref{def:H2_Semi_Norm}},
 	parent=notation}
-	
+
 \newglossaryentry{aForm}{
 	type=symbols,
 	name={$a$-Form of $f$ and $g$},
