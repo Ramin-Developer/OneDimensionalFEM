@@ -1,18 +1,17 @@
 \section{Governing Equations} \label{cha:Problem_Formulation}
-To idealize the problem we assume the following assumptions:
+To idealize the problem, we make the following assumptions:
 \begin{enumerate}
 	\item The displacement is small.
 	\item The material is homogeneous and isotropic with modulus of elasticity $E$.
-	\item The load is inside the linear elastic range, the material follows Hook's law.
-	\item The bar is in a state of uni-axial stress. This idealization is not exact since the state of stress at the fixed end of
-	the bar is in three dimensions due to the Poisson's effects.\footnote{This is a ratio named after Sim\'{e}on Poisson.
+	\item The loading remains within the linear-elastic range, and the material obeys Hooke's law.
+	\item The bar is in a state of uniaxial stress. This idealization is not exact because the stress state near the fixed end is
+	three-dimensional due to the Poisson effect.\footnote{This ratio is named after Sim\'{e}on Poisson.
 	It is defined as the contraction strain, perpendicular to the load, to the extension or axial strain, in the load direction.}
 	However, according to Saint-Venant's principle the effects are localized.\footnote{Named after the French elasticity theorist
 	Jean Claude Barr\'{e} de Saint-Venant, states that:\quote{The difference between the effects of two different but statically
 	equivalent loads becomes very small at sufficiently large distances from load.}}
 \end{enumerate}	\text{}
-Consider now an infinitesimal material element of length $dz$. Using equilibrium of forces in the element's longitudinal axis
-we get
+Consider an infinitesimal material element of length $dz$. Enforcing force equilibrium along its longitudinal axis gives
 \begin{equation}	\label{eqn:Force_Balance_1}
 	-\gls{ABar} \gls{sigma} + \overline{A} \left( z + dz \right) \left[ \gls{sigma} + d \gls{sigma} \right] + \gls{fBar} dz = 0.
 \end{equation}
@@ -30,8 +29,7 @@ In \cref{eqn:Force_Balance_2}, neglect terms of second order and divide it by $d
 		-\frac{ d }{ dz } \Bigl[ \gls{ABar} \sigma \left( z \right) \Bigr] = \gls{fBar}.
 \end{equation}
 \Cref{eqn:Force_Balance_3} is a differential equation for the stress in the bar. To derive a corresponding equation for the
-displacement consider the
-flowing relationships
+displacement, consider the following relationships:
 \begin{subequations}
 	\begin{align}
 		\gls{sigma} &= E \gls{epsilon}	\label{eqn:Stress_Strain_1},	\\
@@ -39,7 +37,7 @@ flowing relationships
 		\label{eqn:Strian_Displacement}
 	\end{align}
 \end{subequations}
-Combining \cref{eqn:Stress_Strain_1,eqn:Strian_Displacement} we have the stress-strian equation
+Combining \cref{eqn:Stress_Strain_1,eqn:Strian_Displacement} gives the stress--strain relation
 \begin{equation}	\label{eqn:Stress_Strain}
 		\gls{sigma} = E \frac{ d \overline{u} }{ dz }.
 \end{equation}
@@ -48,8 +46,8 @@ A differential equation for the displacement of the bar is then derived by inser
 \begin{equation}	\label{eqn:Force_Balance}
 		-\frac{ d }{ dz } \biggl[ E \gls{ABar} \frac{ d \overline{u} }{ dz } \biggr] = \gls{fBar}.
 \end{equation}
-Since the left end of the bar is walled, the displacement here is zero. However, this text is meant to serve as a
-general approach to FEM, so it makes sense to define a constant as the value of displacement at the left boundary. Thus
+Since the left end of the bar is fixed, its displacement is zero. For a general introduction to FEM, however, we prescribe a
+constant displacement at the left boundary. Thus
 \begin{equation}
 	\gls{uBar} \Big \vert_{z = 0} = \gls{deltaBar}.
 \end{equation}

@@ -24,28 +24,26 @@ This introduces the following concepts:
 \end{definition}
 Note that element boundaries and locations are expressed in \gls{globalCoord}.
 \begin{definition}
-	\Gls{meshing}: is a process where we divide the whole region
-	into smaller pieces, elements in \gls{FEM}-terminology. By the end of this process we have then chosen No. of elements, \gls{N} and
-	located the $N + 1$ \glspl{nodePoint}. Another term for \gls{meshing} is \gls{discretization}.
+	\Gls{meshing} is the process of dividing the region into smaller pieces, called elements in FEM terminology. This process
+	determines the number of elements, \gls{N}, and the locations of the $N+1$ nodes. Another term for meshing is discretization.
 \end{definition}
 \begin{remark}
-	Two \gls{adjacentElements} $\Omega_e$ and $\Omega_{e + 1}$ have then one and only one common point, $x_{e + 1}$.
+	Two adjacent elements, $\Omega_e$ and $\Omega_{e+1}$, have exactly one common point, $x_{e+1}$.
 \end{remark}
 \begin{definition}
-	\Gls{uniformMeshing}: A \gls{meshing} is uniform if all \glspl{element} are of the same size. In the one-dimensional case in
-	hand the node points are then equidistant
+	A mesh is uniform if all elements have the same size. In the present one-dimensional case, the nodes are therefore equidistant.
 \end{definition}
 \begin{remark}
-	It is common practice to pre-mesh the \gls{domain}, solve the problem, then analyze the solution, return to the initial
-	\gls{meshing} and make it finer/grosser in the areas with rapid/slow solution change. This process, \gls{adaptivemeshing},
-	improves the solution and may be carried out iteratively. It will also result in a \gls{nonUniformMeshing}.
+	A common procedure is to create an initial mesh, solve the problem, analyze the solution, and then refine or coarsen the mesh
+	in regions where the solution varies rapidly or slowly, respectively. This iterative process, \gls{adaptivemeshing}, produces
+	a \gls{nonUniformMeshing} and can improve solution accuracy.
 \end{remark}
 \begin{figure}
 	\includegraphics[width = \textwidth]{../Figures/Meshing}
 	\caption{A Typical \Gls{region} with \Glspl{element} and \Glspl{nodePoint}}
 	\label{fig:Meshing}
 \end{figure}
-Consider now an approximation to the or \gls{exactSol} given by
+Consider now an approximation to the \gls{exactSol} given by
 \begin{equation} \label{eqn:Truncated_FEM_Solution}
 	\glssymbol{uM} = \sum_{i = 1}^{\gls{M}} \glsentryname{ai} \gls{phii}.
 \end{equation}

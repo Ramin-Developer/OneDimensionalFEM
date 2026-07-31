@@ -117,18 +117,21 @@ Convergence speed of \glspl{FEMSol} in \cref{cas:q_1st_Degree_Denom,cas:q_2nd_De
 \begin{enumerate}
 	\item For a given \gls{N} it seems that both linear and cubic \glspl{FEMSol} stay on the same side of the \gls{analSol}, i.e., they do not oscillate around the \gls{analSol}.
 
-	\item \Gls{linearFEMSol} seems to underestimate the displacement solution. \Gls{cubicFEMSol} on the other hand, changes between being larger and smaller than the \gls{analSol}.
+	\item The linear finite element solution tends to underestimate the displacement. The cubic solution alternates between
+	overestimating and underestimating the analytical solution as $N$ changes.
 
-	\item \Glsentryname{order0Cont} in \gls{linearFEMSol} is clearly seen when No. of elements is small, look at the \glspl{nodePoint} in upper left part of \cref{fig:q_1_Load_0}. Cubic \glspl{FEMSol} on the other hand,
-	has continuous first derivative, see lower parts of \cref{fig:q_1_Load_0}.
+	\item The $C^0$ continuity of the linear solution is most apparent when the number of elements is small; see the nodes in the
+	upper-left plot of \cref{fig:q_1_Load_0}. The cubic solution has a continuous first derivative, as shown in the lower plots.
 
 	\item The \gls{naturalCondition} is imposed through the boundary term in the weak formulation for both linear and cubic \glspl{FEMSol}. The pointwise boundary flux converges under mesh refinement but is not prescribed as an additional essential condition.
 
 	\item The linear and cubic \glspl{FEMSol} seem to converge as $\mathcal{O} \left( h^2 \right)$ and $\mathcal{O} \left( h^4 \right)$. This is in accordance with the results in \cref{cha:Error_Estimates}, see \cref{eqn:FEM_Error_To_h_And_Exact_Sol}.
 
-	\item \Cref{fig:q_1_Load_0,tbl:q_1st_Degree_Denom_Error} suggest a cubic FEM-error comparable to the numerical round off error. This should not come as a surprise because the problem's \gls{analSol} is also a third degree polynomial, see \cref{eqn:q_1st_Degree_Denom_Solution}.
+	\item \Cref{fig:q_1_Load_0,tbl:q_1st_Degree_Denom_Error} suggest that the cubic finite element error is comparable to numerical
+	roundoff because the analytical solution is also a cubic polynomial; see \cref{eqn:q_1st_Degree_Denom_Solution}.
 
-	\item Convergence speed decreases as by growing \gls{N}. This is of course due the round off error. This fact is more clear for cubic \gls{FEMSol} because of its faster speed of convergence.
+	\item The observed convergence rate deteriorates as \gls{N} increases because the discretization error approaches the roundoff
+	error floor. This effect is more apparent for the faster-converging cubic solution.
 \end{enumerate}	\text{}
 %
 Finally, the code in \cref{lst:Estimate_Error} estimates the $L^2$ error norm of each \gls{FEMSol} compared with the \gls{analSol}.

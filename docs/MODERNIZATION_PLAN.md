@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: docs/improve-report-wording
+- What changed: Rewrote front matter and chapter summaries, corrected recurring grammar and spelling, clarified core explanatory prose, and standardized glossary and appendix terminology.
+- Tests run: Known-defect scan and VS Code diagnostics completed; forced 78-page LaTeX build passed without undefined references or duplicate labels.
+- Next action: implement R3 layout and formatting normalization.
+
+- Date: 2026-08-01
 - Branch: docs/correct-report-mathematics
 - What changed: Corrected the weak problem, bilinearity and continuity statements, interpolation bounds, spaces, analytical formulas, constrained uniqueness proof, flux/sparsity claims, and roundoff table entries.
 - Tests run: Forced LaTeX build completed without undefined references or duplicate labels; independent post-edit mathematical review completed.

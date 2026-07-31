@@ -17,7 +17,7 @@ Let us now derive the stiffness matrix of this problem with linear-FEM. From \cr
 		= \frac{ \overline{A} \left( Lx \right) }{ \overline{A} \left( 0 \right) } = 1.
 \end{equation}
 The last equality comes from the fact that the bar's cross-sectional area is uniform, i.e., the area change under the axial load
-is negligible. Next we calculate entries of the stiffness matrix. Now set No. of elements to
+is negligible. Next we calculate entries of the stiffness matrix. Now set number of elements to
 $N = 1$, which also gives $h = 1$. Then the global stiffness and single element matrices are identical, given by
 \cref{eqn:Element_Stiffness_Entries_3}. Thus for $i, j = 1, 2$ we have 
 \begin{equation}	\label{eqn:Stiffness_Matrix_FEM_Linear_1}
@@ -28,7 +28,7 @@ $N = 1$, which also gives $h = 1$. Then the global stiffness and single element 
 	\end{aligned}
 \end{equation}
 Then the normalized counterpart of the stiffness matrix in \cref{eqn:Stiffness_Matrix_Direct,eqn:Stiffness_Matrix_Formal} follows
-after inserting for derivatives of linear basis-functions, $\psi_1^{\prime} \left( \xi \right) = -1$ and
+after inserting for derivatives of linear basis functions, $\psi_1^{\prime} \left( \xi \right) = -1$ and
 $\psi_2^{\prime} \left( \xi \right) = 1$,
 \begin{equation}	\label{eqn:Stiffness_Matrix_FEM_Linear}
 	\mathbf{K} = \begin{bmatrix}

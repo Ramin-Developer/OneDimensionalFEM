@@ -1,19 +1,17 @@
 \section{Introduction}
-Most, if not all, physical phenomena can be modeled as \glspl{diffEq}, with \glspl{boundaryCondition} and/or
-\glspl{initialCondition}. Such a model is called a \glspl{wellDefinedProblem} if and only if it has a unique solution.
-Several inter-related \glspl{diffEq} form a \gls{sysOfDiffEqs}. A \gls{diffEq} involves derivative(s) of an unknown function. \\
+Many physical phenomena can be modeled by \glspl{diffEq} together with \glspl{boundaryCondition} and/or
+\glspl{initialCondition}. A problem is well posed when a solution exists, is unique, and depends continuously on the prescribed
+data. Several related \glspl{diffEq} form a \gls{sysOfDiffEqs}. A \gls{diffEq} involves derivatives of an unknown function.
 
 \Glspl{spatialCoord}\footnote{Also called \glspl{spatialVar}.} and/or time are the most common independent
-variables of \glspl{diffEq}. Differential equations may be grouped into two types, based on the No. of independent variables;
+variables of \glspl{diffEq}. Differential equations may be classified by the number of independent variables as
 \gls{ODE} and \gls{PDE}. An \gls{ODE} has just one independent variable, while a \gls{PDE} has two or more independent variables.
-\Glspl{diffEq} are also grouped with respect to complexity, i.e., linear or non-linear. In a \gls{linearDiffEq}, ordinary
-or partial, the unknown function and all its derivatives appear always linearly, otherwise we have a 
-\gls{nonLinearDiffEq}. \\
+In a \gls{linearDiffEq}, the unknown function and its derivatives appear linearly; otherwise, the equation is nonlinear.
 
 \Glspl{diffEq} are defined in a \gls{region}.\footnote{Also called \gls{domain}.} We call end points or surfaces of this region
 \glspl{boundary}. A \glsfirst{BVP} consists of a single \gls{diffEq} or a \gls{sysOfDiffEqs} where the solution itself and/or its
-derivate(s) are known on the boundaries. An \gls{IVP} on the other hand, is a single \gls{diffEq} or a \gls{sysOfDiffEqs}
-where the solution itself and/or its derivative(s) are given in an initial time, $t = t_0.$ \\
+derivatives are known on the boundaries. An \gls{IVP}, on the other hand, is a single \gls{diffEq} or a \gls{sysOfDiffEqs}
+where the solution itself and/or its derivatives are specified at an initial time, $t = t_0$.
 
 There are two different approaches to solving \glspl{diffEq}, analytical and numerical.\footnote{They result in \glspl{analSol}
 or \glspl{exactSol} and \glspl{numSol} or \glspl{approxSol}, respectively.} A real world problem is usually too complicated to be
@@ -23,10 +21,10 @@ solved analytically, so we have to resort to numerical approaches. In this repor
 In \cref{cha:Problem_Desc} we define a well-known one-dimensional bar problem. Then in \cref{cha:Problem_Formulation} we derive
 the governing equations for this problem, before normalizing this in \cref{cha:Problem_Normalization}. The bar problem above is
 not fully specified. In \cref{cha:Analytical_Sol} we discuss some problem variations for which the \glspl{analSol} are available.
-Finally, \cref{cha:Analytical_Summary} gathers all \glspl{analSol} all solutions to all discussed variations. \\
+Finally, \cref{cha:Analytical_Summary} gathers the analytical solutions for all discussed variants.
  
-\Cref{cha:FEM_Approach} is devoted to general \gls{FEM} and its application to the defined problem. Among other things, we look at
-at two different choices of \glspl{basisFunction} in the numerical solution. \\
+\Cref{cha:FEM_Approach} introduces \gls{FEM} and applies it to the defined problem. In particular, we examine two different choices
+of \glspl{basisFunction}.
 
 We are naturally interested in the method's error estimate and the eventual convergence. This is studied in
 \Cref{cha:Error_Estimates} for a slightly simplified version of the bar-problem. After deduction of the element matrix with
@@ -34,7 +32,6 @@ different approaches in \cref{cha:Results}, we then present results of model app
 by comparing the FEM with analytical solutions in each case, we investigate if the error estimate in \cref{cha:Error_Estimates}
 holds. We conclude this report by a short summary.	\\
 
-In Appendix \cref{cha:Glossary_of_Terms} we have included a complete list of terms and description used in this document. We may
-also find the MATLAB-code for implementation of both solutions as well as solution visualization and error estimates in Appendix
-\ref{cha:MatLab_Code}.
+A complete list of the terms and descriptions used in this document is provided in Appendix \cref{cha:Glossary_of_Terms}.
+Appendix \ref{cha:MatLab_Code} contains the MATLAB code implementing both solution methods, visualization, and error estimation.
 %
