@@ -24,12 +24,12 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### M2. Correct and verify boundary treatment
 
-- Fix the weak form so the natural boundary contribution is $P w(1)$.
-- Independently verify linear and cubic boundary residuals.
-- Decide whether strongly prescribing the cubic endpoint derivative is mathematically intended; remove it if the natural condition alone is correct.
-- Add manufactured-solution tests for constant and variable coefficients.
+- [x] Fix the weak form so the natural boundary contribution is $P w(1)$.
+- [x] Independently verify linear and cubic weak boundary rows.
+- [x] Remove the additional cubic endpoint derivative constraint.
+- [x] Add manufactured-solution tests for constant and variable coefficients.
 
-**Value:** Critical. This controls the mathematical problem being solved and reported.
+**Status:** Complete. Both basis orders now impose the right natural condition through the weak boundary functional only.
 
 ### M3. Harden coefficient admissibility
 

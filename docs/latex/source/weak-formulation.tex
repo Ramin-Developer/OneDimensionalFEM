@@ -37,7 +37,7 @@ Since the \gls{normalCondition} is only given on the \gls{rightBoundary}, i.e., 
 Now, insert the \gls{boundaryCondition} and the weight function property, i.e., \cref{eqn:FEM_Right_Boundary,eqn:Weight_Condition},
 into \cref{eqn:FEM2_Rewritten} and rearrange the terms,
 \begin{equation} \label{eqn:Weak_Formulation}
-	\int_{x = 0}^{1} \gls{q} \glsentryname{uPrime} \frac{ d \glssymbol{wi} }{dx} \dd x = P  \gls{wi} \Big \vert_{x = 0} + \int_{x = 0}^{1} \gls{f} \gls{wi} \dd x.
+	\int_{x = 0}^{1} \gls{q} \glsentryname{uPrime} \frac{ d \glssymbol{wi} }{dx} \dd x = P  \gls{wi} \Big \vert_{x = 1} + \int_{x = 0}^{1} \gls{f} \gls{wi} \dd x.
 \end{equation}
 %
 To summarize the \gls{weakForm} we need a couple of definitions. \\
@@ -78,5 +78,5 @@ We conclude that \cref{prb:Normalized_Weak_Problem} below is a \gls{weakForm} of
 			\gls{u} \bigg \vert_{x = 0} &= \delta,  \label{eqn:Normalized_Weak_Left_Boundary} \\
 			\Biggl[ \gls{q} \glsentryname{uPrime} \Biggr]_{x = 1} &= P. \label{eqn:Normalized_Weak_Right_Boundary}
 		\end{align}
-	\end{subequations}	
+	\end{subequations}
 \end{problem}
