@@ -48,14 +48,21 @@ colCub = zeros(16 * numElements, 1);
 valCub = zeros(16 * numElements, 1);
 b_Lin = zeros(numElements + 1, 1);
 b_Cub = zeros(2*numElements + 2, 1);
+fixedQuadratureElements = 0;
+adaptiveQuadratureElements = 0;
 
 % Build up the global stiffness matrix and load vector:
 for elemNo = 1:1:numElements
 
     % Construct element stiffness matrix and element load vector:
-    [K_Elem_Lin, b_Elem_Lin, K_Elem_Cub, b_Elem_Cub] = ...
+    [K_Elem_Lin, b_Elem_Lin, K_Elem_Cub, b_Elem_Cub, quadratureMode] = ...
         Elem_Cont(meshSize, elemNo, qFunc, loadFunc, ...
         psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol);
+    if strcmp(quadratureMode, 'fixed-gauss')
+        fixedQuadratureElements = fixedQuadratureElements + 1;
+    else
+        adaptiveQuadratureElements = adaptiveQuadratureElements + 1;
+    end
 
     idx_Lin = elemNo:elemNo + 1;
     [rowBlockLin, colBlockLin] = ndgrid(idx_Lin, idx_Lin);
@@ -78,7 +85,8 @@ end;
 
 K_Lin = sparse(rowLin, colLin, valLin, dimLin, dimLin);
 K_Cub = sparse(rowCub, colCub, valCub, dimCub, dimCub);
-assemblyStats = Build_Assembly_Stats(K_Lin, K_Cub);
+assemblyStats = Build_Assembly_Stats( ...
+    K_Lin, K_Cub, fixedQuadratureElements, adaptiveQuadratureElements);
 
 % Implement boundary conditions for the linear-FEM:
 sysSolLin = Bound_Cond(1, numElements, delta, P, K_Lin, b_Lin);
@@ -116,7 +124,8 @@ b( 1 ) = delta;
 sysSol = K\b;
 sysSol(1) = delta;
 
-function stats = Build_Assembly_Stats(KLin, KCub)
+function stats = Build_Assembly_Stats( ...
+    KLin, KCub, fixedQuadratureElements, adaptiveQuadratureElements)
 
 linearInfo = whos('KLin');
 cubicInfo = whos('KCub');
@@ -128,4 +137,6 @@ stats = struct( ...
     'linear_Storage_Bytes', linearInfo.bytes, ...
     'cubic_Storage_Bytes', cubicInfo.bytes, ...
     'linear_Dense_Bytes', 8 * numel(KLin), ...
-    'cubic_Dense_Bytes', 8 * numel(KCub));
+    'cubic_Dense_Bytes', 8 * numel(KCub), ...
+    'fixed_Quadrature_Elements', fixedQuadratureElements, ...
+    'adaptive_Quadrature_Elements', adaptiveQuadratureElements);
