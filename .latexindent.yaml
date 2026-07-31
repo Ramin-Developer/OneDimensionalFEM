@@ -1,0 +1,2 @@
+# Structural indentation only; line wrapping remains an editor concern.
+defaultIndent: "  "

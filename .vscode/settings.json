@@ -1,0 +1,14 @@
+{
+	"latex-workshop.formatting.latex": "latexindent",
+	"latex-workshop.formatting.latexindent.path": "latexindent",
+	"latex-workshop.formatting.latexindent.args": [
+		"-c",
+		"%DIR%/",
+		"%TMPFILE%",
+		"-l=%WORKSPACE_FOLDER%/.latexindent.yaml"
+	],
+	"[latex]": {
+		"editor.defaultFormatter": "James-Yu.latex-workshop",
+		"editor.formatOnSave": true
+	}
+}
