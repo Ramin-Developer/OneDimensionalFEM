@@ -16,7 +16,7 @@
 		two, which are collectively known as transverse dimensions. The intersection of a plane normal to longitudinal dimension
 		and the bar defines the cross sections. The longitudinal dimension defines the longitudinal axis. Second, The bar only
 		resists an internal axial loads}}
-			
+
 \newglossaryentry{dof}{
 	type=terminology,
 	name={Degree of Freedom},
@@ -32,7 +32,7 @@
 		(turning left and right) and rolling (tilting side to side). Other terms of DOFs are generalized coordinates, state variables
 		and primary variables. A system or a mathematical model is discrete, if its DOF-number is finite, otherwise continuous.
 		Because FEM is a discretization method, the number of DOF of a FEM model is necessarily finite, collected in a column vector}}
-		
+
 \newglossaryentry{energyConservation}{
 	type=terminology,
 	name={conservation of energy},
@@ -42,7 +42,7 @@
 		over time. The total energy is said to be conserved over time. For an isolated system, this law means that energy can change
 		its location within the system, and that it can change form within the system, for instance chemical energy can become kinetic
 		energy, but that energy can be neither created nor destroyed}}
-		
+
 \newglossaryentry{minPotentialEnergy}{
 	type=terminology,
 	name={Minimum Potential Energy},
@@ -53,8 +53,8 @@
 		lost potential energy being dissipated as heat. The tendency to minimum total potential energy is due to the second law of
 		thermodynamics, which states that the entropy of a system will maximize at equilibrium. Given two possibilities - a low heat
 		content and a high potential energy, or a high heat content and low potential energy, the latter will be the state with the
-		highest entropy, and will therefore be the state towards which the system moves}}	
-	
+		highest entropy, and will therefore be the state towards which the system moves}}
+
 \newglossaryentry{GalerkinMethod}{
 	type=terminology,
 	name={Galerkin's Method},
@@ -66,20 +66,20 @@
 		applies some constraints on the function space to characterize the space with a finite set of basis functions. Often when
 		using a Galerkin method one also gives the name along with typical approximation methods used, such as Petrov-Galerkin
 		method (after Alexander G. Petrov) or Ritz-Galerkin method (after Walther Ritz)}}
-		
+
 \newglossaryentry{diagonalMatrix}{
 	type=terminology,
 	name={diagonal matrix},
 	first={\emph{diagonal matrix}},
 	sort=Diagonal Matrix,
 	description={In a diagonal matrix all non-zero entries are placed on a few diagonals}}
-	
+
 \newglossaryentry{smoothFunction}{
 	type=terminology,
 	name={smooth function},
 	sort=Smooth Function,
 	description={A function which supports \gls{orderInfCont} }}
-	
+
 \newglossaryentry{finite}{
 	type=terminology,
 	name={finite},
@@ -234,20 +234,20 @@
 	name={Normal Condition},
 	sort=Normal Condition,
 	description={In \gls{1DimProblem}, a Normal Condition specifies the value of solution's first derivative}}
-	
+
 \newglossaryentry{naturalCondition}{
 	type=terminology,
 	name={Natural Condition},
 	sort=Natural Condition,
 	description={See \gls{normalCondition}}}
-	
+
 \newglossaryentry{diffEq}{
 	type=terminology,
 	name={differential equation},
 	sort=Differential Equation,
 	description={A differential equation is an implicit relatation between the function's derivatives and its independent variables,
-		eventually the function itself}}	
-	
+		eventually the function itself}}
+
 \newglossaryentry{sysOfDiffEqs}{
 	type=terminology,
 	name={system of differential equations},
@@ -272,7 +272,7 @@
 	firstplural={Partial Differential Equations (PDEs)},
 	sort=Parial Differential Equation,
 	description={We call a \gls{diffEq} partial if the unknown function has at least two independent variables}}
-	
+
 \newglossaryentry{1DimProblem}{
 	type=terminology,
 	name={one-dimensional problem},
@@ -353,7 +353,7 @@
 	name={node point},
 	sort=Node Point,
 	description={is a fixed point in the region. Node points are non-overlapping}}
-	
+
 \newglossaryentry{adjacentElements}{
 	type=terminology,
 	name={adjacent elements},
@@ -367,7 +367,7 @@
 	name={linear equation system},sort=Linear Equation System,
 	description={is a set of algebraic equations linear with respect to all unknowns. This system has a unique solution if and only
 		if the coefficient matrix $\mathbf{A}$ is quadratic and $\det \left( \mathbf{A} \right) \neq 0$}}
-		
+
 \newglossaryentry{elementLoad}{
 	type=terminology,
 	name={element load},
@@ -375,7 +375,7 @@
 	description={is the contribution of a single \gls{element} to the global load vector. This is described in
 		\cref{cha:Element_Load_Linear,cha:Element_Matrix_Load_Cubic} on
 		\cpageref{cha:Element_Load_Linear,cha:Element_Matrix_Load_Cubic} for linear and cubic \glspl{basisFunction}, respectively}}
-		
+
 \newglossaryentry{elementMatrix}{
 	type=terminology,
 	name={element matrix},
@@ -391,7 +391,7 @@
 	sort=Element Contribution,
 	description={is the contribution of a single \gls{element} to the global \gls{stiffnessMatrix} and the global load vector via
 		\gls{elementMatrix} and \gls{elementLoad}. See \gls{elementMatrix} and \gls{elementLoad}}}
-	
+
 \newglossaryentry{analSol}{
 	type=terminology,
 	name={analytical solution},
@@ -400,7 +400,7 @@
 
 \newglossaryentry{exactSol}{type=terminology,name={exact solution},sort=Exact Solution,
 	description={See \gls{analSol}}}
-	
+
 \newglossaryentry{numSol}{
 	type=terminology,
 	name={numerical solution},
@@ -425,7 +425,7 @@
 	\gls{sysOfDiffEqs}. Nature of the differential equation(s) may be ordinary or partial, with any complexity, linear or
 	non-linear. It handles both \glspl{boundaryCondition} and \glspl{initialCondition}. This report is meant as an introduction
 	to Finite Element Method }}
-	
+
 \newglossaryentry{FEMSol}{
 	type=terminology,
 	name={FEM-Solution},
@@ -433,33 +433,33 @@
 	description={The numerical solution obtained by applying the \gls{FEM} to the problem in hand. In this report we apply \gls{FEM}
 		to a one-dimensional bar under an axial load. We choose two different types of \glspl{basisFunction}, linear and
 		cubic polynomials. The results are then refered to as \gls{linearFEMSol} and \gls{cubicFEMSol} }}
-		
+
 \newglossaryentry{linearFEMSol}{
 	type=terminology,
 	name={linear-FEM-solution},
 	sort=Linear-FEM-Solution,
 	description={The \gls{FEMSol} of the bar problem with \gls{piecewiseLinear} \glspl{basisFunction} }}
-	
+
 \newglossaryentry{piecewiseLinear}{
 	type=terminology,
 	name={piecewise linear},
 	first={\emph{Piecewise Linear}},
 	sort=Piecewise Linear,
-	description={A function is piecewise linear, if it is put together of two or more linear polynomials.}}	
-	
+	description={A function is piecewise linear, if it is put together of two or more linear polynomials.}}
+
 \newglossaryentry{piecewiseCubic}{
 	type=terminology,
 	name={piecewise cubic},
 	first={\emph{piecewise cubic}},
 	sort=Piecewise Cubic,
-	description={A function is piecewise cubic, if it is put together of two or more cubic polynomials.}}	
-	
+	description={A function is piecewise cubic, if it is put together of two or more cubic polynomials.}}
+
 \newglossaryentry{cubicFEMSol}{
 	type=terminology,
 	name={cubic-FEM-solution},
 	sort=Cubic-FEM-Solution,
-	description={The \gls{FEMSol} of the bar problem with \gls{piecewiseCubic} \glspl{basisFunction} }}	
-	
+	description={The \gls{FEMSol} of the bar problem with \gls{piecewiseCubic} \glspl{basisFunction} }}
+
 \newglossaryentry{solConv}{
 	type=terminology,
 	name={solution convergence},
@@ -467,7 +467,7 @@
 	description={A numerical solution is said to converge if the deviation between consecutive solution goes to zero with increasing
 		No. of nodal points. In this report we solve the bar problem numerically for the cases with known analytical solutions.
 		We measure then convergence of the \gls{FEMSol} towards the \gls{analSol} }}
-	
+
 \newglossaryentry{convFactor}{
 	type=terminology,
 	name={error reduction factor},
@@ -479,7 +479,7 @@
 	name={algorithm},
 	sort=Algorithm,
 	description={In mathematics and software developement an algorithm is a step-by-step procedure for calculations}}
-	
+
 \newglossaryentry{localCoord}{
 	type=terminology,
 	name={local coordinate},sort=Local Coordinates,
@@ -492,20 +492,20 @@
 	sort=Global Coordinates,
 	description={Global coordinate system is defined for the whole problem \gls{region}. For example element locations, initial and
 	boundary conditions are defined in terms of this system}}
-	
+
 \newglossaryentry{analInt}{
 	type=terminology,
 	name={analytical integration},sort=Analytical Integration,
 	description={For a function of one variable \gls{f}, the function is integrated analytically if we can find a function
 		$g \left( x \right)$ such that $\gls{f} = \frac{dg}{dx}$}}
-	
+
 \newglossaryentry{numInt}{
 	type=terminology,
 	name={numerical integration},
 	sort=Numerical Integration,
 	description={If analytical integration of a function is impossible or too complicated we have to resort to numerical approaches.
 		In these cases we estimate the value of definite integral}}
-	
+
 \newglossaryentry{sparseMat}{
 	type=terminology,
 	name={sparse matrix},
@@ -513,7 +513,7 @@
 	sort=Sparse Matrix,
 	description={A matrix is said to be sparse if majority of entries are zeros. Numerical approaches give often rise to
 		sparse matrices}}
-	
+
 \newglossaryentry{symMat}{
 	type=terminology,
 	name={symmetrical matrix},
@@ -526,21 +526,21 @@
 	name={positive-definite},
 	sort=Positive-Definite,
 	description={is a property of a matrix, see \cref{def:Positive_Definite} on \cpageref{def:Positive_Definite}}}
-	
+
 \newglossaryentry{singular}{
 	type=terminology,
 	name={singular},
 	sort=Singular,
 	description={A quadratic matrix $\mathbf{A}$ is singular if $\det \left( \mathbf{A} \right) = 0$, otherwise it is non-singular.
 		The equation system $\mathbf{A} x = \mathbf{b}$ with a singular matrix $\mathbf{A}$ will not be well-defined, i.e., based on
-		the vector $\mathbf{b}$ it will either have no solution at all or infinite No. of solutions}}	
-	
+		the vector $\mathbf{b}$ it will either have no solution at all or infinite No. of solutions}}
+
 \newglossaryentry{nonSingular}{
 	type=terminology,
 	name={non-singular},
 	sort=non-singular,
 	description={See \gls{singular}}}
-	
+
 \newglossaryentry{assembly}{
 	type=terminology,
 	name={assembly},
@@ -564,7 +564,7 @@
 	sort=Load Vector,
 	description={arises as the final constant vector $\mathbf{b}$ in the \gls{linearEquationSystem} $\mathbf{A}x = \mathbf{b}$, when
 		\gls{FEM} is applied to the bar problem, see \gls{assembly} }}
-	
+
 \newglossaryentry{weakForm}{
 	type=terminology,
 	name={Weak Formulation},
