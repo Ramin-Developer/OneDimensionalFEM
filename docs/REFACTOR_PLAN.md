@@ -114,9 +114,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### C1. Simplify ownership boundaries
 
-- Keep problem construction, validation, assembly, solution, error analysis, and presentation separate.
-- Remove duplicate calculations and obsolete compatibility terminology.
-- Standardize naming without changing public entry points unnecessarily.
+- [x] Keep problem construction, validation, assembly, solution, error analysis, and presentation separate.
+- [x] Remove duplicate calculations and obsolete compatibility terminology.
+- [x] Standardize naming without changing public entry points unnecessarily.
+
+**Status:** Complete. `Def_Problem` now delegates validation and data construction to `Build_Problem_Data` while preserving public error identifiers.
 
 ### C2. Complete project documentation
 

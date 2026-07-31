@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: refactor/simplify-ownership-boundaries
+- What changed: Removed duplicate `Def_Problem` validation logic, delegated configuration checks to `Build_Problem_Data`, and preserved `Def_Problem:*` API error identifiers through boundary remapping.
+- Tests run: Full guarded MATLAB suite passed (15 test files).
+- Next action: implement C2 documentation completion cleanup.
+
+- Date: 2026-08-01
 - Branch: docs/normalize-report-layout
 - What changed: Added glossary-aware report automation, restored both glossaries, normalized portable paths and glossary display names, removed forced prose breaks, and resolved actionable layout warnings.
 - Tests run: Complete report build passed; glossary text extraction, PDF metadata, path scan, and warning audit completed.
