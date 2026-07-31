@@ -79,7 +79,7 @@ The right end of the bar is subjected to force \gls{PBar}. Thus
 	\Cref{eqn:Non_Normalized_Dirichlet_Cond,eqn:Non_Normalized_Normal_Cond} are both \glspl{boundaryCondition}, but quite
 	different in nature. \Cref{eqn:Non_Normalized_Dirichlet_Cond} is a Dirichlet or \gls{essentialCondition} and specifies
 	the displacement value on the \gls{leftBoundary}. \Cref{eqn:Non_Normalized_Normal_Cond}, on the other hand, is a normal
-	or \gls{naturalCondition}. In a \gls{1DimProblem}, it specifies the solution's first derivative. Thus
-	\cref{eqn:Non_Normalized_Normal_Cond} gives the first derivative's value on the \gls{rightBoundary}.
+	or \gls{naturalCondition}. In a \gls{1DimProblem}, it specifies the boundary flux or traction
+	$\overline{q}(L)\,\overline{u}'(L)=\overline{P}$, rather than prescribing the derivative independently of the rigidity.
 \end{remark}
 %

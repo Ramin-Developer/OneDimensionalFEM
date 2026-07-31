@@ -67,16 +67,9 @@ Following terminology of \cref{def:Cont_of_Derivatives}, a single-variable funct
 \end{remark}
 We conclude that \cref{prb:Normalized_Weak_Problem} below is a \gls{weakForm} of \cref{prb:Normalized_Problem}.
 \begin{problem}	\label{prb:Normalized_Weak_Problem}
-	Find a function $\gls{u}$ supporting \glsentrysymbol{order0Cont}-continuity such that
-	\begin{subequations}
-		\begin{align}	\label{eqn:Normalized_Weak_Diff_Eq}
-			\int_{x = 0}^{1} \frac{d}{dx} \biggl[ \gls{q} \frac{du}{dx} \biggr] \gls{wi} \dd x
-			+\int_{x = 0}^{1} \gls{f} \gls{wi} \dd x &= 0, & x \in \left( 0, 1 \right),
-		\end{align}
-		with boundary conditions
-		\begin{align}
-			\gls{u} \bigg \vert_{x = 0} &= \delta,  \label{eqn:Normalized_Weak_Left_Boundary} \\
-			\Biggl[ \gls{q} \glsentryname{uPrime} \Biggr]_{x = 1} &= P. \label{eqn:Normalized_Weak_Right_Boundary}
-		\end{align}
-	\end{subequations}
+	Find $u \in \{v \in H^1(0,1):v(0)=\delta\}$ such that
+	\begin{equation}	\label{eqn:Normalized_Weak_Diff_Eq}
+		\int_0^1 q u' w' \dd x = \int_0^1 f w \dd x + P w(1)
+	\end{equation}
+	for every $w \in H^1(0,1)$ satisfying $w(0)=0$.
 \end{problem}

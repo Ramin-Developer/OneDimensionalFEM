@@ -83,30 +83,18 @@ A \gls{posDef} matrix $\mathbf{A}$ $\in \mathbb{R}^{2 \times 2}$ is then non-sin
 	\end{subequations}
 \end{remark}
 
-For proving uniqueness of \gls{FEM} it is then enough to show that the \gls{stiffnessMatrix} is positive-definite.\\
-First note that according to \cref{eqn:Stiffness_Matrix}
+Before imposing the essential boundary condition, the assembled stiffness matrix is only positive semidefinite: the constant function belongs to its nullspace. Uniqueness follows after restricting the discrete space to functions satisfying the homogeneous essential condition at the left boundary.
+
+Let $\mathbf{K}_0$ denote the stiffness matrix on the free degrees of freedom. According to \cref{eqn:Stiffness_Matrix},
 \begin{equation}
-	\gls{K} = \gls{K}^T \Longleftrightarrow \glsentryname{Kij} = K_{j,i}.
+	\mathbf{K}_0 = \mathbf{K}_0^T.
 \end{equation}
-Furthermore
+For any nonzero free coefficient vector $\mathbf{v}$, let $w_h$ be its associated discrete function. Then $w_h(0)=0$ and
 \begin{equation}
-	\begin{aligned}
-		\gls{v}^{T} \gls{K} \gls{v}  &= \sum \limits_{i = 1}^{\gls{M}} \sum \limits_{j = 1}^{\gls{M}}
-			\gls{vi} \glsentryname{Kij} v_j \\
-		&= \sum \limits_{i = 1}^{\gls{M}} \sum \limits_{j = 1}^{\gls{M}} \gls{vi} \Biggl[ \int_{x = 0}^{1}
-			\gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x \Biggr] v_j \\
-		&= \sum \limits_{i = 1}^{\gls{M}} \Biggl[ \sum \limits_{j = 1}^{\gls{M}} \int_{x = 0}^{1}
-		\gls{q} \glsentryname{phiiPrime} \glsentryname{phijPrime} \dd x \Biggr] \gls{vi} v_j.
-	\end{aligned}
+	\mathbf{v}^{T}\mathbf{K}_0\mathbf{v}
+	= \int_0^1 q(x)\,[w_h'(x)]^2 \dd x > 0. \label{eqn:Pos_Def_Simplified}
 \end{equation}
-Now exchange the order of integration and summations to get
-\begin{equation} \label{eqn:Pos_Def_Simplified}
-	\begin{aligned}
-		\gls{v}^{T} \gls{K} \gls{v}  &= \int_{x = 0}^{1} \gls{q} \Biggl[ \sum \limits_{i = 1}^{\gls{M}} \gls{vi} \glsentryname{phiiPrime} \Biggr]
-		\Biggl[ \sum \limits_{j = 1}^{\gls{M}} v_j \glsentryname{phijPrime} \Biggr] \dd x \\
-		&= \int_{x = 0}^{1} \gls{q} \Biggl[ \sum \limits_{i = 1}^{\gls{M}} \gls{vi} \glsentryname{phiiPrime} \Biggr]^{2} \dd x > 
-		0, \quad \forall \gls{v} \neq 0.
-	\end{aligned}
-\end{equation}
-\Gls{stiffnessMatrix} satisfies both conditions in \cref{eqn:Pos_Def_Prop_1,eqn:Pos_Def_Prop_2}, and is therefore positive-definite.
+Indeed, equality could hold only if $w_h$ were constant; together with $w_h(0)=0$, this would imply $w_h=0$ and hence $\mathbf{v}=0$. Thus $\mathbf{K}_0$ is positive definite and the constrained Galerkin solution is unique.
+
+The implementation enforces the left value by replacing one matrix row. That full algebraic matrix is nonsymmetric, but it is equivalent to solving the symmetric positive-definite reduced system for the free degrees of freedom.
 %

@@ -148,7 +148,7 @@ By using \cref{eqn:H1_Semi_Norm} we rewrite the left hand side of last inequalit
 \end{equation}
 Combining (\ref{eqn:FEM_1st_Der_Error_6}) and (\ref{eqn:FEM_1st_Der_Error_7}) gives
 \begin{equation}	\label{eqn:FEM_1st_Der_Error_8}
-	\Big \vert E \Big \vert_{ H^1 \left( \Omega_e \right) }^2 = h^2 \Big \vert u \Big \vert_{ H^2 \left( \Omega_e \right) }^2.
+	\Big \vert E \Big \vert_{ H^1 \left( \Omega_e \right) }^2 \leq h^2 \Big \vert u \Big \vert_{ H^2 \left( \Omega_e \right) }^2.
 \end{equation}
 To convert the single element error estimate in (\ref{eqn:FEM_1st_Der_Error_8}) to an error estimate over the entire
 domain, we may simply sum over all elements, i.e.,
@@ -162,7 +162,7 @@ domain, we may simply sum over all elements, i.e.,
 \end{equation}
 Taking square root of (\ref{eqn:FEM_1st_Der_Error_9}) provides us with an interpolation error estimate in $H^1$-Semi-Norm, i.e.,
 \begin{equation}	\label{eqn:FEM_1st_Der_Error}
-	\big \vert E \big \vert_{ H^1 } = \big\| E^{\prime } \big\|_{ L^2 } = h \big \vert u \big \vert_{ H^2 }.
+	\big \vert E \big \vert_{ H^1 } = \big\| E^{\prime } \big\|_{ L^2 } \leq h \big \vert u \big \vert_{ H^2 }.
 \end{equation} \\
 Observe that (\ref{eqn:FEM_1st_Der_Error}) bounds the derivative of error associated with the interpolant. We are also
 interested in an estimate for the interpolant error itself. Note that this error is zero at $x_1^e$ and $x_2^e$. Thus
@@ -179,7 +179,7 @@ Using (\ref{eqn:FEM_1st_Der_Error}) we get
 \end{equation}
 Thus for the interpolant $U^h \in \mathcal{S}^h$, we may bound the $L^2$-Norm of error by
 \begin{equation}	\label{eqn:FEM_Error_5}
-	\big\| E \big\|_{ L^2 } = h^2 \big \vert u \big \vert_{ H^2 }.
+	\big\| E \big\|_{ L^2 } \leq h^2 \big \vert u \big \vert_{ H^2 }.
 \end{equation}
 To estimate an $H^1$ interpolation error begin with \cref{eqn:H1Norm} and use (\ref{eqn:FEM_Error_4}) and
 \cref{eqn:FEM_1st_Der_Error}. Thus
@@ -261,7 +261,7 @@ Take absolute value of \cref{eqn:Orthogonality_e_Wh_1} and apply continuity boun
 	\glsentrysymbol{L2Norme}^2 \leq \gamma h \glsentrysymbol{H1Norme} \big \vert \phi \big \vert_{H^2} =
 		\gamma h \glsentrysymbol{H1Norme} \glsentrysymbol{L2Norme},
 \end{equation}
-Taking square roots of \cref{eqn:Orthogonality_e_Wh_3} results in
+Dividing \cref{eqn:Orthogonality_e_Wh_3} by $\|e\|_{L^2}$ (the zero-error case being immediate) results in
 \begin{equation}	\label{eqn:Orthogonality_e_Wh_4}
 	\left\| e \right\|_{L^2} \leq \gamma h \left\| e \right\|_{H^1}.
 \end{equation}
