@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: test/add-independent-element-oracles
+- What changed: Added closed-form element expectations, an independent fixed Gauss oracle for every rigidity family and basis order, and manufactured nonzero-boundary checks over multiple meshes.
+- Tests run: Focused independent-oracle suite, all tests passing.
+- Next action: implement V2 output and terminology alignment.
+
+- Date: 2026-07-31
 - Branch: fix/validate-q-coefficients
 - What changed: Centralized rigidity coefficient validation, canonicalized aliases, enforced exact counts and positive finite domains, and documented admissible model parameters.
 - Tests run: Complete guarded MATLAB suite with ten test files, exit code 0.
