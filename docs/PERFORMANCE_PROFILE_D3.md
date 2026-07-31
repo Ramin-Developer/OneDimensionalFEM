@@ -37,16 +37,16 @@ Raw profiler table is saved in `docs/performance_hotspots.txt`.
 
 ## Optimization Opportunities (Prioritized)
 
-1. Reduce quadrature call volume in element assembly.
-   - In `Elem_Cont`, each `(i, j)` and `i` entry calls `quadgk` separately.
-   - Evaluate fixed-order Gauss quadrature for known polynomial basis-function products where acceptable.
+1. Quadrature call-volume reduction completed.
+   - `Elem_Cont` now evaluates all matrix and load entries together with shared Gauss points.
+   - A two-order agreement check retains adaptive fallback for difficult coefficients.
 
-2. Hoist repeated per-element computations.
-   - Cache mapped coordinates and repeated basis/basis-derivative evaluations for quadrature points.
-   - Reduce repeated anonymous-function capture overhead inside nested loops.
+2. Repeated per-element computations hoisted.
+   - Mapped coordinates, coefficient/load values, and basis values are shared across both basis orders.
+   - Measured results are documented in `PERFORMANCE_QUADRATURE.md`.
 
-3. Introduce optional fast path for constant-coefficient cases.
-   - For `q_Const` and polynomial load definitions, precompute reference element integrals and reuse scaled values.
+3. Constant and polynomial cases use the shared Gauss fast path.
+   - Gauss integration is exact for the supported polynomial element integrands.
 
 4. Sparse assembly completed.
    - `Solve_Eq_Sys` now assembles both stiffness matrices from sparse triplets.

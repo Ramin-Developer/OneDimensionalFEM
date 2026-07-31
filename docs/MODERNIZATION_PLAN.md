@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: perf/fixed-gauss-quadrature
+- What changed: Replaced repeated entry-wise adaptive integration with shared 16/32-point Gauss evaluation, added tolerance-based adaptive fallback, and tracked quadrature modes.
+- Tests run: Complete guarded MATLAB suite with thirteen test files, exit code 0.
+- Next action: implement P3 corrected performance baselines and stable informational gates.
+
+- Date: 2026-07-31
 - Branch: perf/sparse-assembly
 - What changed: Replaced dense stiffness accumulation with sparse triplets, exposed assembly statistics, added storage-scaling tests, and extended benchmarks with memory evidence.
 - Tests run: Independent numerical oracles and focused sparse-storage tests passed.

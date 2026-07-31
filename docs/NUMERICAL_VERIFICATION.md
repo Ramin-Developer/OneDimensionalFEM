@@ -10,3 +10,5 @@ Correctness assertions are independent of compatibility snapshots:
 Element comparisons use an absolute tolerance of $10^{-11}$; polynomial cubic solutions use $10^{-10}$. These tolerances are well above double-precision roundoff while remaining small enough to expose mapping, scaling, basis-order, and indexing defects.
 
 Golden MAT files remain compatibility baselines only; they are not the mathematical oracle.
+
+Production element integration compares 16- and 32-point Gauss results. The 32-point result is accepted when every matrix and load contribution agrees within five times the requested relative tolerance; otherwise the element uses adaptive `quadgk`. Tests cover both selection paths.
