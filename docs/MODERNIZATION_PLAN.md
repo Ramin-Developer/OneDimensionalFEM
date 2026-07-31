@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: perf/stable-performance-gates
+- What changed: Added a versioned warmed performance baseline, deterministic runtime/memory evaluation, JIT warm-up, baseline ratios, and stable informational CI limits.
+- Tests run: Deterministic evaluator tests and the real default guardrail passed.
+- Next action: implement R1 remaining mathematical report corrections.
+
+- Date: 2026-07-31
 - Branch: perf/fixed-gauss-quadrature
 - What changed: Replaced repeated entry-wise adaptive integration with shared 16/32-point Gauss evaluation, added tolerance-based adaptive fallback, and tracked quadrature modes.
 - Tests run: Complete guarded MATLAB suite with thirteen test files, exit code 0.
