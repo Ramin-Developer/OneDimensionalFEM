@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: perf/sparse-assembly
+- What changed: Replaced dense stiffness accumulation with sparse triplets, exposed assembly statistics, added storage-scaling tests, and extended benchmarks with memory evidence.
+- Tests run: Independent numerical oracles and focused sparse-storage tests passed.
+- Next action: implement P2 fixed-order quadrature and invariant precomputation.
+
+- Date: 2026-07-31
 - Branch: refactor/align-error-terminology
 - What changed: Removed misleading error aliases, canonicalized reduction-factor fields, added mesh-ratio-aware observed orders, and synchronized console/report terminology.
 - Tests run: Focused output-contract suite, all tests passing.
