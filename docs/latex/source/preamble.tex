@@ -1,7 +1,7 @@
 % ***************************** Language and Font *****************************
 \usepackage[american]{babel}
-\usepackage[latin1]{inputenc} % as usual
-\usepackage[T1]{fontenc} % as usual
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 % ***************************** Figure and Table Processing *****************************
 \usepackage{graphicx}
@@ -65,6 +65,12 @@
 
 % ****************************** Code Insertion *******************************
 \usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\small,
+	breakatwhitespace=false,
+	breaklines=true,
+	columns=fullflexible
+}
 
 % ************************** Smart Cross Referencing **************************
 \usepackage{cleveref}

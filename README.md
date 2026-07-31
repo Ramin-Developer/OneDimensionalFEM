@@ -37,12 +37,6 @@ run('tests/run_tests_with_coverage.m')
 
 ## Test Coverage
 
-Latest CI coverage report:
-
-- overall line coverage: 51.41%
-- critical files (<60%): Basis_Shape_Func.m, Export_Figure.m, Main_Program.m, Plot_FEM_Solutions.m, Read_input.m, Show_Results.m, Def_Problem.m
-- low coverage files (60%-<80%): none
-
 Coverage is published automatically by CI in the job summary and coverage artifact.
 Use the CI coverage summary to see the latest file-by-file view.
 

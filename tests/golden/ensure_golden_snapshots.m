@@ -53,8 +53,8 @@ snapshot.sampleX = sampleX;
 snapshot.exactVals = femData.u_Exact(sampleX);
 snapshot.linVals = linVals;
 snapshot.cubVals = cubVals;
-snapshot.sqErrorLin = femData.sq_Error_Lin;
-snapshot.sqErrorCub = femData.sq_Error_Cub;
+snapshot.l2ErrorLin = femData.l2_Error_Lin;
+snapshot.l2ErrorCub = femData.l2_Error_Cub;
 snapshot.convLin = femData.conv_Factor_Lin;
 snapshot.convCub = femData.conv_Factor_Cub;
 
