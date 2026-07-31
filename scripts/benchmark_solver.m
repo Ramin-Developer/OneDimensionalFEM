@@ -44,6 +44,10 @@ for idx = 1:numel(numElementsList)
     N = numElementsList(idx);
     repeats = zeros(repeatCount, 1);
 
+    % Warm up JIT compilation and persistent quadrature data outside timing.
+    [~, ~, assemblyStats] = Calc_FEM_Sol( ...
+        N, h(idx), delta, P, q_Func, load_Func, relTol);
+
     for rep = 1:repeatCount
         tic;
         [~, ~, assemblyStats] = Calc_FEM_Sol( ...

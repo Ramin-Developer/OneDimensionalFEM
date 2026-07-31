@@ -76,10 +76,10 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### P3. Establish performance gates
 
-- Capture a corrected baseline before optimization.
-- Report median runtime and memory scaling; keep CI thresholds informational until stable.
+- [x] Capture a corrected, warmed baseline after sparse assembly and shared quadrature.
+- [x] Report median runtime, baseline ratio, and memory scaling with informational CI thresholds.
 
-**Value:** Medium to high after correctness. Expected improvement is substantial for large meshes.
+**Status:** Complete. Versioned runtime and deterministic memory baselines now drive scheduled/manual informational checks without failing CI.
 
 ## Priority 4: Report Quality
 
