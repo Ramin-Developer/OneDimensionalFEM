@@ -192,7 +192,7 @@ assert(all(femData.conv_Factor_Cub >= cub_Min), ...
     'Cubic convergence factor fell below threshold.');
 end
 
-function testRightBoundaryResidualsAreControlled(~)
+function testPointwiseBoundaryFluxResidualsConverge(~)
 num_Elements = [8 16 32];
 q_Type = 'q_Const';
 q_Coeff = 1;
@@ -219,8 +219,8 @@ end
 
 assert(all(diff(resLin) < 0), ...
     'Linear right-boundary residual should decrease with mesh refinement.');
-assert(all(resCub <= 1e-6), ...
-    'Cubic right-boundary residual exceeded tolerance.');
+assert(all(diff(resCub) < 0), ...
+    'Cubic right-boundary residual should decrease with mesh refinement.');
 assert(resLin(end) <= 1e-3, ...
     'Linear right-boundary residual exceeded finest-mesh threshold.');
 end

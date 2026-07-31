@@ -63,10 +63,10 @@ for elemNo = 1:1:numElements
 end;
 
 % Implement boundary conditions for the linear-FEM:
-sysSolLin = Bound_Cond(1, numElements, meshSize, delta, P, qFunc, K_Lin, b_Lin);
+sysSolLin = Bound_Cond(1, numElements, delta, P, K_Lin, b_Lin);
 
 % Implement boundary conditions for the cubic-FEM:
-sysSolCub = Bound_Cond(3, numElements, meshSize, delta, P, qFunc, K_Cub, b_Cub);
+sysSolCub = Bound_Cond(3, numElements, delta, P, K_Cub, b_Cub);
 
 assert(isvector(sysSolLin) && numel(sysSolLin) == numElements + 1, ...
     'Solve_Eq_Sys:InvalidOutput', ...
@@ -75,26 +75,20 @@ assert(isvector(sysSolCub) && numel(sysSolCub) == 2*numElements + 2, ...
     'Solve_Eq_Sys:InvalidOutput', ...
     'Cubic system solution size mismatch.');
 
-function sysSol = Bound_Cond(basisDegree, numElements, meshSize, delta, P, qFunc, K, b)
+function sysSol = Bound_Cond(basisDegree, numElements, delta, P, K, b)
 
 % Apply boundary conditions for linear and cubic systems.
 
 if basisDegree == 1
     dim = numElements + 1;
-
-    % Adjusting load value on the right boundary:
-	b(dim) = P + b(dim);
-
+    rightValueIndex = dim;
 else
     dim = 2*numElements + 2;
-    % Adjusting load value on the right boundary:
-    b(numElements + 1) = b(numElements + 1) + P;
-
-    % Implement Normal Condition on the right boundary:
-    K(dim, :) = zeros(1, dim);
-    K(dim, dim) = 1;
-    b(dim) = meshSize * P / qFunc(1);
+    rightValueIndex = numElements + 1;
 end;
+
+% The natural boundary condition contributes only to the endpoint value row.
+b(rightValueIndex) = b(rightValueIndex) + P;
 
 % Implement Dirichlet Condition on the left boundary:
 K(1, :) = zeros(1, dim);
