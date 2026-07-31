@@ -43,9 +43,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### V1. Build an independent numerical oracle
 
-- Test element matrices and loads against closed-form cases rather than production helpers.
-- Cover all coefficient families, both basis orders, multiple meshes, and nonzero boundary data.
-- Separate compatibility snapshots from correctness assertions.
+- [x] Test element matrices and loads against closed-form cases rather than production helpers.
+- [x] Cover all coefficient families, both basis orders, multiple meshes, and nonzero boundary data.
+- [x] Separate compatibility snapshots from correctness assertions.
+
+**Status:** Complete. Closed-form constant-element results and an independent fixed Gauss oracle now verify assembly and manufactured solutions.
 
 ### V2. Align outputs and terminology
 
