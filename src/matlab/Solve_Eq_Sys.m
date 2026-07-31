@@ -1,4 +1,4 @@
-function [sysSolLin, sysSolCub] = ...
+function [sysSolLin, sysSolCub, assemblyStats] = ...
     Solve_Eq_Sys(numElements, meshSize, delta, P, qFunc, loadFunc, ...
     psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol)
 
@@ -38,9 +38,15 @@ assert(isfinite(relTol), ...
     'Solve_Eq_Sys:InvalidRelTol', ...
     'relTol must be finite.');
 
-K_Lin = zeros(numElements + 1, numElements + 1);
+dimLin = numElements + 1;
+dimCub = 2 * numElements + 2;
+rowLin = zeros(4 * numElements, 1);
+colLin = zeros(4 * numElements, 1);
+valLin = zeros(4 * numElements, 1);
+rowCub = zeros(16 * numElements, 1);
+colCub = zeros(16 * numElements, 1);
+valCub = zeros(16 * numElements, 1);
 b_Lin = zeros(numElements + 1, 1);
-K_Cub = zeros(2*numElements + 2, 2*numElements + 2);
 b_Cub = zeros(2*numElements + 2, 1);
 
 % Build up the global stiffness matrix and load vector:
@@ -52,15 +58,27 @@ for elemNo = 1:1:numElements
         psiLin, psiPrimeLin, psiCub, psiPrimeCub, relTol);
 
     idx_Lin = elemNo:elemNo + 1;
-    K_Lin(idx_Lin, idx_Lin) = K_Lin(idx_Lin, idx_Lin) + K_Elem_Lin;
+    [rowBlockLin, colBlockLin] = ndgrid(idx_Lin, idx_Lin);
+    tripletLin = (elemNo - 1) * 4 + (1:4);
+    rowLin(tripletLin) = rowBlockLin(:);
+    colLin(tripletLin) = colBlockLin(:);
+    valLin(tripletLin) = K_Elem_Lin(:);
     b_Lin(idx_Lin) = b_Lin(idx_Lin) + b_Elem_Lin;
 
     idx_Cub_Node = elemNo:elemNo + 1;
     idx_Cub_Slope = idx_Cub_Node + numElements + 1;
     idx_Cub = [idx_Cub_Node idx_Cub_Slope];
-    K_Cub(idx_Cub, idx_Cub) = K_Cub(idx_Cub, idx_Cub) + K_Elem_Cub;
+    [rowBlockCub, colBlockCub] = ndgrid(idx_Cub, idx_Cub);
+    tripletCub = (elemNo - 1) * 16 + (1:16);
+    rowCub(tripletCub) = rowBlockCub(:);
+    colCub(tripletCub) = colBlockCub(:);
+    valCub(tripletCub) = K_Elem_Cub(:);
     b_Cub(idx_Cub) = b_Cub(idx_Cub) + b_Elem_Cub;
 end;
+
+K_Lin = sparse(rowLin, colLin, valLin, dimLin, dimLin);
+K_Cub = sparse(rowCub, colCub, valCub, dimCub, dimCub);
+assemblyStats = Build_Assembly_Stats(K_Lin, K_Cub);
 
 % Implement boundary conditions for the linear-FEM:
 sysSolLin = Bound_Cond(1, numElements, delta, P, K_Lin, b_Lin);
@@ -97,3 +115,17 @@ b( 1 ) = delta;
 
 sysSol = K\b;
 sysSol(1) = delta;
+
+function stats = Build_Assembly_Stats(KLin, KCub)
+
+linearInfo = whos('KLin');
+cubicInfo = whos('KCub');
+stats = struct( ...
+    'linear_Is_Sparse', issparse(KLin), ...
+    'cubic_Is_Sparse', issparse(KCub), ...
+    'linear_Nnz', nnz(KLin), ...
+    'cubic_Nnz', nnz(KCub), ...
+    'linear_Storage_Bytes', linearInfo.bytes, ...
+    'cubic_Storage_Bytes', cubicInfo.bytes, ...
+    'linear_Dense_Bytes', 8 * numel(KLin), ...
+    'cubic_Dense_Bytes', 8 * numel(KCub));

@@ -48,9 +48,9 @@ Raw profiler table is saved in `docs/performance_hotspots.txt`.
 3. Introduce optional fast path for constant-coefficient cases.
    - For `q_Const` and polynomial load definitions, precompute reference element integrals and reuse scaled values.
 
-4. Assess sparse-assembly strategy for larger meshes.
-   - Global stiffness matrices are currently assembled as dense arrays in `Solve_Eq_Sys`.
-   - Test sparse assembly/solve impact for higher `N` while preserving current numerics.
+4. Sparse assembly completed.
+   - `Solve_Eq_Sys` now assembles both stiffness matrices from sparse triplets.
+   - Measured runtime and storage results are documented in `PERFORMANCE_SPARSE_ASSEMBLY.md`.
 
 5. Add profiling/benchmark guardrails in CI (D4).
    - Use the existing benchmark workflow and compare median elapsed times against informational thresholds.

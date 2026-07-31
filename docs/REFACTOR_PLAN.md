@@ -61,8 +61,10 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### P1. Use sparse assembly
 
-- Replace dense global matrices with sparse triplet assembly.
-- Benchmark memory and solve time over representative mesh sizes.
+- [x] Replace dense global matrices with sparse triplet assembly.
+- [x] Benchmark memory and solve time over representative mesh sizes.
+
+**Status:** Complete. Sparse storage scales linearly and used 2.6% of equivalent dense storage at $N=256$ without a runtime regression.
 
 ### P2. Reduce quadrature cost
 

@@ -1,4 +1,4 @@
-function timings = benchmark_solver(repeatCount, numElementsList)
+function [timings, memoryStats] = benchmark_solver(repeatCount, numElementsList)
 %BENCHMARK_SOLVER Runtime benchmark with repeat-count statistics.
 %
 %   timings = BENCHMARK_SOLVER() runs baseline benchmark for a default mesh
@@ -6,7 +6,8 @@ function timings = benchmark_solver(repeatCount, numElementsList)
 %
 %   timings = BENCHMARK_SOLVER(repeatCount, numElementsList) customizes the
 %   number of repeats and mesh sizes. timings is an N-by-4 matrix:
-%   [numElements, minSeconds, medianSeconds, maxSeconds].
+%   [numElements, minSeconds, medianSeconds, maxSeconds]. memoryStats is
+%   [numElements, sparseBytes, denseBytes, sparseToDenseRatio].
 
 addpath(genpath('src/matlab'));
 
@@ -37,6 +38,7 @@ P = 0.01;
     Def_Problem(numElementsList, q_Type, load_Coeff, q_Coeff, delta, P);
 
 timings = zeros(numel(numElementsList), 4);
+memoryStats = zeros(numel(numElementsList), 4);
 
 for idx = 1:numel(numElementsList)
     N = numElementsList(idx);
@@ -44,7 +46,8 @@ for idx = 1:numel(numElementsList)
 
     for rep = 1:repeatCount
         tic;
-        Calc_FEM_Sol(N, h(idx), delta, P, q_Func, load_Func, relTol);
+        [~, ~, assemblyStats] = Calc_FEM_Sol( ...
+            N, h(idx), delta, P, q_Func, load_Func, relTol);
         repeats(rep) = toc;
     end
 
@@ -56,9 +59,20 @@ for idx = 1:numel(numElementsList)
     timings(idx, 2) = minSec;
     timings(idx, 3) = medSec;
     timings(idx, 4) = maxSec;
+    sparseBytes = assemblyStats.linear_Storage_Bytes ...
+        + assemblyStats.cubic_Storage_Bytes;
+    denseBytes = assemblyStats.linear_Dense_Bytes ...
+        + assemblyStats.cubic_Dense_Bytes;
+    memoryStats(idx, :) = [N sparseBytes denseBytes sparseBytes / denseBytes];
 end
 
 disp('N        min_seconds    median_seconds    max_seconds');
 disp(timings);
+disp('N        sparse_bytes   dense_bytes    sparse_to_dense');
+for idx = 1:size(memoryStats, 1)
+    fprintf('%-8d %-14d %-14d %.6f\n', ...
+        memoryStats(idx, 1), memoryStats(idx, 2), ...
+        memoryStats(idx, 3), memoryStats(idx, 4));
+end
 
 end
