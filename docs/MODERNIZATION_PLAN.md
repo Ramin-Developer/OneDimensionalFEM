@@ -130,6 +130,12 @@ Append a short note at the top of the log below after each session:
 ## Session Log
 
 - Date: 2026-07-31
+- Branch: fix/correct-natural-boundary
+- What changed: Corrected natural boundary enforcement, removed the cubic endpoint slope overconstraint, added independent constant- and variable-coefficient weak-row tests, and regenerated affected evidence.
+- Tests run: Complete guarded MATLAB suite with nine test files, exit code 0.
+- Next action: implement M3 coefficient admissibility validation.
+
+- Date: 2026-07-31
 - Branch: fix/correct-l2-error-norm
 - What changed: Corrected the physical $L^2$ error norm, consolidated its implementation, regenerated evidence, synchronized the report, and restored all R2017a test files to the guarded suite.
 - Tests run: Complete MATLAB suite with exclusion detection, exit code 0.
