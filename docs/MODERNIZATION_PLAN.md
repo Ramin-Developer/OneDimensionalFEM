@@ -26,13 +26,15 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Near-Term Priority Backlog
 
-The validation work is now sufficiently complete for the current scope. The best remaining value is concentrated in performance-oriented follow-up work:
+The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.md). Its order is authoritative:
 
-- [ ] P1: Reduce quadrature-call volume in element assembly by replacing repeated adaptive integration with a fixed-order Gauss rule where it preserves current accuracy.
-- [ ] P2: Hoist repeated per-element computations in the assembly path to avoid repeated callback/capture overhead.
-- [ ] P3: Add a fast path for constant-coefficient and polynomial-load cases that reuses precomputed element integrals.
-- [ ] P4: Benchmark the performance change set and document the measured gain against the current profile baseline.
-- [ ] P5: Keep this plan and the backlog in sync after any future maintenance work.
+1. Mathematical correctness.
+2. Independent verification.
+3. Performance.
+4. Report quality.
+5. Maintainability.
+
+Every implementation PR must update the roadmap and any documentation affected by changed behavior or evidence.
 
 ## Completed Milestones
 
