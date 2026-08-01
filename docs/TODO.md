@@ -8,7 +8,7 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 - [x] Execute the value-ranked tasks in [REFACTOR_PLAN.md](REFACTOR_PLAN.md).
 - Keep corrective plan, modernization plan, report, tests, and benchmarks synchronized in each relevant follow-up PR.
 - Collect and prioritize new post-roadmap improvements before opening the next implementation branch.
-- Execute MZ1 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): publish explicit module contracts and dependency map for public MATLAB entry points.
+- [x] Execute MZ1 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): publish explicit module contracts and dependency map for public MATLAB entry points.
 
 ## Status
 

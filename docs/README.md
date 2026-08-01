@@ -12,6 +12,7 @@ The code focuses on solving a simple 1D boundary value problem with FEM, while t
 - [MODERNIZATION_PLAN.md](MODERNIZATION_PLAN.md) - living status summary.
 - [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md) - next modernization tasks.
 - [ARCHITECTURE_MAP.md](ARCHITECTURE_MAP.md) - ownership boundaries and runtime flow.
+- [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) - public entry-point contracts and ownership boundaries.
 - [NUMERICAL_VERIFICATION.md](NUMERICAL_VERIFICATION.md) - numerical evidence references.
 - [PERFORMANCE_GUARDRAIL.md](PERFORMANCE_GUARDRAIL.md) - baseline and threshold policy.
 - [PERFORMANCE_PROFILE_D3.md](PERFORMANCE_PROFILE_D3.md) - hotspot findings and reproduction.

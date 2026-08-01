@@ -52,6 +52,12 @@ No pending items remain in the ranked roadmap. New unscheduled maintenance ideas
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: modernize/mz1-module-contracts-20260801
+- What changed: Completed MZ1 by adding a public entry-point contract catalog and quick dependency map, and synchronized docs navigation/backlog items.
+- Tests run: Not run; documentation-only modernization step.
+- Next action: execute MZ2 path normalization in automation commands.
+
+- Date: 2026-08-01
 - Branch: task/next-20260801
 - What changed: Completed C2 documentation cleanup by reducing stale historical claims in tracked planning docs, synchronizing roadmap status, and removing tracked generated profiler output.
 - Tests run: Not run; documentation-only cleanup.
