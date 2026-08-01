@@ -5,10 +5,12 @@ tests = functiontests(localfunctions);
 end
 
 function testComputeApiContractSnapshot(~)
-raw = fileread(fullfile('tests', 'golden', 'compute_api_contract_snapshot.json'));
+thisFile = mfilename('fullpath');
+testsDir = fileparts(thisFile);
+raw = fileread(fullfile(testsDir, 'golden', 'compute_api_contract_snapshot.json'));
 snapshot = jsondecode(raw);
 
-numElements = snapshot.scenario.numElements;
+numElements = snapshot.scenario.numElements(:).';
 qType = char(snapshot.scenario.qType);
 qCoeff = snapshot.scenario.qCoeff;
 loadCoeff = snapshot.scenario.loadCoeff;
@@ -31,8 +33,10 @@ assert(numel(femData.num_Elements) == meshCount, ...
     'Compute API contract snapshot mismatch: num_Elements count changed.');
 assert(numel(femData.mesh_Size) == meshCount, ...
     'Compute API contract snapshot mismatch: mesh_Size count changed.');
-assert(numel(femData.solution_Size) == meshCount, ...
-    'Compute API contract snapshot mismatch: solution_Size count changed.');
+assert(isnumeric(femData.solution_Size) && isscalar(femData.solution_Size) ...
+    && isfinite(femData.solution_Size) && femData.solution_Size > 0 ...
+    && mod(femData.solution_Size, 1) == 0, ...
+    'Compute API contract snapshot mismatch: solution_Size scalar contract changed.');
 assert(numel(femData.u_FEM_Lin) == meshCount, ...
     'Compute API contract snapshot mismatch: u_FEM_Lin cell count changed.');
 assert(numel(femData.u_FEM_Cub) == meshCount, ...

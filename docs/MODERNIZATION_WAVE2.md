@@ -25,9 +25,12 @@ Acceptance criteria:
 
 ### MZ7. Add focused CI matrix for modernization checks
 
-Scope:
+[x] Scope:
 - Separate docs-quality, API-contract, and smoke-test concerns into explicit CI jobs.
 - Ensure each check reports a clear failure source.
+
+Status:
+- Complete. CI now runs distinct `docs-quality`, `smoke-test`, and `api-contract` jobs so failures map directly to documentation drift, smoke runtime checks, or compute API contract checks.
 
 Acceptance criteria:
 - CI failures point directly to docs drift, API drift, or runtime drift.
@@ -55,6 +58,5 @@ Acceptance criteria:
 
 ## Suggested Execution Order
 
-1. MZ7 (CI clarity)
-2. MZ8 (workflow ergonomics)
-3. MZ9 (baseline governance)
+1. MZ8 (workflow ergonomics)
+2. MZ9 (baseline governance)

@@ -16,6 +16,8 @@ jobs:
   docs-quality:
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -24,9 +26,11 @@ jobs:
         shell: pwsh
         run: ./scripts/check_docs_quality.ps1
 
-  test:
+  smoke-test:
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -46,9 +50,34 @@ jobs:
             Validate_Input('constant', 1, [1 2 -3], 0, 0.01, [4 8 16]);
             disp('Smoke checks passed.');
 
+  api-contract:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+
+      - name: Run compute API contract tests
+        uses: matlab-actions/run-command@v3
+        with:
+          command: |
+            cd(getenv('MW_ORIG_WORKING_FOLDER'));
+            addpath(genpath('src/matlab'));
+            addpath('tests');
+            results = runtests({'tests/test_compute_api_schema.m', 'tests/test_compute_api_contract_snapshot.m'});
+            assert(all([results.Passed]), 'Compute API contract test failures detected.');
+            disp('Compute API contract checks passed.');
+
   performance-guardrail:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v5
