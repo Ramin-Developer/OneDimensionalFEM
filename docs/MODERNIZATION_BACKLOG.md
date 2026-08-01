@@ -12,9 +12,12 @@ This backlog captures the next modernization wave after completing the ranked co
 
 ### MZ1. Publish explicit module contracts
 
-- Add contract notes for each public MATLAB entry point in `src/matlab`.
-- Define owner boundaries for problem definition, assembly, solve, error summary, and plotting.
-- Add a quick dependency map in `docs/ARCHITECTURE_MAP.md`.
+- [x] Add contract notes for each public MATLAB entry point in `src/matlab`.
+- [x] Define owner boundaries for problem definition, assembly, solve, error summary, and plotting.
+- [x] Add a quick dependency map in `docs/ARCHITECTURE_MAP.md`.
+
+Status:
+- Complete. Public entry contracts are documented in `docs/MODULE_CONTRACTS.md`, and the architecture file now includes a quick dependency map.
 
 Acceptance criteria:
 - Public entry points and ownership boundaries are documented in one place.

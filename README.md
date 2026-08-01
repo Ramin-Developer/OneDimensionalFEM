@@ -73,3 +73,4 @@ Build the PDF, nomenclature, and terminology glossary:
 - Living status: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
 - Modernization backlog: [docs/MODERNIZATION_BACKLOG.md](docs/MODERNIZATION_BACKLOG.md)
 - Architecture map: [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md)
+- Module contracts: [docs/MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md)
