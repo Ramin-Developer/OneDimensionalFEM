@@ -10,7 +10,7 @@ testsDir = fileparts(thisFile);
 raw = fileread(fullfile(testsDir, 'golden', 'compute_api_contract_snapshot.json'));
 snapshot = jsondecode(raw);
 
-numElements = snapshot.scenario.numElements;
+numElements = snapshot.scenario.numElements(:).';
 qType = char(snapshot.scenario.qType);
 qCoeff = snapshot.scenario.qCoeff;
 loadCoeff = snapshot.scenario.loadCoeff;
