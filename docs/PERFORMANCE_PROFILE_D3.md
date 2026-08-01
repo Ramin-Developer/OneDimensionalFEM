@@ -12,7 +12,7 @@ Profile representative FEM solves and identify high-impact optimization targets.
 - MATLAB: R2017a execution mode `-nosplash -nodesktop -wait -r`
 - Script: `scripts/profile_solver_hotpaths.m`
 - Inputs: `numElementsList = [32, 64]`, `repeatCount = 2`
-- Output artifact: `docs/performance_hotspots.txt`
+- Output artifact: ad hoc profiler text output (not tracked)
 
 ## Measured Hotspots
 
@@ -26,8 +26,6 @@ Top relevant functions by total time:
 4. `Elem_Cont>Cal_Cont`: `0.573994368543` s
 5. `quadgk`: `0.510424538802` s
 6. `quadgk>vadapt`: `0.235059809973` s
-
-Raw profiler table is saved in `docs/performance_hotspots.txt`.
 
 ## Interpretation
 
@@ -58,5 +56,7 @@ Raw profiler table is saved in `docs/performance_hotspots.txt`.
 ## Reproduction Command
 
 ```powershell
-matlab -nosplash -nodesktop -wait -r "try; cd('d:/repos/Code/OneDimensionalFEM'); addpath('scripts'); profile_solver_hotpaths([32 64],2,10,'docs/performance_hotspots.txt'); catch ME; disp(getReport(ME,'extended')); end; exit"
+matlab -nosplash -nodesktop -wait -r "try; cd('d:/repos/Code/OneDimensionalFEM'); addpath('scripts'); profile_solver_hotpaths([32 64],2,10,fullfile(tempdir,'performance_hotspots.txt')); catch ME; disp(getReport(ME,'extended')); end; exit"
 ```
+
+Use an untracked output path for ad hoc reruns, for example `%TEMP%/performance_hotspots.txt`.

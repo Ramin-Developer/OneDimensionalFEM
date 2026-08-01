@@ -1,15 +1,16 @@
 # One-Dimensional FEM
 
-MATLAB-based implementation of a one-dimensional finite element method (FEM) solver, together with LaTeX documentation for the accompanying mathematical write-up and figures.
+MATLAB implementation of a one-dimensional finite element method (FEM) solver with reproducible tests, benchmarks, and report build tooling.
 
-## Project Profile
+## Current Setup
 
-This repository is a mixed software/documentation project:
+Repository layout:
 
 - `src/matlab/`: MATLAB solver and supporting numerical routines.
-- `docs/latex/`: LaTeX source, bibliography, and figure assets for the documentation.
-- `docs/reference/`: compiled reference/documentation artifacts.
 - `tests/`: MATLAB test harness and regression coverage.
+- `scripts/`: benchmark, CI guardrail, and report-build helpers.
+- `docs/latex/`: LaTeX source and figure assets.
+- `docs/reference/`: generated reference artifacts.
 
 ## Quick Start
 
@@ -66,12 +67,7 @@ Build the PDF, nomenclature, and terminology glossary:
 .\scripts\build_report.ps1
 ```
 
-## Notes
+## Project Plans
 
-- This repository is being prepared for modernization and refactoring.
-- Baseline behavior should be preserved while improving structure and testability.
-
-## Plan and Progress
-
-- Living modernization plan: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
-- Active development branch: use short-lived `feat/*` branches from `main`
+- Corrective roadmap: [docs/REFACTOR_PLAN.md](docs/REFACTOR_PLAN.md)
+- Living status: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)

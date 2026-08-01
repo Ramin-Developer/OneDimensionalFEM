@@ -122,9 +122,11 @@ This living plan is the source of truth for corrective MATLAB and report work. T
 
 ### C2. Complete project documentation
 
-- Keep `README.md` limited to current setup and commands.
-- Keep `MODERNIZATION_PLAN.md` synchronized with completed milestones and next work.
-- Move durable findings into `docs/`; remove stale generated logs and historical claims from tracked documentation.
+- [x] Keep `README.md` limited to current setup and commands.
+- [x] Keep `MODERNIZATION_PLAN.md` synchronized with completed milestones and next work.
+- [x] Move durable findings into `docs/`; remove stale generated logs and historical claims from tracked documentation.
+
+**Status:** Complete. Setup/command documentation is concise, roadmap status is synchronized, and stale generated/historical planning noise has been removed.
 
 ## Completion Gates
 
