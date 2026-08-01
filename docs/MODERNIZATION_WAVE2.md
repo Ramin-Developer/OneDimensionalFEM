@@ -12,9 +12,12 @@ This plan defines the next ranked modernization wave after completing MZ1-MZ5.
 
 ### MZ6. Add compute API golden-contract snapshots
 
-Scope:
+[x] Scope:
 - Add snapshot-based contract fixtures for key `Compute_FEM_Data` fields and dimensions.
 - Verify compatibility of schema plus representative value shapes for baseline scenarios.
+
+Status:
+- Complete. Added `tests/golden/compute_api_contract_snapshot.json` and `tests/test_compute_api_contract_snapshot.m` to enforce contract field ordering plus baseline shape expectations.
 
 Acceptance criteria:
 - Contract snapshots detect unintentional output drift.
@@ -52,7 +55,6 @@ Acceptance criteria:
 
 ## Suggested Execution Order
 
-1. MZ6 (contract confidence)
-2. MZ7 (CI clarity)
-3. MZ8 (workflow ergonomics)
-4. MZ9 (baseline governance)
+1. MZ7 (CI clarity)
+2. MZ8 (workflow ergonomics)
+3. MZ9 (baseline governance)

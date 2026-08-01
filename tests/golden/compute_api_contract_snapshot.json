@@ -1,0 +1,35 @@
+{
+  "snapshotVersion": "v1",
+  "scenario": {
+    "numElements": [4, 8, 16],
+    "qType": "q_Const",
+    "qCoeff": 1,
+    "loadCoeff": [1, 2, -3],
+    "delta": 0,
+    "P": 0.01
+  },
+  "contract": {
+    "expectedFieldOrder": [
+      "num_Elements",
+      "mesh_Size",
+      "q_Type",
+      "solution_Size",
+      "x",
+      "u_Exact",
+      "u_FEM_Lin",
+      "u_FEM_Cub",
+      "rel_Tol",
+      "l2_Error_Lin",
+      "l2_Error_Cub",
+      "convergence_Factor_Lin",
+      "convergence_Factor_Cub",
+      "convergence_Order_Lin",
+      "convergence_Order_Cub"
+    ],
+    "expectedQType": "q_const",
+    "expectedMeshCount": 3,
+    "expectedPairCount": 2,
+    "expectedXMin": 0,
+    "expectedXMax": 1
+  }
+}

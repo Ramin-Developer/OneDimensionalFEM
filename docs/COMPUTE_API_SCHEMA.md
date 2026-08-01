@@ -50,4 +50,6 @@ The returned struct must contain exactly these fields:
 ## Verification
 
 - Contract regression test: `tests/test_compute_api_schema.m`
+- Contract snapshot test: `tests/test_compute_api_contract_snapshot.m`
+- Snapshot fixture: `tests/golden/compute_api_contract_snapshot.json`
 - General suite runner: `tests/run_all_tests.m`
