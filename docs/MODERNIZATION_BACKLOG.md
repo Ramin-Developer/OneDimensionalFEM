@@ -38,9 +38,12 @@ Acceptance criteria:
 
 ### MZ3. Strengthen documentation information architecture
 
-- Keep top-level `README.md` strictly operational.
-- Keep `docs/README.md` as canonical navigation to plans, evidence, and report materials.
-- Ensure roadmap, status, and backlog files do not duplicate conflicting state.
+- [x] Keep top-level `README.md` strictly operational.
+- [x] Keep `docs/README.md` as canonical navigation to plans, evidence, and report materials.
+- [x] Ensure roadmap, status, and backlog files do not duplicate conflicting state.
+
+Status:
+- Complete. Top-level README now points to a single docs index, and docs README is the canonical navigation page for plans, architecture, and evidence.
 
 Acceptance criteria:
 - A first-time reader can navigate run/test/report/performance/plan docs in less than 2 minutes.

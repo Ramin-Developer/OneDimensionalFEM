@@ -73,10 +73,6 @@ Build the PDF, nomenclature, and terminology glossary:
 .\scripts\build_report.ps1
 ```
 
-## Project Plans
+## Documentation Index
 
-- Corrective roadmap: [docs/REFACTOR_PLAN.md](docs/REFACTOR_PLAN.md)
-- Living status: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
-- Modernization backlog: [docs/MODERNIZATION_BACKLOG.md](docs/MODERNIZATION_BACKLOG.md)
-- Architecture map: [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md)
-- Module contracts: [docs/MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md)
+For plans, status, architecture, and evidence references, use [docs/README.md](docs/README.md).

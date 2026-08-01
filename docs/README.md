@@ -1,10 +1,6 @@
-# OneDimensionalFEM
+# Documentation Index
 
-This repository contains a MATLAB implementation of a one-dimensional finite element method (FEM) solver together with LaTeX-based documentation.
-
-## Project purpose
-
-The code focuses on solving a simple 1D boundary value problem with FEM, while the documentation in the `docs/latex` tree captures the mathematical formulation, implementation notes, and results.
+This is the canonical navigation page for project plans, status, architecture, and evidence.
 
 ## Documentation map
 
@@ -21,21 +17,13 @@ The code focuses on solving a simple 1D boundary value problem with FEM, while t
 - [latex/](latex/) - report source tree.
 - [reference/](reference/) - generated reference artifacts.
 
-## Source map
+## Operational entry points
 
-- `src/matlab/` - production solver code.
-- `tests/` - regression and oracle tests.
-- `scripts/` - benchmark/profile/report tooling.
+- Run/test/build commands: [../README.md](../README.md)
+- MATLAB production code: [../src/matlab/](../src/matlab/)
+- Tests: [../tests/](../tests/)
+- Scripts/tooling: [../scripts/](../scripts/)
 
-## Modernization focus
-
-The current modernization work emphasizes:
-
-- clearer and more consistent naming
-- reduced duplication and simpler structure
-- better documentation and maintainability
-- more readable MATLAB and LaTeX organization
-
-## Project backlog
+## Backlog
 
 A lightweight backlog of future follow-up ideas is maintained in [TODO.md](TODO.md).
