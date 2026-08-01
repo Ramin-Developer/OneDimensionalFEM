@@ -51,8 +51,11 @@ Acceptance criteria:
 
 ### MZ4. Add modernization quality checks
 
-- Add lightweight CI checks for stale references and broken internal markdown links.
-- Add a doc-consistency check for required plan/status/backlog markers.
+- [x] Add lightweight CI checks for stale references and broken internal markdown links.
+- [x] Add a doc-consistency check for required plan/status/backlog markers.
+
+Status:
+- Complete. CI now runs `scripts/check_docs_quality.ps1` on push and pull requests to detect broken markdown links, hard-coded local repo paths, and missing required documentation markers.
 
 Acceptance criteria:
 - Pull requests fail early when internal docs drift or links break.

@@ -52,6 +52,12 @@ No pending items remain in the ranked roadmap. New unscheduled maintenance ideas
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: modernize/mz4-doc-quality-checks-20260801
+- What changed: Completed MZ4 by adding automated documentation quality checks and wiring them into CI for push and pull request validation.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally.
+- Next action: execute MZ5 stable compute API surface documentation and schema formalization.
+
+- Date: 2026-08-01
 - Branch: modernize/mz3-doc-architecture-20260801
 - What changed: Completed MZ3 by making top-level README operational-only, consolidating canonical documentation navigation in docs/README, and synchronizing plan/backlog status references.
 - Tests run: Not run; documentation-only modernization step.
