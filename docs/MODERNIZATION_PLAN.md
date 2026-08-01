@@ -47,9 +47,15 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 
 ## Next Action
 
-No pending items remain in the ranked roadmap or MZ1-MZ5 modernization backlog. New unscheduled maintenance ideas belong in [TODO.md](TODO.md).
+Execute MZ6 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add compute API golden-contract snapshots.
 
 ## Session Log
+
+- Date: 2026-08-01
+- Branch: modernize/wave2-backlog-20260801
+- What changed: Defined and ranked the next modernization wave (MZ6-MZ9) and wired it into canonical docs navigation.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally.
+- Next action: execute MZ6 compute API contract snapshots.
 
 - Date: 2026-08-01
 - Branch: modernize/mz5-compute-api-schema-20260801

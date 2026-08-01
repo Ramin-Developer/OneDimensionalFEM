@@ -78,3 +78,7 @@ Acceptance criteria:
 - One branch and one PR per modernization task.
 - Documentation-only tasks can skip MATLAB execution unless command examples change.
 - Behavior-changing tasks must run the guarded MATLAB suite before merge.
+
+## Continuation
+
+The next ranked task set is tracked in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md).
