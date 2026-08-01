@@ -52,6 +52,12 @@ No pending items remain in the ranked roadmap. New unscheduled maintenance ideas
 ## Session Log
 
 - Date: 2026-08-01
+- Branch: modernize/mz2-path-normalization-20260801
+- What changed: Completed MZ2 by removing the remaining hard-coded repository path in profiling docs and adding a repository-root profiling wrapper that writes outputs to temp.
+- Tests run: Not run; tooling/docs-only modernization step.
+- Next action: execute MZ3 documentation architecture strengthening.
+
+- Date: 2026-08-01
 - Branch: modernize/mz1-module-contracts-20260801
 - What changed: Completed MZ1 by adding a public entry-point contract catalog and quick dependency map, and synchronized docs navigation/backlog items.
 - Tests run: Not run; documentation-only modernization step.

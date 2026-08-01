@@ -9,6 +9,8 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 - Keep corrective plan, modernization plan, report, tests, and benchmarks synchronized in each relevant follow-up PR.
 - Collect and prioritize new post-roadmap improvements before opening the next implementation branch.
 - [x] Execute MZ1 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): publish explicit module contracts and dependency map for public MATLAB entry points.
+- [x] Execute MZ2 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): normalize path conventions for automation and profiling outputs.
+- Execute MZ3 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): strengthen documentation information architecture and remove any remaining duplication risk.
 
 ## Status
 
