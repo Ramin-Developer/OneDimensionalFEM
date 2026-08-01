@@ -5,7 +5,9 @@ tests = functiontests(localfunctions);
 end
 
 function testComputeApiContractSnapshot(~)
-raw = fileread(fullfile('tests', 'golden', 'compute_api_contract_snapshot.json'));
+thisFile = mfilename('fullpath');
+testsDir = fileparts(thisFile);
+raw = fileread(fullfile(testsDir, 'golden', 'compute_api_contract_snapshot.json'));
 snapshot = jsondecode(raw);
 
 numElements = snapshot.scenario.numElements;

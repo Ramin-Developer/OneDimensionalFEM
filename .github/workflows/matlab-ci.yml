@@ -60,6 +60,7 @@ jobs:
         uses: matlab-actions/run-command@v3
         with:
           command: |
+            cd(getenv('MW_ORIG_WORKING_FOLDER'));
             addpath(genpath('src/matlab'));
             addpath('tests');
             results = runtests({'tests/test_compute_api_schema.m', 'tests/test_compute_api_contract_snapshot.m'});
