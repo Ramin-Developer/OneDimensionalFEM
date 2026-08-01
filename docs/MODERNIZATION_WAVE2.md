@@ -38,9 +38,12 @@ Acceptance criteria:
 
 ### MZ8. Consolidate MATLAB run entrypoints
 
-Scope:
+[x] Scope:
 - Provide one stable script entrypoint per workflow: smoke, regression, benchmark, profile.
 - Remove overlapping command variants where possible.
+
+Status:
+- Complete. Added root-safe script entrypoints: `run_smoke_checks`, `run_regression_tests`, `run_benchmark_workflow`, and `run_profile_workflow`; updated CI smoke command and README workflow commands to use these entrypoints.
 
 Acceptance criteria:
 - Contributors can run all workflows from repository root with one command each.
@@ -58,5 +61,4 @@ Acceptance criteria:
 
 ## Suggested Execution Order
 
-1. MZ8 (workflow ergonomics)
-2. MZ9 (baseline governance)
+1. MZ9 (baseline governance)

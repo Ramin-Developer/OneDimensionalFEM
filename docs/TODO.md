@@ -16,7 +16,7 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 - [x] Define the next modernization wave and ranked task set beyond MZ1-MZ5.
 - [x] Execute MZ6 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add compute API golden-contract snapshots.
 - [x] Execute MZ7 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add focused CI matrix for modernization checks.
-- Execute MZ8 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): consolidate MATLAB run entrypoints.
+- [x] Execute MZ8 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): consolidate MATLAB run entrypoints.
 
 ## Status
 
