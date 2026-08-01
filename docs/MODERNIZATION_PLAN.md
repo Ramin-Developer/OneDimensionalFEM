@@ -47,9 +47,15 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 
 ## Next Action
 
-Execute MZ6 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add compute API golden-contract snapshots.
+Execute MZ7 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add focused CI matrix for modernization checks.
 
 ## Session Log
+
+- Date: 2026-08-01
+- Branch: modernize/mz6-contract-snapshots-20260801
+- What changed: Completed MZ6 by adding a Compute API contract snapshot fixture and dedicated snapshot regression test.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally. MATLAB full suite not run in this terminal session.
+- Next action: execute MZ7 CI matrix focus for modernization checks.
 
 - Date: 2026-08-01
 - Branch: modernize/wave2-backlog-20260801
