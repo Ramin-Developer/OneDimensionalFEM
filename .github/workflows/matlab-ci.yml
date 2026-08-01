@@ -13,6 +13,17 @@ on:
     - cron: '30 2 * * *'
 
 jobs:
+  docs-quality:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Run docs quality checks
+        shell: pwsh
+        run: ./scripts/check_docs_quality.ps1
+
   test:
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
