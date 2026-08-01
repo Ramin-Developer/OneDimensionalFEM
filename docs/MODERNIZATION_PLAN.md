@@ -47,9 +47,15 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 
 ## Next Action
 
-Execute MZ7 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add focused CI matrix for modernization checks.
+Execute MZ8 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): consolidate MATLAB run entrypoints.
 
 ## Session Log
+
+- Date: 2026-08-01
+- Branch: modernize/mz7-ci-matrix-20260801
+- What changed: Completed MZ7 by splitting CI into explicit docs-quality, smoke-test, and api-contract jobs for clearer failure attribution.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally. CI workflow structure validated by YAML diff.
+- Next action: execute MZ8 workflow entrypoint consolidation.
 
 - Date: 2026-08-01
 - Branch: modernize/mz6-contract-snapshots-20260801

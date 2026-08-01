@@ -15,7 +15,8 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 - [x] Execute MZ5 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): introduce a stable compute API surface and formal output schemas.
 - [x] Define the next modernization wave and ranked task set beyond MZ1-MZ5.
 - [x] Execute MZ6 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add compute API golden-contract snapshots.
-- Execute MZ7 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add focused CI matrix for modernization checks.
+- [x] Execute MZ7 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): add focused CI matrix for modernization checks.
+- Execute MZ8 in [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): consolidate MATLAB run entrypoints.
 
 ## Status
 
