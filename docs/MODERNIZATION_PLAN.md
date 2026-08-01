@@ -47,9 +47,15 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 
 ## Next Action
 
-Execute MZ8 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): consolidate MATLAB run entrypoints.
+Execute MZ9 from [MODERNIZATION_WAVE2.md](MODERNIZATION_WAVE2.md): baseline runtime evidence refresh policy.
 
 ## Session Log
+
+- Date: 2026-08-01
+- Branch: modernize/mz8-entrypoints-20260801
+- What changed: Completed MZ8 by adding consolidated root-safe workflow entrypoints for smoke, regression, benchmark, and profile flows, and wiring smoke CI plus README commands to those entrypoints.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally. PR CI to validate smoke and contract jobs.
+- Next action: execute MZ9 baseline refresh governance.
 
 - Date: 2026-08-01
 - Branch: modernize/mz7-ci-matrix-20260801

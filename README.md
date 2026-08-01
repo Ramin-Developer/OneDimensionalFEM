@@ -23,11 +23,18 @@ Main_Program
 
 ## Running Tests
 
-Run the test suite:
+Run smoke checks:
 
 ```matlab
-addpath('tests');
-run_all_tests
+addpath('scripts');
+run_smoke_checks
+```
+
+Run the regression suite:
+
+```matlab
+addpath('scripts');
+run_regression_tests
 ```
 
 Run tests with coverage:
@@ -43,11 +50,11 @@ Use the CI coverage summary to see the latest file-by-file view.
 
 ## Benchmarking
 
-Run the benchmark:
+Run the benchmark workflow:
 
 ```matlab
 addpath('scripts');
-benchmark_solver
+run_benchmark_workflow
 ```
 
 Run the informational performance guardrail:
@@ -57,7 +64,14 @@ addpath('scripts');
 ci_performance_guardrail
 ```
 
-Run profiling with path-normalized output to `%TEMP%`:
+Run profiling workflow (default output to `%TEMP%`):
+
+```matlab
+addpath('scripts');
+run_profile_workflow
+```
+
+Or run profiling through the PowerShell wrapper:
 
 ```powershell
 .\scripts\run_profile_hotpaths.ps1
