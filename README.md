@@ -71,3 +71,5 @@ Build the PDF, nomenclature, and terminology glossary:
 
 - Corrective roadmap: [docs/REFACTOR_PLAN.md](docs/REFACTOR_PLAN.md)
 - Living status: [docs/MODERNIZATION_PLAN.md](docs/MODERNIZATION_PLAN.md)
+- Modernization backlog: [docs/MODERNIZATION_BACKLOG.md](docs/MODERNIZATION_BACKLOG.md)
+- Architecture map: [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md)
