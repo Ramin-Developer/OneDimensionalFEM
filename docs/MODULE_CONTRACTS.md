@@ -44,6 +44,9 @@ Side effects:
 Owner:
 - Stable compute API surface for non-UI consumers.
 
+Schema reference:
+- `docs/COMPUTE_API_SCHEMA.md` defines the versioned output field contract and compatibility policy.
+
 ### Def_Problem.m
 
 Purpose:

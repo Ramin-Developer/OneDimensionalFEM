@@ -47,9 +47,15 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 
 ## Next Action
 
-No pending items remain in the ranked roadmap. New unscheduled maintenance ideas belong in [TODO.md](TODO.md).
+No pending items remain in the ranked roadmap or MZ1-MZ5 modernization backlog. New unscheduled maintenance ideas belong in [TODO.md](TODO.md).
 
 ## Session Log
+
+- Date: 2026-08-01
+- Branch: modernize/mz5-compute-api-schema-20260801
+- What changed: Completed MZ5 by formalizing a stable `Compute_FEM_Data` schema contract and adding dedicated schema regression coverage.
+- Tests run: `pwsh ./scripts/check_docs_quality.ps1` passed locally. MATLAB suite not run in this terminal session.
+- Next action: define and prioritize the next modernization wave beyond MZ1-MZ5.
 
 - Date: 2026-08-01
 - Branch: modernize/mz4-doc-quality-checks-20260801

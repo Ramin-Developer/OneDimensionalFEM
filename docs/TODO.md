@@ -12,7 +12,8 @@ This file collects future maintenance ideas and follow-up work that is not yet s
 - [x] Execute MZ2 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): normalize path conventions for automation and profiling outputs.
 - [x] Execute MZ3 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): strengthen documentation information architecture and remove any remaining duplication risk.
 - [x] Execute MZ4 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): add modernization quality checks for stale references and markdown consistency.
-- Execute MZ5 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): introduce a stable compute API surface and formal output schemas.
+- [x] Execute MZ5 in [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md): introduce a stable compute API surface and formal output schemas.
+- Define the next modernization wave and ranked task set beyond MZ1-MZ5.
 
 ## Status
 
