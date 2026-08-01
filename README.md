@@ -57,6 +57,12 @@ addpath('scripts');
 ci_performance_guardrail
 ```
 
+Run profiling with path-normalized output to `%TEMP%`:
+
+```powershell
+.\scripts\run_profile_hotpaths.ps1
+```
+
 The versioned baseline and threshold policy are documented in [docs/PERFORMANCE_GUARDRAIL.md](docs/PERFORMANCE_GUARDRAIL.md).
 
 ## Building the Report

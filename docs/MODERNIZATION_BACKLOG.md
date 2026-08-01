@@ -25,9 +25,12 @@ Acceptance criteria:
 
 ### MZ2. Normalize path conventions in automation
 
-- Standardize script/task commands to avoid hard-coded workspace-specific paths.
-- Prefer relative repository paths and temp output for generated artifacts.
-- Keep generated logs out of tracked docs.
+- [x] Standardize script/task commands to avoid hard-coded workspace-specific paths.
+- [x] Prefer relative repository paths and temp output for generated artifacts.
+- [x] Keep generated logs out of tracked docs.
+
+Status:
+- Complete. Profiling commands now run from repository root without hard-coded absolute paths, and generated profiler output is routed to temp locations.
 
 Acceptance criteria:
 - Build, test, benchmark, and profiling commands run from repository root without path edits.

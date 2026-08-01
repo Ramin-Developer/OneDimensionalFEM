@@ -56,7 +56,9 @@ Top relevant functions by total time:
 ## Reproduction Command
 
 ```powershell
-matlab -nosplash -nodesktop -wait -r "try; cd('d:/repos/Code/OneDimensionalFEM'); addpath('scripts'); profile_solver_hotpaths([32 64],2,10,fullfile(tempdir,'performance_hotspots.txt')); catch ME; disp(getReport(ME,'extended')); end; exit"
+matlab -nosplash -nodesktop -wait -r "try; addpath('scripts'); profile_solver_hotpaths([32 64],2,10,fullfile(tempdir,'performance_hotspots.txt')); catch ME; disp(getReport(ME,'extended')); end; exit"
 ```
 
 Use an untracked output path for ad hoc reruns, for example `%TEMP%/performance_hotspots.txt`.
+
+Run the command from the repository root.
