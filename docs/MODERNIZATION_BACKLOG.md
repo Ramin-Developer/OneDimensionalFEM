@@ -63,8 +63,11 @@ Acceptance criteria:
 
 ### MZ5. Introduce a stable compute API surface
 
-- Define a stable, test-focused compute API layer independent of plotting/UI concerns.
-- Formalize output schemas used by tests, benchmarks, and report data generation.
+- [x] Define a stable, test-focused compute API layer independent of plotting/UI concerns.
+- [x] Formalize output schemas used by tests, benchmarks, and report data generation.
+
+Status:
+- Complete. The compute API schema is formalized in `docs/COMPUTE_API_SCHEMA.md`, and schema regression coverage is enforced by `tests/test_compute_api_schema.m`.
 
 Acceptance criteria:
 - Regression and benchmark consumers rely on stable documented output fields.

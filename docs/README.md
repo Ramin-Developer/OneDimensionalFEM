@@ -9,6 +9,7 @@ This is the canonical navigation page for project plans, status, architecture, a
 - [MODERNIZATION_BACKLOG.md](MODERNIZATION_BACKLOG.md) - next modernization tasks.
 - [ARCHITECTURE_MAP.md](ARCHITECTURE_MAP.md) - ownership boundaries and runtime flow.
 - [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) - public entry-point contracts and ownership boundaries.
+- [COMPUTE_API_SCHEMA.md](COMPUTE_API_SCHEMA.md) - stable `Compute_FEM_Data` output schema contract.
 - [NUMERICAL_VERIFICATION.md](NUMERICAL_VERIFICATION.md) - numerical evidence references.
 - [PERFORMANCE_GUARDRAIL.md](PERFORMANCE_GUARDRAIL.md) - baseline and threshold policy.
 - [PERFORMANCE_PROFILE_D3.md](PERFORMANCE_PROFILE_D3.md) - hotspot findings and reproduction.
