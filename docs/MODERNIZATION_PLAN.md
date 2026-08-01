@@ -1,6 +1,6 @@
 # Modernization Plan (Living Document)
 
-This plan is the single source of truth for incremental updates across sessions.
+This plan tracks current modernization status and next work.
 
 ## Scope
 
@@ -10,21 +10,12 @@ This plan is the single source of truth for incremental updates across sessions.
 
 ## Current Baseline
 
-- Active branch: main (use short-lived feat/* branches per task)
+- Active branch: main (use short-lived task branches per task)
 - Existing CI: MATLAB tests in .github/workflows/matlab-ci.yml
 - Canonical code location: src/matlab
 - LaTeX documentation location: docs/latex
 
-## Working Rules
-
-- Keep changes small and reversible.
-- One concern per commit.
-- Add tests before or together with refactors when feasible.
-- Keep a short session note in this file after each work block.
-
-## Phase Plan
-
-## Near-Term Priority Backlog
+## Ranked Corrective Plan
 
 The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.md). Its order is authoritative:
 
@@ -34,7 +25,13 @@ The ranked corrective roadmap is maintained in [REFACTOR_PLAN.md](REFACTOR_PLAN.
 4. Report quality.
 5. Maintainability.
 
-Every implementation PR must update the roadmap and any documentation affected by changed behavior or evidence.
+## Status Summary
+
+- M1-M3: complete.
+- V1-V2: complete.
+- P1-P3: complete.
+- R1-R3: complete.
+- C1-C2: complete.
 
 ## Completed Milestones
 
@@ -46,271 +43,16 @@ Every implementation PR must update the roadmap and any documentation affected b
 - [x] Initial test suite added under tests/.
 - [x] CI executes MATLAB tests.
 - [x] Baseline benchmark scaffold added at scripts/benchmark_solver.m.
+- [x] Ranked corrective roadmap executed through C2.
 
-## Workstream Plan (Competency-Driven)
+## Next Action
 
-### Workstream A: Code Analysis and Refactor
-
-- [x] A1: Extract a pure compute API that returns solution/error data without plotting side effects.
-- [x] A2: Isolate plotting from Show_Results into dedicated plotting utility.
-- [x] A3: Standardize function signatures and naming across src/matlab.
-- [x] A4: Add lightweight inline function-level contracts (inputs/outputs assumptions).
-
-Definition of Done:
-
-- Numerical outputs unchanged for baseline scenarios.
-- Main_Program remains a thin orchestration script.
-
-### Workstream B: Unit and Regression Testing
-
-- [x] B1: Shape-function sanity checks.
-- [x] B2: Element-assembly consistency checks.
-- [x] B3: End-to-end refinement regression checks.
-- [x] B4: Add deterministic golden-data regression snapshots (values and tolerances).
-- [x] B5: Add negative tests for invalid inputs to Validate_Input.
-
-Definition of Done:
-
-- run_all_tests passes locally and in CI.
-- Failures provide actionable messages.
-
-### Workstream C: Numerical Validation
-
-- [x] C1: Add reference-case JSON/ MAT snapshots for selected N values.
-- [x] C2: Add convergence-rate checks with explicit thresholds.
-- [x] C3: Add boundary-condition residual checks as formal assertions.
-
-Definition of Done:
-
-- Regression tests detect unintended numerical drift.
-
-### Workstream D: Performance and Vectorization
-
-- [x] D1: Baseline benchmark script available.
-- [x] D2: Add repeat-count and summary statistics (min/median/max) to benchmark.
-- [x] D3: Profile hot paths and document optimization opportunities.
-- [x] D4: Add optional performance guardrails (informational thresholds) in CI/nightly.
-
-Definition of Done:
-
-- Benchmark output is reproducible and version-comparable.
-
-### Workstream E: Documentation and Release Hygiene
-
-- [x] E1: Update README with canonical run/test/benchmark commands only.
-- [x] E2: Add CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
-- [x] E3: Keep modernization plan status current per merged PR.
-
-Definition of Done:
-
-- New contributors can run, test, and benchmark without ambiguity.
-
-## Branching Strategy
-
-- main: stable branch
-- short-lived branches for focused tasks, merged into main via PR
-
-Recommended branch naming:
-
-- feat/refactor-*
-- test/*
-- perf/*
-- docs/*
-
-## Session Update Template
-
-Append a short note at the top of the log below after each session:
-
-- Date:
-- Branch:
-- What changed:
-- Tests run:
-- Next action:
+No pending items remain in the ranked roadmap. New unscheduled maintenance ideas belong in [TODO.md](TODO.md).
 
 ## Session Log
 
 - Date: 2026-08-01
-- Branch: refactor/simplify-ownership-boundaries
-- What changed: Removed duplicate `Def_Problem` validation logic, delegated configuration checks to `Build_Problem_Data`, and preserved `Def_Problem:*` API error identifiers through boundary remapping.
-- Tests run: Full guarded MATLAB suite passed (15 test files).
-- Next action: implement C2 documentation completion cleanup.
-
-- Date: 2026-08-01
-- Branch: docs/normalize-report-layout
-- What changed: Added glossary-aware report automation, restored both glossaries, normalized portable paths and glossary display names, removed forced prose breaks, and resolved actionable layout warnings.
-- Tests run: Complete report build passed; glossary text extraction, PDF metadata, path scan, and warning audit completed.
-- Next action: implement C1 maintainability boundary cleanup.
-
-- Date: 2026-08-01
-- Branch: docs/improve-report-wording
-- What changed: Rewrote front matter and chapter summaries, corrected recurring grammar and spelling, clarified core explanatory prose, and standardized glossary and appendix terminology.
-- Tests run: Known-defect scan and VS Code diagnostics completed; forced 78-page LaTeX build passed without undefined references or duplicate labels.
-- Next action: implement R3 layout and formatting normalization.
-
-- Date: 2026-08-01
-- Branch: docs/correct-report-mathematics
-- What changed: Corrected the weak problem, bilinearity and continuity statements, interpolation bounds, spaces, analytical formulas, constrained uniqueness proof, flux/sparsity claims, and roundoff table entries.
-- Tests run: Forced LaTeX build completed without undefined references or duplicate labels; independent post-edit mathematical review completed.
-- Next action: implement R2 wording and readability improvements.
-
-- Date: 2026-07-31
-- Branch: perf/stable-performance-gates
-- What changed: Added a versioned warmed performance baseline, deterministic runtime/memory evaluation, JIT warm-up, baseline ratios, and stable informational CI limits.
-- Tests run: Deterministic evaluator tests and the real default guardrail passed.
-- Next action: implement R1 remaining mathematical report corrections.
-
-- Date: 2026-07-31
-- Branch: perf/fixed-gauss-quadrature
-- What changed: Replaced repeated entry-wise adaptive integration with shared 16/32-point Gauss evaluation, added tolerance-based adaptive fallback, and tracked quadrature modes.
-- Tests run: Complete guarded MATLAB suite with thirteen test files, exit code 0.
-- Next action: implement P3 corrected performance baselines and stable informational gates.
-
-- Date: 2026-07-31
-- Branch: perf/sparse-assembly
-- What changed: Replaced dense stiffness accumulation with sparse triplets, exposed assembly statistics, added storage-scaling tests, and extended benchmarks with memory evidence.
-- Tests run: Independent numerical oracles and focused sparse-storage tests passed.
-- Next action: implement P2 fixed-order quadrature and invariant precomputation.
-
-- Date: 2026-07-31
-- Branch: refactor/align-error-terminology
-- What changed: Removed misleading error aliases, canonicalized reduction-factor fields, added mesh-ratio-aware observed orders, and synchronized console/report terminology.
-- Tests run: Focused output-contract suite, all tests passing.
-- Next action: implement P1 sparse global assembly.
-
-- Date: 2026-07-31
-- Branch: test/add-independent-element-oracles
-- What changed: Added closed-form element expectations, an independent fixed Gauss oracle for every rigidity family and basis order, and manufactured nonzero-boundary checks over multiple meshes.
-- Tests run: Focused independent-oracle suite, all tests passing.
-- Next action: implement V2 output and terminology alignment.
-
-- Date: 2026-07-31
-- Branch: fix/validate-q-coefficients
-- What changed: Centralized rigidity coefficient validation, canonicalized aliases, enforced exact counts and positive finite domains, and documented admissible model parameters.
-- Tests run: Complete guarded MATLAB suite with ten test files, exit code 0.
-- Next action: implement V1 independent element matrix and load oracles.
-
-- Date: 2026-07-31
-- Branch: fix/correct-natural-boundary
-- What changed: Corrected natural boundary enforcement, removed the cubic endpoint slope overconstraint, added independent constant- and variable-coefficient weak-row tests, and regenerated affected evidence.
-- Tests run: Complete guarded MATLAB suite with nine test files, exit code 0.
-- Next action: implement M3 coefficient admissibility validation.
-
-- Date: 2026-07-31
-- Branch: fix/correct-l2-error-norm
-- What changed: Corrected the physical $L^2$ error norm, consolidated its implementation, regenerated evidence, synchronized the report, and restored all R2017a test files to the guarded suite.
-- Tests run: Complete MATLAB suite with exclusion detection, exit code 0.
-- Next action: implement M2 boundary-treatment verification and correction.
-
-- Date: 2026-07-31
-- Branch: main
-- What changed: Updated the living plan to reflect that validation hardening is complete for the current scope and documented the highest-value near-term performance tasks.
-- Tests run: MATLAB regression suite executed via headless runner, exit code 0.
-- Next action: if desired, start the first performance-focused implementation task from the near-term backlog.
-
-- Date: 2026-07-29
-- Branch: chore/next-cycle-20260729
-- What changed: Reset local branches to a clean follow-up branch after syncing the merged MATLAB coverage fix back into main.
-- Tests run: Not run; branch-management and documentation-only update.
-- Next action: wait for the next requested maintenance item.
-
-- Date: 2026-07-27
-- Branch: feat/refactor-core
-- What changed: Repository moved to new GitHub account, branch renamed to main, feature branch created, Main_Program change preserved and pushed, initial MATLAB CI workflow added.
-- Tests run: CI smoke workflow file added (not yet executed locally in MATLAB).
-- Next action: create matlab.unittest baseline tests and wire CI to run them.
-
-- Date: 2026-07-29
-- Branch: perf/benchmark-d2-followup-20260729
-- What changed: Updated benchmark_solver to support configurable repeat counts and report min/median/max elapsed seconds per mesh size.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: implement Workstream D3 profiling of hot paths and summarize optimization opportunities.
-
-- Date: 2026-07-29
-- Branch: main (after PR merges)
-- What changed: Canonical src/matlab layout finalized, docs moved to docs/latex, wrapper path removed, regression tests and benchmark scaffold added, CI test execution confirmed.
-- Tests run: MATLAB test suite executed locally and in CI workflow.
-- Next action: implement Workstream A and B4/B5 (pure compute API and deterministic golden-data checks).
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Added Compute_FEM_Data as a compute-only API, updated Main_Program to orchestrate compute then plotting, and added tests validating no plotting side effects in compute flow.
-- Tests run: Not executed locally in this session (MATLAB runner not invoked from terminal).
-- Next action: implement Workstream A2 by splitting plotting out of Show_Results into a dedicated plotting utility.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Extracted plotting from Show_Results into Plot_FEM_Solutions and kept Show_Results focused on orchestration and error estimation.
-- Tests run: MATLAB suite executed via batch runner (exit code 0).
-- Next action: implement Workstream A3 by standardizing signatures and naming across src/matlab.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Standardized naming/signatures across core src/matlab pipeline (Def_Problem, Calc_FEM_Sol, Solve_Eq_Sys, Show_Results, Plot_FEM_Solutions, Compute_FEM_Data, Main_Program, Read_input) without behavior changes.
-- Tests run: MATLAB suite executed via batch runner (exit code 0).
-- Next action: implement Workstream A4 by adding lightweight function-level contracts.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Added lightweight inline contracts (assert-based input/output assumptions) across core compute, assembly, and result functions.
-- Tests run: MATLAB suite executed via batch runner (exit code 0).
-- Next action: start Workstream B4 deterministic golden-data regression snapshots.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Added deterministic golden snapshot regression baseline in tests/golden/baseline_qconst_snapshot.mat and test_golden_snapshot_regression.m with explicit tolerances for exact/FEM fields, $L^2$ error norms, and error reduction factors.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: implement Workstream B5 negative-input tests for Validate_Input.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Added Validate_Input negative tests for invalid q_Type, unsupported q_Type, invalid coefficients, invalid boundary values, and invalid element vectors.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: begin Workstream C1 reference-case snapshot expansion for selected N values.
-
-- Date: 2026-07-29
-- Branch: chore/modernization-followup-20260729
-- What changed: Added per-mesh reference-case MAT snapshots for selected N values and test coverage that validates exact/FEM field and error values against those snapshots.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: implement Workstream C2 convergence-rate checks with explicit thresholds.
-
-- Date: 2026-07-29
-- Branch: test/convergence-thresholds-20260729
-- What changed: Added explicit convergence-rate threshold assertions for linear and cubic FEM factors using baseline-derived margins.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: implement Workstream C3 boundary-condition residual assertions.
-
-- Date: 2026-07-29
-- Branch: test/boundary-residual-checks-20260729
-- What changed: Added formal right-boundary residual assertions for linear and cubic FEM, including linear refinement trend checks and explicit tolerances.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: continue Workstream D2 benchmark repeat-count and summary statistics.
-
-- Date: 2026-07-29
-- Branch: perf/profile-hotpaths-d3-20260729
-- What changed: Added `scripts/profile_solver_hotpaths.m`, generated profiling artifact `docs/performance_hotspots.txt`, and documented measured hotspots plus prioritized optimization opportunities in `docs/PERFORMANCE_PROFILE_D3.md`.
-- Tests run: MATLAB test suite executed via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: implement Workstream D4 optional CI/nightly performance guardrails.
-
-- Date: 2026-07-29
-- Branch: perf/d4-ci-guardrails-20260729
-- What changed: Added `scripts/ci_performance_guardrail.m` and updated `.github/workflows/matlab-ci.yml` with nightly/manual informational performance guardrail job and event gating for test vs. nightly jobs.
-- Tests run: Local guardrail run via -nodesktop/-r flow (R2017a-compatible), exit code 0.
-- Next action: begin Workstream E1 README command refresh.
-
-- Date: 2026-07-29
-- Branch: docs/e1-readme-commands-20260729
-- What changed: Simplified `README.md` to canonical run/test/benchmark commands only and removed the older narrative quick-start/test steps.
-- Tests run: Not run; documentation-only change.
-- Next action: implement Workstream E2 CONTRIBUTING notes for branch/PR workflow and R2017a constraints.
-
-- Date: 2026-07-29
-- Branch: docs/e1-readme-commands-20260729
-- What changed: Added `CONTRIBUTING.md` with branch/PR workflow and MATLAB R2017a guidance, and added a README test coverage window section for the CI summary thresholds.
-- Tests run: Not run; documentation-only change.
-- Next action: continue Workstream E3 to keep the modernization plan status current after merged PRs.
-
-- Date: 2026-07-29
-- Branch: docs/e1-readme-commands-20260729
-- What changed: Refreshed the living plan against the latest merged PRs (#7 through #10) and marked Workstream E3 complete.
-- Tests run: Not run; documentation-only change.
-- Next action: move to the next requested maintenance item if any.
+- Branch: task/next-20260801
+- What changed: Completed C2 documentation cleanup by reducing stale historical claims in tracked planning docs, synchronizing roadmap status, and removing tracked generated profiler output.
+- Tests run: Not run; documentation-only cleanup.
+- Next action: none in ranked roadmap.
