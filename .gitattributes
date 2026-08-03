@@ -13,6 +13,7 @@
 docs/latex/** linguist-language=TeX
 docs/latex/source/*.tex linguist-detectable=true
 docs/latex/source/*.bib linguist-detectable=true
+docs/latex/source/** linguist-documentation=false
 scripts/*.ps1 linguist-detectable=false
 
 # Standard to msysgit
