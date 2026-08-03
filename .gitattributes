@@ -2,23 +2,27 @@
 * text=auto
 
 # Custom for Visual Studio
-*.cs     diff=csharp
+*.cs diff=csharp
 
-# GitHub language detection
+# GitHub Linguist language detection
+*.m linguist-language=MATLAB
 *.tex linguist-language=TeX
-*.bib linguist-language=TeX
+*.bib linguist-language=BibTeX
 *.sty linguist-language=TeX
 *.cls linguist-language=TeX
 docs/latex/** linguist-language=TeX
+docs/latex/source/*.tex linguist-detectable=true
+docs/latex/source/*.bib linguist-detectable=true
+scripts/*.ps1 linguist-detectable=false
 
 # Standard to msysgit
-*.doc	 diff=astextplain
-*.DOC	 diff=astextplain
+*.doc diff=astextplain
+*.DOC diff=astextplain
 *.docx diff=astextplain
 *.DOCX diff=astextplain
-*.dot  diff=astextplain
-*.DOT  diff=astextplain
-*.pdf  diff=astextplain
-*.PDF	 diff=astextplain
-*.rtf	 diff=astextplain
-*.RTF	 diff=astextplain
+*.dot diff=astextplain
+*.DOT diff=astextplain
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+*.rtf diff=astextplain
+*.RTF diff=astextplain
