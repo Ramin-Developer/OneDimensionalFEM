@@ -11,6 +11,9 @@
 *.sty linguist-language=TeX
 *.cls linguist-language=TeX
 docs/latex/** linguist-language=TeX
+docs/latex/source/*.tex linguist-detectable=true
+docs/latex/source/*.bib linguist-detectable=true
+scripts/*.ps1 linguist-detectable=false
 
 # Standard to msysgit
 *.doc diff=astextplain
